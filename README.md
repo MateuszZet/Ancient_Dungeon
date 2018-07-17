@@ -1,6 +1,8 @@
 # Ancient Dungeon
-GameBoy game created using ZAL0/ZGB engine.	+GameBoy game created using GBDK and ZAL0/ZGB engine. <br/>
-**GBDK** : https://sourceforge.net/projects/gbdk/files/gbdk-win32/2.95-3/ <br/>
-**ZAL0/ZGB**: https://github.com/Zal0/ZGB/wiki <br/>
-**Good GBDK tutorial to startw with:** https://videlais.com/2016/07/03/programming-game-boy-games-using-gbdk-part-1-configuring-programming-and-compiling/ <br/>
+GameBoy game created using ZAL0/ZGB engine.<br/>
+**GBDK:** https://sourceforge.net/projects/gbdk/files/gbdk-win32/2.95-3/ <br/>
+**ZAL0/ZGB:** https://github.com/Zal0/ZGB/wiki <br/>
+**Good GBDK tutorial to start with:** https://videlais.com/2016/07/03/programming-game-boy-games-using-gbdk-part-1-configuring-programming-and-compiling/ <br/>
 **GBDK tutorials on wiki:** http://gbdev.gg8.se/wiki/articles/Tutorials <br/>
+![ad](https://user-images.githubusercontent.com/18172067/42843522-9e682180-8a10-11e8-985e-975dd84c385d.JPG)
+![ac2](https://user-images.githubusercontent.com/18172067/42843556-bc9c3416-8a10-11e8-8f51-9fa6917732a5.JPG)
