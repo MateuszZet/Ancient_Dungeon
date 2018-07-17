@@ -1,0 +1,115 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.0 #9615 (MINGW64)
+                              4 ;--------------------------------------------------------
+                              5 	.module SpriteDoor
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _bank_SPRITE_DOOR
+                             12 	.globl _Start_SPRITE_DOOR
+                             13 	.globl _Update_SPRITE_DOOR
+                             14 	.globl _Destroy_SPRITE_DOOR
+                             15 ;--------------------------------------------------------
+                             16 ; ram data
+                             17 ;--------------------------------------------------------
+                             18 	.area _DATA
+   0000                      19 _bank_SPRITE_DOOR::
+   0000                      20 	.ds 1
+                             21 ;--------------------------------------------------------
+                             22 ; absolute external ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _DABS (ABS)
+                             25 ;--------------------------------------------------------
+                             26 ; global & static initialisations
+                             27 ;--------------------------------------------------------
+                             28 	.area _HOME
+                             29 	.area _GSINIT
+                             30 	.area _GSFINAL
+                             31 	.area _GSINIT
+                             32 ;SpriteDoor.c:3: UINT8 bank_SPRITE_DOOR = 2;
+   0000 21r00r00             33 	ld	hl,#_bank_SPRITE_DOOR
+   0003 36 02                34 	ld	(hl),#0x02
+                             35 ;--------------------------------------------------------
+                             36 ; Home
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _HOME
+                             40 ;--------------------------------------------------------
+                             41 ; code
+                             42 ;--------------------------------------------------------
+                             43 	.area _CODE_2
+                             44 ;SpriteDoor.c:13: void Start_SPRITE_DOOR() {
+                             45 ;	---------------------------------
+                             46 ; Function Start_SPRITE_DOOR
+                             47 ; ---------------------------------
+   0000                      48 _Start_SPRITE_DOOR::
+   0000 E8 FC                49 	add	sp, #-4
+                             50 ;SpriteDoor.c:14: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+   0002 21r01r00             51 	ld	hl,#_THIS + 1
+   0005 2B                   52 	dec	hl
+   0006 4E                   53 	ld	c,(hl)
+   0007 23                   54 	inc	hl
+   0008 46                   55 	ld	b,(hl)
+   0009 21 18 00             56 	ld	hl,#0x0018
+   000C 09                   57 	add	hl,bc
+   000D 7D                   58 	ld	a,l
+   000E 54                   59 	ld	d,h
+   000F F8 02                60 	ldhl	sp,#2
+   0011 22                   61 	ld	(hl+),a
+   0012 72                   62 	ld	(hl),d
+   0013 2B                   63 	dec	hl
+   0014 2A                   64 	ld	a,(hl+)
+   0015 5E                   65 	ld	e, (hl)
+   0016 F8 00                66 	ldhl	sp,#0
+   0018 22                   67 	ld	(hl+),a
+   0019 73                   68 	ld	(hl),e
+                             69 ;SpriteDoor.c:15: THIS->lim_x = 9999;
+   001A 21 12 00             70 	ld	hl,#0x0012
+   001D 09                   71 	add	hl,bc
+   001E 4D                   72 	ld	c,l
+   001F 44                   73 	ld	b,h
+   0020 3E 0F                74 	ld	a,#0x0f
+   0022 02                   75 	ld	(bc),a
+   0023 03                   76 	inc	bc
+   0024 3E 27                77 	ld	a,#0x27
+   0026 02                   78 	ld	(bc),a
+                             79 ;SpriteDoor.c:16: THIS->lim_y = 9999;
+   0027 21r01r00             80 	ld	hl,#_THIS + 1
+   002A 2B                   81 	dec	hl
+   002B 4E                   82 	ld	c,(hl)
+   002C 23                   83 	inc	hl
+   002D 46                   84 	ld	b,(hl)
+   002E 21 14 00             85 	ld	hl,#0x0014
+   0031 09                   86 	add	hl,bc
+   0032 4D                   87 	ld	c,l
+   0033 44                   88 	ld	b,h
+   0034 3E 0F                89 	ld	a,#0x0f
+   0036 02                   90 	ld	(bc),a
+   0037 03                   91 	inc	bc
+   0038 3E 27                92 	ld	a,#0x27
+   003A 02                   93 	ld	(bc),a
+                             94 ;SpriteDoor.c:18: data->vy = 1;
+   003B E1                   95 	pop	hl
+   003C E5                   96 	push	hl
+   003D 36 01                97 	ld	(hl),#0x01
+   003F E8 04                98 	add	sp, #4
+   0041 C9                   99 	ret
+                            100 ;SpriteDoor.c:21: void Update_SPRITE_DOOR() {
+                            101 ;	---------------------------------
+                            102 ; Function Update_SPRITE_DOOR
+                            103 ; ---------------------------------
+   0042                     104 _Update_SPRITE_DOOR::
+                            105 ;SpriteDoor.c:23: }
+   0042 C9                  106 	ret
+                            107 ;SpriteDoor.c:25: void Destroy_SPRITE_DOOR() {
+                            108 ;	---------------------------------
+                            109 ; Function Destroy_SPRITE_DOOR
+                            110 ; ---------------------------------
+   0043                     111 _Destroy_SPRITE_DOOR::
+                            112 ;SpriteDoor.c:27: }
+   0043 C9                  113 	ret
+                            114 	.area _CODE_2
+                            115 	.area _CABS (ABS)

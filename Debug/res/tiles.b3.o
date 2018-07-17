@@ -1,0 +1,22 @@
+XL2
+H 8 areas 2 global symbols
+M tiles_b3
+O -mgbz80
+S .__.ABS. Def0000
+A _CODE size 0 flags 0 addr 0
+A _DATA size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _CODE_3 size 20 flags 0 addr 0
+S _tiles Def0000
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 06 00
+T 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+R 00 00 06 00
+T 0E 00 00 00 FF FF FD C3 FB A5 F7 99 EF 99 DF A5
+R 00 00 06 00
+T 1C 00 BF C3 FF FF
+R 00 00 06 00

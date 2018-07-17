@@ -1,0 +1,224 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.0 #9615 (MINGW64)
+                              4 ;--------------------------------------------------------
+                              5 	.module StateMenu
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _SpriteManagerAdd
+                             12 	.globl _SpriteManagerLoad
+                             13 	.globl _InitScrollColor
+                             14 	.globl _ZInitScrollTilesColor
+                             15 	.globl _SetState
+                             16 	.globl _collilision_tiles
+                             17 	.globl _bank_STATE_MENU
+                             18 	.globl _Start_STATE_MENU
+                             19 	.globl _Update_STATE_MENU
+                             20 ;--------------------------------------------------------
+                             21 ; ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _DATA
+   0000                      24 _bank_STATE_MENU::
+   0000                      25 	.ds 1
+   0001                      26 _collilision_tiles::
+   0001                      27 	.ds 5
+                             28 ;--------------------------------------------------------
+                             29 ; absolute external ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _DABS (ABS)
+                             32 ;--------------------------------------------------------
+                             33 ; global & static initialisations
+                             34 ;--------------------------------------------------------
+                             35 	.area _HOME
+                             36 	.area _GSINIT
+                             37 	.area _GSFINAL
+                             38 	.area _GSINIT
+                             39 ;StateMenu.c:3: UINT8 bank_STATE_MENU = 2;
+   0000 21r00r00             40 	ld	hl,#_bank_STATE_MENU
+   0003 36 02                41 	ld	(hl),#0x02
+                             42 ;StateMenu.c:14: UINT8 collilision_tiles[] = { 1,2,3,4,0 };
+   0005 21r01r00             43 	ld	hl,#_collilision_tiles
+   0008 36 01                44 	ld	(hl),#0x01
+   000A 21r02r00             45 	ld	hl,#(_collilision_tiles + 0x0001)
+   000D 36 02                46 	ld	(hl),#0x02
+   000F 21r03r00             47 	ld	hl,#(_collilision_tiles + 0x0002)
+   0012 36 03                48 	ld	(hl),#0x03
+   0014 21r04r00             49 	ld	hl,#(_collilision_tiles + 0x0003)
+   0017 36 04                50 	ld	(hl),#0x04
+   0019 21r05r00             51 	ld	hl,#(_collilision_tiles + 0x0004)
+   001C 36 00                52 	ld	(hl),#0x00
+                             53 ;--------------------------------------------------------
+                             54 ; Home
+                             55 ;--------------------------------------------------------
+                             56 	.area _HOME
+                             57 	.area _HOME
+                             58 ;--------------------------------------------------------
+                             59 ; code
+                             60 ;--------------------------------------------------------
+                             61 	.area _CODE_2
+                             62 ;StateMenu.c:15: void Start_STATE_MENU() {
+                             63 ;	---------------------------------
+                             64 ; Function Start_STATE_MENU
+                             65 ; ---------------------------------
+   0000                      66 _Start_STATE_MENU::
+                             67 ;StateMenu.c:17: NR52_REG = 0x80; //Enables sound, you should always setup this first
+   0000 21 26 FF             68 	ld	hl,#0xff26
+   0003 36 80                69 	ld	(hl),#0x80
+                             70 ;StateMenu.c:18: NR51_REG = 0xFF; //Enables all channels (left and right)
+   0005 2E 25                71 	ld	l, #0x25
+   0007 36 FF                72 	ld	(hl),#0xff
+                             73 ;StateMenu.c:19: NR50_REG = 0x77; //Max volume
+   0009 2E 24                74 	ld	l, #0x24
+   000B 36 77                75 	ld	(hl),#0x77
+                             76 ;StateMenu.c:21: SPRITES_8x16;
+   000D 11 40 FF             77 	ld	de,#0xff40
+   0010 1A                   78 	ld	a,(de)
+   0011 4F                   79 	ld	c,a
+   0012 06 00                80 	ld	b,#0x00
+   0014 79                   81 	ld	a,c
+   0015 CB D7                82 	set	2, a
+   0017 4F                   83 	ld	c,a
+   0018 2E 40                84 	ld	l, #0x40
+   001A 71                   85 	ld	(hl),c
+                             86 ;StateMenu.c:22: for(i = 0; i != n_sprite_types; ++ i) {
+   001B 06 00                87 	ld	b,#0x00
+   001D                      88 00103$:
+   001D 21r00r00             89 	ld	hl,#_n_sprite_types
+   0020 7E                   90 	ld	a,(hl)
+   0021 90                   91 	sub	a, b
+   0022 28 0B                92 	jr	Z,00101$
+                             93 ;StateMenu.c:23: SpriteManagerLoad(i);
+   0024 C5                   94 	push	bc
+   0025 C5                   95 	push	bc
+   0026 33                   96 	inc	sp
+   0027 CDr00r00             97 	call	_SpriteManagerLoad
+   002A 33                   98 	inc	sp
+   002B C1                   99 	pop	bc
+                            100 ;StateMenu.c:22: for(i = 0; i != n_sprite_types; ++ i) {
+   002C 04                  101 	inc	b
+   002D 18 EE               102 	jr	00103$
+   002F                     103 00101$:
+                            104 ;StateMenu.c:25: SHOW_SPRITES;
+   002F 11 40 FF            105 	ld	de,#0xff40
+   0032 1A                  106 	ld	a,(de)
+   0033 4F                  107 	ld	c,a
+   0034 06 00               108 	ld	b,#0x00
+   0036 79                  109 	ld	a,c
+   0037 CB CF               110 	set	1, a
+   0039 4F                  111 	ld	c,a
+   003A 21 40 FF            112 	ld	hl,#0xff40
+   003D 71                  113 	ld	(hl),c
+                            114 ;StateMenu.c:27: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
+   003E 21 23 00            115 	ld	hl,#0x0023
+   0041 E5                  116 	push	hl
+   0042 2E 46               117 	ld	l, #0x46
+   0044 E5                  118 	push	hl
+   0045 AF                  119 	xor	a, a
+   0046 F5                  120 	push	af
+   0047 33                  121 	inc	sp
+   0048 CDr00r00            122 	call	_SpriteManagerAdd
+   004B E8 05               123 	add	sp, #5
+   004D 21r00r00            124 	ld	hl,#_scroll_target
+   0050 73                  125 	ld	(hl),e
+   0051 23                  126 	inc	hl
+   0052 72                  127 	ld	(hl),d
+                            128 ;StateMenu.c:28: door_x = 20;
+   0053 21r00r00            129 	ld	hl,#_door_x
+   0056 36 14               130 	ld	(hl),#0x14
+   0058 23                  131 	inc	hl
+   0059 36 00               132 	ld	(hl),#0x00
+                            133 ;StateMenu.c:29: door_y = 120;
+   005B 21r00r00            134 	ld	hl,#_door_y
+   005E 36 78               135 	ld	(hl),#0x78
+   0060 23                  136 	inc	hl
+   0061 36 00               137 	ld	(hl),#0x00
+                            138 ;StateMenu.c:30: SpriteManagerAdd(SPRITE_KEY, 20, 20);
+   0063 21 14 00            139 	ld	hl,#0x0014
+   0066 E5                  140 	push	hl
+   0067 2E 14               141 	ld	l, #0x14
+   0069 E5                  142 	push	hl
+   006A 3E 03               143 	ld	a,#0x03
+   006C F5                  144 	push	af
+   006D 33                  145 	inc	sp
+   006E CDr00r00            146 	call	_SpriteManagerAdd
+   0071 E8 05               147 	add	sp, #5
+                            148 ;StateMenu.c:31: SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
+   0073 21r00r00            149 	ld	hl,#_door_y
+   0076 2A                  150 	ld	a,(hl+)
+   0077 66                  151 	ld	h,(hl)
+   0078 6F                  152 	ld	l,a
+   0079 E5                  153 	push	hl
+   007A 21r00r00            154 	ld	hl,#_door_x
+   007D 2A                  155 	ld	a,(hl+)
+   007E 66                  156 	ld	h,(hl)
+   007F 6F                  157 	ld	l,a
+   0080 E5                  158 	push	hl
+   0081 3E 04               159 	ld	a,#0x04
+   0083 F5                  160 	push	af
+   0084 33                  161 	inc	sp
+   0085 CDr00r00            162 	call	_SpriteManagerAdd
+   0088 E8 05               163 	add	sp, #5
+                            164 ;StateMenu.c:33: InitScrollTiles(0, 59, tiles, 3);
+   008A 21 00 00            165 	ld	hl,#0x0000
+   008D E5                  166 	push	hl
+   008E 3E 03               167 	ld	a,#0x03
+   0090 F5                  168 	push	af
+   0091 33                  169 	inc	sp
+   0092 21r00r00            170 	ld	hl,#_tiles
+   0095 E5                  171 	push	hl
+   0096 21 00 3B            172 	ld	hl,#0x3b00
+   0099 E5                  173 	push	hl
+   009A CDr00r00            174 	call	_ZInitScrollTilesColor
+   009D E8 07               175 	add	sp, #7
+                            176 ;StateMenu.c:34: InitScroll(menuWidth,menuHeight,menu, collilision_tiles, 0, 3);
+   009F 21 00 00            177 	ld	hl,#0x0000
+   00A2 E5                  178 	push	hl
+   00A3 3E 03               179 	ld	a,#0x03
+   00A5 F5                  180 	push	af
+   00A6 33                  181 	inc	sp
+   00A7 2E 00               182 	ld	l, #0x00
+   00A9 E5                  183 	push	hl
+   00AA 21r01r00            184 	ld	hl,#_collilision_tiles
+   00AD E5                  185 	push	hl
+   00AE 21r00r00            186 	ld	hl,#_menu
+   00B1 E5                  187 	push	hl
+   00B2 21 12 00            188 	ld	hl,#0x0012
+   00B5 E5                  189 	push	hl
+   00B6 2E 14               190 	ld	l, #0x14
+   00B8 E5                  191 	push	hl
+   00B9 CDr00r00            192 	call	_InitScrollColor
+   00BC E8 0D               193 	add	sp, #13
+                            194 ;StateMenu.c:35: SHOW_BKG;
+   00BE 11 40 FF            195 	ld	de,#0xff40
+   00C1 1A                  196 	ld	a,(de)
+   00C2 4F                  197 	ld	c,a
+   00C3 06 00               198 	ld	b,#0x00
+   00C5 79                  199 	ld	a,c
+   00C6 CB C7               200 	set	0, a
+   00C8 4F                  201 	ld	c,a
+   00C9 21 40 FF            202 	ld	hl,#0xff40
+   00CC 71                  203 	ld	(hl),c
+   00CD C9                  204 	ret
+                            205 ;StateMenu.c:40: void Update_STATE_MENU() {
+                            206 ;	---------------------------------
+                            207 ; Function Update_STATE_MENU
+                            208 ; ---------------------------------
+   00CE                     209 _Update_STATE_MENU::
+                            210 ;StateMenu.c:41: if (KEY_PRESSED(J_START)) {
+   00CE 21r00r00            211 	ld	hl,#_keys
+   00D1 4E                  212 	ld	c,(hl)
+   00D2 06 00               213 	ld	b,#0x00
+   00D4 CB 79               214 	bit	7, c
+   00D6 C8                  215 	ret	Z
+                            216 ;StateMenu.c:42: SetState(STATE_GAME);
+   00D7 3E 01               217 	ld	a,#0x01
+   00D9 F5                  218 	push	af
+   00DA 33                  219 	inc	sp
+   00DB CDr00r00            220 	call	_SetState
+   00DE 33                  221 	inc	sp
+   00DF C9                  222 	ret
+                            223 	.area _CODE_2
+                            224 	.area _CABS (ABS)

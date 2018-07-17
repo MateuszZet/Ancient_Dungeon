@@ -1,0 +1,137 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.0 #9615 (MINGW64)
+                              4 ;--------------------------------------------------------
+                              5 	.module SpriteKey
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _SetSpriteAnim
+                             12 	.globl _bank_SPRITE_KEY
+                             13 	.globl _anim_key
+                             14 	.globl _Start_SPRITE_KEY
+                             15 	.globl _Update_SPRITE_KEY
+                             16 	.globl _Destroy_SPRITE_KEY
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+   0000                      21 _bank_SPRITE_KEY::
+   0000                      22 	.ds 1
+                             23 ;--------------------------------------------------------
+                             24 ; absolute external ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DABS (ABS)
+                             27 ;--------------------------------------------------------
+                             28 ; global & static initialisations
+                             29 ;--------------------------------------------------------
+                             30 	.area _HOME
+                             31 	.area _GSINIT
+                             32 	.area _GSFINAL
+                             33 	.area _GSINIT
+                             34 ;SpriteKey.c:3: UINT8 bank_SPRITE_KEY = 2;
+   0000 21r00r00             35 	ld	hl,#_bank_SPRITE_KEY
+   0003 36 02                36 	ld	(hl),#0x02
+                             37 ;--------------------------------------------------------
+                             38 ; Home
+                             39 ;--------------------------------------------------------
+                             40 	.area _HOME
+                             41 	.area _HOME
+                             42 ;--------------------------------------------------------
+                             43 ; code
+                             44 ;--------------------------------------------------------
+                             45 	.area _CODE_2
+                             46 ;SpriteKey.c:14: void Start_SPRITE_KEY() {
+                             47 ;	---------------------------------
+                             48 ; Function Start_SPRITE_KEY
+                             49 ; ---------------------------------
+   0000                      50 _Start_SPRITE_KEY::
+   0000 E8 FC                51 	add	sp, #-4
+                             52 ;SpriteKey.c:16: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+   0002 21r01r00             53 	ld	hl,#_THIS + 1
+   0005 2B                   54 	dec	hl
+   0006 4E                   55 	ld	c,(hl)
+   0007 23                   56 	inc	hl
+   0008 46                   57 	ld	b,(hl)
+   0009 21 18 00             58 	ld	hl,#0x0018
+   000C 09                   59 	add	hl,bc
+   000D 7D                   60 	ld	a,l
+   000E 54                   61 	ld	d,h
+   000F F8 02                62 	ldhl	sp,#2
+   0011 22                   63 	ld	(hl+),a
+   0012 72                   64 	ld	(hl),d
+   0013 2B                   65 	dec	hl
+   0014 2A                   66 	ld	a,(hl+)
+   0015 5E                   67 	ld	e, (hl)
+   0016 F8 00                68 	ldhl	sp,#0
+   0018 22                   69 	ld	(hl+),a
+   0019 73                   70 	ld	(hl),e
+                             71 ;SpriteKey.c:17: THIS->lim_x = 9999;
+   001A 21 12 00             72 	ld	hl,#0x0012
+   001D 09                   73 	add	hl,bc
+   001E 4D                   74 	ld	c,l
+   001F 44                   75 	ld	b,h
+   0020 3E 0F                76 	ld	a,#0x0f
+   0022 02                   77 	ld	(bc),a
+   0023 03                   78 	inc	bc
+   0024 3E 27                79 	ld	a,#0x27
+   0026 02                   80 	ld	(bc),a
+                             81 ;SpriteKey.c:18: THIS->lim_y = 9999;
+   0027 21r01r00             82 	ld	hl,#_THIS + 1
+   002A 2B                   83 	dec	hl
+   002B 4E                   84 	ld	c,(hl)
+   002C 23                   85 	inc	hl
+   002D 46                   86 	ld	b,(hl)
+   002E 21 14 00             87 	ld	hl,#0x0014
+   0031 09                   88 	add	hl,bc
+   0032 4D                   89 	ld	c,l
+   0033 44                   90 	ld	b,h
+   0034 3E 0F                91 	ld	a,#0x0f
+   0036 02                   92 	ld	(bc),a
+   0037 03                   93 	inc	bc
+   0038 3E 27                94 	ld	a,#0x27
+   003A 02                   95 	ld	(bc),a
+                             96 ;SpriteKey.c:20: data->vy = 1;
+   003B E1                   97 	pop	hl
+   003C E5                   98 	push	hl
+   003D 36 01                99 	ld	(hl),#0x01
+   003F E8 04               100 	add	sp, #4
+   0041 C9                  101 	ret
+   0042                     102 _anim_key:
+   0042 06                  103 	.db #0x06	; 6
+   0043 00                  104 	.db #0x00	; 0
+   0044 01                  105 	.db #0x01	; 1
+   0045 02                  106 	.db #0x02	; 2
+   0046 03                  107 	.db #0x03	; 3
+   0047 04                  108 	.db #0x04	; 4
+   0048 05                  109 	.db #0x05	; 5
+                            110 ;SpriteKey.c:23: void Update_SPRITE_KEY() {
+                            111 ;	---------------------------------
+                            112 ; Function Update_SPRITE_KEY
+                            113 ; ---------------------------------
+   0049                     114 _Update_SPRITE_KEY::
+                            115 ;SpriteKey.c:24: SetSpriteAnim(THIS, anim_key, 15);
+   0049 3E 0F               116 	ld	a,#0x0f
+   004B F5                  117 	push	af
+   004C 33                  118 	inc	sp
+   004D 21r42r00            119 	ld	hl,#_anim_key
+   0050 E5                  120 	push	hl
+   0051 21r00r00            121 	ld	hl,#_THIS
+   0054 2A                  122 	ld	a,(hl+)
+   0055 66                  123 	ld	h,(hl)
+   0056 6F                  124 	ld	l,a
+   0057 E5                  125 	push	hl
+   0058 CDr00r00            126 	call	_SetSpriteAnim
+   005B E8 05               127 	add	sp, #5
+   005D C9                  128 	ret
+                            129 ;SpriteKey.c:27: void Destroy_SPRITE_KEY() {
+                            130 ;	---------------------------------
+                            131 ; Function Destroy_SPRITE_KEY
+                            132 ; ---------------------------------
+   005E                     133 _Destroy_SPRITE_KEY::
+                            134 ;SpriteKey.c:31: }
+   005E C9                  135 	ret
+                            136 	.area _CODE_2
+                            137 	.area _CABS (ABS)

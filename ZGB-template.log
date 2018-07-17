@@ -1,0 +1,13 @@
+﻿  compiling StateMenu.c
+  In file included from C:/gbdk/ZGB/common/include/main.h:4,
+                   from ../include/StateMenu.h:4,
+                   from StateMenu.c:2:
+C:/gbdk/include/gb/gb.h(167,1): warning G10BCEF52: "/*" within comment
+C:/gbdk/include/gb/gb.h(181,1): warning G10BCEF52: "/*" within comment
+  Linking
+  C:\gbdk/bin/lcc -Wl-yt1 -Wl-yo4 -o ../Release/ZGB_TEMPLATE.gb ../Release/res/door.b3.o ../Release/res/dooropen.b3.o ../Release/res/enemy.b3.o ../Release/res/enemy2.b3.o ../Release/res/font.b3.o ../Release/res/key.b3.o ../Release/res/map.b3.o ../Release/res/map2.b3.o ../Release/res/menu.b3.o ../Release/res/player.b3.o ../Release/res/tiles.b3.o  ../Release/SpriteDoor.o ../Release/SpriteDoorOpen.o ../Release/SpriteEnemy.o ../Release/SpriteEnemy2.o ../Release/SpriteKey.o ../Release/SpritePlayer.o ../Release/StateGame.o ../Release/StateMenu.o ../Release/ZGBMain.o ../Release/ZGBMain_Init.o  C:\gbdk\ZGB\common/Release/__sdcc_call_hl.o C:\gbdk\ZGB\common/Release/_memcpy.o C:\gbdk\ZGB\common/Release/BankManager.o C:\gbdk\ZGB\common/Release/div.o C:\gbdk\ZGB\common/Release/Fade.o C:\gbdk\ZGB\common/Release/Fade_b.o C:\gbdk\ZGB\common/Release/Frame.o C:\gbdk\ZGB\common/Release/Frame_b.o C:\gbdk\ZGB\common/Release/gbt_player.o C:\gbdk\ZGB\common/Release/gbt_player_bank1.o C:\gbdk\ZGB\common/Release/Keys.o C:\gbdk\ZGB\common/Release/main.o C:\gbdk\ZGB\common/Release/Math.o C:\gbdk\ZGB\common/Release/mul.o C:\gbdk\ZGB\common/Release/OAMManager.o C:\gbdk\ZGB\common/Release/Print.o C:\gbdk\ZGB\common/Release/Scroll.o C:\gbdk\ZGB\common/Release/Sound.o C:\gbdk\ZGB\common/Release/Sprite.o C:\gbdk\ZGB\common/Release/SpriteManager.o C:\gbdk\ZGB\common/Release/Stack.o C:\gbdk\ZGB\common/Release/Vector.o
+  Multiple definition of _collilision_tiles
+  Multiple definition of _collilision_tiles
+  make: *** [../bin/ZGB_TEMPLATE.gb] B│╣d -1
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): error MSB3073: The command "cd src
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): error MSB3073: make run BUILD_TYPE=Release" exited with code 2.

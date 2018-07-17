@@ -1,0 +1,96 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.0 #9615 (MINGW64)
+                              4 ;--------------------------------------------------------
+                              5 	.module ZGBMain
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _GetTileReplacement
+                             12 ;--------------------------------------------------------
+                             13 ; ram data
+                             14 ;--------------------------------------------------------
+                             15 	.area _DATA
+                             16 ;--------------------------------------------------------
+                             17 ; absolute external ram data
+                             18 ;--------------------------------------------------------
+                             19 	.area _DABS (ABS)
+                             20 ;--------------------------------------------------------
+                             21 ; global & static initialisations
+                             22 ;--------------------------------------------------------
+                             23 	.area _HOME
+                             24 	.area _GSINIT
+                             25 	.area _GSFINAL
+                             26 	.area _GSINIT
+                             27 ;--------------------------------------------------------
+                             28 ; Home
+                             29 ;--------------------------------------------------------
+                             30 	.area _HOME
+                             31 	.area _HOME
+                             32 ;--------------------------------------------------------
+                             33 ; code
+                             34 ;--------------------------------------------------------
+                             35 	.area _CODE
+                             36 ;ZGBMain.c:4: UINT8 GetTileReplacement(UINT8* tile_ptr, UINT8* tile) {
+                             37 ;	---------------------------------
+                             38 ; Function GetTileReplacement
+                             39 ; ---------------------------------
+   0000                      40 _GetTileReplacement::
+   0000 E8 FD                41 	add	sp, #-3
+                             42 ;ZGBMain.c:5: if(U_LESS_THAN(255 - (UINT16)*tile_ptr, N_SPRITE_TYPES)) {
+   0002 F8 05                43 	ldhl	sp,#(6 - 1)
+   0004 4E                   44 	ld	c,(hl)
+   0005 23                   45 	inc	hl
+   0006 46                   46 	ld	b,(hl)
+   0007 0A                   47 	ld	a,(bc)
+   0008 F8 02                48 	ldhl	sp,#2
+   000A 77                   49 	ld	(hl),a
+   000B 3A                   50 	ld	a,(hl-)
+   000C 2B                   51 	dec	hl
+   000D 22                   52 	ld	(hl+),a
+   000E 36 00                53 	ld	(hl),#0x00
+   0010 11 FD 00             54 	ld	de,#0x00fd
+   0013 E1                   55 	pop	hl
+   0014 E5                   56 	push	hl
+   0015 7B                   57 	ld	a,e
+   0016 95                   58 	sub	a,l
+   0017 5F                   59 	ld	e,a
+   0018 7A                   60 	ld	a,d
+   0019 9C                   61 	sbc	a,h
+   001A F8 01                62 	ldhl	sp,#1
+   001C 32                   63 	ld	(hl-),a
+   001D 73                   64 	ld	(hl),e
+                             65 ;ZGBMain.c:6: *tile = 0;
+   001E F8 07                66 	ldhl	sp,#(8 - 1)
+   0020 5E                   67 	ld	e,(hl)
+   0021 23                   68 	inc	hl
+   0022 56                   69 	ld	d,(hl)
+                             70 ;ZGBMain.c:5: if(U_LESS_THAN(255 - (UINT16)*tile_ptr, N_SPRITE_TYPES)) {
+   0023 F8 01                71 	ldhl	sp,#1
+   0025 CB 7E                72 	bit	7, (hl)
+   0027 28 0C                73 	jr	Z,00102$
+                             74 ;ZGBMain.c:6: *tile = 0;
+   0029 AF                   75 	xor	a, a
+   002A 12                   76 	ld	(de),a
+                             77 ;ZGBMain.c:7: return 255 - (UINT16)*tile_ptr;
+   002B 0A                   78 	ld	a,(bc)
+   002C 4F                   79 	ld	c,a
+   002D 06 00                80 	ld	b,#0x00
+   002F 3E FF                81 	ld	a,#0xff
+   0031 91                   82 	sub	a, c
+   0032 5F                   83 	ld	e,a
+   0033 18 06                84 	jr	00103$
+   0035                      85 00102$:
+                             86 ;ZGBMain.c:10: *tile = *tile_ptr;
+   0035 F8 02                87 	ldhl	sp,#2
+   0037 7E                   88 	ld	a,(hl)
+   0038 12                   89 	ld	(de),a
+                             90 ;ZGBMain.c:12: return 255u;
+   0039 1E FF                91 	ld	e,#0xff
+   003B                      92 00103$:
+   003B E8 03                93 	add	sp, #3
+   003D C9                   94 	ret
+                             95 	.area _CODE
+                             96 	.area _CABS (ABS)

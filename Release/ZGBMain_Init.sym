@@ -1,0 +1,85 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+    _Destroy_SPRITE_DOOR                                           **** GX
+    _Destroy_SPRITE_DOOROPEN                                       **** GX
+    _Destroy_SPRITE_ENEMY                                          **** GX
+    _Destroy_SPRITE_ENEMY2                                         **** GX
+    _Destroy_SPRITE_KEY                                            **** GX
+    _Destroy_SPRITE_PLAYER                                         **** GX
+    _InitSpriteInfo                                                **** GX
+  6 _InitSprites                                                   0031 GR
+  6 _InitStates                                                    0000 GR
+    _Start_SPRITE_DOOR                                             **** GX
+    _Start_SPRITE_DOOROPEN                                         **** GX
+    _Start_SPRITE_ENEMY                                            **** GX
+    _Start_SPRITE_ENEMY2                                           **** GX
+    _Start_SPRITE_KEY                                              **** GX
+    _Start_SPRITE_PLAYER                                           **** GX
+    _Start_STATE_GAME                                              **** GX
+    _Start_STATE_MENU                                              **** GX
+    _Update_SPRITE_DOOR                                            **** GX
+    _Update_SPRITE_DOOROPEN                                        **** GX
+    _Update_SPRITE_ENEMY                                           **** GX
+    _Update_SPRITE_ENEMY2                                          **** GX
+    _Update_SPRITE_KEY                                             **** GX
+    _Update_SPRITE_PLAYER                                          **** GX
+    _Update_STATE_GAME                                             **** GX
+    _Update_STATE_MENU                                             **** GX
+    _bank_SPRITE_DOOR                                              **** GX
+    _bank_SPRITE_DOOROPEN                                          **** GX
+    _bank_SPRITE_ENEMY                                             **** GX
+    _bank_SPRITE_ENEMY2                                            **** GX
+    _bank_SPRITE_KEY                                               **** GX
+    _bank_SPRITE_PLAYER                                            **** GX
+    _bank_STATE_GAME                                               **** GX
+    _bank_STATE_MENU                                               **** GX
+    _door                                                          **** GX
+    _dooropen                                                      **** GX
+    _enemy                                                         **** GX
+    _enemy2                                                        **** GX
+  1 _init_bank                                                     0000 GR
+    _key                                                           **** GX
+  1 _n_sprite_types                                                005A GR
+  1 _next_state                                                    0001 GR
+    _player                                                        **** GX
+  1 _spriteBanks                                                   000C GR
+  1 _spriteDataBanks                                               0042 GR
+  1 _spriteDatas                                                   0036 GR
+  1 _spriteDestroyFuncs                                            002A GR
+  1 _spriteFrameSizes                                              0048 GR
+  1 _spriteIdxs                                                    0054 GR
+  1 _spriteNumFrames                                               004E GR
+  1 _spritePalDatas                                                005B GR
+  1 _spriteStartFuncs                                              0012 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  1 _spriteUpdateFuncs                                             001E GR
+  1 _startFuncs                                                    0004 GR
+  1 _stateBanks                                                    0002 GR
+  1 _updateFuncs                                                   0008 GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size    0   flags    0
+   1 _DATA                                      size   67   flags    0
+   2 _DABS                                      size    0   flags    8
+   3 _HOME                                      size    0   flags    0
+   4 _GSINIT                                    size    F   flags    0
+   5 _GSFINAL                                   size    0   flags    0
+   6 _CODE_1                                    size  133   flags    0
+   7 _CABS                                      size    0   flags    8
+
