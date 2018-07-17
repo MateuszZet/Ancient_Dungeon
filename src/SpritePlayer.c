@@ -15,6 +15,7 @@ UINT8 bank_SPRITE_PLAYER = 2;
 
 int door_x;
 int door_y;
+int next_lvl;
 
 void Start_SPRITE_PLAYER() {
 	THIS->coll_x = 1;
@@ -60,17 +61,23 @@ void Update_SPRITE_PLAYER() {
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
 			}
 		}
+		if(spr->type == SPRITE_ENEMY2) {
+			if(CheckCollision(THIS, spr)) {
+				SetState(STATE_MENU);
+				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+			}
+		}
 		if (spr->type == SPRITE_KEY) {
 			if (CheckCollision(THIS, spr)) {
 				SpriteManagerRemove(1);
 				SpriteManagerRemove(2);
 				SpriteManagerAdd(SPRITE_DOOROPEN, door_x, door_y);
-				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+				PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
 			}
 		}
 		if (spr->type == SPRITE_DOOROPEN) {
 			if (CheckCollision(THIS, spr)) {
-				SetState(STATE_GAME);
+				SetState(next_lvl);
 				
 			}
 		}
