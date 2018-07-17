@@ -1,0 +1,8 @@
+#ifndef SPRITE_DOOROPEN_H
+#define SPRITE_DOOROPEN_H
+
+#include "main.h"
+
+DECLARE_SPRITE(SPRITE_DOOROPEN);
+
+#endif
