@@ -11,9 +11,6 @@ const UINT8 anim_walk[] = { 2,3,4 };
 int dir=0;
 int *dir_pointer = NULL;
 
-
-
-
 struct EnemyInfo {
 	INT8 vy;
 };
@@ -50,9 +47,6 @@ void Update_SPRITE_ENEMY() {
 	
 }
 
-int variable(int dir) {
-	return dir;
-}
 
 void Destroy_SPRITE_ENEMY() {
 }

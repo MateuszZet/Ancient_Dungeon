@@ -52,6 +52,15 @@ void Update_SPRITE_PLAYER() {
 	if(keys == 0){
 		SetSpriteAnim(THIS, anim_idle, 20);
 	}
+	if (KEY_TICKED(J_A)) {
+		SpriteManagerAdd(SPRITE_BOMB, THIS->x, THIS->y);
+		
+	}
+	if (KEY_PRESSED(J_B)) {
+		
+
+	}
+	
 	
 	//collision with objects
 	SPRITEMANAGER_ITERATE(i, spr) {

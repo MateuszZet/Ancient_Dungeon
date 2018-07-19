@@ -1,5 +1,5 @@
 XL2
-H 8 areas E global symbols
+H 8 areas D global symbols
 M SpriteEnemy
 O -mgbz80
 S _TranslateSprite Ref0000
@@ -16,13 +16,12 @@ A _DABS size 0 flags 8 addr 0
 A _HOME size 0 flags 0 addr 0
 A _GSINIT size 15 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
-A _CODE_2 size 100 flags 0 addr 0
+A _CODE_2 size FB flags 0 addr 0
 S _Start_SPRITE_ENEMY Def0000
 S _anim_walk2 Def0056
 S _anim_walk Def0059
 S _Update_SPRITE_ENEMY Def005C
-S _Destroy_SPRITE_ENEMY Def00FF
-S _variable Def00FA
+S _Destroy_SPRITE_ENEMY Def00FA
 A _CABS size 0 flags 8 addr 0
 T 00 00
 R 00 00 01 00
@@ -98,9 +97,5 @@ T F8 00 33 C9
 R 00 00 06 00
 T FA 00
 R 00 00 06 00
-T FA 00 C1 D1 D5 C5 C9
-R 00 00 06 00
-T FF 00
-R 00 00 06 00
-T FF 00 C9
+T FA 00 C9
 R 00 00 06 00

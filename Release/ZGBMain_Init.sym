@@ -7,6 +7,7 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
+    _Destroy_SPRITE_BOMB                                           **** GX
     _Destroy_SPRITE_DOOR                                           **** GX
     _Destroy_SPRITE_DOOROPEN                                       **** GX
     _Destroy_SPRITE_ENEMY                                          **** GX
@@ -16,6 +17,7 @@ Symbol Table
     _InitSpriteInfo                                                **** GX
   6 _InitSprites                                                   0061 GR
   6 _InitStates                                                    0000 GR
+    _Start_SPRITE_BOMB                                             **** GX
     _Start_SPRITE_DOOR                                             **** GX
     _Start_SPRITE_DOOROPEN                                         **** GX
     _Start_SPRITE_ENEMY                                            **** GX
@@ -26,6 +28,7 @@ Symbol Table
     _Start_STATE_GAME2                                             **** GX
     _Start_STATE_GAME3                                             **** GX
     _Start_STATE_MENU                                              **** GX
+    _Update_SPRITE_BOMB                                            **** GX
     _Update_SPRITE_DOOR                                            **** GX
     _Update_SPRITE_DOOROPEN                                        **** GX
     _Update_SPRITE_ENEMY                                           **** GX
@@ -36,6 +39,7 @@ Symbol Table
     _Update_STATE_GAME2                                            **** GX
     _Update_STATE_GAME3                                            **** GX
     _Update_STATE_MENU                                             **** GX
+    _bank_SPRITE_BOMB                                              **** GX
     _bank_SPRITE_DOOR                                              **** GX
     _bank_SPRITE_DOOROPEN                                          **** GX
     _bank_SPRITE_ENEMY                                             **** GX
@@ -46,30 +50,31 @@ Symbol Table
     _bank_STATE_GAME2                                              **** GX
     _bank_STATE_GAME3                                              **** GX
     _bank_STATE_MENU                                               **** GX
+    _bomb                                                          **** GX
     _door                                                          **** GX
     _dooropen                                                      **** GX
     _enemy                                                         **** GX
     _enemy2                                                        **** GX
   1 _init_bank                                                     0000 GR
     _key                                                           **** GX
-  1 _n_sprite_types                                                006E GR
-  1 _next_state                                                    0001 GR
-    _player                                                        **** GX
-  1 _spriteBanks                                                   0020 GR
-  1 _spriteDataBanks                                               0056 GR
-  1 _spriteDatas                                                   004A GR
+  1 _n_sprite_types                                                007B GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
-  1 _spriteDestroyFuncs                                            003E GR
-  1 _spriteFrameSizes                                              005C GR
-  1 _spriteIdxs                                                    0068 GR
-  1 _spriteNumFrames                                               0062 GR
-  1 _spritePalDatas                                                006F GR
-  1 _spriteStartFuncs                                              0026 GR
-  1 _spriteUpdateFuncs                                             0032 GR
+  1 _next_state                                                    0001 GR
+    _player                                                        **** GX
+  1 _spriteBanks                                                   0020 GR
+  1 _spriteDataBanks                                               005F GR
+  1 _spriteDatas                                                   0051 GR
+  1 _spriteDestroyFuncs                                            0043 GR
+  1 _spriteFrameSizes                                              0066 GR
+  1 _spriteIdxs                                                    0074 GR
+  1 _spriteNumFrames                                               006D GR
+  1 _spritePalDatas                                                007C GR
+  1 _spriteStartFuncs                                              0027 GR
+  1 _spriteUpdateFuncs                                             0035 GR
   1 _startFuncs                                                    0008 GR
   1 _stateBanks                                                    0002 GR
   1 _updateFuncs                                                   0014 GR
@@ -81,11 +86,11 @@ Hexadecimal [16-Bits]
 Area Table
 
    0 _CODE                                      size    0   flags    0
-   1 _DATA                                      size   7B   flags    0
+   1 _DATA                                      size   8A   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size    F   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_1                                    size  163   flags    0
+   6 _CODE_1                                    size  18E   flags    0
    7 _CABS                                      size    0   flags    8
 

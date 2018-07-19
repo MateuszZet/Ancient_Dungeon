@@ -8,7 +8,6 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _variable
 	.globl _PlayFx
 	.globl _TranslateSprite
 	.globl _SetSpriteAnim
@@ -63,13 +62,13 @@ _dir_pointer::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;SpriteEnemy.c:21: void Start_SPRITE_ENEMY() {
+;SpriteEnemy.c:18: void Start_SPRITE_ENEMY() {
 ;	---------------------------------
 ; Function Start_SPRITE_ENEMY
 ; ---------------------------------
 _Start_SPRITE_ENEMY::
 	add	sp, #-4
-;SpriteEnemy.c:22: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+;SpriteEnemy.c:19: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -88,7 +87,7 @@ _Start_SPRITE_ENEMY::
 	ldhl	sp,#0
 	ld	(hl+),a
 	ld	(hl),e
-;SpriteEnemy.c:23: THIS->lim_x=9999;
+;SpriteEnemy.c:20: THIS->lim_x=9999;
 	ld	hl,#0x0012
 	add	hl,bc
 	ld	c,l
@@ -98,7 +97,7 @@ _Start_SPRITE_ENEMY::
 	inc	bc
 	ld	a,#0x27
 	ld	(bc),a
-;SpriteEnemy.c:24: THIS->lim_y=9999;
+;SpriteEnemy.c:21: THIS->lim_y=9999;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -113,11 +112,11 @@ _Start_SPRITE_ENEMY::
 	inc	bc
 	ld	a,#0x27
 	ld	(bc),a
-;SpriteEnemy.c:25: data->vy = 1;
+;SpriteEnemy.c:22: data->vy = 1;
 	pop	hl
 	push	hl
 	ld	(hl),#0x01
-;SpriteEnemy.c:27: SetSpriteAnim(THIS, anim_walk2, 15);
+;SpriteEnemy.c:24: SetSpriteAnim(THIS, anim_walk2, 15);
 	ld	a,#0x0f
 	push	af
 	inc	sp
@@ -140,13 +139,13 @@ _anim_walk:
 	.db #0x02	; 2
 	.db #0x03	; 3
 	.db #0x04	; 4
-;SpriteEnemy.c:31: void Update_SPRITE_ENEMY() {
+;SpriteEnemy.c:28: void Update_SPRITE_ENEMY() {
 ;	---------------------------------
 ; Function Update_SPRITE_ENEMY
 ; ---------------------------------
 _Update_SPRITE_ENEMY::
 	dec	sp
-;SpriteEnemy.c:32: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+;SpriteEnemy.c:29: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -156,12 +155,12 @@ _Update_SPRITE_ENEMY::
 	add	hl,bc
 	ld	c,l
 	ld	b,h
-;SpriteEnemy.c:33: dir_pointer = &dir;
+;SpriteEnemy.c:30: dir_pointer = &dir;
 	ld	hl,#_dir_pointer
 	ld	(hl),#<(_dir)
 	inc	hl
 	ld	(hl),#>(_dir)
-;SpriteEnemy.c:35: if(TranslateSprite(THIS, 0, data->vy)) {
+;SpriteEnemy.c:32: if(TranslateSprite(THIS, 0, data->vy)) {
 	ld	a,(bc)
 	ld	d,a
 	push	bc
@@ -181,7 +180,7 @@ _Update_SPRITE_ENEMY::
 	ld	a,e
 	or	a, a
 	jp	Z,00106$
-;SpriteEnemy.c:37: data->vy = -data->vy;
+;SpriteEnemy.c:34: data->vy = -data->vy;
 	ld	a,(bc)
 	ldhl	sp,#0
 	ld	(hl),a
@@ -190,7 +189,7 @@ _Update_SPRITE_ENEMY::
 	ld	(hl),a
 	ld	a,(hl)
 	ld	(bc),a
-;SpriteEnemy.c:39: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
+;SpriteEnemy.c:36: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
 	ld	hl,#0x00c0
 	push	hl
 	ld	l, #0x30
@@ -203,12 +202,12 @@ _Update_SPRITE_ENEMY::
 	push	hl
 	call	_PlayFx
 	add	sp, #10
-;SpriteEnemy.c:40: if (dir == 0 ) {
+;SpriteEnemy.c:37: if (dir == 0 ) {
 	ld	hl,#_dir + 1
 	ld	a,(hl-)
 	or	a,(hl)
 	jr	NZ,00102$
-;SpriteEnemy.c:41: SetSpriteAnim(THIS, anim_walk, 15);
+;SpriteEnemy.c:38: SetSpriteAnim(THIS, anim_walk, 15);
 	ld	a,#0x0f
 	push	af
 	inc	sp
@@ -221,7 +220,7 @@ _Update_SPRITE_ENEMY::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpriteEnemy.c:42: *dir_pointer = 1;
+;SpriteEnemy.c:39: *dir_pointer = 1;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -234,7 +233,7 @@ _Update_SPRITE_ENEMY::
 	ld	(bc),a
 	jr	00106$
 00102$:
-;SpriteEnemy.c:45: SetSpriteAnim(THIS, anim_walk2, 15);
+;SpriteEnemy.c:42: SetSpriteAnim(THIS, anim_walk2, 15);
 	ld	a,#0x0f
 	push	af
 	inc	sp
@@ -247,7 +246,7 @@ _Update_SPRITE_ENEMY::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpriteEnemy.c:46: *dir_pointer = 0;
+;SpriteEnemy.c:43: *dir_pointer = 0;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -261,23 +260,12 @@ _Update_SPRITE_ENEMY::
 00106$:
 	inc	sp
 	ret
-;SpriteEnemy.c:53: int variable(int dir) {
-;	---------------------------------
-; Function variable
-; ---------------------------------
-_variable::
-;SpriteEnemy.c:54: return dir;
-	pop	bc
-	pop	de
-	push	de
-	push	bc
-	ret
-;SpriteEnemy.c:57: void Destroy_SPRITE_ENEMY() {
+;SpriteEnemy.c:51: void Destroy_SPRITE_ENEMY() {
 ;	---------------------------------
 ; Function Destroy_SPRITE_ENEMY
 ; ---------------------------------
 _Destroy_SPRITE_ENEMY::
-;SpriteEnemy.c:58: }
+;SpriteEnemy.c:52: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)
