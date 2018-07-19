@@ -41,4 +41,7 @@ void Start_STATE_GAME() {
 }
 
 void Update_STATE_GAME() {
+	if (KEY_PRESSED(J_START)) {
+		SetState(STATE_GAME2);
+	}
 }

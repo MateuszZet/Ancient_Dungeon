@@ -28,6 +28,8 @@
 	.globl _Destroy_SPRITE_PLAYER
 	.globl _Update_SPRITE_PLAYER
 	.globl _Start_SPRITE_PLAYER
+	.globl _Update_STATE_GAME3
+	.globl _Start_STATE_GAME3
 	.globl _Update_STATE_GAME2
 	.globl _Start_STATE_GAME2
 	.globl _Update_STATE_MENU
@@ -60,11 +62,11 @@ _init_bank::
 _next_state::
 	.ds 1
 _stateBanks::
-	.ds 3
+	.ds 6
 _startFuncs::
-	.ds 6
+	.ds 12
 _updateFuncs::
-	.ds 6
+	.ds 12
 _spriteBanks::
 	.ds 6
 _spriteStartFuncs::
@@ -101,10 +103,10 @@ _spritePalDatas::
 ;ZGBMain_Init.c:3: UINT8 init_bank = 1;
 	ld	hl,#_init_bank
 	ld	(hl),#0x01
-;ZGBMain_Init.c:31: UINT8 next_state = STATE_MENU;
+;ZGBMain_Init.c:32: UINT8 next_state = STATE_MENU;
 	ld	hl,#_next_state
 	ld	(hl),#0x00
-;ZGBMain_Init.c:34: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
+;ZGBMain_Init.c:35: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
 	ld	hl,#_n_sprite_types
 	ld	(hl),#0x06
 ;--------------------------------------------------------
@@ -116,12 +118,12 @@ _spritePalDatas::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_1
-;ZGBMain_Init.c:36: void InitStates() {
+;ZGBMain_Init.c:37: void InitStates() {
 ;	---------------------------------
 ; Function InitStates
 ; ---------------------------------
 _InitStates::
-;ZGBMain_Init.c:37: INIT_STATE(STATE_MENU);
+;ZGBMain_Init.c:38: INIT_STATE(STATE_MENU);
 	ld	de,#_stateBanks
 	ld	hl,#_bank_STATE_MENU
 	ld	a,(hl)
@@ -134,7 +136,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_MENU)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_MENU)
-;ZGBMain_Init.c:38: INIT_STATE(STATE_GAME);
+;ZGBMain_Init.c:39: INIT_STATE(STATE_GAME);
 	ld	de,#(_stateBanks + 0x0001)
 	ld	hl,#_bank_STATE_GAME
 	ld	a,(hl)
@@ -147,7 +149,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME)
-;ZGBMain_Init.c:39: INIT_STATE(STATE_GAME2);
+;ZGBMain_Init.c:40: INIT_STATE(STATE_GAME2);
 	ld	de,#(_stateBanks + 0x0002)
 	ld	hl,#_bank_STATE_GAME2
 	ld	a,(hl)
@@ -160,13 +162,26 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME2)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME2)
+;ZGBMain_Init.c:41: INIT_STATE(STATE_GAME3);
+	ld	de,#(_stateBanks + 0x0003)
+	ld	hl,#_bank_STATE_GAME3
+	ld	a,(hl)
+	ld	(de),a
+	ld	hl,#(_startFuncs + 0x0006)
+	ld	(hl),#<(_Start_STATE_GAME3)
+	inc	hl
+	ld	(hl),#>(_Start_STATE_GAME3)
+	ld	hl,#(_updateFuncs + 0x0006)
+	ld	(hl),#<(_Update_STATE_GAME3)
+	inc	hl
+	ld	(hl),#>(_Update_STATE_GAME3)
 	ret
-;ZGBMain_Init.c:42: void InitSprites() {
+;ZGBMain_Init.c:44: void InitSprites() {
 ;	---------------------------------
 ; Function InitSprites
 ; ---------------------------------
 _InitSprites::
-;ZGBMain_Init.c:43: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
+;ZGBMain_Init.c:45: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0902
@@ -191,7 +206,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:44: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
+;ZGBMain_Init.c:46: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0502
@@ -216,7 +231,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:46: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:48: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602
@@ -241,7 +256,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:47: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:49: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -266,7 +281,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:48: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:50: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -291,7 +306,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:49: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:51: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602

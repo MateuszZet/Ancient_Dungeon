@@ -218,8 +218,8 @@
    00DA 06 00               218 	ld	b,#0x00
    00DC CB 79               219 	bit	7, c
    00DE C8                  220 	ret	Z
-                            221 ;StateMenu.c:44: SetState(STATE_GAME2);
-   00DF 3E 02               222 	ld	a,#0x02
+                            221 ;StateMenu.c:44: SetState(STATE_GAME3);
+   00DF 3E 03               222 	ld	a,#0x03
    00E1 F5                  223 	push	af
    00E2 33                  224 	inc	sp
    00E3 CDr00r00            225 	call	_SetState
