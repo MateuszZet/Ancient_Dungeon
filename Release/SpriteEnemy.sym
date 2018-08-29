@@ -7,9 +7,11 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  6 _Destroy_SPRITE_ENEMY                                          00FA GR
+    _CheckCollision                                                **** GX
+  6 _Destroy_SPRITE_ENEMY                                          01A2 GR
     _PlayFx                                                        **** GX
     _SetSpriteAnim                                                 **** GX
+    _SpriteManagerRemoveSprite                                     **** GX
   6 _Start_SPRITE_ENEMY                                            0000 GR
     _THIS                                                          **** GX
     _TranslateSprite                                               **** GX
@@ -19,6 +21,8 @@ Symbol Table
   1 _bank_SPRITE_ENEMY                                             0000 GR
   1 _dir                                                           0001 GR
   1 _dir_pointer                                                   0003 GR
+    _sprite_manager_sprites                                        **** GX
+    _sprite_manager_updatables                                     **** GX
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
@@ -32,6 +36,6 @@ Area Table
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size   15   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size   FB   flags    0
+   6 _CODE_2                                    size  1A3   flags    0
    7 _CABS                                      size    0   flags    8
 

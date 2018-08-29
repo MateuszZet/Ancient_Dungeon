@@ -3,7 +3,8 @@
 UINT8 bank_SPRITE_ENEMY2 = 2;
 #include "Sound.h"
 #include "SpriteManager.h"
-//#include "global.h"
+#include "global.h"
+#include "ZGBMain.h"
 
 const UINT8 anime_left[] = { 3,0,1,2 };
 const UINT8 anime_right[] = { 3,3,4,5 };
@@ -29,6 +30,8 @@ void Start_SPRITE_ENEMY2() {
 }
 
 void Update_SPRITE_ENEMY2() {
+	UINT8 i;
+	struct Sprite* spr;
 	struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	dir_pointer2 = &dir2;
 	
@@ -46,6 +49,18 @@ void Update_SPRITE_ENEMY2() {
 			*dir_pointer2 = 0;
 		}
 		
+	}
+
+	//collision with objects
+	SPRITEMANAGER_ITERATE(i, spr) {
+		if (spr->type == SPRITE_BOMB) {
+			if (CheckCollision(THIS, spr)) {
+				SpriteManagerRemoveSprite(THIS);
+				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+				SpriteManagerRemoveSprite(spr);
+			}
+		}
+
 	}
 	
 }

@@ -16,6 +16,7 @@ UINT8 bank_SPRITE_PLAYER = 2;
 int door_x;
 int door_y;
 int next_lvl;
+int have_bomb=3;
 
 void Start_SPRITE_PLAYER() {
 	THIS->coll_x = 1;
@@ -28,7 +29,7 @@ void Update_SPRITE_PLAYER() {
 	UINT8 i;
 	struct Sprite* spr;
 	
-	//controls
+	//controlssa
 	if(KEY_PRESSED(J_UP)){
 		THIS->y--;
 		SetSpriteAnim(THIS, anim_up, 10);
@@ -52,9 +53,9 @@ void Update_SPRITE_PLAYER() {
 	if(keys == 0){
 		SetSpriteAnim(THIS, anim_idle, 20);
 	}
-	if (KEY_TICKED(J_A)) {
+	if (KEY_TICKED(J_A) && have_bomb>0) {
 		SpriteManagerAdd(SPRITE_BOMB, THIS->x, THIS->y);
-		
+		have_bomb--;	
 	}
 	if (KEY_PRESSED(J_B)) {
 		
@@ -68,12 +69,14 @@ void Update_SPRITE_PLAYER() {
 			if(CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+				have_bomb = 3;
 			}
 		}
 		if(spr->type == SPRITE_ENEMY2) {
 			if(CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+				have_bomb = 3;
 			}
 		}
 		if (spr->type == SPRITE_KEY) {

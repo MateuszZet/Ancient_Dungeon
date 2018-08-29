@@ -8,7 +8,9 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
+	.globl _SpriteManagerRemoveSprite
 	.globl _PlayFx
+	.globl _CheckCollision
 	.globl _TranslateSprite
 	.globl _SetSpriteAnim
 	.globl _dir_pointer
@@ -43,12 +45,12 @@ _dir_pointer::
 ;SpriteEnemy.c:3: UINT8 bank_SPRITE_ENEMY = 2;
 	ld	hl,#_bank_SPRITE_ENEMY
 	ld	(hl),#0x02
-;SpriteEnemy.c:11: int dir=0;
+;SpriteEnemy.c:12: int dir=0;
 	ld	hl,#_dir
 	ld	(hl),#0x00
 	inc	hl
 	ld	(hl),#0x00
-;SpriteEnemy.c:12: int *dir_pointer = NULL;
+;SpriteEnemy.c:13: int *dir_pointer = NULL;
 	ld	hl,#_dir_pointer
 	ld	(hl),#0x00
 	inc	hl
@@ -62,13 +64,13 @@ _dir_pointer::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;SpriteEnemy.c:18: void Start_SPRITE_ENEMY() {
+;SpriteEnemy.c:19: void Start_SPRITE_ENEMY() {
 ;	---------------------------------
 ; Function Start_SPRITE_ENEMY
 ; ---------------------------------
 _Start_SPRITE_ENEMY::
 	add	sp, #-4
-;SpriteEnemy.c:19: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+;SpriteEnemy.c:20: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -87,7 +89,7 @@ _Start_SPRITE_ENEMY::
 	ldhl	sp,#0
 	ld	(hl+),a
 	ld	(hl),e
-;SpriteEnemy.c:20: THIS->lim_x=9999;
+;SpriteEnemy.c:21: THIS->lim_x=9999;
 	ld	hl,#0x0012
 	add	hl,bc
 	ld	c,l
@@ -97,7 +99,7 @@ _Start_SPRITE_ENEMY::
 	inc	bc
 	ld	a,#0x27
 	ld	(bc),a
-;SpriteEnemy.c:21: THIS->lim_y=9999;
+;SpriteEnemy.c:22: THIS->lim_y=9999;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -112,11 +114,11 @@ _Start_SPRITE_ENEMY::
 	inc	bc
 	ld	a,#0x27
 	ld	(bc),a
-;SpriteEnemy.c:22: data->vy = 1;
+;SpriteEnemy.c:23: data->vy = 1;
 	pop	hl
 	push	hl
 	ld	(hl),#0x01
-;SpriteEnemy.c:24: SetSpriteAnim(THIS, anim_walk2, 15);
+;SpriteEnemy.c:25: SetSpriteAnim(THIS, anim_walk2, 15);
 	ld	a,#0x0f
 	push	af
 	inc	sp
@@ -139,13 +141,13 @@ _anim_walk:
 	.db #0x02	; 2
 	.db #0x03	; 3
 	.db #0x04	; 4
-;SpriteEnemy.c:28: void Update_SPRITE_ENEMY() {
+;SpriteEnemy.c:29: void Update_SPRITE_ENEMY() {
 ;	---------------------------------
 ; Function Update_SPRITE_ENEMY
 ; ---------------------------------
 _Update_SPRITE_ENEMY::
-	dec	sp
-;SpriteEnemy.c:29: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+	add	sp, #-4
+;SpriteEnemy.c:34: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -155,12 +157,12 @@ _Update_SPRITE_ENEMY::
 	add	hl,bc
 	ld	c,l
 	ld	b,h
-;SpriteEnemy.c:30: dir_pointer = &dir;
+;SpriteEnemy.c:35: dir_pointer = &dir;
 	ld	hl,#_dir_pointer
 	ld	(hl),#<(_dir)
 	inc	hl
 	ld	(hl),#>(_dir)
-;SpriteEnemy.c:32: if(TranslateSprite(THIS, 0, data->vy)) {
+;SpriteEnemy.c:39: if (TranslateSprite(THIS, 0, data->vy)) {
 	ld	a,(bc)
 	ld	d,a
 	push	bc
@@ -179,17 +181,17 @@ _Update_SPRITE_ENEMY::
 	pop	bc
 	ld	a,e
 	or	a, a
-	jp	Z,00106$
-;SpriteEnemy.c:34: data->vy = -data->vy;
+	jp	Z,00105$
+;SpriteEnemy.c:41: data->vy = -data->vy;
 	ld	a,(bc)
-	ldhl	sp,#0
+	ldhl	sp,#3
 	ld	(hl),a
 	xor	a, a
 	sub	a, (hl)
 	ld	(hl),a
 	ld	a,(hl)
 	ld	(bc),a
-;SpriteEnemy.c:36: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
+;SpriteEnemy.c:43: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
 	ld	hl,#0x00c0
 	push	hl
 	ld	l, #0x30
@@ -202,12 +204,12 @@ _Update_SPRITE_ENEMY::
 	push	hl
 	call	_PlayFx
 	add	sp, #10
-;SpriteEnemy.c:37: if (dir == 0 ) {
+;SpriteEnemy.c:44: if (dir == 0) {
 	ld	hl,#_dir + 1
 	ld	a,(hl-)
 	or	a,(hl)
 	jr	NZ,00102$
-;SpriteEnemy.c:38: SetSpriteAnim(THIS, anim_walk, 15);
+;SpriteEnemy.c:45: SetSpriteAnim(THIS, anim_walk, 15);
 	ld	a,#0x0f
 	push	af
 	inc	sp
@@ -220,7 +222,7 @@ _Update_SPRITE_ENEMY::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpriteEnemy.c:39: *dir_pointer = 1;
+;SpriteEnemy.c:46: *dir_pointer = 1;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -231,9 +233,9 @@ _Update_SPRITE_ENEMY::
 	inc	bc
 	ld	a,#0x00
 	ld	(bc),a
-	jr	00106$
+	jr	00105$
 00102$:
-;SpriteEnemy.c:42: SetSpriteAnim(THIS, anim_walk2, 15);
+;SpriteEnemy.c:49: SetSpriteAnim(THIS, anim_walk2, 15);
 	ld	a,#0x0f
 	push	af
 	inc	sp
@@ -246,7 +248,7 @@ _Update_SPRITE_ENEMY::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpriteEnemy.c:43: *dir_pointer = 0;
+;SpriteEnemy.c:50: *dir_pointer = 0;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -257,15 +259,133 @@ _Update_SPRITE_ENEMY::
 	inc	bc
 	ld	a,#0x00
 	ld	(bc),a
-00106$:
-	inc	sp
+00105$:
+;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
+	ld	a, (#(_sprite_manager_updatables + 0x0001) + 0)
+	ld	c,a
+	ld	b,#0x00
+	sla	c
+	rl	b
+	ld	hl,#_sprite_manager_sprites
+	add	hl,bc
+	ld	c,l
+	ld	b,h
+	ld	e, c
+	ld	d, b
+	ld	a,(de)
+	ld	c,a
+	inc	de
+	ld	a,(de)
+	ld	b,a
+	ldhl	sp,#0
+	ld	(hl),#0x00
+00112$:
+	ld	de, #_sprite_manager_updatables + 0
+	ld	a,(de)
+	ldhl	sp,#3
+	ld	(hl),a
+	ldhl	sp,#0
+	ld	a,(hl)
+	ldhl	sp,#3
+	sub	a, (hl)
+	jp	Z,00114$
+;SpriteEnemy.c:57: if (spr->type == SPRITE_BOMB) {
+	ld	hl,#0x0010
+	add	hl,bc
+	ld	a,l
+	ld	d,h
+	ldhl	sp,#1
+	ld	(hl+),a
+	ld	(hl),d
+	dec	hl
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	ld	a,(de)
+	sub	a, #0x06
+	jp	NZ,00113$
+;SpriteEnemy.c:58: if (CheckCollision(THIS, spr)) {
+	push	bc
+	push	bc
+	ld	hl,#_THIS
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	call	_CheckCollision
+	add	sp, #4
+	pop	bc
+	ld	a,e
+	or	a, a
+	jr	Z,00113$
+;SpriteEnemy.c:59: SpriteManagerRemoveSprite(THIS);
+	push	bc
+	ld	hl,#_THIS
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	call	_SpriteManagerRemoveSprite
+	add	sp, #2
+	pop	bc
+;SpriteEnemy.c:60: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+	push	bc
+	ld	hl,#0x0086
+	push	hl
+	ld	l, #0x73
+	push	hl
+	ld	l, #0xf3
+	push	hl
+	ld	l, #0xc7
+	push	hl
+	ld	l, #0x4f
+	push	hl
+	ld	hl,#0x0a00
+	push	hl
+	call	_PlayFx
+	add	sp, #12
+	pop	bc
+;SpriteEnemy.c:61: SpriteManagerRemoveSprite(spr);
+	push	bc
+	call	_SpriteManagerRemoveSprite
+	add	sp, #2
+00113$:
+;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
+	ldhl	sp,#0
+	inc	(hl)
+	ld	c,(hl)
+	ld	b,#0x00
+	inc	bc
+	ld	hl,#_sprite_manager_updatables
+	add	hl,bc
+	ld	c,l
+	ld	b,h
+	ld	a,(bc)
+	ld	c,a
+	ld	b,#0x00
+	sla	c
+	rl	b
+	ld	hl,#_sprite_manager_sprites
+	add	hl,bc
+	ld	c,l
+	ld	b,h
+	ld	e, c
+	ld	d, b
+	ld	a,(de)
+	ld	c,a
+	inc	de
+	ld	a,(de)
+	ld	b,a
+	jp	00112$
+00114$:
+	add	sp, #4
 	ret
-;SpriteEnemy.c:51: void Destroy_SPRITE_ENEMY() {
+;SpriteEnemy.c:68: void Destroy_SPRITE_ENEMY() {
 ;	---------------------------------
 ; Function Destroy_SPRITE_ENEMY
 ; ---------------------------------
 _Destroy_SPRITE_ENEMY::
-;SpriteEnemy.c:52: }
+;SpriteEnemy.c:69: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

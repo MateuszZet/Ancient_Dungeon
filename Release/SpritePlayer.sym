@@ -8,7 +8,7 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _CheckCollision                                                **** GX
-  6 _Destroy_SPRITE_PLAYER                                         03A5 GR
+  6 _Destroy_SPRITE_PLAYER                                         03E2 GR
     _PlayFx                                                        **** GX
     _SetSpriteAnim                                                 **** GX
     _SetState                                                      **** GX
@@ -27,12 +27,12 @@ Symbol Table
     _delta_time                                                    **** GX
   1 _door_x                                                        0001 GR
   1 _door_y                                                        0003 GR
+  1 _have_bomb                                                     0007 GR
     _keys                                                          **** GX
   1 _next_lvl                                                      0005 GR
     _previous_keys                                                 **** GX
     _sprite_manager_sprites                                        **** GX
     _sprite_manager_updatables                                     **** GX
-
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
@@ -40,11 +40,11 @@ Hexadecimal [16-Bits]
 Area Table
 
    0 _CODE                                      size    0   flags    0
-   1 _DATA                                      size    7   flags    0
+   1 _DATA                                      size    9   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
-   4 _GSINIT                                    size    5   flags    0
+   4 _GSINIT                                    size    D   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  3A6   flags    0
+   6 _CODE_2                                    size  3E3   flags    0
    7 _CABS                                      size    0   flags    8
 
