@@ -166,7 +166,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:36: SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
+;StateGame3.c:37: SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
 	ld	hl,#0x0138
 	push	hl
 	ld	hl,#0x0010
@@ -176,7 +176,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:37: SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
+;StateGame3.c:38: SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
 	ld	hl,#0x0058
 	push	hl
 	ld	l, #0x10
@@ -186,7 +186,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:38: SpriteManagerAdd(SPRITE_ENEMY2, 32, 408 );
+;StateGame3.c:39: SpriteManagerAdd(SPRITE_ENEMY2, 32, 408 );
 	ld	hl,#0x0198
 	push	hl
 	ld	hl,#0x0020
@@ -196,7 +196,37 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:39: InitScrollTiles(0, 59, tiles, 3);
+;StateGame3.c:41: SpriteManagerAdd(SPRITE_ENEMY, 120, 24);
+	ld	hl,#0x0018
+	push	hl
+	ld	l, #0x78
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:42: SpriteManagerAdd(SPRITE_ENEMY, 120, 216);
+	ld	hl,#0x00d8
+	push	hl
+	ld	l, #0x78
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:43: SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
+	ld	hl,#0x0190
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:46: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -208,7 +238,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame3.c:40: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
+;StateGame3.c:47: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -226,7 +256,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame3.c:41: SHOW_BKG;
+;StateGame3.c:48: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -237,18 +267,18 @@ _Start_STATE_GAME3::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame3.c:46: void Update_STATE_GAME3() {
+;StateGame3.c:53: void Update_STATE_GAME3() {
 ;	---------------------------------
 ; Function Update_STATE_GAME3
 ; ---------------------------------
 _Update_STATE_GAME3::
-;StateGame3.c:47: if (KEY_PRESSED(J_START)) {
+;StateGame3.c:54: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame3.c:48: SetState(STATE_GAME4);
+;StateGame3.c:55: SetState(STATE_GAME4);
 	ld	a,#0x04
 	push	af
 	inc	sp

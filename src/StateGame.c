@@ -28,11 +28,17 @@ void Start_STATE_GAME() {
 	SHOW_SPRITES;
 
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
-	//SpriteManagerAdd(SPRITE_ENEMY2, 8, 115 );
+	
 	door_x = 240;
 	door_y = 112;
 	SpriteManagerAdd(SPRITE_KEY, 288, 112);
 	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+
+	SpriteManagerAdd(SPRITE_ENEMY, 40, 32);
+	SpriteManagerAdd(SPRITE_ENEMY, 128, 80);
+	SpriteManagerAdd(SPRITE_ENEMY, 200, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 288, 96);
+	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(mapWidth, mapHeight, map, collilision_tiles, 0, 3);
 	SHOW_BKG;

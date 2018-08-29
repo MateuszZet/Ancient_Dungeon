@@ -36,7 +36,7 @@ void Update_SPRITE_ENEMY() {
 
 	
 
-	if (TranslateSprite(THIS, 0, data->vy)) {
+	if (TranslateSprite(THIS, 0 << delta_time, data->vy << delta_time)) {
 
 		data->vy = -data->vy;
 

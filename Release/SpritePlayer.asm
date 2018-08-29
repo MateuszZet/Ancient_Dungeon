@@ -9,6 +9,7 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _PlayFx
+	.globl _SpriteManagerRemoveSprite
 	.globl _SpriteManagerRemove
 	.globl _SpriteManagerAdd
 	.globl _SetState
@@ -148,7 +149,7 @@ _anim_up:
 ; Function Update_SPRITE_PLAYER
 ; ---------------------------------
 _Update_SPRITE_PLAYER::
-	add	sp, #-5
+	add	sp, #-3
 ;SpritePlayer.c:33: if(KEY_PRESSED(J_UP)){
 	ld	hl,#_keys
 	ld	c,(hl)
@@ -165,7 +166,7 @@ _Update_SPRITE_PLAYER::
 	add	hl,bc
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	(hl+),a
 	ld	(hl),d
 	dec	hl
@@ -240,7 +241,7 @@ _Update_SPRITE_PLAYER::
 	add	hl,bc
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	(hl+),a
 	ld	(hl),d
 	dec	hl
@@ -315,7 +316,7 @@ _Update_SPRITE_PLAYER::
 	add	hl,bc
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	(hl+),a
 	ld	(hl),d
 	dec	hl
@@ -390,7 +391,7 @@ _Update_SPRITE_PLAYER::
 	add	hl,bc
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	(hl+),a
 	ld	(hl),d
 	dec	hl
@@ -511,7 +512,7 @@ _Update_SPRITE_PLAYER::
 	add	hl,bc
 	ld	a,l
 	ld	d,h
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	(hl+),a
 	ld	(hl),d
 	dec	hl
@@ -535,7 +536,7 @@ _Update_SPRITE_PLAYER::
 	inc	de
 	ld	a,(de)
 	ld	b,a
-	ldhl	sp,#3
+	ldhl	sp,#1
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
@@ -571,37 +572,38 @@ _Update_SPRITE_PLAYER::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#0
-	ld	(hl+),a
+	ld	c,a
 	inc	de
 	ld	a,(de)
-	ld	(hl+),a
+	ld	b,a
+	ldhl	sp,#0
 	ld	(hl),#0x00
 00133$:
 	ld	de, #_sprite_manager_updatables + 0
 	ld	a,(de)
-	ld	c,a
-	ldhl	sp,#2
-	ld	a,(hl)
-	sub	a, c
+	ldhl	sp,#1
+	ld	(hl-),a
+	ld	a,(hl+)
+	sub	a, (hl)
 	jp	Z,00135$
 ;SpritePlayer.c:68: if(spr->type == SPRITE_ENEMY) {
-	pop	de
-	push	de
 	ld	hl,#0x0010
-	add	hl,de
-	ld	c,l
-	ld	b,h
-	ld	a,(bc)
+	add	hl,bc
+	ld	a,l
+	ld	d,h
+	ldhl	sp,#1
+	ld	(hl+),a
+	ld	(hl),d
+	dec	hl
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	ld	a,(de)
 	dec	a
 	jp	NZ,00118$
 ;SpritePlayer.c:69: if(CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
-	push	hl
+	push	bc
 	ld	hl,#_THIS
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -645,16 +647,16 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),#0x00
 00118$:
 ;SpritePlayer.c:75: if(spr->type == SPRITE_ENEMY2) {
-	ld	a,(bc)
+	ldhl	sp,#(2 - 1)
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	ld	a,(de)
 	sub	a, #0x02
 	jp	NZ,00122$
 ;SpritePlayer.c:76: if(CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
-	push	hl
+	push	bc
 	ld	hl,#_THIS
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -698,16 +700,16 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),#0x00
 00122$:
 ;SpritePlayer.c:82: if (spr->type == SPRITE_KEY) {
-	ld	a,(bc)
+	ldhl	sp,#(2 - 1)
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	ld	a,(de)
 	sub	a, #0x03
 	jp	NZ,00126$
 ;SpritePlayer.c:83: if (CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
-	push	hl
+	push	bc
 	ld	hl,#_THIS
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -719,14 +721,13 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jp	Z,00126$
-;SpritePlayer.c:84: SpriteManagerRemove(1);
+;SpritePlayer.c:84: SpriteManagerRemoveSprite(spr);
 	push	bc
-	ld	hl,#0x0001
-	push	hl
-	call	_SpriteManagerRemove
+	push	bc
+	call	_SpriteManagerRemoveSprite
 	add	sp, #2
 	pop	bc
-;SpritePlayer.c:85: SpriteManagerRemove(2);
+;SpritePlayer.c:85: SpriteManagerRemove(2); //need to place door always as 2 sprite
 	push	bc
 	ld	hl,#0x0002
 	push	hl
@@ -770,13 +771,15 @@ _Update_SPRITE_PLAYER::
 	pop	bc
 00126$:
 ;SpritePlayer.c:90: if (spr->type == SPRITE_DOOROPEN) {
-	ld	a,(bc)
+	ldhl	sp,#(2 - 1)
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	ld	a,(de)
 	sub	a, #0x05
 	jr	NZ,00134$
 ;SpritePlayer.c:91: if (CheckCollision(THIS, spr)) {
-	pop	hl
-	push	hl
-	push	hl
+	push	bc
 	ld	hl,#_THIS
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -796,7 +799,7 @@ _Update_SPRITE_PLAYER::
 	inc	sp
 00134$:
 ;SpritePlayer.c:67: SPRITEMANAGER_ITERATE(i, spr) {
-	ldhl	sp,#2
+	ldhl	sp,#0
 	inc	(hl)
 	ld	c,(hl)
 	ld	b,#0x00
@@ -817,21 +820,20 @@ _Update_SPRITE_PLAYER::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#0
-	ld	(hl+),a
+	ld	c,a
 	inc	de
 	ld	a,(de)
-	ld	(hl),a
+	ld	b,a
 	jp	00133$
 00135$:
-	add	sp, #5
+	add	sp, #3
 	ret
-;SpritePlayer.c:99: void Destroy_SPRITE_PLAYER() {
+;SpritePlayer.c:98: void Destroy_SPRITE_PLAYER() {
 ;	---------------------------------
 ; Function Destroy_SPRITE_PLAYER
 ; ---------------------------------
 _Destroy_SPRITE_PLAYER::
-;SpritePlayer.c:100: }
+;SpritePlayer.c:99: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

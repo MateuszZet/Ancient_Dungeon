@@ -8,12 +8,13 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _CheckCollision                                                **** GX
-  6 _Destroy_SPRITE_PLAYER                                         03E2 GR
+  6 _Destroy_SPRITE_PLAYER                                         03E4 GR
     _PlayFx                                                        **** GX
     _SetSpriteAnim                                                 **** GX
     _SetState                                                      **** GX
     _SpriteManagerAdd                                              **** GX
     _SpriteManagerRemove                                           **** GX
+    _SpriteManagerRemoveSprite                                     **** GX
   6 _Start_SPRITE_PLAYER                                           0000 GR
     _THIS                                                          **** GX
     _TranslateSprite                                               **** GX
@@ -34,6 +35,7 @@ Symbol Table
     _sprite_manager_sprites                                        **** GX
     _sprite_manager_updatables                                     **** GX
 
+
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
 
@@ -45,6 +47,6 @@ Area Table
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size    D   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  3E3   flags    0
+   6 _CODE_2                                    size  3E5   flags    0
    7 _CABS                                      size    0   flags    8
 

@@ -33,9 +33,16 @@ void Start_STATE_GAME3() {
 	door_y = 344;
 	SpriteManagerAdd(SPRITE_KEY, 120, 408);
 	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
 	SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
 	SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
 	SpriteManagerAdd(SPRITE_ENEMY2, 32, 408 );
+
+	SpriteManagerAdd(SPRITE_ENEMY, 120, 24);
+	SpriteManagerAdd(SPRITE_ENEMY, 120, 216);
+	SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
+
+	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
 	SHOW_BKG;

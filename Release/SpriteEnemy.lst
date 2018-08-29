@@ -162,230 +162,250 @@
    006E 36r01               162 	ld	(hl),#<(_dir)
    0070 23                  163 	inc	hl
    0071 36s00               164 	ld	(hl),#>(_dir)
-                            165 ;SpriteEnemy.c:39: if (TranslateSprite(THIS, 0, data->vy)) {
+                            165 ;SpriteEnemy.c:39: if (TranslateSprite(THIS, 0 << delta_time, data->vy << delta_time)) {
    0073 0A                  166 	ld	a,(bc)
    0074 57                  167 	ld	d,a
-   0075 C5                  168 	push	bc
-   0076 D5                  169 	push	de
-   0077 33                  170 	inc	sp
-   0078 AF                  171 	xor	a, a
-   0079 F5                  172 	push	af
-   007A 33                  173 	inc	sp
-   007B 21r00r00            174 	ld	hl,#_THIS
-   007E 2A                  175 	ld	a,(hl+)
-   007F 66                  176 	ld	h,(hl)
-   0080 6F                  177 	ld	l,a
-   0081 E5                  178 	push	hl
-   0082 CDr00r00            179 	call	_TranslateSprite
-   0085 E8 04               180 	add	sp, #4
-   0087 C1                  181 	pop	bc
-   0088 7B                  182 	ld	a,e
-   0089 B7                  183 	or	a, a
-   008A CArF9r00            184 	jp	Z,00105$
-                            185 ;SpriteEnemy.c:41: data->vy = -data->vy;
-   008D 0A                  186 	ld	a,(bc)
-   008E F8 03               187 	ldhl	sp,#3
-   0090 77                  188 	ld	(hl),a
-   0091 AF                  189 	xor	a, a
-   0092 96                  190 	sub	a, (hl)
-   0093 77                  191 	ld	(hl),a
-   0094 7E                  192 	ld	a,(hl)
-   0095 02                  193 	ld	(bc),a
-                            194 ;SpriteEnemy.c:43: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
-   0096 21 C0 00            195 	ld	hl,#0x00c0
-   0099 E5                  196 	push	hl
-   009A 2E 30               197 	ld	l, #0x30
-   009C E5                  198 	push	hl
-   009D 2E 41               199 	ld	l, #0x41
-   009F E5                  200 	push	hl
-   00A0 2E 0C               201 	ld	l, #0x0c
-   00A2 E5                  202 	push	hl
-   00A3 21 03 04            203 	ld	hl,#0x0403
-   00A6 E5                  204 	push	hl
-   00A7 CDr00r00            205 	call	_PlayFx
-   00AA E8 0A               206 	add	sp, #10
-                            207 ;SpriteEnemy.c:44: if (dir == 0) {
-   00AC 21r02r00            208 	ld	hl,#_dir + 1
-   00AF 3A                  209 	ld	a,(hl-)
-   00B0 B6                  210 	or	a,(hl)
-   00B1 20 24               211 	jr	NZ,00102$
-                            212 ;SpriteEnemy.c:45: SetSpriteAnim(THIS, anim_walk, 15);
-   00B3 3E 0F               213 	ld	a,#0x0f
-   00B5 F5                  214 	push	af
-   00B6 33                  215 	inc	sp
-   00B7 21r59r00            216 	ld	hl,#_anim_walk
-   00BA E5                  217 	push	hl
-   00BB 21r00r00            218 	ld	hl,#_THIS
-   00BE 2A                  219 	ld	a,(hl+)
-   00BF 66                  220 	ld	h,(hl)
-   00C0 6F                  221 	ld	l,a
-   00C1 E5                  222 	push	hl
-   00C2 CDr00r00            223 	call	_SetSpriteAnim
-   00C5 E8 05               224 	add	sp, #5
-                            225 ;SpriteEnemy.c:46: *dir_pointer = 1;
-   00C7 21r04r00            226 	ld	hl,#_dir_pointer + 1
-   00CA 2B                  227 	dec	hl
-   00CB 4E                  228 	ld	c,(hl)
-   00CC 23                  229 	inc	hl
-   00CD 46                  230 	ld	b,(hl)
-   00CE 3E 01               231 	ld	a,#0x01
-   00D0 02                  232 	ld	(bc),a
-   00D1 03                  233 	inc	bc
-   00D2 3E 00               234 	ld	a,#0x00
-   00D4 02                  235 	ld	(bc),a
-   00D5 18 22               236 	jr	00105$
-   00D7                     237 00102$:
-                            238 ;SpriteEnemy.c:49: SetSpriteAnim(THIS, anim_walk2, 15);
-   00D7 3E 0F               239 	ld	a,#0x0f
-   00D9 F5                  240 	push	af
-   00DA 33                  241 	inc	sp
-   00DB 21r56r00            242 	ld	hl,#_anim_walk2
-   00DE E5                  243 	push	hl
-   00DF 21r00r00            244 	ld	hl,#_THIS
-   00E2 2A                  245 	ld	a,(hl+)
-   00E3 66                  246 	ld	h,(hl)
-   00E4 6F                  247 	ld	l,a
-   00E5 E5                  248 	push	hl
-   00E6 CDr00r00            249 	call	_SetSpriteAnim
-   00E9 E8 05               250 	add	sp, #5
-                            251 ;SpriteEnemy.c:50: *dir_pointer = 0;
-   00EB 21r04r00            252 	ld	hl,#_dir_pointer + 1
-   00EE 2B                  253 	dec	hl
-   00EF 4E                  254 	ld	c,(hl)
-   00F0 23                  255 	inc	hl
-   00F1 46                  256 	ld	b,(hl)
-   00F2 3E 00               257 	ld	a,#0x00
-   00F4 02                  258 	ld	(bc),a
-   00F5 03                  259 	inc	bc
-   00F6 3E 00               260 	ld	a,#0x00
-   00F8 02                  261 	ld	(bc),a
-   00F9                     262 00105$:
-                            263 ;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
-   00F9 FAr01r00            264 	ld	a, (#(_sprite_manager_updatables + 0x0001) + 0)
-   00FC 4F                  265 	ld	c,a
-   00FD 06 00               266 	ld	b,#0x00
-   00FF CB 21               267 	sla	c
-   0101 CB 10               268 	rl	b
-   0103 21r00r00            269 	ld	hl,#_sprite_manager_sprites
-   0106 09                  270 	add	hl,bc
-   0107 4D                  271 	ld	c,l
-   0108 44                  272 	ld	b,h
-   0109 59                  273 	ld	e, c
-   010A 50                  274 	ld	d, b
-   010B 1A                  275 	ld	a,(de)
-   010C 4F                  276 	ld	c,a
-   010D 13                  277 	inc	de
-   010E 1A                  278 	ld	a,(de)
-   010F 47                  279 	ld	b,a
-   0110 F8 00               280 	ldhl	sp,#0
-   0112 36 00               281 	ld	(hl),#0x00
-   0114                     282 00112$:
-   0114 11r00r00            283 	ld	de, #_sprite_manager_updatables + 0
-   0117 1A                  284 	ld	a,(de)
-   0118 F8 03               285 	ldhl	sp,#3
-   011A 77                  286 	ld	(hl),a
-   011B F8 00               287 	ldhl	sp,#0
-   011D 7E                  288 	ld	a,(hl)
-   011E F8 03               289 	ldhl	sp,#3
-   0120 96                  290 	sub	a, (hl)
-   0121 CAr9Fr01            291 	jp	Z,00114$
-                            292 ;SpriteEnemy.c:57: if (spr->type == SPRITE_BOMB) {
-   0124 21 10 00            293 	ld	hl,#0x0010
-   0127 09                  294 	add	hl,bc
-   0128 7D                  295 	ld	a,l
-   0129 54                  296 	ld	d,h
-   012A F8 01               297 	ldhl	sp,#1
-   012C 22                  298 	ld	(hl+),a
-   012D 72                  299 	ld	(hl),d
-   012E 2B                  300 	dec	hl
-   012F 5E                  301 	ld	e,(hl)
-   0130 23                  302 	inc	hl
-   0131 56                  303 	ld	d,(hl)
-   0132 1A                  304 	ld	a,(de)
-   0133 D6 06               305 	sub	a, #0x06
-   0135 C2r7Ar01            306 	jp	NZ,00113$
-                            307 ;SpriteEnemy.c:58: if (CheckCollision(THIS, spr)) {
-   0138 C5                  308 	push	bc
-   0139 C5                  309 	push	bc
-   013A 21r00r00            310 	ld	hl,#_THIS
-   013D 2A                  311 	ld	a,(hl+)
-   013E 66                  312 	ld	h,(hl)
-   013F 6F                  313 	ld	l,a
-   0140 E5                  314 	push	hl
-   0141 CDr00r00            315 	call	_CheckCollision
-   0144 E8 04               316 	add	sp, #4
-   0146 C1                  317 	pop	bc
-   0147 7B                  318 	ld	a,e
-   0148 B7                  319 	or	a, a
-   0149 28 2F               320 	jr	Z,00113$
-                            321 ;SpriteEnemy.c:59: SpriteManagerRemoveSprite(THIS);
-   014B C5                  322 	push	bc
-   014C 21r00r00            323 	ld	hl,#_THIS
-   014F 2A                  324 	ld	a,(hl+)
-   0150 66                  325 	ld	h,(hl)
-   0151 6F                  326 	ld	l,a
-   0152 E5                  327 	push	hl
-   0153 CDr00r00            328 	call	_SpriteManagerRemoveSprite
-   0156 E8 02               329 	add	sp, #2
-   0158 C1                  330 	pop	bc
-                            331 ;SpriteEnemy.c:60: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   0159 C5                  332 	push	bc
-   015A 21 86 00            333 	ld	hl,#0x0086
-   015D E5                  334 	push	hl
-   015E 2E 73               335 	ld	l, #0x73
-   0160 E5                  336 	push	hl
-   0161 2E F3               337 	ld	l, #0xf3
-   0163 E5                  338 	push	hl
-   0164 2E C7               339 	ld	l, #0xc7
-   0166 E5                  340 	push	hl
-   0167 2E 4F               341 	ld	l, #0x4f
-   0169 E5                  342 	push	hl
-   016A 21 00 0A            343 	ld	hl,#0x0a00
-   016D E5                  344 	push	hl
-   016E CDr00r00            345 	call	_PlayFx
-   0171 E8 0C               346 	add	sp, #12
-   0173 C1                  347 	pop	bc
-                            348 ;SpriteEnemy.c:61: SpriteManagerRemoveSprite(spr);
-   0174 C5                  349 	push	bc
-   0175 CDr00r00            350 	call	_SpriteManagerRemoveSprite
-   0178 E8 02               351 	add	sp, #2
-   017A                     352 00113$:
-                            353 ;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
-   017A F8 00               354 	ldhl	sp,#0
-   017C 34                  355 	inc	(hl)
-   017D 4E                  356 	ld	c,(hl)
-   017E 06 00               357 	ld	b,#0x00
-   0180 03                  358 	inc	bc
-   0181 21r00r00            359 	ld	hl,#_sprite_manager_updatables
-   0184 09                  360 	add	hl,bc
-   0185 4D                  361 	ld	c,l
-   0186 44                  362 	ld	b,h
-   0187 0A                  363 	ld	a,(bc)
-   0188 4F                  364 	ld	c,a
-   0189 06 00               365 	ld	b,#0x00
-   018B CB 21               366 	sla	c
-   018D CB 10               367 	rl	b
-   018F 21r00r00            368 	ld	hl,#_sprite_manager_sprites
-   0192 09                  369 	add	hl,bc
-   0193 4D                  370 	ld	c,l
-   0194 44                  371 	ld	b,h
-   0195 59                  372 	ld	e, c
-   0196 50                  373 	ld	d, b
-   0197 1A                  374 	ld	a,(de)
-   0198 4F                  375 	ld	c,a
-   0199 13                  376 	inc	de
-   019A 1A                  377 	ld	a,(de)
-   019B 47                  378 	ld	b,a
-   019C C3r14r01            379 	jp	00112$
-   019F                     380 00114$:
-   019F E8 04               381 	add	sp, #4
-   01A1 C9                  382 	ret
-                            383 ;SpriteEnemy.c:68: void Destroy_SPRITE_ENEMY() {
-                            384 ;	---------------------------------
-                            385 ; Function Destroy_SPRITE_ENEMY
-                            386 ; ---------------------------------
-   01A2                     387 _Destroy_SPRITE_ENEMY::
-                            388 ;SpriteEnemy.c:69: }
-   01A2 C9                  389 	ret
-                            390 	.area _CODE_2
-                            391 	.area _CABS (ABS)
+   0075 21r00r00            168 	ld	hl,#_delta_time
+   0078 7E                  169 	ld	a,(hl)
+   0079 3C                  170 	inc	a
+   007A 18 02               171 	jr	00142$
+   007C                     172 00141$:
+   007C CB 22               173 	sla	d
+   007E                     174 00142$:
+   007E 3D                  175 	dec	a
+   007F 20 FB               176 	jr	NZ,00141$
+   0081 7E                  177 	ld	a,(hl)
+   0082 F5                  178 	push	af
+   0083 1E 00               179 	ld	e,#0x00
+   0085 F1                  180 	pop	af
+   0086 3C                  181 	inc	a
+   0087 18 02               182 	jr	00144$
+   0089                     183 00143$:
+   0089 CB 23               184 	sla	e
+   008B                     185 00144$:
+   008B 3D                  186 	dec	a
+   008C 20 FB               187 	jr	NZ,00143$
+   008E C5                  188 	push	bc
+   008F D5                  189 	push	de
+   0090 33                  190 	inc	sp
+   0091 7B                  191 	ld	a,e
+   0092 F5                  192 	push	af
+   0093 33                  193 	inc	sp
+   0094 21r00r00            194 	ld	hl,#_THIS
+   0097 2A                  195 	ld	a,(hl+)
+   0098 66                  196 	ld	h,(hl)
+   0099 6F                  197 	ld	l,a
+   009A E5                  198 	push	hl
+   009B CDr00r00            199 	call	_TranslateSprite
+   009E E8 04               200 	add	sp, #4
+   00A0 C1                  201 	pop	bc
+   00A1 7B                  202 	ld	a,e
+   00A2 B7                  203 	or	a, a
+   00A3 CAr12r01            204 	jp	Z,00105$
+                            205 ;SpriteEnemy.c:41: data->vy = -data->vy;
+   00A6 0A                  206 	ld	a,(bc)
+   00A7 F8 03               207 	ldhl	sp,#3
+   00A9 77                  208 	ld	(hl),a
+   00AA AF                  209 	xor	a, a
+   00AB 96                  210 	sub	a, (hl)
+   00AC 77                  211 	ld	(hl),a
+   00AD 7E                  212 	ld	a,(hl)
+   00AE 02                  213 	ld	(bc),a
+                            214 ;SpriteEnemy.c:43: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
+   00AF 21 C0 00            215 	ld	hl,#0x00c0
+   00B2 E5                  216 	push	hl
+   00B3 2E 30               217 	ld	l, #0x30
+   00B5 E5                  218 	push	hl
+   00B6 2E 41               219 	ld	l, #0x41
+   00B8 E5                  220 	push	hl
+   00B9 2E 0C               221 	ld	l, #0x0c
+   00BB E5                  222 	push	hl
+   00BC 21 03 04            223 	ld	hl,#0x0403
+   00BF E5                  224 	push	hl
+   00C0 CDr00r00            225 	call	_PlayFx
+   00C3 E8 0A               226 	add	sp, #10
+                            227 ;SpriteEnemy.c:44: if (dir == 0) {
+   00C5 21r02r00            228 	ld	hl,#_dir + 1
+   00C8 3A                  229 	ld	a,(hl-)
+   00C9 B6                  230 	or	a,(hl)
+   00CA 20 24               231 	jr	NZ,00102$
+                            232 ;SpriteEnemy.c:45: SetSpriteAnim(THIS, anim_walk, 15);
+   00CC 3E 0F               233 	ld	a,#0x0f
+   00CE F5                  234 	push	af
+   00CF 33                  235 	inc	sp
+   00D0 21r59r00            236 	ld	hl,#_anim_walk
+   00D3 E5                  237 	push	hl
+   00D4 21r00r00            238 	ld	hl,#_THIS
+   00D7 2A                  239 	ld	a,(hl+)
+   00D8 66                  240 	ld	h,(hl)
+   00D9 6F                  241 	ld	l,a
+   00DA E5                  242 	push	hl
+   00DB CDr00r00            243 	call	_SetSpriteAnim
+   00DE E8 05               244 	add	sp, #5
+                            245 ;SpriteEnemy.c:46: *dir_pointer = 1;
+   00E0 21r04r00            246 	ld	hl,#_dir_pointer + 1
+   00E3 2B                  247 	dec	hl
+   00E4 4E                  248 	ld	c,(hl)
+   00E5 23                  249 	inc	hl
+   00E6 46                  250 	ld	b,(hl)
+   00E7 3E 01               251 	ld	a,#0x01
+   00E9 02                  252 	ld	(bc),a
+   00EA 03                  253 	inc	bc
+   00EB 3E 00               254 	ld	a,#0x00
+   00ED 02                  255 	ld	(bc),a
+   00EE 18 22               256 	jr	00105$
+   00F0                     257 00102$:
+                            258 ;SpriteEnemy.c:49: SetSpriteAnim(THIS, anim_walk2, 15);
+   00F0 3E 0F               259 	ld	a,#0x0f
+   00F2 F5                  260 	push	af
+   00F3 33                  261 	inc	sp
+   00F4 21r56r00            262 	ld	hl,#_anim_walk2
+   00F7 E5                  263 	push	hl
+   00F8 21r00r00            264 	ld	hl,#_THIS
+   00FB 2A                  265 	ld	a,(hl+)
+   00FC 66                  266 	ld	h,(hl)
+   00FD 6F                  267 	ld	l,a
+   00FE E5                  268 	push	hl
+   00FF CDr00r00            269 	call	_SetSpriteAnim
+   0102 E8 05               270 	add	sp, #5
+                            271 ;SpriteEnemy.c:50: *dir_pointer = 0;
+   0104 21r04r00            272 	ld	hl,#_dir_pointer + 1
+   0107 2B                  273 	dec	hl
+   0108 4E                  274 	ld	c,(hl)
+   0109 23                  275 	inc	hl
+   010A 46                  276 	ld	b,(hl)
+   010B 3E 00               277 	ld	a,#0x00
+   010D 02                  278 	ld	(bc),a
+   010E 03                  279 	inc	bc
+   010F 3E 00               280 	ld	a,#0x00
+   0111 02                  281 	ld	(bc),a
+   0112                     282 00105$:
+                            283 ;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
+   0112 FAr01r00            284 	ld	a, (#(_sprite_manager_updatables + 0x0001) + 0)
+   0115 4F                  285 	ld	c,a
+   0116 06 00               286 	ld	b,#0x00
+   0118 CB 21               287 	sla	c
+   011A CB 10               288 	rl	b
+   011C 21r00r00            289 	ld	hl,#_sprite_manager_sprites
+   011F 09                  290 	add	hl,bc
+   0120 4D                  291 	ld	c,l
+   0121 44                  292 	ld	b,h
+   0122 59                  293 	ld	e, c
+   0123 50                  294 	ld	d, b
+   0124 1A                  295 	ld	a,(de)
+   0125 4F                  296 	ld	c,a
+   0126 13                  297 	inc	de
+   0127 1A                  298 	ld	a,(de)
+   0128 47                  299 	ld	b,a
+   0129 F8 00               300 	ldhl	sp,#0
+   012B 36 00               301 	ld	(hl),#0x00
+   012D                     302 00112$:
+   012D 11r00r00            303 	ld	de, #_sprite_manager_updatables + 0
+   0130 1A                  304 	ld	a,(de)
+   0131 F8 03               305 	ldhl	sp,#3
+   0133 77                  306 	ld	(hl),a
+   0134 F8 00               307 	ldhl	sp,#0
+   0136 7E                  308 	ld	a,(hl)
+   0137 F8 03               309 	ldhl	sp,#3
+   0139 96                  310 	sub	a, (hl)
+   013A CArB8r01            311 	jp	Z,00114$
+                            312 ;SpriteEnemy.c:57: if (spr->type == SPRITE_BOMB) {
+   013D 21 10 00            313 	ld	hl,#0x0010
+   0140 09                  314 	add	hl,bc
+   0141 7D                  315 	ld	a,l
+   0142 54                  316 	ld	d,h
+   0143 F8 01               317 	ldhl	sp,#1
+   0145 22                  318 	ld	(hl+),a
+   0146 72                  319 	ld	(hl),d
+   0147 2B                  320 	dec	hl
+   0148 5E                  321 	ld	e,(hl)
+   0149 23                  322 	inc	hl
+   014A 56                  323 	ld	d,(hl)
+   014B 1A                  324 	ld	a,(de)
+   014C D6 06               325 	sub	a, #0x06
+   014E C2r93r01            326 	jp	NZ,00113$
+                            327 ;SpriteEnemy.c:58: if (CheckCollision(THIS, spr)) {
+   0151 C5                  328 	push	bc
+   0152 C5                  329 	push	bc
+   0153 21r00r00            330 	ld	hl,#_THIS
+   0156 2A                  331 	ld	a,(hl+)
+   0157 66                  332 	ld	h,(hl)
+   0158 6F                  333 	ld	l,a
+   0159 E5                  334 	push	hl
+   015A CDr00r00            335 	call	_CheckCollision
+   015D E8 04               336 	add	sp, #4
+   015F C1                  337 	pop	bc
+   0160 7B                  338 	ld	a,e
+   0161 B7                  339 	or	a, a
+   0162 28 2F               340 	jr	Z,00113$
+                            341 ;SpriteEnemy.c:59: SpriteManagerRemoveSprite(THIS);
+   0164 C5                  342 	push	bc
+   0165 21r00r00            343 	ld	hl,#_THIS
+   0168 2A                  344 	ld	a,(hl+)
+   0169 66                  345 	ld	h,(hl)
+   016A 6F                  346 	ld	l,a
+   016B E5                  347 	push	hl
+   016C CDr00r00            348 	call	_SpriteManagerRemoveSprite
+   016F E8 02               349 	add	sp, #2
+   0171 C1                  350 	pop	bc
+                            351 ;SpriteEnemy.c:60: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+   0172 C5                  352 	push	bc
+   0173 21 86 00            353 	ld	hl,#0x0086
+   0176 E5                  354 	push	hl
+   0177 2E 73               355 	ld	l, #0x73
+   0179 E5                  356 	push	hl
+   017A 2E F3               357 	ld	l, #0xf3
+   017C E5                  358 	push	hl
+   017D 2E C7               359 	ld	l, #0xc7
+   017F E5                  360 	push	hl
+   0180 2E 4F               361 	ld	l, #0x4f
+   0182 E5                  362 	push	hl
+   0183 21 00 0A            363 	ld	hl,#0x0a00
+   0186 E5                  364 	push	hl
+   0187 CDr00r00            365 	call	_PlayFx
+   018A E8 0C               366 	add	sp, #12
+   018C C1                  367 	pop	bc
+                            368 ;SpriteEnemy.c:61: SpriteManagerRemoveSprite(spr);
+   018D C5                  369 	push	bc
+   018E CDr00r00            370 	call	_SpriteManagerRemoveSprite
+   0191 E8 02               371 	add	sp, #2
+   0193                     372 00113$:
+                            373 ;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
+   0193 F8 00               374 	ldhl	sp,#0
+   0195 34                  375 	inc	(hl)
+   0196 4E                  376 	ld	c,(hl)
+   0197 06 00               377 	ld	b,#0x00
+   0199 03                  378 	inc	bc
+   019A 21r00r00            379 	ld	hl,#_sprite_manager_updatables
+   019D 09                  380 	add	hl,bc
+   019E 4D                  381 	ld	c,l
+   019F 44                  382 	ld	b,h
+   01A0 0A                  383 	ld	a,(bc)
+   01A1 4F                  384 	ld	c,a
+   01A2 06 00               385 	ld	b,#0x00
+   01A4 CB 21               386 	sla	c
+   01A6 CB 10               387 	rl	b
+   01A8 21r00r00            388 	ld	hl,#_sprite_manager_sprites
+   01AB 09                  389 	add	hl,bc
+   01AC 4D                  390 	ld	c,l
+   01AD 44                  391 	ld	b,h
+   01AE 59                  392 	ld	e, c
+   01AF 50                  393 	ld	d, b
+   01B0 1A                  394 	ld	a,(de)
+   01B1 4F                  395 	ld	c,a
+   01B2 13                  396 	inc	de
+   01B3 1A                  397 	ld	a,(de)
+   01B4 47                  398 	ld	b,a
+   01B5 C3r2Dr01            399 	jp	00112$
+   01B8                     400 00114$:
+   01B8 E8 04               401 	add	sp, #4
+   01BA C9                  402 	ret
+                            403 ;SpriteEnemy.c:68: void Destroy_SPRITE_ENEMY() {
+                            404 ;	---------------------------------
+                            405 ; Function Destroy_SPRITE_ENEMY
+                            406 ; ---------------------------------
+   01BB                     407 _Destroy_SPRITE_ENEMY::
+                            408 ;SpriteEnemy.c:69: }
+   01BB C9                  409 	ret
+                            410 	.area _CODE_2
+                            411 	.area _CABS (ABS)

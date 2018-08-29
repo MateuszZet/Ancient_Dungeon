@@ -162,13 +162,33 @@ _Update_SPRITE_ENEMY::
 	ld	(hl),#<(_dir)
 	inc	hl
 	ld	(hl),#>(_dir)
-;SpriteEnemy.c:39: if (TranslateSprite(THIS, 0, data->vy)) {
+;SpriteEnemy.c:39: if (TranslateSprite(THIS, 0 << delta_time, data->vy << delta_time)) {
 	ld	a,(bc)
 	ld	d,a
+	ld	hl,#_delta_time
+	ld	a,(hl)
+	inc	a
+	jr	00142$
+00141$:
+	sla	d
+00142$:
+	dec	a
+	jr	NZ,00141$
+	ld	a,(hl)
+	push	af
+	ld	e,#0x00
+	pop	af
+	inc	a
+	jr	00144$
+00143$:
+	sla	e
+00144$:
+	dec	a
+	jr	NZ,00143$
 	push	bc
 	push	de
 	inc	sp
-	xor	a, a
+	ld	a,e
 	push	af
 	inc	sp
 	ld	hl,#_THIS

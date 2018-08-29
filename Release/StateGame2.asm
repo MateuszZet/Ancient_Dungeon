@@ -166,7 +166,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:36: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+;StateGame2.c:37: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	ld	hl,#0x0073
 	push	hl
 	ld	l, #0x32
@@ -176,7 +176,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:37: SpriteManagerAdd(SPRITE_ENEMY2, 24, 64 );
+;StateGame2.c:38: SpriteManagerAdd(SPRITE_ENEMY2, 24, 64 );
 	ld	hl,#0x0040
 	push	hl
 	ld	l, #0x18
@@ -186,7 +186,37 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:38: InitScrollTiles(0, 59, tiles, 3);
+;StateGame2.c:40: SpriteManagerAdd(SPRITE_ENEMY, 88, 104);
+	ld	hl,#0x0068
+	push	hl
+	ld	l, #0x58
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame2.c:41: SpriteManagerAdd(SPRITE_ENEMY, 224, 48);
+	ld	hl,#0x0030
+	push	hl
+	ld	l, #0xe0
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame2.c:42: SpriteManagerAdd(SPRITE_ENEMY, 288, 40);
+	ld	hl,#0x0028
+	push	hl
+	ld	hl,#0x0120
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame2.c:44: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -198,7 +228,7 @@ _Start_STATE_GAME2::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame2.c:39: InitScroll(map2Width, map2Height, map2, collilision_tiles2, 0, 3);
+;StateGame2.c:45: InitScroll(map2Width, map2Height, map2, collilision_tiles2, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -216,7 +246,7 @@ _Start_STATE_GAME2::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame2.c:40: SHOW_BKG;
+;StateGame2.c:46: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -227,18 +257,18 @@ _Start_STATE_GAME2::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame2.c:45: void Update_STATE_GAME2() {
+;StateGame2.c:51: void Update_STATE_GAME2() {
 ;	---------------------------------
 ; Function Update_STATE_GAME2
 ; ---------------------------------
 _Update_STATE_GAME2::
-;StateGame2.c:46: if (KEY_PRESSED(J_START)) {
+;StateGame2.c:52: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame2.c:47: SetState(STATE_GAME3);
+;StateGame2.c:53: SetState(STATE_GAME3);
 	ld	a,#0x03
 	push	af
 	inc	sp

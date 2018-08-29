@@ -12,7 +12,7 @@ Symbol Table
     _SpriteManagerAdd                                              **** GX
     _SpriteManagerLoad                                             **** GX
   6 _Start_STATE_GAME3                                             0000 GR
-  6 _Update_STATE_GAME3                                            0109 GR
+  6 _Update_STATE_GAME3                                            013A GR
     _ZInitScrollTilesColor                                         **** GX
   1 _bank_STATE_GAME3                                              0000 GR
   1 _collilision_tiles3                                            0001 GR
@@ -36,6 +36,6 @@ Area Table
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size   1E   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  11B   flags    0
+   6 _CODE_2                                    size  14C   flags    0
    7 _CABS                                      size    0   flags    8
 

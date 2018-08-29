@@ -166,7 +166,17 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:35: InitScrollTiles(0, 59, tiles, 3);
+;StateMenu.c:34: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	ld	hl,#0x0070
+	push	hl
+	ld	l, #0x80
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateMenu.c:36: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -178,7 +188,7 @@ _Start_STATE_MENU::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateMenu.c:36: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
+;StateMenu.c:37: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -196,7 +206,7 @@ _Start_STATE_MENU::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateMenu.c:37: SHOW_BKG;
+;StateMenu.c:38: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -207,18 +217,18 @@ _Start_STATE_MENU::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateMenu.c:42: void Update_STATE_MENU() {
+;StateMenu.c:43: void Update_STATE_MENU() {
 ;	---------------------------------
 ; Function Update_STATE_MENU
 ; ---------------------------------
 _Update_STATE_MENU::
-;StateMenu.c:43: if (KEY_PRESSED(J_START)) {
+;StateMenu.c:44: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateMenu.c:44: SetState(STATE_GAME3);
+;StateMenu.c:45: SetState(STATE_GAME3);
 	ld	a,#0x03
 	push	af
 	inc	sp
