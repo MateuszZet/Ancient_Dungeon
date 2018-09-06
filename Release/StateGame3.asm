@@ -130,6 +130,11 @@ _Start_STATE_GAME3::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
+;StateGame3.c:31: have_bomb = 2;
+	ld	hl,#_have_bomb
+	ld	(hl),#0x02
+	inc	hl
+	ld	(hl),#0x00
 ;StateGame3.c:32: door_x = 104;
 	ld	hl,#_door_x
 	ld	(hl),#0x68

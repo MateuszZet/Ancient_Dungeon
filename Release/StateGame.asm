@@ -140,7 +140,12 @@ _Start_STATE_GAME::
 	ld	(hl),#0x70
 	inc	hl
 	ld	(hl),#0x00
-;StateGame.c:34: SpriteManagerAdd(SPRITE_KEY, 288, 112);
+;StateGame.c:34: have_bomb = 4;
+	ld	hl,#_have_bomb
+	ld	(hl),#0x04
+	inc	hl
+	ld	(hl),#0x00
+;StateGame.c:35: SpriteManagerAdd(SPRITE_KEY, 288, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	hl,#0x0120
@@ -150,7 +155,7 @@ _Start_STATE_GAME::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame.c:35: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+;StateGame.c:36: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 	ld	hl,#_door_y
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -166,7 +171,7 @@ _Start_STATE_GAME::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame.c:37: SpriteManagerAdd(SPRITE_ENEMY, 40, 32);
+;StateGame.c:38: SpriteManagerAdd(SPRITE_ENEMY, 40, 32);
 	ld	hl,#0x0020
 	push	hl
 	ld	l, #0x28
@@ -176,7 +181,7 @@ _Start_STATE_GAME::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame.c:38: SpriteManagerAdd(SPRITE_ENEMY, 128, 80);
+;StateGame.c:39: SpriteManagerAdd(SPRITE_ENEMY, 128, 80);
 	ld	hl,#0x0050
 	push	hl
 	ld	l, #0x80
@@ -186,7 +191,7 @@ _Start_STATE_GAME::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame.c:39: SpriteManagerAdd(SPRITE_ENEMY, 200, 112);
+;StateGame.c:40: SpriteManagerAdd(SPRITE_ENEMY, 200, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0xc8
@@ -196,7 +201,7 @@ _Start_STATE_GAME::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame.c:40: SpriteManagerAdd(SPRITE_ENEMY, 288, 96);
+;StateGame.c:41: SpriteManagerAdd(SPRITE_ENEMY, 288, 96);
 	ld	hl,#0x0060
 	push	hl
 	ld	hl,#0x0120
@@ -206,7 +211,7 @@ _Start_STATE_GAME::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame.c:41: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+;StateGame.c:42: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	ld	hl,#0x001e
 	push	hl
 	ld	l, #0x1e
@@ -216,7 +221,7 @@ _Start_STATE_GAME::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame.c:43: InitScrollTiles(0, 59, tiles, 3);
+;StateGame.c:44: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -228,7 +233,7 @@ _Start_STATE_GAME::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame.c:44: InitScroll(mapWidth, mapHeight, map, collilision_tiles, 0, 3);
+;StateGame.c:45: InitScroll(mapWidth, mapHeight, map, collilision_tiles, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -246,7 +251,7 @@ _Start_STATE_GAME::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame.c:45: SHOW_BKG;
+;StateGame.c:46: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -257,18 +262,18 @@ _Start_STATE_GAME::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame.c:50: void Update_STATE_GAME() {
+;StateGame.c:51: void Update_STATE_GAME() {
 ;	---------------------------------
 ; Function Update_STATE_GAME
 ; ---------------------------------
 _Update_STATE_GAME::
-;StateGame.c:51: if (KEY_PRESSED(J_START)) {
+;StateGame.c:52: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame.c:52: SetState(STATE_GAME2);
+;StateGame.c:53: SetState(STATE_GAME2);
 	ld	a,#0x02
 	push	af
 	inc	sp

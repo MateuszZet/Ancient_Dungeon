@@ -16,8 +16,7 @@ UINT8 bank_SPRITE_PLAYER = 2;
 int door_x;
 int door_y;
 int next_lvl;
-int bomb_start = 6;
-int have_bomb=6;
+int have_bomb;
 int direction_x;
 
 void Start_SPRITE_PLAYER() {
@@ -79,28 +78,25 @@ void Update_SPRITE_PLAYER() {
 			if(CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-				have_bomb = bomb_start;
+				
 			}
 		}
 		if(spr->type == SPRITE_ENEMY2) {
 			if(CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-				have_bomb = bomb_start;
 			}
 		}
 		if (spr->type == SPRITE_BOMB) {
 			if (CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-				have_bomb = bomb_start;
 			}
 		}
 		if (spr->type == SPRITE_BOMB_L) {
 			if (CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-				have_bomb = bomb_start;
 			}
 		}
 		if (spr->type == SPRITE_KEY) {

@@ -31,6 +31,7 @@ void Start_STATE_GAME() {
 	
 	door_x = 240;
 	door_y = 112;
+	have_bomb = 4;
 	SpriteManagerAdd(SPRITE_KEY, 288, 112);
 	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 

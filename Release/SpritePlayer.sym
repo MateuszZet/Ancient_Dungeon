@@ -8,7 +8,7 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _CheckCollision                                                **** GX
-  6 _Destroy_SPRITE_PLAYER                                         054C GR
+  6 _Destroy_SPRITE_PLAYER                                         0520 GR
     _PlayFx                                                        **** GX
     _SetSpriteAnim                                                 **** GX
     _SetState                                                      **** GX
@@ -25,17 +25,17 @@ Symbol Table
   6 _anim_right                                                    0045 GR
   6 _anim_up                                                       004B GR
   1 _bank_SPRITE_PLAYER                                            0000 GR
-  1 _bomb_start                                                    0007 GR
     _delta_time                                                    **** GX
-  1 _direction_x                                                   000B GR
+  1 _direction_x                                                   0009 GR
   1 _door_x                                                        0001 GR
   1 _door_y                                                        0003 GR
-  1 _have_bomb                                                     0009 GR
+  1 _have_bomb                                                     0007 GR
     _keys                                                          **** GX
   1 _next_lvl                                                      0005 GR
     _previous_keys                                                 **** GX
     _sprite_manager_sprites                                        **** GX
     _sprite_manager_updatables                                     **** GX
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
@@ -43,11 +43,11 @@ Hexadecimal [16-Bits]
 Area Table
 
    0 _CODE                                      size    0   flags    0
-   1 _DATA                                      size    D   flags    0
+   1 _DATA                                      size    B   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
-   4 _GSINIT                                    size   15   flags    0
+   4 _GSINIT                                    size    5   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  54D   flags    0
+   6 _CODE_2                                    size  521   flags    0
    7 _CABS                                      size    0   flags    8
 

@@ -29,6 +29,7 @@ void Start_STATE_MENU() {
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
 	door_x = 20;
 	door_y = 120;
+	have_bomb = 6;
 	SpriteManagerAdd(SPRITE_KEY, 20, 20);
 	SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
