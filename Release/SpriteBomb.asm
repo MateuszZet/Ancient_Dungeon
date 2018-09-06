@@ -44,13 +44,13 @@ _bank_SPRITE_BOMB::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;SpriteBomb.c:14: void Start_SPRITE_BOMB() {
+;SpriteBomb.c:17: void Start_SPRITE_BOMB() {
 ;	---------------------------------
 ; Function Start_SPRITE_BOMB
 ; ---------------------------------
 _Start_SPRITE_BOMB::
 	add	sp, #-4
-;SpriteBomb.c:17: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+;SpriteBomb.c:20: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -69,7 +69,7 @@ _Start_SPRITE_BOMB::
 	ldhl	sp,#0
 	ld	(hl+),a
 	ld	(hl),e
-;SpriteBomb.c:18: THIS->lim_x = 9999;
+;SpriteBomb.c:22: THIS->lim_x = 9999;
 	ld	hl,#0x0012
 	add	hl,bc
 	ld	c,l
@@ -79,7 +79,7 @@ _Start_SPRITE_BOMB::
 	inc	bc
 	ld	a,#0x27
 	ld	(bc),a
-;SpriteBomb.c:19: THIS->lim_y = 9999;
+;SpriteBomb.c:23: THIS->lim_y = 9999;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -94,11 +94,17 @@ _Start_SPRITE_BOMB::
 	inc	bc
 	ld	a,#0x27
 	ld	(bc),a
-;SpriteBomb.c:21: data->vy = 1;
+;SpriteBomb.c:25: data->vy = 2;
 	pop	hl
 	push	hl
-	ld	(hl),#0x01
-;SpriteBomb.c:22: SetSpriteAnim(THIS, anim_bomb, 15);
+	ld	(hl),#0x02
+;SpriteBomb.c:26: data->vx = 2;
+	pop	bc
+	push	bc
+	inc	bc
+	ld	a,#0x02
+	ld	(bc),a
+;SpriteBomb.c:28: SetSpriteAnim(THIS, anim_bomb, 15);
 	ld	a,#0x0f
 	push	af
 	inc	sp
@@ -119,12 +125,12 @@ _anim_bomb:
 	.db #0x01	; 1
 	.db #0x02	; 2
 	.db #0x03	; 3
-;SpriteBomb.c:26: void Update_SPRITE_BOMB() {
+;SpriteBomb.c:33: void Update_SPRITE_BOMB() {
 ;	---------------------------------
 ; Function Update_SPRITE_BOMB
 ; ---------------------------------
 _Update_SPRITE_BOMB::
-;SpriteBomb.c:27: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+;SpriteBomb.c:34: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -134,13 +140,14 @@ _Update_SPRITE_BOMB::
 	add	hl,bc
 	ld	c,l
 	ld	b,h
-;SpriteBomb.c:28: TranslateSprite(THIS, 0, data->vy);
+;SpriteBomb.c:35: TranslateSprite(THIS, data->vx, 0);
+	inc	bc
 	ld	a,(bc)
 	ld	b,a
-	push	bc
-	inc	sp
 	xor	a, a
 	push	af
+	inc	sp
+	push	bc
 	inc	sp
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -150,12 +157,12 @@ _Update_SPRITE_BOMB::
 	call	_TranslateSprite
 	add	sp, #4
 	ret
-;SpriteBomb.c:33: void Destroy_SPRITE_BOMB() {
+;SpriteBomb.c:41: void Destroy_SPRITE_BOMB() {
 ;	---------------------------------
 ; Function Destroy_SPRITE_BOMB
 ; ---------------------------------
 _Destroy_SPRITE_BOMB::
-;SpriteBomb.c:37: }
+;SpriteBomb.c:45: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

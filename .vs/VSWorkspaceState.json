@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\include",
-    "\\res",
     "\\src"
   ],
-  "SelectedNode": "\\src\\StateGame2.c",
+  "SelectedNode": "\\src\\SpritePlayer.c",
   "PreviewInSolutionExplorer": false
 }

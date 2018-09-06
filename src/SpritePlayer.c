@@ -29,7 +29,7 @@ void Update_SPRITE_PLAYER() {
 	UINT8 i;
 	struct Sprite* spr;
 	
-	//controlssa
+	//controls
 	if(KEY_PRESSED(J_UP)){
 		THIS->y--;
 		SetSpriteAnim(THIS, anim_up, 10);
@@ -44,17 +44,20 @@ void Update_SPRITE_PLAYER() {
 		THIS->x++;
 		SetSpriteAnim(THIS, anim_right, 10);
 		TranslateSprite(THIS, 1 << delta_time, 0);
+		SPRITE_UNSET_VMIRROR(THIS);
+		
 	}
 	if(KEY_PRESSED(J_LEFT)){
 		THIS->x--;
 		SetSpriteAnim(THIS, anim_left, 10);
 		TranslateSprite(THIS, -1 << delta_time, 0);
+
 	}
 	if(keys == 0){
 		SetSpriteAnim(THIS, anim_idle, 20);
 	}
 	if (KEY_TICKED(J_A) && have_bomb>0) {
-		SpriteManagerAdd(SPRITE_BOMB, THIS->x, THIS->y);
+		SpriteManagerAdd(SPRITE_BOMB, THIS->x+15, THIS->y);
 		have_bomb--;	
 	}
 	if (KEY_PRESSED(J_B)) {
@@ -79,6 +82,13 @@ void Update_SPRITE_PLAYER() {
 				have_bomb = 3;
 			}
 		}
+		if (spr->type == SPRITE_BOMB) {
+			if (CheckCollision(THIS, spr)) {
+				SetState(STATE_MENU);
+				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+				have_bomb = 3;
+			}
+		}
 		if (spr->type == SPRITE_KEY) {
 			if (CheckCollision(THIS, spr)) {
 				SpriteManagerRemoveSprite(spr);
@@ -97,3 +107,4 @@ void Update_SPRITE_PLAYER() {
 
 void Destroy_SPRITE_PLAYER() {
 }
+
