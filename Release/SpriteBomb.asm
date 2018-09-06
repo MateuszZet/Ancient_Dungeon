@@ -98,8 +98,8 @@ _Start_SPRITE_BOMB::
 	pop	hl
 	push	hl
 	ld	(hl),#0x01
-;SpriteBomb.c:22: SetSpriteAnim(THIS, anim_bomb, 5);
-	ld	a,#0x05
+;SpriteBomb.c:22: SetSpriteAnim(THIS, anim_bomb, 15);
+	ld	a,#0x0f
 	push	af
 	inc	sp
 	ld	hl,#_anim_bomb
@@ -114,14 +114,11 @@ _Start_SPRITE_BOMB::
 	add	sp, #4
 	ret
 _anim_bomb:
-	.db #0x07	; 7
+	.db #0x04	; 4
 	.db #0x00	; 0
 	.db #0x01	; 1
 	.db #0x02	; 2
 	.db #0x03	; 3
-	.db #0x04	; 4
-	.db #0x05	; 5
-	.db #0x06	; 6
 ;SpriteBomb.c:26: void Update_SPRITE_BOMB() {
 ;	---------------------------------
 ; Function Update_SPRITE_BOMB

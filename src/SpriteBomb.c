@@ -5,7 +5,7 @@ UINT8 bank_SPRITE_BOMB = 2;
 #include "SpriteManager.h"
 #include "ZGBMain.h"
 #include "Keys.h"
-const UINT8 anim_bomb[] = { 7,0,1,2,3,4,5,6};
+const UINT8 anim_bomb[] = { 4,0,1,2,3};
 
 struct EnemyInfo {
 	INT8 vy;
@@ -19,7 +19,7 @@ void Start_SPRITE_BOMB() {
 	THIS->lim_y = 9999;
 
 	data->vy = 1;
-	SetSpriteAnim(THIS, anim_bomb, 5);
+	SetSpriteAnim(THIS, anim_bomb, 15);
 
 }
 
