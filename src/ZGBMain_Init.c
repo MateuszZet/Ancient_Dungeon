@@ -15,6 +15,9 @@ UINT8 init_bank = 1;
 #include "SpriteEnemy.h"
 #include "../res/src/enemy.h"
 
+#include "SpriteEnemy3.h"
+#include "../res/src/enemy3.h"
+
 
 
 #include "SpriteKey.h"
@@ -57,4 +60,5 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
 	INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
 	INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
+	INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
 }

@@ -32,6 +32,7 @@ void Start_STATE_MENU() {
 	SpriteManagerAdd(SPRITE_KEY, 20, 20);
 	SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);

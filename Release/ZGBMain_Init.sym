@@ -13,6 +13,7 @@ Symbol Table
     _Destroy_SPRITE_DOOROPEN                                       **** GX
     _Destroy_SPRITE_ENEMY                                          **** GX
     _Destroy_SPRITE_ENEMY2                                         **** GX
+    _Destroy_SPRITE_ENEMY3                                         **** GX
     _Destroy_SPRITE_KEY                                            **** GX
     _Destroy_SPRITE_PLAYER                                         **** GX
     _InitSpriteInfo                                                **** GX
@@ -24,6 +25,7 @@ Symbol Table
     _Start_SPRITE_DOOROPEN                                         **** GX
     _Start_SPRITE_ENEMY                                            **** GX
     _Start_SPRITE_ENEMY2                                           **** GX
+    _Start_SPRITE_ENEMY3                                           **** GX
     _Start_SPRITE_KEY                                              **** GX
     _Start_SPRITE_PLAYER                                           **** GX
     _Start_STATE_GAME                                              **** GX
@@ -36,6 +38,7 @@ Symbol Table
     _Update_SPRITE_DOOROPEN                                        **** GX
     _Update_SPRITE_ENEMY                                           **** GX
     _Update_SPRITE_ENEMY2                                          **** GX
+    _Update_SPRITE_ENEMY3                                          **** GX
     _Update_SPRITE_KEY                                             **** GX
     _Update_SPRITE_PLAYER                                          **** GX
     _Update_STATE_GAME                                             **** GX
@@ -48,37 +51,39 @@ Symbol Table
     _bank_SPRITE_DOOROPEN                                          **** GX
     _bank_SPRITE_ENEMY                                             **** GX
     _bank_SPRITE_ENEMY2                                            **** GX
+    _bank_SPRITE_ENEMY3                                            **** GX
     _bank_SPRITE_KEY                                               **** GX
     _bank_SPRITE_PLAYER                                            **** GX
     _bank_STATE_GAME                                               **** GX
     _bank_STATE_GAME2                                              **** GX
     _bank_STATE_GAME3                                              **** GX
     _bank_STATE_MENU                                               **** GX
-    _bomb                                                          **** GX
-    _door                                                          **** GX
-    _dooropen                                                      **** GX
-    _enemy                                                         **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
+    _bomb                                                          **** GX
+    _door                                                          **** GX
+    _dooropen                                                      **** GX
+    _enemy                                                         **** GX
     _enemy2                                                        **** GX
+    _enemy3                                                        **** GX
   1 _init_bank                                                     0000 GR
     _key                                                           **** GX
-  1 _n_sprite_types                                                0088 GR
+  1 _n_sprite_types                                                0095 GR
   1 _next_state                                                    0001 GR
     _player                                                        **** GX
   1 _spriteBanks                                                   0020 GR
-  1 _spriteDataBanks                                               0068 GR
-  1 _spriteDatas                                                   0058 GR
-  1 _spriteDestroyFuncs                                            0048 GR
-  1 _spriteFrameSizes                                              0070 GR
-  1 _spriteIdxs                                                    0080 GR
-  1 _spriteNumFrames                                               0078 GR
-  1 _spritePalDatas                                                0089 GR
-  1 _spriteStartFuncs                                              0028 GR
-  1 _spriteUpdateFuncs                                             0038 GR
+  1 _spriteDataBanks                                               0071 GR
+  1 _spriteDatas                                                   005F GR
+  1 _spriteDestroyFuncs                                            004D GR
+  1 _spriteFrameSizes                                              007A GR
+  1 _spriteIdxs                                                    008C GR
+  1 _spriteNumFrames                                               0083 GR
+  1 _spritePalDatas                                                0096 GR
+  1 _spriteStartFuncs                                              0029 GR
+  1 _spriteUpdateFuncs                                             003B GR
   1 _startFuncs                                                    0008 GR
   1 _stateBanks                                                    0002 GR
   1 _updateFuncs                                                   0014 GR
@@ -90,11 +95,11 @@ Hexadecimal [16-Bits]
 Area Table
 
    0 _CODE                                      size    0   flags    0
-   1 _DATA                                      size   99   flags    0
+   1 _DATA                                      size   A8   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size    F   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_1                                    size  1B9   flags    0
+   6 _CODE_1                                    size  1E4   flags    0
    7 _CABS                                      size    0   flags    8
 
