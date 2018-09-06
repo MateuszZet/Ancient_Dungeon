@@ -168,23 +168,23 @@
    0075 21r00r00            168 	ld	hl,#_delta_time
    0078 7E                  169 	ld	a,(hl)
    0079 3C                  170 	inc	a
-   007A 18 02               171 	jr	00142$
-   007C                     172 00141$:
+   007A 18 02               171 	jr	00143$
+   007C                     172 00142$:
    007C CB 22               173 	sla	d
-   007E                     174 00142$:
+   007E                     174 00143$:
    007E 3D                  175 	dec	a
-   007F 20 FB               176 	jr	NZ,00141$
+   007F 20 FB               176 	jr	NZ,00142$
    0081 7E                  177 	ld	a,(hl)
    0082 F5                  178 	push	af
    0083 1E 00               179 	ld	e,#0x00
    0085 F1                  180 	pop	af
    0086 3C                  181 	inc	a
-   0087 18 02               182 	jr	00144$
-   0089                     183 00143$:
+   0087 18 02               182 	jr	00145$
+   0089                     183 00144$:
    0089 CB 23               184 	sla	e
-   008B                     185 00144$:
+   008B                     185 00145$:
    008B 3D                  186 	dec	a
-   008C 20 FB               187 	jr	NZ,00143$
+   008C 20 FB               187 	jr	NZ,00144$
    008E C5                  188 	push	bc
    008F D5                  189 	push	de
    0090 33                  190 	inc	sp
@@ -293,119 +293,116 @@
    0122 59                  293 	ld	e, c
    0123 50                  294 	ld	d, b
    0124 1A                  295 	ld	a,(de)
-   0125 4F                  296 	ld	c,a
-   0126 13                  297 	inc	de
-   0127 1A                  298 	ld	a,(de)
-   0128 47                  299 	ld	b,a
-   0129 F8 00               300 	ldhl	sp,#0
+   0125 F8 00               296 	ldhl	sp,#0
+   0127 22                  297 	ld	(hl+),a
+   0128 13                  298 	inc	de
+   0129 1A                  299 	ld	a,(de)
+   012A 22                  300 	ld	(hl+),a
    012B 36 00               301 	ld	(hl),#0x00
-   012D                     302 00112$:
+   012D                     302 00113$:
    012D 11r00r00            303 	ld	de, #_sprite_manager_updatables + 0
    0130 1A                  304 	ld	a,(de)
-   0131 F8 03               305 	ldhl	sp,#3
-   0133 77                  306 	ld	(hl),a
-   0134 F8 00               307 	ldhl	sp,#0
-   0136 7E                  308 	ld	a,(hl)
-   0137 F8 03               309 	ldhl	sp,#3
-   0139 96                  310 	sub	a, (hl)
-   013A CArB8r01            311 	jp	Z,00114$
-                            312 ;SpriteEnemy.c:57: if (spr->type == SPRITE_BOMB) {
-   013D 21 10 00            313 	ld	hl,#0x0010
-   0140 09                  314 	add	hl,bc
-   0141 7D                  315 	ld	a,l
-   0142 54                  316 	ld	d,h
-   0143 F8 01               317 	ldhl	sp,#1
-   0145 22                  318 	ld	(hl+),a
-   0146 72                  319 	ld	(hl),d
-   0147 2B                  320 	dec	hl
-   0148 5E                  321 	ld	e,(hl)
-   0149 23                  322 	inc	hl
-   014A 56                  323 	ld	d,(hl)
-   014B 1A                  324 	ld	a,(de)
-   014C D6 06               325 	sub	a, #0x06
-   014E C2r93r01            326 	jp	NZ,00113$
-                            327 ;SpriteEnemy.c:58: if (CheckCollision(THIS, spr)) {
-   0151 C5                  328 	push	bc
-   0152 C5                  329 	push	bc
-   0153 21r00r00            330 	ld	hl,#_THIS
-   0156 2A                  331 	ld	a,(hl+)
-   0157 66                  332 	ld	h,(hl)
-   0158 6F                  333 	ld	l,a
-   0159 E5                  334 	push	hl
-   015A CDr00r00            335 	call	_CheckCollision
-   015D E8 04               336 	add	sp, #4
-   015F C1                  337 	pop	bc
-   0160 7B                  338 	ld	a,e
-   0161 B7                  339 	or	a, a
-   0162 28 2F               340 	jr	Z,00113$
-                            341 ;SpriteEnemy.c:59: SpriteManagerRemoveSprite(THIS);
-   0164 C5                  342 	push	bc
-   0165 21r00r00            343 	ld	hl,#_THIS
-   0168 2A                  344 	ld	a,(hl+)
-   0169 66                  345 	ld	h,(hl)
-   016A 6F                  346 	ld	l,a
-   016B E5                  347 	push	hl
-   016C CDr00r00            348 	call	_SpriteManagerRemoveSprite
-   016F E8 02               349 	add	sp, #2
-   0171 C1                  350 	pop	bc
-                            351 ;SpriteEnemy.c:60: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   0172 C5                  352 	push	bc
-   0173 21 86 00            353 	ld	hl,#0x0086
-   0176 E5                  354 	push	hl
-   0177 2E 73               355 	ld	l, #0x73
-   0179 E5                  356 	push	hl
-   017A 2E F3               357 	ld	l, #0xf3
-   017C E5                  358 	push	hl
-   017D 2E C7               359 	ld	l, #0xc7
-   017F E5                  360 	push	hl
-   0180 2E 4F               361 	ld	l, #0x4f
-   0182 E5                  362 	push	hl
-   0183 21 00 0A            363 	ld	hl,#0x0a00
+   0131 4F                  305 	ld	c,a
+   0132 F8 02               306 	ldhl	sp,#2
+   0134 7E                  307 	ld	a,(hl)
+   0135 91                  308 	sub	a, c
+   0136 CArB4r01            309 	jp	Z,00115$
+                            310 ;SpriteEnemy.c:57: if (spr->type == SPRITE_BOMB || spr->type == SPRITE_BOMB_L) {
+   0139 D1                  311 	pop	de
+   013A D5                  312 	push	de
+   013B 21 10 00            313 	ld	hl,#0x0010
+   013E 19                  314 	add	hl,de
+   013F 4D                  315 	ld	c,l
+   0140 44                  316 	ld	b,h
+   0141 0A                  317 	ld	a,(bc)
+   0142 4F                  318 	ld	c,a
+   0143 D6 06               319 	sub	a, #0x06
+   0145 28 06               320 	jr	Z,00108$
+   0147 79                  321 	ld	a,c
+   0148 D6 07               322 	sub	a, #0x07
+   014A C2r8Dr01            323 	jp	NZ,00114$
+   014D                     324 00108$:
+                            325 ;SpriteEnemy.c:58: if (CheckCollision(THIS, spr)) {
+   014D E1                  326 	pop	hl
+   014E E5                  327 	push	hl
+   014F E5                  328 	push	hl
+   0150 21r00r00            329 	ld	hl,#_THIS
+   0153 2A                  330 	ld	a,(hl+)
+   0154 66                  331 	ld	h,(hl)
+   0155 6F                  332 	ld	l,a
+   0156 E5                  333 	push	hl
+   0157 CDr00r00            334 	call	_CheckCollision
+   015A E8 04               335 	add	sp, #4
+   015C 7B                  336 	ld	a,e
+   015D B7                  337 	or	a, a
+   015E 28 2D               338 	jr	Z,00114$
+                            339 ;SpriteEnemy.c:59: SpriteManagerRemoveSprite(THIS);
+   0160 21r00r00            340 	ld	hl,#_THIS
+   0163 2A                  341 	ld	a,(hl+)
+   0164 66                  342 	ld	h,(hl)
+   0165 6F                  343 	ld	l,a
+   0166 E5                  344 	push	hl
+   0167 CDr00r00            345 	call	_SpriteManagerRemoveSprite
+   016A E8 02               346 	add	sp, #2
+                            347 ;SpriteEnemy.c:60: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+   016C 21 86 00            348 	ld	hl,#0x0086
+   016F E5                  349 	push	hl
+   0170 2E 73               350 	ld	l, #0x73
+   0172 E5                  351 	push	hl
+   0173 2E F3               352 	ld	l, #0xf3
+   0175 E5                  353 	push	hl
+   0176 2E C7               354 	ld	l, #0xc7
+   0178 E5                  355 	push	hl
+   0179 2E 4F               356 	ld	l, #0x4f
+   017B E5                  357 	push	hl
+   017C 21 00 0A            358 	ld	hl,#0x0a00
+   017F E5                  359 	push	hl
+   0180 CDr00r00            360 	call	_PlayFx
+   0183 E8 0C               361 	add	sp, #12
+                            362 ;SpriteEnemy.c:61: SpriteManagerRemoveSprite(spr);
+   0185 E1                  363 	pop	hl
    0186 E5                  364 	push	hl
-   0187 CDr00r00            365 	call	_PlayFx
-   018A E8 0C               366 	add	sp, #12
-   018C C1                  367 	pop	bc
-                            368 ;SpriteEnemy.c:61: SpriteManagerRemoveSprite(spr);
-   018D C5                  369 	push	bc
-   018E CDr00r00            370 	call	_SpriteManagerRemoveSprite
-   0191 E8 02               371 	add	sp, #2
-   0193                     372 00113$:
-                            373 ;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
-   0193 F8 00               374 	ldhl	sp,#0
-   0195 34                  375 	inc	(hl)
-   0196 4E                  376 	ld	c,(hl)
-   0197 06 00               377 	ld	b,#0x00
-   0199 03                  378 	inc	bc
-   019A 21r00r00            379 	ld	hl,#_sprite_manager_updatables
-   019D 09                  380 	add	hl,bc
-   019E 4D                  381 	ld	c,l
-   019F 44                  382 	ld	b,h
-   01A0 0A                  383 	ld	a,(bc)
-   01A1 4F                  384 	ld	c,a
-   01A2 06 00               385 	ld	b,#0x00
-   01A4 CB 21               386 	sla	c
-   01A6 CB 10               387 	rl	b
-   01A8 21r00r00            388 	ld	hl,#_sprite_manager_sprites
-   01AB 09                  389 	add	hl,bc
-   01AC 4D                  390 	ld	c,l
-   01AD 44                  391 	ld	b,h
-   01AE 59                  392 	ld	e, c
-   01AF 50                  393 	ld	d, b
-   01B0 1A                  394 	ld	a,(de)
-   01B1 4F                  395 	ld	c,a
-   01B2 13                  396 	inc	de
-   01B3 1A                  397 	ld	a,(de)
-   01B4 47                  398 	ld	b,a
-   01B5 C3r2Dr01            399 	jp	00112$
-   01B8                     400 00114$:
-   01B8 E8 04               401 	add	sp, #4
-   01BA C9                  402 	ret
-                            403 ;SpriteEnemy.c:68: void Destroy_SPRITE_ENEMY() {
-                            404 ;	---------------------------------
-                            405 ; Function Destroy_SPRITE_ENEMY
-                            406 ; ---------------------------------
-   01BB                     407 _Destroy_SPRITE_ENEMY::
-                            408 ;SpriteEnemy.c:69: }
-   01BB C9                  409 	ret
-                            410 	.area _CODE_2
-                            411 	.area _CABS (ABS)
+   0187 E5                  365 	push	hl
+   0188 CDr00r00            366 	call	_SpriteManagerRemoveSprite
+   018B E8 02               367 	add	sp, #2
+   018D                     368 00114$:
+                            369 ;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
+   018D F8 02               370 	ldhl	sp,#2
+   018F 34                  371 	inc	(hl)
+   0190 4E                  372 	ld	c,(hl)
+   0191 06 00               373 	ld	b,#0x00
+   0193 03                  374 	inc	bc
+   0194 21r00r00            375 	ld	hl,#_sprite_manager_updatables
+   0197 09                  376 	add	hl,bc
+   0198 4D                  377 	ld	c,l
+   0199 44                  378 	ld	b,h
+   019A 0A                  379 	ld	a,(bc)
+   019B 4F                  380 	ld	c,a
+   019C 06 00               381 	ld	b,#0x00
+   019E CB 21               382 	sla	c
+   01A0 CB 10               383 	rl	b
+   01A2 21r00r00            384 	ld	hl,#_sprite_manager_sprites
+   01A5 09                  385 	add	hl,bc
+   01A6 4D                  386 	ld	c,l
+   01A7 44                  387 	ld	b,h
+   01A8 59                  388 	ld	e, c
+   01A9 50                  389 	ld	d, b
+   01AA 1A                  390 	ld	a,(de)
+   01AB F8 00               391 	ldhl	sp,#0
+   01AD 22                  392 	ld	(hl+),a
+   01AE 13                  393 	inc	de
+   01AF 1A                  394 	ld	a,(de)
+   01B0 77                  395 	ld	(hl),a
+   01B1 C3r2Dr01            396 	jp	00113$
+   01B4                     397 00115$:
+   01B4 E8 04               398 	add	sp, #4
+   01B6 C9                  399 	ret
+                            400 ;SpriteEnemy.c:68: void Destroy_SPRITE_ENEMY() {
+                            401 ;	---------------------------------
+                            402 ; Function Destroy_SPRITE_ENEMY
+                            403 ; ---------------------------------
+   01B7                     404 _Destroy_SPRITE_ENEMY::
+                            405 ;SpriteEnemy.c:69: }
+   01B7 C9                  406 	ret
+                            407 	.area _CODE_2
+                            408 	.area _CABS (ABS)

@@ -170,12 +170,12 @@ _Update_SPRITE_ENEMY2::
 	ld	hl,#_delta_time
 	ld	a,(hl)
 	inc	a
-	jr	00142$
-00141$:
-	sla	d
+	jr	00143$
 00142$:
+	sla	d
+00143$:
 	dec	a
-	jr	NZ,00141$
+	jr	NZ,00142$
 	push	bc
 	xor	a, a
 	push	af
@@ -284,40 +284,39 @@ _Update_SPRITE_ENEMY2::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ld	c,a
+	ldhl	sp,#0
+	ld	(hl+),a
 	inc	de
 	ld	a,(de)
-	ld	b,a
-	ldhl	sp,#0
+	ld	(hl+),a
 	ld	(hl),#0x00
-00112$:
+00113$:
 	ld	de, #_sprite_manager_updatables + 0
 	ld	a,(de)
-	ldhl	sp,#3
-	ld	(hl),a
-	ldhl	sp,#0
+	ld	c,a
+	ldhl	sp,#2
 	ld	a,(hl)
-	ldhl	sp,#3
-	sub	a, (hl)
-	jp	Z,00114$
-;SpriteEnemy2.c:56: if (spr->type == SPRITE_BOMB) {
+	sub	a, c
+	jp	Z,00115$
+;SpriteEnemy2.c:56: if (spr->type == SPRITE_BOMB || spr->type == SPRITE_BOMB_L) {
+	pop	de
+	push	de
 	ld	hl,#0x0010
-	add	hl,bc
-	ld	a,l
-	ld	d,h
-	ldhl	sp,#1
-	ld	(hl+),a
-	ld	(hl),d
-	dec	hl
-	ld	e,(hl)
-	inc	hl
-	ld	d,(hl)
-	ld	a,(de)
+	add	hl,de
+	ld	c,l
+	ld	b,h
+	ld	a,(bc)
+	ld	c,a
 	sub	a, #0x06
-	jp	NZ,00113$
+	jr	Z,00108$
+	ld	a,c
+	sub	a, #0x07
+	jp	NZ,00114$
+00108$:
 ;SpriteEnemy2.c:57: if (CheckCollision(THIS, spr)) {
-	push	bc
-	push	bc
+	pop	hl
+	push	hl
+	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -325,12 +324,10 @@ _Update_SPRITE_ENEMY2::
 	push	hl
 	call	_CheckCollision
 	add	sp, #4
-	pop	bc
 	ld	a,e
 	or	a, a
-	jr	Z,00113$
+	jr	Z,00114$
 ;SpriteEnemy2.c:58: SpriteManagerRemoveSprite(THIS);
-	push	bc
 	ld	hl,#_THIS
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -338,9 +335,7 @@ _Update_SPRITE_ENEMY2::
 	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
-	pop	bc
 ;SpriteEnemy2.c:59: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-	push	bc
 	ld	hl,#0x0086
 	push	hl
 	ld	l, #0x73
@@ -355,14 +350,15 @@ _Update_SPRITE_ENEMY2::
 	push	hl
 	call	_PlayFx
 	add	sp, #12
-	pop	bc
 ;SpriteEnemy2.c:60: SpriteManagerRemoveSprite(spr);
-	push	bc
+	pop	hl
+	push	hl
+	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
-00113$:
+00114$:
 ;SpriteEnemy2.c:55: SPRITEMANAGER_ITERATE(i, spr) {
-	ldhl	sp,#0
+	ldhl	sp,#2
 	inc	(hl)
 	ld	c,(hl)
 	ld	b,#0x00
@@ -383,12 +379,13 @@ _Update_SPRITE_ENEMY2::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ld	c,a
+	ldhl	sp,#0
+	ld	(hl+),a
 	inc	de
 	ld	a,(de)
-	ld	b,a
-	jp	00112$
-00114$:
+	ld	(hl),a
+	jp	00113$
+00115$:
 	add	sp, #4
 	ret
 ;SpriteEnemy2.c:68: void Destroy_SPRITE_ENEMY2() {

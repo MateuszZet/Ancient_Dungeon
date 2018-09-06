@@ -8,7 +8,7 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _CheckCollision                                                **** GX
-  6 _Destroy_SPRITE_ENEMY2                                         01B0 GR
+  6 _Destroy_SPRITE_ENEMY2                                         01AC GR
     _PlayFx                                                        **** GX
     _SetSpriteAnim                                                 **** GX
     _SpriteManagerRemoveSprite                                     **** GX
@@ -36,6 +36,6 @@ Area Table
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size   15   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  1B1   flags    0
+   6 _CODE_2                                    size  1AD   flags    0
    7 _CABS                                      size    0   flags    8
 
