@@ -32,6 +32,9 @@ UINT8 init_bank = 1;
 #include "SpriteBomb.h"
 #include "../res/src/bomb.h"
 
+#include "SpriteBomb_L.h"
+#include "../res/src/bomb.h"
+
 UINT8 next_state = STATE_MENU;
 
 SET_N_STATES(N_STATES);
@@ -52,5 +55,6 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
 	INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
 	INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
-	INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 7);
+	INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
+	INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
 }

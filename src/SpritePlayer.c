@@ -16,7 +16,9 @@ UINT8 bank_SPRITE_PLAYER = 2;
 int door_x;
 int door_y;
 int next_lvl;
-int have_bomb=3;
+int bomb_start = 6;
+int have_bomb=6;
+int direction_x;
 
 void Start_SPRITE_PLAYER() {
 	THIS->coll_x = 1;
@@ -44,24 +46,26 @@ void Update_SPRITE_PLAYER() {
 		THIS->x++;
 		SetSpriteAnim(THIS, anim_right, 10);
 		TranslateSprite(THIS, 1 << delta_time, 0);
-		SPRITE_UNSET_VMIRROR(THIS);
+		direction_x = 1;
 		
 	}
 	if(KEY_PRESSED(J_LEFT)){
 		THIS->x--;
 		SetSpriteAnim(THIS, anim_left, 10);
 		TranslateSprite(THIS, -1 << delta_time, 0);
+		direction_x = 0;
 
 	}
 	if(keys == 0){
 		SetSpriteAnim(THIS, anim_idle, 20);
 	}
-	if (KEY_TICKED(J_A) && have_bomb>0) {
-		SpriteManagerAdd(SPRITE_BOMB, THIS->x+15, THIS->y);
-		have_bomb--;	
+	if (KEY_TICKED(J_A) && have_bomb>0 ) {
+			SpriteManagerAdd(SPRITE_BOMB, THIS->x + 15, THIS->y);
+			have_bomb--;
 	}
-	if (KEY_PRESSED(J_B)) {
-		
+	if (KEY_TICKED(J_B) && have_bomb>0) {
+		SpriteManagerAdd(SPRITE_BOMB_L, THIS->x - 20, THIS->y);
+		have_bomb--;
 
 	}
 	
@@ -72,21 +76,28 @@ void Update_SPRITE_PLAYER() {
 			if(CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-				have_bomb = 3;
+				have_bomb = bomb_start;
 			}
 		}
 		if(spr->type == SPRITE_ENEMY2) {
 			if(CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-				have_bomb = 3;
+				have_bomb = bomb_start;
 			}
 		}
 		if (spr->type == SPRITE_BOMB) {
 			if (CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-				have_bomb = 3;
+				have_bomb = bomb_start;
+			}
+		}
+		if (spr->type == SPRITE_BOMB_L) {
+			if (CheckCollision(THIS, spr)) {
+				SetState(STATE_MENU);
+				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+				have_bomb = bomb_start;
 			}
 		}
 		if (spr->type == SPRITE_KEY) {

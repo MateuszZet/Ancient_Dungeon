@@ -2,24 +2,24 @@
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.6.0 #9615 (MINGW64)
                               4 ;--------------------------------------------------------
-                              5 	.module SpriteBomb
+                              5 	.module SpriteBomb_L
                               6 	.optsdcc -mgbz80
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
-                             11 	.globl _TranslateSprite
-                             12 	.globl _SetSpriteAnim
-                             13 	.globl _bank_SPRITE_BOMB
-                             14 	.globl _anim_bomb
-                             15 	.globl _Start_SPRITE_BOMB
-                             16 	.globl _Update_SPRITE_BOMB
-                             17 	.globl _Destroy_SPRITE_BOMB
+                             11 	.globl _Destroy_SPRITE_BOMB_L
+                             12 	.globl _Update_SPRITE_BOMB_L
+                             13 	.globl _Start_SPRITE_BOMB_L
+                             14 	.globl _TranslateSprite
+                             15 	.globl _SetSpriteAnim
+                             16 	.globl _bank_SPRITE_BOMB_L
+                             17 	.globl _anim_bomb
                              18 ;--------------------------------------------------------
                              19 ; ram data
                              20 ;--------------------------------------------------------
                              21 	.area _DATA
-   0000                      22 _bank_SPRITE_BOMB::
+   0000                      22 _bank_SPRITE_BOMB_L::
    0000                      23 	.ds 1
                              24 ;--------------------------------------------------------
                              25 ; absolute external ram data
@@ -32,8 +32,8 @@
                              32 	.area _GSINIT
                              33 	.area _GSFINAL
                              34 	.area _GSINIT
-                             35 ;SpriteBomb.c:3: UINT8 bank_SPRITE_BOMB = 2;
-   0000 21r00r00             36 	ld	hl,#_bank_SPRITE_BOMB
+                             35 ;SpriteBomb_L.c:3: UINT8 bank_SPRITE_BOMB_L = 2;
+   0000 21r00r00             36 	ld	hl,#_bank_SPRITE_BOMB_L
    0003 36 02                37 	ld	(hl),#0x02
                              38 ;--------------------------------------------------------
                              39 ; Home
@@ -44,13 +44,13 @@
                              44 ; code
                              45 ;--------------------------------------------------------
                              46 	.area _CODE_2
-                             47 ;SpriteBomb.c:17: void Start_SPRITE_BOMB() {
+                             47 ;SpriteBomb_L.c:17: void Start_SPRITE_BOMB_L() {
                              48 ;	---------------------------------
-                             49 ; Function Start_SPRITE_BOMB
+                             49 ; Function Start_SPRITE_BOMB_L
                              50 ; ---------------------------------
-   0000                      51 _Start_SPRITE_BOMB::
+   0000                      51 _Start_SPRITE_BOMB_L::
    0000 E8 FC                52 	add	sp, #-4
-                             53 ;SpriteBomb.c:20: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+                             53 ;SpriteBomb_L.c:20: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
    0002 21r01r00             54 	ld	hl,#_THIS + 1
    0005 2B                   55 	dec	hl
    0006 4E                   56 	ld	c,(hl)
@@ -69,7 +69,7 @@
    0016 F8 00                69 	ldhl	sp,#0
    0018 22                   70 	ld	(hl+),a
    0019 73                   71 	ld	(hl),e
-                             72 ;SpriteBomb.c:22: THIS->lim_x = 9999;
+                             72 ;SpriteBomb_L.c:22: THIS->lim_x = 9999;
    001A 21 12 00             73 	ld	hl,#0x0012
    001D 09                   74 	add	hl,bc
    001E 4D                   75 	ld	c,l
@@ -79,7 +79,7 @@
    0023 03                   79 	inc	bc
    0024 3E 27                80 	ld	a,#0x27
    0026 02                   81 	ld	(bc),a
-                             82 ;SpriteBomb.c:23: THIS->lim_y = 9999;
+                             82 ;SpriteBomb_L.c:23: THIS->lim_y = 9999;
    0027 21r01r00             83 	ld	hl,#_THIS + 1
    002A 2B                   84 	dec	hl
    002B 4E                   85 	ld	c,(hl)
@@ -94,17 +94,17 @@
    0037 03                   94 	inc	bc
    0038 3E 27                95 	ld	a,#0x27
    003A 02                   96 	ld	(bc),a
-                             97 ;SpriteBomb.c:25: data->vy = 2;
+                             97 ;SpriteBomb_L.c:25: data->vy = 2;
    003B E1                   98 	pop	hl
    003C E5                   99 	push	hl
    003D 36 02               100 	ld	(hl),#0x02
-                            101 ;SpriteBomb.c:26: data->vx = 2;
+                            101 ;SpriteBomb_L.c:26: data->vx = 2;
    003F C1                  102 	pop	bc
    0040 C5                  103 	push	bc
    0041 03                  104 	inc	bc
    0042 3E 02               105 	ld	a,#0x02
    0044 02                  106 	ld	(bc),a
-                            107 ;SpriteBomb.c:28: SetSpriteAnim(THIS, anim_bomb, 15);
+                            107 ;SpriteBomb_L.c:28: SetSpriteAnim(THIS, anim_bomb, 15);
    0045 3E 0F               108 	ld	a,#0x0f
    0047 F5                  109 	push	af
    0048 33                  110 	inc	sp
@@ -121,16 +121,16 @@
    005B C9                  121 	ret
    005C                     122 _anim_bomb:
    005C 04                  123 	.db #0x04	; 4
-   005D 00                  124 	.db #0x00	; 0
-   005E 01                  125 	.db #0x01	; 1
-   005F 02                  126 	.db #0x02	; 2
-   0060 03                  127 	.db #0x03	; 3
-                            128 ;SpriteBomb.c:33: void Update_SPRITE_BOMB() {
+   005D 04                  124 	.db #0x04	; 4
+   005E 05                  125 	.db #0x05	; 5
+   005F 06                  126 	.db #0x06	; 6
+   0060 07                  127 	.db #0x07	; 7
+                            128 ;SpriteBomb_L.c:33: void Update_SPRITE_BOMB_L() {
                             129 ;	---------------------------------
-                            130 ; Function Update_SPRITE_BOMB
+                            130 ; Function Update_SPRITE_BOMB_L
                             131 ; ---------------------------------
-   0061                     132 _Update_SPRITE_BOMB::
-                            133 ;SpriteBomb.c:34: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+   0061                     132 _Update_SPRITE_BOMB_L::
+                            133 ;SpriteBomb_L.c:34: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
    0061 21r01r00            134 	ld	hl,#_THIS + 1
    0064 2B                  135 	dec	hl
    0065 4E                  136 	ld	c,(hl)
@@ -140,29 +140,32 @@
    006B 09                  140 	add	hl,bc
    006C 4D                  141 	ld	c,l
    006D 44                  142 	ld	b,h
-                            143 ;SpriteBomb.c:35: TranslateSprite(THIS, data->vx, 0);
+                            143 ;SpriteBomb_L.c:35: TranslateSprite(THIS, -data->vx, 0);
    006E 03                  144 	inc	bc
    006F 0A                  145 	ld	a,(bc)
-   0070 47                  146 	ld	b,a
+   0070 4F                  146 	ld	c,a
    0071 AF                  147 	xor	a, a
-   0072 F5                  148 	push	af
-   0073 33                  149 	inc	sp
-   0074 C5                  150 	push	bc
-   0075 33                  151 	inc	sp
-   0076 21r00r00            152 	ld	hl,#_THIS
-   0079 2A                  153 	ld	a,(hl+)
-   007A 66                  154 	ld	h,(hl)
-   007B 6F                  155 	ld	l,a
-   007C E5                  156 	push	hl
-   007D CDr00r00            157 	call	_TranslateSprite
-   0080 E8 04               158 	add	sp, #4
-   0082 C9                  159 	ret
-                            160 ;SpriteBomb.c:39: void Destroy_SPRITE_BOMB() {
-                            161 ;	---------------------------------
-                            162 ; Function Destroy_SPRITE_BOMB
-                            163 ; ---------------------------------
-   0083                     164 _Destroy_SPRITE_BOMB::
-                            165 ;SpriteBomb.c:43: }
-   0083 C9                  166 	ret
-                            167 	.area _CODE_2
-                            168 	.area _CABS (ABS)
+   0072 91                  148 	sub	a, c
+   0073 47                  149 	ld	b,a
+   0074 AF                  150 	xor	a, a
+   0075 F5                  151 	push	af
+   0076 33                  152 	inc	sp
+   0077 C5                  153 	push	bc
+   0078 33                  154 	inc	sp
+   0079 21r00r00            155 	ld	hl,#_THIS
+   007C 2A                  156 	ld	a,(hl+)
+   007D 66                  157 	ld	h,(hl)
+   007E 6F                  158 	ld	l,a
+   007F E5                  159 	push	hl
+   0080 CDr00r00            160 	call	_TranslateSprite
+   0083 E8 04               161 	add	sp, #4
+   0085 C9                  162 	ret
+                            163 ;SpriteBomb_L.c:39: void Destroy_SPRITE_BOMB_L() {
+                            164 ;	---------------------------------
+                            165 ; Function Destroy_SPRITE_BOMB_L
+                            166 ; ---------------------------------
+   0086                     167 _Destroy_SPRITE_BOMB_L::
+                            168 ;SpriteBomb_L.c:43: }
+   0086 C9                  169 	ret
+                            170 	.area _CODE_2
+                            171 	.area _CABS (ABS)
