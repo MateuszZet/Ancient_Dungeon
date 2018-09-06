@@ -335,16 +335,16 @@
    015B E5                  335 	push	hl
    015C CDr00r00            336 	call	_SpriteManagerRemoveSprite
    015F E8 02               337 	add	sp, #2
-                            338 ;SpriteEnemy2.c:59: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   0161 21 86 00            339 	ld	hl,#0x0086
+                            338 ;SpriteEnemy2.c:59: PlayFx(CHANNEL_1, 10, 0x1e, 0x10, 0xf3, 0x00, 0x87);
+   0161 21 87 00            339 	ld	hl,#0x0087
    0164 E5                  340 	push	hl
-   0165 2E 73               341 	ld	l, #0x73
+   0165 2E 00               341 	ld	l, #0x00
    0167 E5                  342 	push	hl
    0168 2E F3               343 	ld	l, #0xf3
    016A E5                  344 	push	hl
-   016B 2E C7               345 	ld	l, #0xc7
+   016B 2E 10               345 	ld	l, #0x10
    016D E5                  346 	push	hl
-   016E 2E 4F               347 	ld	l, #0x4f
+   016E 2E 1E               347 	ld	l, #0x1e
    0170 E5                  348 	push	hl
    0171 21 00 0A            349 	ld	hl,#0x0a00
    0174 E5                  350 	push	hl

@@ -335,16 +335,16 @@ _Update_SPRITE_ENEMY2::
 	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
-;SpriteEnemy2.c:59: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-	ld	hl,#0x0086
+;SpriteEnemy2.c:59: PlayFx(CHANNEL_1, 10, 0x1e, 0x10, 0xf3, 0x00, 0x87);
+	ld	hl,#0x0087
 	push	hl
-	ld	l, #0x73
+	ld	l, #0x00
 	push	hl
 	ld	l, #0xf3
 	push	hl
-	ld	l, #0xc7
+	ld	l, #0x10
 	push	hl
-	ld	l, #0x4f
+	ld	l, #0x1e
 	push	hl
 	ld	hl,#0x0a00
 	push	hl

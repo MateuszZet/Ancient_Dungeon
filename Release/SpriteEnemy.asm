@@ -293,23 +293,26 @@ _Update_SPRITE_ENEMY::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#0
+	ldhl	sp,#1
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
-	ld	(hl+),a
+	ld	(hl-),a
+	dec	hl
 	ld	(hl),#0x00
 00113$:
 	ld	de, #_sprite_manager_updatables + 0
 	ld	a,(de)
 	ld	c,a
-	ldhl	sp,#2
+	ldhl	sp,#0
 	ld	a,(hl)
 	sub	a, c
 	jp	Z,00115$
 ;SpriteEnemy.c:57: if (spr->type == SPRITE_BOMB || spr->type == SPRITE_BOMB_L) {
-	pop	de
-	push	de
+	ldhl	sp,#(2 - 1)
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
 	ld	hl,#0x0010
 	add	hl,de
 	ld	c,l
@@ -323,8 +326,10 @@ _Update_SPRITE_ENEMY::
 	jp	NZ,00114$
 00108$:
 ;SpriteEnemy.c:58: if (CheckCollision(THIS, spr)) {
-	pop	hl
-	push	hl
+	ldhl	sp,#1
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -344,30 +349,32 @@ _Update_SPRITE_ENEMY::
 	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
-;SpriteEnemy.c:60: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-	ld	hl,#0x0086
+;SpriteEnemy.c:60: PlayFx(CHANNEL_1, 10, 0x1e, 0x10, 0xf3, 0x00, 0x87);
+	ld	hl,#0x0087
 	push	hl
-	ld	l, #0x73
+	ld	l, #0x00
 	push	hl
 	ld	l, #0xf3
 	push	hl
-	ld	l, #0xc7
+	ld	l, #0x10
 	push	hl
-	ld	l, #0x4f
+	ld	l, #0x1e
 	push	hl
 	ld	hl,#0x0a00
 	push	hl
 	call	_PlayFx
 	add	sp, #12
 ;SpriteEnemy.c:61: SpriteManagerRemoveSprite(spr);
-	pop	hl
-	push	hl
+	ldhl	sp,#1
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
 00114$:
 ;SpriteEnemy.c:56: SPRITEMANAGER_ITERATE(i, spr) {
-	ldhl	sp,#2
+	ldhl	sp,#0
 	inc	(hl)
 	ld	c,(hl)
 	ld	b,#0x00
@@ -388,7 +395,7 @@ _Update_SPRITE_ENEMY::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#0
+	ldhl	sp,#1
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)

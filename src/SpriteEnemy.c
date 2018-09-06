@@ -57,7 +57,7 @@ void Update_SPRITE_ENEMY() {
 		if (spr->type == SPRITE_BOMB || spr->type == SPRITE_BOMB_L) {
 			if (CheckCollision(THIS, spr)) {
 				SpriteManagerRemoveSprite(THIS);
-				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+				PlayFx(CHANNEL_1, 10, 0x1e, 0x10, 0xf3, 0x00, 0x87);
 				SpriteManagerRemoveSprite(spr);
 			}
 		}
