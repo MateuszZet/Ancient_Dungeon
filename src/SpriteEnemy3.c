@@ -32,6 +32,7 @@ void Update_SPRITE_ENEMY3() {
 	struct Sprite* spr;
 	struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	dir_pointer = &dir;
+	
 	if (TranslateSprite(THIS, data->vx << delta_time, data->vy << delta_time)) {
 		if (*dir_pointer == 0) {
 			data->vx = 1;
@@ -55,7 +56,20 @@ void Update_SPRITE_ENEMY3() {
 		}
 		
 	}
-	
+	/*
+	if(TranslateSprite(THIS, data->vx << delta_time, data->vy << delta_time)) {
+		
+		if (*dir_pointer == 0) {
+			data->vy = -data->vy;
+			*dir_pointer = 1;
+		}
+		else {
+			data->vx = -data->vx;
+			*dir_pointer = 0;
+		}
+		
+	}
+	*/
 	
 
 	

@@ -164,7 +164,7 @@ _Update_SPRITE_ENEMY3::
 	ld	(hl),#<(_dir)
 	inc	hl
 	ld	(hl),#>(_dir)
-;SpriteEnemy3.c:35: if (TranslateSprite(THIS, data->vx << delta_time, data->vy << delta_time)) {
+;SpriteEnemy3.c:36: if (TranslateSprite(THIS, data->vx << delta_time, data->vy << delta_time)) {
 	pop	de
 	push	de
 	ld	hl,#0x0001
@@ -216,7 +216,7 @@ _Update_SPRITE_ENEMY3::
 	ld	a,e
 	or	a, a
 	jp	Z,00114$
-;SpriteEnemy3.c:36: if (*dir_pointer == 0) {
+;SpriteEnemy3.c:37: if (*dir_pointer == 0) {
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -231,17 +231,17 @@ _Update_SPRITE_ENEMY3::
 	ld	b,a
 	or	a,c
 	jr	NZ,00110$
-;SpriteEnemy3.c:37: data->vx = 1;
+;SpriteEnemy3.c:38: data->vx = 1;
 	pop	hl
 	push	hl
 	ld	(hl),#0x01
-;SpriteEnemy3.c:38: data->vy = 0;
+;SpriteEnemy3.c:39: data->vy = 0;
 	ldhl	sp,#2
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x00
-;SpriteEnemy3.c:39: *dir_pointer = 1;
+;SpriteEnemy3.c:40: *dir_pointer = 1;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -254,24 +254,24 @@ _Update_SPRITE_ENEMY3::
 	ld	(bc),a
 	jp	00114$
 00110$:
-;SpriteEnemy3.c:41: else if(*dir_pointer == 1) {
+;SpriteEnemy3.c:42: else if(*dir_pointer == 1) {
 	ld	a,c
 	dec	a
 	jr	NZ,00107$
 	ld	a,b
 	or	a, a
 	jr	NZ,00107$
-;SpriteEnemy3.c:42: data->vx = 0;
+;SpriteEnemy3.c:43: data->vx = 0;
 	pop	hl
 	push	hl
 	ld	(hl),#0x00
-;SpriteEnemy3.c:43: data->vy = -1;
+;SpriteEnemy3.c:44: data->vy = -1;
 	ldhl	sp,#2
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0xff
-;SpriteEnemy3.c:44: *dir_pointer = 2;
+;SpriteEnemy3.c:45: *dir_pointer = 2;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -284,24 +284,24 @@ _Update_SPRITE_ENEMY3::
 	ld	(bc),a
 	jp	00114$
 00107$:
-;SpriteEnemy3.c:46: else if (*dir_pointer == 2) {
+;SpriteEnemy3.c:47: else if (*dir_pointer == 2) {
 	ld	a,c
 	sub	a, #0x02
 	jr	NZ,00104$
 	ld	a,b
 	or	a, a
 	jr	NZ,00104$
-;SpriteEnemy3.c:47: data->vx = -1;
+;SpriteEnemy3.c:48: data->vx = -1;
 	pop	hl
 	push	hl
 	ld	(hl),#0xff
-;SpriteEnemy3.c:48: data->vy = 0;
+;SpriteEnemy3.c:49: data->vy = 0;
 	ldhl	sp,#2
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x00
-;SpriteEnemy3.c:49: *dir_pointer = 3;
+;SpriteEnemy3.c:50: *dir_pointer = 3;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -314,24 +314,24 @@ _Update_SPRITE_ENEMY3::
 	ld	(bc),a
 	jr	00114$
 00104$:
-;SpriteEnemy3.c:51: else if (*dir_pointer == 3) {
+;SpriteEnemy3.c:52: else if (*dir_pointer == 3) {
 	ld	a,c
 	sub	a, #0x03
 	jr	NZ,00114$
 	ld	a,b
 	or	a, a
 	jr	NZ,00114$
-;SpriteEnemy3.c:52: data->vx = 0;
+;SpriteEnemy3.c:53: data->vx = 0;
 	pop	hl
 	push	hl
 	ld	(hl),#0x00
-;SpriteEnemy3.c:53: data->vy = 1;
+;SpriteEnemy3.c:54: data->vy = 1;
 	ldhl	sp,#2
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
 	ld	(hl),#0x01
-;SpriteEnemy3.c:54: *dir_pointer = 0;
+;SpriteEnemy3.c:55: *dir_pointer = 0;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)
@@ -345,12 +345,12 @@ _Update_SPRITE_ENEMY3::
 00114$:
 	add	sp, #4
 	ret
-;SpriteEnemy3.c:64: void Destroy_SPRITE_ENEMY3() {
+;SpriteEnemy3.c:78: void Destroy_SPRITE_ENEMY3() {
 ;	---------------------------------
 ; Function Destroy_SPRITE_ENEMY3
 ; ---------------------------------
 _Destroy_SPRITE_ENEMY3::
-;SpriteEnemy3.c:65: *dir_pointer = 0;
+;SpriteEnemy3.c:79: *dir_pointer = 0;
 	ld	hl,#_dir_pointer + 1
 	dec	hl
 	ld	c,(hl)

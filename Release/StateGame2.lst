@@ -216,10 +216,10 @@
    00DD 33                  216 	inc	sp
    00DE CDr00r00            217 	call	_SpriteManagerAdd
    00E1 E8 05               218 	add	sp, #5
-                            219 ;StateGame2.c:43: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
-   00E3 21 1E 00            220 	ld	hl,#0x001e
+                            219 ;StateGame2.c:43: SpriteManagerAdd(SPRITE_ENEMY3, 50, 50);
+   00E3 21 32 00            220 	ld	hl,#0x0032
    00E6 E5                  221 	push	hl
-   00E7 2E 1E               222 	ld	l, #0x1e
+   00E7 2E 32               222 	ld	l, #0x32
    00E9 E5                  223 	push	hl
    00EA 3E 08               224 	ld	a,#0x08
    00EC F5                  225 	push	af

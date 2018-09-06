@@ -216,10 +216,10 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:43: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
-	ld	hl,#0x001e
+;StateGame2.c:43: SpriteManagerAdd(SPRITE_ENEMY3, 50, 50);
+	ld	hl,#0x0032
 	push	hl
-	ld	l, #0x1e
+	ld	l, #0x32
 	push	hl
 	ld	a,#0x08
 	push	af
