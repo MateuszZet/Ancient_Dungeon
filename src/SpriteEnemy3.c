@@ -20,7 +20,7 @@ void Start_SPRITE_ENEMY3() {
 	struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	THIS->lim_x=9999;
 	THIS->lim_y=9999;
-	data->vx = 1;
+	data->vx = 0;
 	data->vy = 1;
 	
 	SetSpriteAnim(THIS, anime, 15);
@@ -32,24 +32,35 @@ void Update_SPRITE_ENEMY3() {
 	struct Sprite* spr;
 	struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
 	dir_pointer = &dir;
-
-	if(TranslateSprite(THIS, data->vx << delta_time, data->vy << delta_time)) {
-		
+	if (TranslateSprite(THIS, data->vx << delta_time, data->vy << delta_time)) {
 		if (*dir_pointer == 0) {
-			//data->vx = 0;
-			data->vy = -data->vy;
+			data->vx = 1;
+			data->vy = 0;
 			*dir_pointer = 1;
 		}
-		else {
-			data->vx = -data->vx;
-			//data->vy = -data->vy;
+		else if(*dir_pointer == 1) {
+			data->vx = 0;
+			data->vy = -1;
+			*dir_pointer = 2;
+		}
+		else if (*dir_pointer == 2) {
+			data->vx = -1;
+			data->vy = 0;
+			*dir_pointer = 3;
+		}
+		else if (*dir_pointer == 3) {
+			data->vx = 0;
+			data->vy = 1;
 			*dir_pointer = 0;
 		}
 		
 	}
+	
+	
 
 	
 }
 
 void Destroy_SPRITE_ENEMY3() {
+	*dir_pointer = 0;
 }

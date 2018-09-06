@@ -140,13 +140,22 @@ _Update_SPRITE_BOMB_L::
 	add	hl,bc
 	ld	c,l
 	ld	b,h
-;SpriteBomb_L.c:35: TranslateSprite(THIS, -data->vx, 0);
+;SpriteBomb_L.c:35: TranslateSprite(THIS, -data->vx << delta_time, 0);
 	inc	bc
 	ld	a,(bc)
 	ld	c,a
 	xor	a, a
 	sub	a, c
 	ld	b,a
+	ld	hl,#_delta_time
+	ld	a,(hl)
+	inc	a
+	jr	00104$
+00103$:
+	sla	b
+00104$:
+	dec	a
+	jr	NZ,00103$
 	xor	a, a
 	push	af
 	inc	sp

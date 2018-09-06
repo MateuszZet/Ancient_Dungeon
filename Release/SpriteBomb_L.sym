@@ -7,7 +7,7 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  6 _Destroy_SPRITE_BOMB_L                                         0086 GR
+  6 _Destroy_SPRITE_BOMB_L                                         0092 GR
     _SetSpriteAnim                                                 **** GX
   6 _Start_SPRITE_BOMB_L                                           0000 GR
     _THIS                                                          **** GX
@@ -15,6 +15,8 @@ Symbol Table
   6 _Update_SPRITE_BOMB_L                                          0061 GR
   6 _anim_bomb                                                     005C GR
   1 _bank_SPRITE_BOMB_L                                            0000 GR
+    _delta_time                                                    **** GX
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
@@ -27,6 +29,6 @@ Area Table
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size    5   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size   87   flags    0
+   6 _CODE_2                                    size   93   flags    0
    7 _CABS                                      size    0   flags    8
 

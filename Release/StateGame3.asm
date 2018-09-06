@@ -226,6 +226,16 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
+;StateGame3.c:44: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+	ld	hl,#0x001e
+	push	hl
+	ld	l, #0x1e
+	push	hl
+	ld	a,#0x08
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
 ;StateGame3.c:46: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl

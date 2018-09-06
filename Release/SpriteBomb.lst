@@ -140,29 +140,38 @@
    006B 09                  140 	add	hl,bc
    006C 4D                  141 	ld	c,l
    006D 44                  142 	ld	b,h
-                            143 ;SpriteBomb.c:35: TranslateSprite(THIS, data->vx, 0);
+                            143 ;SpriteBomb.c:35: TranslateSprite(THIS, data->vx << delta_time, 0);
    006E 03                  144 	inc	bc
    006F 0A                  145 	ld	a,(bc)
    0070 47                  146 	ld	b,a
-   0071 AF                  147 	xor	a, a
-   0072 F5                  148 	push	af
-   0073 33                  149 	inc	sp
-   0074 C5                  150 	push	bc
-   0075 33                  151 	inc	sp
-   0076 21r00r00            152 	ld	hl,#_THIS
-   0079 2A                  153 	ld	a,(hl+)
-   007A 66                  154 	ld	h,(hl)
-   007B 6F                  155 	ld	l,a
-   007C E5                  156 	push	hl
-   007D CDr00r00            157 	call	_TranslateSprite
-   0080 E8 04               158 	add	sp, #4
-   0082 C9                  159 	ret
-                            160 ;SpriteBomb.c:39: void Destroy_SPRITE_BOMB() {
-                            161 ;	---------------------------------
-                            162 ; Function Destroy_SPRITE_BOMB
-                            163 ; ---------------------------------
-   0083                     164 _Destroy_SPRITE_BOMB::
-                            165 ;SpriteBomb.c:43: }
-   0083 C9                  166 	ret
-                            167 	.area _CODE_2
-                            168 	.area _CABS (ABS)
+   0071 21r00r00            147 	ld	hl,#_delta_time
+   0074 7E                  148 	ld	a,(hl)
+   0075 3C                  149 	inc	a
+   0076 18 02               150 	jr	00104$
+   0078                     151 00103$:
+   0078 CB 20               152 	sla	b
+   007A                     153 00104$:
+   007A 3D                  154 	dec	a
+   007B 20 FB               155 	jr	NZ,00103$
+   007D AF                  156 	xor	a, a
+   007E F5                  157 	push	af
+   007F 33                  158 	inc	sp
+   0080 C5                  159 	push	bc
+   0081 33                  160 	inc	sp
+   0082 21r00r00            161 	ld	hl,#_THIS
+   0085 2A                  162 	ld	a,(hl+)
+   0086 66                  163 	ld	h,(hl)
+   0087 6F                  164 	ld	l,a
+   0088 E5                  165 	push	hl
+   0089 CDr00r00            166 	call	_TranslateSprite
+   008C E8 04               167 	add	sp, #4
+   008E C9                  168 	ret
+                            169 ;SpriteBomb.c:39: void Destroy_SPRITE_BOMB() {
+                            170 ;	---------------------------------
+                            171 ; Function Destroy_SPRITE_BOMB
+                            172 ; ---------------------------------
+   008F                     173 _Destroy_SPRITE_BOMB::
+                            174 ;SpriteBomb.c:43: }
+   008F C9                  175 	ret
+                            176 	.area _CODE_2
+                            177 	.area _CABS (ABS)

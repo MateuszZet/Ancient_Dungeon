@@ -32,7 +32,7 @@ void Start_SPRITE_BOMB() {
 
 void Update_SPRITE_BOMB() {
 	struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
-	TranslateSprite(THIS, data->vx, 0);
+	TranslateSprite(THIS, data->vx << delta_time, 0);
 
 }
 

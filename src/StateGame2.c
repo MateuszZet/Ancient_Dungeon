@@ -40,7 +40,7 @@ void Start_STATE_GAME2() {
 	SpriteManagerAdd(SPRITE_ENEMY, 88, 104);
 	SpriteManagerAdd(SPRITE_ENEMY, 224, 48);
 	SpriteManagerAdd(SPRITE_ENEMY, 288, 40);
-
+	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(map2Width, map2Height, map2, collilision_tiles2, 0, 3);
 	SHOW_BKG;

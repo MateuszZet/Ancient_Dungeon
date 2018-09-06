@@ -38,6 +38,7 @@ void Start_STATE_GAME() {
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 80);
 	SpriteManagerAdd(SPRITE_ENEMY, 200, 112);
 	SpriteManagerAdd(SPRITE_ENEMY, 288, 96);
+	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(mapWidth, mapHeight, map, collilision_tiles, 0, 3);
