@@ -1,6 +1,6 @@
-#pragma bank 1
+#pragma bank 2
 #include "ZGBMain.h"
-UINT8 init_bank = 1;
+UINT8 init_bank = 2;
 
 
 #include "StateGame.h"
@@ -38,6 +38,9 @@ UINT8 init_bank = 1;
 #include "SpriteBomb_L.h"
 #include "../res/src/bomb.h"
 
+#include "SpriteDiamond.h"
+#include "../res/src/diamond.h"
+
 UINT8 next_state = STATE_MENU;
 
 SET_N_STATES(N_STATES);
@@ -61,4 +64,5 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
 	INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
 	INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
+	INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
 }

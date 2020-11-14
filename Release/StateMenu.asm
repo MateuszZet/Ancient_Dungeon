@@ -201,6 +201,16 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
+;StateMenu.c:38: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+	ld	hl,#0x0070
+	push	hl
+	ld	l, #0x80
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
 ;StateMenu.c:39: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl

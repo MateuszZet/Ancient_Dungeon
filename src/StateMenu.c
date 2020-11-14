@@ -35,7 +35,7 @@ void Start_STATE_MENU() {
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
-	
+	SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
 	SHOW_BKG;

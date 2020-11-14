@@ -1,6 +1,6 @@
 /*
 
- SRC/ENEMY3.H
+ SRC/DIAMOND.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 2
+  Tiles                : 0 to 6
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define enemy3Bank 0
+#define diamondBank 0
 /* Start of tile array. */
-extern unsigned char enemy3[];
+extern unsigned char diamond[];
 
-/* End of SRC/ENEMY3.H */
+/* End of SRC/DIAMOND.H */

@@ -204,12 +204,12 @@
    0096 06 FF               204 	ld	b,#0xff
    0098 F1                  205 	pop	af
    0099 3C                  206 	inc	a
-   009A 18 02               207 	jr	00264$
-   009C                     208 00263$:
+   009A 18 02               207 	jr	00276$
+   009C                     208 00275$:
    009C CB 20               209 	sla	b
-   009E                     210 00264$:
+   009E                     210 00276$:
    009E 3D                  211 	dec	a
-   009F 20 FB               212 	jr	NZ,00263$
+   009F 20 FB               212 	jr	NZ,00275$
    00A1 C5                  213 	push	bc
    00A2 33                  214 	inc	sp
    00A3 AF                  215 	xor	a, a
@@ -279,12 +279,12 @@
    00F8 06 01               279 	ld	b,#0x01
    00FA F1                  280 	pop	af
    00FB 3C                  281 	inc	a
-   00FC 18 02               282 	jr	00267$
-   00FE                     283 00266$:
+   00FC 18 02               282 	jr	00279$
+   00FE                     283 00278$:
    00FE CB 20               284 	sla	b
-   0100                     285 00267$:
+   0100                     285 00279$:
    0100 3D                  286 	dec	a
-   0101 20 FB               287 	jr	NZ,00266$
+   0101 20 FB               287 	jr	NZ,00278$
    0103 C5                  288 	push	bc
    0104 33                  289 	inc	sp
    0105 AF                  290 	xor	a, a
@@ -354,12 +354,12 @@
    015A 06 01               354 	ld	b,#0x01
    015C F1                  355 	pop	af
    015D 3C                  356 	inc	a
-   015E 18 02               357 	jr	00270$
-   0160                     358 00269$:
+   015E 18 02               357 	jr	00282$
+   0160                     358 00281$:
    0160 CB 20               359 	sla	b
-   0162                     360 00270$:
+   0162                     360 00282$:
    0162 3D                  361 	dec	a
-   0163 20 FB               362 	jr	NZ,00269$
+   0163 20 FB               362 	jr	NZ,00281$
    0165 AF                  363 	xor	a, a
    0166 F5                  364 	push	af
    0167 33                  365 	inc	sp
@@ -434,12 +434,12 @@
    01C4 06 FF               434 	ld	b,#0xff
    01C6 F1                  435 	pop	af
    01C7 3C                  436 	inc	a
-   01C8 18 02               437 	jr	00273$
-   01CA                     438 00272$:
+   01C8 18 02               437 	jr	00285$
+   01CA                     438 00284$:
    01CA CB 20               439 	sla	b
-   01CC                     440 00273$:
+   01CC                     440 00285$:
    01CC 3D                  441 	dec	a
-   01CD 20 FB               442 	jr	NZ,00272$
+   01CD 20 FB               442 	jr	NZ,00284$
    01CF AF                  443 	xor	a, a
    01D0 F5                  444 	push	af
    01D1 33                  445 	inc	sp
@@ -498,16 +498,16 @@
    0225 57                  498 	ld	d, a
    0226 5E                  499 	ld	e, (hl)
    0227 CB 7B               500 	bit	7, e
-   0229 28 07               501 	jr	Z,00277$
+   0229 28 07               501 	jr	Z,00289$
    022B CB 7A               502 	bit	7, d
-   022D 20 08               503 	jr	NZ,00278$
+   022D 20 08               503 	jr	NZ,00290$
    022F BF                  504 	cp	a, a
-   0230 18 05               505 	jr	00278$
-   0232                     506 00277$:
+   0230 18 05               505 	jr	00290$
+   0232                     506 00289$:
    0232 CB 7A               507 	bit	7, d
-   0234 28 01               508 	jr	Z,00278$
+   0234 28 01               508 	jr	Z,00290$
    0236 37                  509 	scf
-   0237                     510 00278$:
+   0237                     510 00290$:
    0237 D2r9Dr02            511 	jp	NC,00112$
                             512 ;SpritePlayer.c:35: THIS->y--;
    023A 21r01r00            513 	ld	hl,#_THIS + 1
@@ -607,16 +607,16 @@
    02BF 57                  607 	ld	d, a
    02C0 5E                  608 	ld	e, (hl)
    02C1 CB 7B               609 	bit	7, e
-   02C3 28 07               610 	jr	Z,00282$
+   02C3 28 07               610 	jr	Z,00294$
    02C5 CB 7A               611 	bit	7, d
-   02C7 20 08               612 	jr	NZ,00283$
+   02C7 20 08               612 	jr	NZ,00295$
    02C9 BF                  613 	cp	a, a
-   02CA 18 05               614 	jr	00283$
-   02CC                     615 00282$:
+   02CA 18 05               614 	jr	00295$
+   02CC                     615 00294$:
    02CC CB 7A               616 	bit	7, d
-   02CE 28 01               617 	jr	Z,00283$
+   02CE 28 01               617 	jr	Z,00295$
    02D0 37                  618 	scf
-   02D1                     619 00283$:
+   02D1                     619 00295$:
    02D1 D2r39r03            620 	jp	NC,00116$
                             621 ;SpritePlayer.c:35: THIS->y--;
    02D4 21r01r00            622 	ld	hl,#_THIS + 1
@@ -710,409 +710,454 @@
    0349 59                  710 	ld	e, c
    034A 50                  711 	ld	d, b
    034B 1A                  712 	ld	a,(de)
-   034C F8 01               713 	ldhl	sp,#1
+   034C F8 00               713 	ldhl	sp,#0
    034E 22                  714 	ld	(hl+),a
    034F 13                  715 	inc	de
    0350 1A                  716 	ld	a,(de)
-   0351 32                  717 	ld	(hl-),a
-   0352 2B                  718 	dec	hl
-   0353 36 00               719 	ld	(hl),#0x00
-   0355                     720 00149$:
-   0355 11r00r00            721 	ld	de, #_sprite_manager_updatables + 0
-   0358 1A                  722 	ld	a,(de)
-   0359 4F                  723 	ld	c,a
-   035A F8 00               724 	ldhl	sp,#0
-   035C 7E                  725 	ld	a,(hl)
-   035D 91                  726 	sub	a, c
-   035E CAr6Cr05            727 	jp	Z,00151$
-                            728 ;SpritePlayer.c:77: if(spr->type == SPRITE_ENEMY) {
-   0361 F8 01               729 	ldhl	sp,#(2 - 1)
-   0363 5E                  730 	ld	e,(hl)
-   0364 23                  731 	inc	hl
-   0365 56                  732 	ld	d,(hl)
-   0366 21 10 00            733 	ld	hl,#0x0010
-   0369 19                  734 	add	hl,de
-   036A 4D                  735 	ld	c,l
-   036B 44                  736 	ld	b,h
-   036C 0A                  737 	ld	a,(bc)
-   036D 3D                  738 	dec	a
-   036E C2rADr03            739 	jp	NZ,00122$
-                            740 ;SpritePlayer.c:78: if(CheckCollision(THIS, spr)) {
-   0371 C5                  741 	push	bc
-   0372 F8 03               742 	ldhl	sp,#3
-   0374 2A                  743 	ld	a,(hl+)
-   0375 66                  744 	ld	h,(hl)
-   0376 6F                  745 	ld	l,a
-   0377 E5                  746 	push	hl
-   0378 21r00r00            747 	ld	hl,#_THIS
-   037B 2A                  748 	ld	a,(hl+)
-   037C 66                  749 	ld	h,(hl)
-   037D 6F                  750 	ld	l,a
-   037E E5                  751 	push	hl
-   037F CDr00r00            752 	call	_CheckCollision
-   0382 E8 04               753 	add	sp, #4
-   0384 C1                  754 	pop	bc
-   0385 7B                  755 	ld	a,e
-   0386 B7                  756 	or	a, a
-   0387 28 24               757 	jr	Z,00122$
-                            758 ;SpritePlayer.c:79: SetState(STATE_MENU);
-   0389 C5                  759 	push	bc
-   038A AF                  760 	xor	a, a
-   038B F5                  761 	push	af
-   038C 33                  762 	inc	sp
-   038D CDr00r00            763 	call	_SetState
-   0390 33                  764 	inc	sp
-   0391 C1                  765 	pop	bc
-                            766 ;SpritePlayer.c:80: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   0392 C5                  767 	push	bc
-   0393 21 86 00            768 	ld	hl,#0x0086
-   0396 E5                  769 	push	hl
-   0397 2E 73               770 	ld	l, #0x73
-   0399 E5                  771 	push	hl
-   039A 2E F3               772 	ld	l, #0xf3
-   039C E5                  773 	push	hl
-   039D 2E C7               774 	ld	l, #0xc7
-   039F E5                  775 	push	hl
-   03A0 2E 4F               776 	ld	l, #0x4f
-   03A2 E5                  777 	push	hl
-   03A3 21 00 0A            778 	ld	hl,#0x0a00
-   03A6 E5                  779 	push	hl
-   03A7 CDr00r00            780 	call	_PlayFx
-   03AA E8 0C               781 	add	sp, #12
-   03AC C1                  782 	pop	bc
-   03AD                     783 00122$:
-                            784 ;SpritePlayer.c:84: if(spr->type == SPRITE_ENEMY2) {
-   03AD 0A                  785 	ld	a,(bc)
-   03AE D6 02               786 	sub	a, #0x02
-   03B0 C2rEFr03            787 	jp	NZ,00126$
-                            788 ;SpritePlayer.c:85: if(CheckCollision(THIS, spr)) {
-   03B3 C5                  789 	push	bc
-   03B4 F8 03               790 	ldhl	sp,#3
-   03B6 2A                  791 	ld	a,(hl+)
-   03B7 66                  792 	ld	h,(hl)
-   03B8 6F                  793 	ld	l,a
-   03B9 E5                  794 	push	hl
-   03BA 21r00r00            795 	ld	hl,#_THIS
-   03BD 2A                  796 	ld	a,(hl+)
-   03BE 66                  797 	ld	h,(hl)
-   03BF 6F                  798 	ld	l,a
-   03C0 E5                  799 	push	hl
-   03C1 CDr00r00            800 	call	_CheckCollision
-   03C4 E8 04               801 	add	sp, #4
-   03C6 C1                  802 	pop	bc
-   03C7 7B                  803 	ld	a,e
-   03C8 B7                  804 	or	a, a
-   03C9 28 24               805 	jr	Z,00126$
-                            806 ;SpritePlayer.c:86: SetState(STATE_MENU);
-   03CB C5                  807 	push	bc
-   03CC AF                  808 	xor	a, a
-   03CD F5                  809 	push	af
-   03CE 33                  810 	inc	sp
-   03CF CDr00r00            811 	call	_SetState
-   03D2 33                  812 	inc	sp
-   03D3 C1                  813 	pop	bc
-                            814 ;SpritePlayer.c:87: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   03D4 C5                  815 	push	bc
-   03D5 21 86 00            816 	ld	hl,#0x0086
-   03D8 E5                  817 	push	hl
-   03D9 2E 73               818 	ld	l, #0x73
-   03DB E5                  819 	push	hl
-   03DC 2E F3               820 	ld	l, #0xf3
-   03DE E5                  821 	push	hl
-   03DF 2E C7               822 	ld	l, #0xc7
-   03E1 E5                  823 	push	hl
-   03E2 2E 4F               824 	ld	l, #0x4f
-   03E4 E5                  825 	push	hl
-   03E5 21 00 0A            826 	ld	hl,#0x0a00
-   03E8 E5                  827 	push	hl
-   03E9 CDr00r00            828 	call	_PlayFx
-   03EC E8 0C               829 	add	sp, #12
-   03EE C1                  830 	pop	bc
-   03EF                     831 00126$:
-                            832 ;SpritePlayer.c:90: if(spr->type == SPRITE_ENEMY3) {
-   03EF 0A                  833 	ld	a,(bc)
-   03F0 D6 08               834 	sub	a, #0x08
-   03F2 C2r31r04            835 	jp	NZ,00130$
-                            836 ;SpritePlayer.c:91: if(CheckCollision(THIS, spr)) {
-   03F5 C5                  837 	push	bc
-   03F6 F8 03               838 	ldhl	sp,#3
-   03F8 2A                  839 	ld	a,(hl+)
-   03F9 66                  840 	ld	h,(hl)
-   03FA 6F                  841 	ld	l,a
-   03FB E5                  842 	push	hl
-   03FC 21r00r00            843 	ld	hl,#_THIS
-   03FF 2A                  844 	ld	a,(hl+)
-   0400 66                  845 	ld	h,(hl)
-   0401 6F                  846 	ld	l,a
-   0402 E5                  847 	push	hl
-   0403 CDr00r00            848 	call	_CheckCollision
-   0406 E8 04               849 	add	sp, #4
-   0408 C1                  850 	pop	bc
-   0409 7B                  851 	ld	a,e
-   040A B7                  852 	or	a, a
-   040B 28 24               853 	jr	Z,00130$
-                            854 ;SpritePlayer.c:92: SetState(STATE_MENU);
-   040D C5                  855 	push	bc
-   040E AF                  856 	xor	a, a
-   040F F5                  857 	push	af
-   0410 33                  858 	inc	sp
-   0411 CDr00r00            859 	call	_SetState
-   0414 33                  860 	inc	sp
-   0415 C1                  861 	pop	bc
-                            862 ;SpritePlayer.c:93: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   0416 C5                  863 	push	bc
-   0417 21 86 00            864 	ld	hl,#0x0086
-   041A E5                  865 	push	hl
-   041B 2E 73               866 	ld	l, #0x73
-   041D E5                  867 	push	hl
-   041E 2E F3               868 	ld	l, #0xf3
-   0420 E5                  869 	push	hl
-   0421 2E C7               870 	ld	l, #0xc7
-   0423 E5                  871 	push	hl
-   0424 2E 4F               872 	ld	l, #0x4f
-   0426 E5                  873 	push	hl
-   0427 21 00 0A            874 	ld	hl,#0x0a00
-   042A E5                  875 	push	hl
-   042B CDr00r00            876 	call	_PlayFx
-   042E E8 0C               877 	add	sp, #12
-   0430 C1                  878 	pop	bc
-   0431                     879 00130$:
-                            880 ;SpritePlayer.c:96: if (spr->type == SPRITE_BOMB) {
-   0431 0A                  881 	ld	a,(bc)
-   0432 D6 06               882 	sub	a, #0x06
-   0434 C2r73r04            883 	jp	NZ,00134$
-                            884 ;SpritePlayer.c:97: if (CheckCollision(THIS, spr)) {
-   0437 C5                  885 	push	bc
-   0438 F8 03               886 	ldhl	sp,#3
-   043A 2A                  887 	ld	a,(hl+)
-   043B 66                  888 	ld	h,(hl)
-   043C 6F                  889 	ld	l,a
-   043D E5                  890 	push	hl
-   043E 21r00r00            891 	ld	hl,#_THIS
-   0441 2A                  892 	ld	a,(hl+)
-   0442 66                  893 	ld	h,(hl)
-   0443 6F                  894 	ld	l,a
-   0444 E5                  895 	push	hl
-   0445 CDr00r00            896 	call	_CheckCollision
-   0448 E8 04               897 	add	sp, #4
-   044A C1                  898 	pop	bc
-   044B 7B                  899 	ld	a,e
-   044C B7                  900 	or	a, a
-   044D 28 24               901 	jr	Z,00134$
-                            902 ;SpritePlayer.c:98: SetState(STATE_MENU);
-   044F C5                  903 	push	bc
-   0450 AF                  904 	xor	a, a
-   0451 F5                  905 	push	af
-   0452 33                  906 	inc	sp
-   0453 CDr00r00            907 	call	_SetState
-   0456 33                  908 	inc	sp
-   0457 C1                  909 	pop	bc
-                            910 ;SpritePlayer.c:99: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   0458 C5                  911 	push	bc
-   0459 21 86 00            912 	ld	hl,#0x0086
-   045C E5                  913 	push	hl
-   045D 2E 73               914 	ld	l, #0x73
-   045F E5                  915 	push	hl
-   0460 2E F3               916 	ld	l, #0xf3
-   0462 E5                  917 	push	hl
-   0463 2E C7               918 	ld	l, #0xc7
-   0465 E5                  919 	push	hl
-   0466 2E 4F               920 	ld	l, #0x4f
-   0468 E5                  921 	push	hl
-   0469 21 00 0A            922 	ld	hl,#0x0a00
-   046C E5                  923 	push	hl
-   046D CDr00r00            924 	call	_PlayFx
-   0470 E8 0C               925 	add	sp, #12
-   0472 C1                  926 	pop	bc
-   0473                     927 00134$:
-                            928 ;SpritePlayer.c:102: if (spr->type == SPRITE_BOMB_L) {
-   0473 0A                  929 	ld	a,(bc)
-   0474 D6 07               930 	sub	a, #0x07
-   0476 C2rB5r04            931 	jp	NZ,00138$
-                            932 ;SpritePlayer.c:103: if (CheckCollision(THIS, spr)) {
-   0479 C5                  933 	push	bc
-   047A F8 03               934 	ldhl	sp,#3
-   047C 2A                  935 	ld	a,(hl+)
-   047D 66                  936 	ld	h,(hl)
-   047E 6F                  937 	ld	l,a
-   047F E5                  938 	push	hl
-   0480 21r00r00            939 	ld	hl,#_THIS
-   0483 2A                  940 	ld	a,(hl+)
-   0484 66                  941 	ld	h,(hl)
-   0485 6F                  942 	ld	l,a
-   0486 E5                  943 	push	hl
-   0487 CDr00r00            944 	call	_CheckCollision
-   048A E8 04               945 	add	sp, #4
-   048C C1                  946 	pop	bc
-   048D 7B                  947 	ld	a,e
-   048E B7                  948 	or	a, a
-   048F 28 24               949 	jr	Z,00138$
-                            950 ;SpritePlayer.c:104: SetState(STATE_MENU);
-   0491 C5                  951 	push	bc
-   0492 AF                  952 	xor	a, a
-   0493 F5                  953 	push	af
-   0494 33                  954 	inc	sp
-   0495 CDr00r00            955 	call	_SetState
-   0498 33                  956 	inc	sp
-   0499 C1                  957 	pop	bc
-                            958 ;SpritePlayer.c:105: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
-   049A C5                  959 	push	bc
-   049B 21 86 00            960 	ld	hl,#0x0086
-   049E E5                  961 	push	hl
-   049F 2E 73               962 	ld	l, #0x73
-   04A1 E5                  963 	push	hl
-   04A2 2E F3               964 	ld	l, #0xf3
-   04A4 E5                  965 	push	hl
-   04A5 2E C7               966 	ld	l, #0xc7
-   04A7 E5                  967 	push	hl
-   04A8 2E 4F               968 	ld	l, #0x4f
-   04AA E5                  969 	push	hl
-   04AB 21 00 0A            970 	ld	hl,#0x0a00
-   04AE E5                  971 	push	hl
-   04AF CDr00r00            972 	call	_PlayFx
-   04B2 E8 0C               973 	add	sp, #12
-   04B4 C1                  974 	pop	bc
-   04B5                     975 00138$:
-                            976 ;SpritePlayer.c:108: if (spr->type == SPRITE_KEY) {
-   04B5 0A                  977 	ld	a,(bc)
-   04B6 D6 03               978 	sub	a, #0x03
-   04B8 C2r20r05            979 	jp	NZ,00142$
-                            980 ;SpritePlayer.c:109: if (CheckCollision(THIS, spr)) {
-   04BB C5                  981 	push	bc
-   04BC F8 03               982 	ldhl	sp,#3
-   04BE 2A                  983 	ld	a,(hl+)
-   04BF 66                  984 	ld	h,(hl)
-   04C0 6F                  985 	ld	l,a
-   04C1 E5                  986 	push	hl
-   04C2 21r00r00            987 	ld	hl,#_THIS
-   04C5 2A                  988 	ld	a,(hl+)
-   04C6 66                  989 	ld	h,(hl)
-   04C7 6F                  990 	ld	l,a
-   04C8 E5                  991 	push	hl
-   04C9 CDr00r00            992 	call	_CheckCollision
-   04CC E8 04               993 	add	sp, #4
-   04CE C1                  994 	pop	bc
-   04CF 7B                  995 	ld	a,e
-   04D0 B7                  996 	or	a, a
-   04D1 CAr20r05            997 	jp	Z,00142$
-                            998 ;SpritePlayer.c:110: SpriteManagerRemoveSprite(spr);
-   04D4 C5                  999 	push	bc
-   04D5 F8 03              1000 	ldhl	sp,#3
-   04D7 2A                 1001 	ld	a,(hl+)
-   04D8 66                 1002 	ld	h,(hl)
-   04D9 6F                 1003 	ld	l,a
-   04DA E5                 1004 	push	hl
-   04DB CDr00r00           1005 	call	_SpriteManagerRemoveSprite
-   04DE E8 02              1006 	add	sp, #2
-   04E0 C1                 1007 	pop	bc
-                           1008 ;SpritePlayer.c:111: SpriteManagerRemove(2); //need to place door always as 2 sprite
-   04E1 C5                 1009 	push	bc
-   04E2 21 02 00           1010 	ld	hl,#0x0002
-   04E5 E5                 1011 	push	hl
-   04E6 CDr00r00           1012 	call	_SpriteManagerRemove
-   04E9 E8 02              1013 	add	sp, #2
-   04EB C1                 1014 	pop	bc
-                           1015 ;SpritePlayer.c:112: SpriteManagerAdd(SPRITE_DOOROPEN, door_x, door_y);
-   04EC C5                 1016 	push	bc
-   04ED 21r03r00           1017 	ld	hl,#_door_y
-   04F0 2A                 1018 	ld	a,(hl+)
-   04F1 66                 1019 	ld	h,(hl)
-   04F2 6F                 1020 	ld	l,a
-   04F3 E5                 1021 	push	hl
-   04F4 21r01r00           1022 	ld	hl,#_door_x
-   04F7 2A                 1023 	ld	a,(hl+)
-   04F8 66                 1024 	ld	h,(hl)
-   04F9 6F                 1025 	ld	l,a
-   04FA E5                 1026 	push	hl
-   04FB 3E 05              1027 	ld	a,#0x05
-   04FD F5                 1028 	push	af
-   04FE 33                 1029 	inc	sp
-   04FF CDr00r00           1030 	call	_SpriteManagerAdd
-   0502 E8 05              1031 	add	sp, #5
-   0504 C1                 1032 	pop	bc
-                           1033 ;SpritePlayer.c:113: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
-   0505 C5                 1034 	push	bc
-   0506 21 86 00           1035 	ld	hl,#0x0086
-   0509 E5                 1036 	push	hl
-   050A 2E 8F              1037 	ld	l, #0x8f
-   050C E5                 1038 	push	hl
-   050D 2E A1              1039 	ld	l, #0xa1
-   050F E5                 1040 	push	hl
-   0510 2E FE              1041 	ld	l, #0xfe
-   0512 E5                 1042 	push	hl
-   0513 2E 04              1043 	ld	l, #0x04
-   0515 E5                 1044 	push	hl
-   0516 21 00 0A           1045 	ld	hl,#0x0a00
-   0519 E5                 1046 	push	hl
-   051A CDr00r00           1047 	call	_PlayFx
-   051D E8 0C              1048 	add	sp, #12
-   051F C1                 1049 	pop	bc
-   0520                    1050 00142$:
-                           1051 ;SpritePlayer.c:116: if (spr->type == SPRITE_DOOROPEN) {
-   0520 0A                 1052 	ld	a,(bc)
-   0521 D6 05              1053 	sub	a, #0x05
-   0523 20 20              1054 	jr	NZ,00150$
-                           1055 ;SpritePlayer.c:117: if (CheckCollision(THIS, spr)) {
-   0525 F8 01              1056 	ldhl	sp,#1
-   0527 2A                 1057 	ld	a,(hl+)
-   0528 66                 1058 	ld	h,(hl)
-   0529 6F                 1059 	ld	l,a
-   052A E5                 1060 	push	hl
-   052B 21r00r00           1061 	ld	hl,#_THIS
-   052E 2A                 1062 	ld	a,(hl+)
-   052F 66                 1063 	ld	h,(hl)
-   0530 6F                 1064 	ld	l,a
-   0531 E5                 1065 	push	hl
-   0532 CDr00r00           1066 	call	_CheckCollision
-   0535 E8 04              1067 	add	sp, #4
-   0537 7B                 1068 	ld	a,e
-   0538 B7                 1069 	or	a, a
-   0539 28 0A              1070 	jr	Z,00150$
-                           1071 ;SpritePlayer.c:118: SetState(next_lvl);
-   053B 21r05r00           1072 	ld	hl,#_next_lvl
-   053E 46                 1073 	ld	b,(hl)
-   053F C5                 1074 	push	bc
-   0540 33                 1075 	inc	sp
-   0541 CDr00r00           1076 	call	_SetState
-   0544 33                 1077 	inc	sp
-   0545                    1078 00150$:
-                           1079 ;SpritePlayer.c:76: SPRITEMANAGER_ITERATE(i, spr) {
-   0545 F8 00              1080 	ldhl	sp,#0
-   0547 34                 1081 	inc	(hl)
-   0548 4E                 1082 	ld	c,(hl)
-   0549 06 00              1083 	ld	b,#0x00
-   054B 03                 1084 	inc	bc
-   054C 21r00r00           1085 	ld	hl,#_sprite_manager_updatables
-   054F 09                 1086 	add	hl,bc
-   0550 4D                 1087 	ld	c,l
-   0551 44                 1088 	ld	b,h
-   0552 0A                 1089 	ld	a,(bc)
-   0553 4F                 1090 	ld	c,a
-   0554 06 00              1091 	ld	b,#0x00
-   0556 CB 21              1092 	sla	c
-   0558 CB 10              1093 	rl	b
-   055A 21r00r00           1094 	ld	hl,#_sprite_manager_sprites
-   055D 09                 1095 	add	hl,bc
-   055E 4D                 1096 	ld	c,l
-   055F 44                 1097 	ld	b,h
-   0560 59                 1098 	ld	e, c
-   0561 50                 1099 	ld	d, b
-   0562 1A                 1100 	ld	a,(de)
-   0563 F8 01              1101 	ldhl	sp,#1
-   0565 22                 1102 	ld	(hl+),a
-   0566 13                 1103 	inc	de
-   0567 1A                 1104 	ld	a,(de)
-   0568 77                 1105 	ld	(hl),a
-   0569 C3r55r03           1106 	jp	00149$
-   056C                    1107 00151$:
-   056C E8 05              1108 	add	sp, #5
-   056E C9                 1109 	ret
-                           1110 ;SpritePlayer.c:124: void Destroy_SPRITE_PLAYER() {
-                           1111 ;	---------------------------------
-                           1112 ; Function Destroy_SPRITE_PLAYER
-                           1113 ; ---------------------------------
-   056F                    1114 _Destroy_SPRITE_PLAYER::
-                           1115 ;SpritePlayer.c:125: }
-   056F C9                 1116 	ret
-                           1117 	.area _CODE_2
-                           1118 	.area _CABS (ABS)
+   0351 22                  717 	ld	(hl+),a
+   0352 36 00               718 	ld	(hl),#0x00
+   0354                     719 00153$:
+   0354 11r00r00            720 	ld	de, #_sprite_manager_updatables + 0
+   0357 1A                  721 	ld	a,(de)
+   0358 4F                  722 	ld	c,a
+   0359 F8 02               723 	ldhl	sp,#2
+   035B 7E                  724 	ld	a,(hl)
+   035C 91                  725 	sub	a, c
+   035D CArA2r05            726 	jp	Z,00155$
+                            727 ;SpritePlayer.c:77: if(spr->type == SPRITE_ENEMY) {
+   0360 D1                  728 	pop	de
+   0361 D5                  729 	push	de
+   0362 21 10 00            730 	ld	hl,#0x0010
+   0365 19                  731 	add	hl,de
+   0366 4D                  732 	ld	c,l
+   0367 44                  733 	ld	b,h
+   0368 0A                  734 	ld	a,(bc)
+   0369 3D                  735 	dec	a
+   036A C2rA8r03            736 	jp	NZ,00122$
+                            737 ;SpritePlayer.c:78: if(CheckCollision(THIS, spr)) {
+   036D C5                  738 	push	bc
+   036E D1                  739 	pop	de
+   036F E1                  740 	pop	hl
+   0370 E5                  741 	push	hl
+   0371 D5                  742 	push	de
+   0372 E5                  743 	push	hl
+   0373 21r00r00            744 	ld	hl,#_THIS
+   0376 2A                  745 	ld	a,(hl+)
+   0377 66                  746 	ld	h,(hl)
+   0378 6F                  747 	ld	l,a
+   0379 E5                  748 	push	hl
+   037A CDr00r00            749 	call	_CheckCollision
+   037D E8 04               750 	add	sp, #4
+   037F C1                  751 	pop	bc
+   0380 7B                  752 	ld	a,e
+   0381 B7                  753 	or	a, a
+   0382 28 24               754 	jr	Z,00122$
+                            755 ;SpritePlayer.c:79: SetState(STATE_MENU);
+   0384 C5                  756 	push	bc
+   0385 AF                  757 	xor	a, a
+   0386 F5                  758 	push	af
+   0387 33                  759 	inc	sp
+   0388 CDr00r00            760 	call	_SetState
+   038B 33                  761 	inc	sp
+   038C C1                  762 	pop	bc
+                            763 ;SpritePlayer.c:80: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+   038D C5                  764 	push	bc
+   038E 21 86 00            765 	ld	hl,#0x0086
+   0391 E5                  766 	push	hl
+   0392 2E 73               767 	ld	l, #0x73
+   0394 E5                  768 	push	hl
+   0395 2E F3               769 	ld	l, #0xf3
+   0397 E5                  770 	push	hl
+   0398 2E C7               771 	ld	l, #0xc7
+   039A E5                  772 	push	hl
+   039B 2E 4F               773 	ld	l, #0x4f
+   039D E5                  774 	push	hl
+   039E 21 00 0A            775 	ld	hl,#0x0a00
+   03A1 E5                  776 	push	hl
+   03A2 CDr00r00            777 	call	_PlayFx
+   03A5 E8 0C               778 	add	sp, #12
+   03A7 C1                  779 	pop	bc
+   03A8                     780 00122$:
+                            781 ;SpritePlayer.c:84: if(spr->type == SPRITE_ENEMY2) {
+   03A8 0A                  782 	ld	a,(bc)
+   03A9 D6 02               783 	sub	a, #0x02
+   03AB C2rE9r03            784 	jp	NZ,00126$
+                            785 ;SpritePlayer.c:85: if(CheckCollision(THIS, spr)) {
+   03AE C5                  786 	push	bc
+   03AF D1                  787 	pop	de
+   03B0 E1                  788 	pop	hl
+   03B1 E5                  789 	push	hl
+   03B2 D5                  790 	push	de
+   03B3 E5                  791 	push	hl
+   03B4 21r00r00            792 	ld	hl,#_THIS
+   03B7 2A                  793 	ld	a,(hl+)
+   03B8 66                  794 	ld	h,(hl)
+   03B9 6F                  795 	ld	l,a
+   03BA E5                  796 	push	hl
+   03BB CDr00r00            797 	call	_CheckCollision
+   03BE E8 04               798 	add	sp, #4
+   03C0 C1                  799 	pop	bc
+   03C1 7B                  800 	ld	a,e
+   03C2 B7                  801 	or	a, a
+   03C3 28 24               802 	jr	Z,00126$
+                            803 ;SpritePlayer.c:86: SetState(STATE_MENU);
+   03C5 C5                  804 	push	bc
+   03C6 AF                  805 	xor	a, a
+   03C7 F5                  806 	push	af
+   03C8 33                  807 	inc	sp
+   03C9 CDr00r00            808 	call	_SetState
+   03CC 33                  809 	inc	sp
+   03CD C1                  810 	pop	bc
+                            811 ;SpritePlayer.c:87: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+   03CE C5                  812 	push	bc
+   03CF 21 86 00            813 	ld	hl,#0x0086
+   03D2 E5                  814 	push	hl
+   03D3 2E 73               815 	ld	l, #0x73
+   03D5 E5                  816 	push	hl
+   03D6 2E F3               817 	ld	l, #0xf3
+   03D8 E5                  818 	push	hl
+   03D9 2E C7               819 	ld	l, #0xc7
+   03DB E5                  820 	push	hl
+   03DC 2E 4F               821 	ld	l, #0x4f
+   03DE E5                  822 	push	hl
+   03DF 21 00 0A            823 	ld	hl,#0x0a00
+   03E2 E5                  824 	push	hl
+   03E3 CDr00r00            825 	call	_PlayFx
+   03E6 E8 0C               826 	add	sp, #12
+   03E8 C1                  827 	pop	bc
+   03E9                     828 00126$:
+                            829 ;SpritePlayer.c:90: if(spr->type == SPRITE_ENEMY3) {
+   03E9 0A                  830 	ld	a,(bc)
+   03EA D6 08               831 	sub	a, #0x08
+   03EC C2r2Ar04            832 	jp	NZ,00130$
+                            833 ;SpritePlayer.c:91: if(CheckCollision(THIS, spr)) {
+   03EF C5                  834 	push	bc
+   03F0 D1                  835 	pop	de
+   03F1 E1                  836 	pop	hl
+   03F2 E5                  837 	push	hl
+   03F3 D5                  838 	push	de
+   03F4 E5                  839 	push	hl
+   03F5 21r00r00            840 	ld	hl,#_THIS
+   03F8 2A                  841 	ld	a,(hl+)
+   03F9 66                  842 	ld	h,(hl)
+   03FA 6F                  843 	ld	l,a
+   03FB E5                  844 	push	hl
+   03FC CDr00r00            845 	call	_CheckCollision
+   03FF E8 04               846 	add	sp, #4
+   0401 C1                  847 	pop	bc
+   0402 7B                  848 	ld	a,e
+   0403 B7                  849 	or	a, a
+   0404 28 24               850 	jr	Z,00130$
+                            851 ;SpritePlayer.c:92: SetState(STATE_MENU);
+   0406 C5                  852 	push	bc
+   0407 AF                  853 	xor	a, a
+   0408 F5                  854 	push	af
+   0409 33                  855 	inc	sp
+   040A CDr00r00            856 	call	_SetState
+   040D 33                  857 	inc	sp
+   040E C1                  858 	pop	bc
+                            859 ;SpritePlayer.c:93: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+   040F C5                  860 	push	bc
+   0410 21 86 00            861 	ld	hl,#0x0086
+   0413 E5                  862 	push	hl
+   0414 2E 73               863 	ld	l, #0x73
+   0416 E5                  864 	push	hl
+   0417 2E F3               865 	ld	l, #0xf3
+   0419 E5                  866 	push	hl
+   041A 2E C7               867 	ld	l, #0xc7
+   041C E5                  868 	push	hl
+   041D 2E 4F               869 	ld	l, #0x4f
+   041F E5                  870 	push	hl
+   0420 21 00 0A            871 	ld	hl,#0x0a00
+   0423 E5                  872 	push	hl
+   0424 CDr00r00            873 	call	_PlayFx
+   0427 E8 0C               874 	add	sp, #12
+   0429 C1                  875 	pop	bc
+   042A                     876 00130$:
+                            877 ;SpritePlayer.c:96: if (spr->type == SPRITE_BOMB) {
+   042A 0A                  878 	ld	a,(bc)
+   042B D6 06               879 	sub	a, #0x06
+   042D C2r6Br04            880 	jp	NZ,00134$
+                            881 ;SpritePlayer.c:97: if (CheckCollision(THIS, spr)) {
+   0430 C5                  882 	push	bc
+   0431 D1                  883 	pop	de
+   0432 E1                  884 	pop	hl
+   0433 E5                  885 	push	hl
+   0434 D5                  886 	push	de
+   0435 E5                  887 	push	hl
+   0436 21r00r00            888 	ld	hl,#_THIS
+   0439 2A                  889 	ld	a,(hl+)
+   043A 66                  890 	ld	h,(hl)
+   043B 6F                  891 	ld	l,a
+   043C E5                  892 	push	hl
+   043D CDr00r00            893 	call	_CheckCollision
+   0440 E8 04               894 	add	sp, #4
+   0442 C1                  895 	pop	bc
+   0443 7B                  896 	ld	a,e
+   0444 B7                  897 	or	a, a
+   0445 28 24               898 	jr	Z,00134$
+                            899 ;SpritePlayer.c:98: SetState(STATE_MENU);
+   0447 C5                  900 	push	bc
+   0448 AF                  901 	xor	a, a
+   0449 F5                  902 	push	af
+   044A 33                  903 	inc	sp
+   044B CDr00r00            904 	call	_SetState
+   044E 33                  905 	inc	sp
+   044F C1                  906 	pop	bc
+                            907 ;SpritePlayer.c:99: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+   0450 C5                  908 	push	bc
+   0451 21 86 00            909 	ld	hl,#0x0086
+   0454 E5                  910 	push	hl
+   0455 2E 73               911 	ld	l, #0x73
+   0457 E5                  912 	push	hl
+   0458 2E F3               913 	ld	l, #0xf3
+   045A E5                  914 	push	hl
+   045B 2E C7               915 	ld	l, #0xc7
+   045D E5                  916 	push	hl
+   045E 2E 4F               917 	ld	l, #0x4f
+   0460 E5                  918 	push	hl
+   0461 21 00 0A            919 	ld	hl,#0x0a00
+   0464 E5                  920 	push	hl
+   0465 CDr00r00            921 	call	_PlayFx
+   0468 E8 0C               922 	add	sp, #12
+   046A C1                  923 	pop	bc
+   046B                     924 00134$:
+                            925 ;SpritePlayer.c:102: if (spr->type == SPRITE_BOMB_L) {
+   046B 0A                  926 	ld	a,(bc)
+   046C D6 07               927 	sub	a, #0x07
+   046E C2rACr04            928 	jp	NZ,00138$
+                            929 ;SpritePlayer.c:103: if (CheckCollision(THIS, spr)) {
+   0471 C5                  930 	push	bc
+   0472 D1                  931 	pop	de
+   0473 E1                  932 	pop	hl
+   0474 E5                  933 	push	hl
+   0475 D5                  934 	push	de
+   0476 E5                  935 	push	hl
+   0477 21r00r00            936 	ld	hl,#_THIS
+   047A 2A                  937 	ld	a,(hl+)
+   047B 66                  938 	ld	h,(hl)
+   047C 6F                  939 	ld	l,a
+   047D E5                  940 	push	hl
+   047E CDr00r00            941 	call	_CheckCollision
+   0481 E8 04               942 	add	sp, #4
+   0483 C1                  943 	pop	bc
+   0484 7B                  944 	ld	a,e
+   0485 B7                  945 	or	a, a
+   0486 28 24               946 	jr	Z,00138$
+                            947 ;SpritePlayer.c:104: SetState(STATE_MENU);
+   0488 C5                  948 	push	bc
+   0489 AF                  949 	xor	a, a
+   048A F5                  950 	push	af
+   048B 33                  951 	inc	sp
+   048C CDr00r00            952 	call	_SetState
+   048F 33                  953 	inc	sp
+   0490 C1                  954 	pop	bc
+                            955 ;SpritePlayer.c:105: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+   0491 C5                  956 	push	bc
+   0492 21 86 00            957 	ld	hl,#0x0086
+   0495 E5                  958 	push	hl
+   0496 2E 73               959 	ld	l, #0x73
+   0498 E5                  960 	push	hl
+   0499 2E F3               961 	ld	l, #0xf3
+   049B E5                  962 	push	hl
+   049C 2E C7               963 	ld	l, #0xc7
+   049E E5                  964 	push	hl
+   049F 2E 4F               965 	ld	l, #0x4f
+   04A1 E5                  966 	push	hl
+   04A2 21 00 0A            967 	ld	hl,#0x0a00
+   04A5 E5                  968 	push	hl
+   04A6 CDr00r00            969 	call	_PlayFx
+   04A9 E8 0C               970 	add	sp, #12
+   04AB C1                  971 	pop	bc
+   04AC                     972 00138$:
+                            973 ;SpritePlayer.c:108: if (spr->type == SPRITE_KEY) {
+   04AC 0A                  974 	ld	a,(bc)
+   04AD D6 03               975 	sub	a, #0x03
+   04AF C2r15r05            976 	jp	NZ,00142$
+                            977 ;SpritePlayer.c:109: if (CheckCollision(THIS, spr)) {
+   04B2 C5                  978 	push	bc
+   04B3 D1                  979 	pop	de
+   04B4 E1                  980 	pop	hl
+   04B5 E5                  981 	push	hl
+   04B6 D5                  982 	push	de
+   04B7 E5                  983 	push	hl
+   04B8 21r00r00            984 	ld	hl,#_THIS
+   04BB 2A                  985 	ld	a,(hl+)
+   04BC 66                  986 	ld	h,(hl)
+   04BD 6F                  987 	ld	l,a
+   04BE E5                  988 	push	hl
+   04BF CDr00r00            989 	call	_CheckCollision
+   04C2 E8 04               990 	add	sp, #4
+   04C4 C1                  991 	pop	bc
+   04C5 7B                  992 	ld	a,e
+   04C6 B7                  993 	or	a, a
+   04C7 CAr15r05            994 	jp	Z,00142$
+                            995 ;SpritePlayer.c:110: SpriteManagerRemoveSprite(spr);
+   04CA C5                  996 	push	bc
+   04CB D1                  997 	pop	de
+   04CC E1                  998 	pop	hl
+   04CD E5                  999 	push	hl
+   04CE D5                 1000 	push	de
+   04CF E5                 1001 	push	hl
+   04D0 CDr00r00           1002 	call	_SpriteManagerRemoveSprite
+   04D3 E8 02              1003 	add	sp, #2
+   04D5 C1                 1004 	pop	bc
+                           1005 ;SpritePlayer.c:111: SpriteManagerRemove(2); //need to place door always as 2 sprite
+   04D6 C5                 1006 	push	bc
+   04D7 21 02 00           1007 	ld	hl,#0x0002
+   04DA E5                 1008 	push	hl
+   04DB CDr00r00           1009 	call	_SpriteManagerRemove
+   04DE E8 02              1010 	add	sp, #2
+   04E0 C1                 1011 	pop	bc
+                           1012 ;SpritePlayer.c:112: SpriteManagerAdd(SPRITE_DOOROPEN, door_x, door_y);
+   04E1 C5                 1013 	push	bc
+   04E2 21r03r00           1014 	ld	hl,#_door_y
+   04E5 2A                 1015 	ld	a,(hl+)
+   04E6 66                 1016 	ld	h,(hl)
+   04E7 6F                 1017 	ld	l,a
+   04E8 E5                 1018 	push	hl
+   04E9 21r01r00           1019 	ld	hl,#_door_x
+   04EC 2A                 1020 	ld	a,(hl+)
+   04ED 66                 1021 	ld	h,(hl)
+   04EE 6F                 1022 	ld	l,a
+   04EF E5                 1023 	push	hl
+   04F0 3E 05              1024 	ld	a,#0x05
+   04F2 F5                 1025 	push	af
+   04F3 33                 1026 	inc	sp
+   04F4 CDr00r00           1027 	call	_SpriteManagerAdd
+   04F7 E8 05              1028 	add	sp, #5
+   04F9 C1                 1029 	pop	bc
+                           1030 ;SpritePlayer.c:113: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
+   04FA C5                 1031 	push	bc
+   04FB 21 86 00           1032 	ld	hl,#0x0086
+   04FE E5                 1033 	push	hl
+   04FF 2E 8F              1034 	ld	l, #0x8f
+   0501 E5                 1035 	push	hl
+   0502 2E A1              1036 	ld	l, #0xa1
+   0504 E5                 1037 	push	hl
+   0505 2E FE              1038 	ld	l, #0xfe
+   0507 E5                 1039 	push	hl
+   0508 2E 04              1040 	ld	l, #0x04
+   050A E5                 1041 	push	hl
+   050B 21 00 0A           1042 	ld	hl,#0x0a00
+   050E E5                 1043 	push	hl
+   050F CDr00r00           1044 	call	_PlayFx
+   0512 E8 0C              1045 	add	sp, #12
+   0514 C1                 1046 	pop	bc
+   0515                    1047 00142$:
+                           1048 ;SpritePlayer.c:116: if (spr->type == SPRITE_DIAMOND) {
+   0515 0A                 1049 	ld	a,(bc)
+   0516 D6 09              1050 	sub	a, #0x09
+   0518 C2r59r05           1051 	jp	NZ,00146$
+                           1052 ;SpritePlayer.c:117: if (CheckCollision(THIS, spr)) {
+   051B C5                 1053 	push	bc
+   051C D1                 1054 	pop	de
+   051D E1                 1055 	pop	hl
+   051E E5                 1056 	push	hl
+   051F D5                 1057 	push	de
+   0520 E5                 1058 	push	hl
+   0521 21r00r00           1059 	ld	hl,#_THIS
+   0524 2A                 1060 	ld	a,(hl+)
+   0525 66                 1061 	ld	h,(hl)
+   0526 6F                 1062 	ld	l,a
+   0527 E5                 1063 	push	hl
+   0528 CDr00r00           1064 	call	_CheckCollision
+   052B E8 04              1065 	add	sp, #4
+   052D C1                 1066 	pop	bc
+   052E 7B                 1067 	ld	a,e
+   052F B7                 1068 	or	a, a
+   0530 28 27              1069 	jr	Z,00146$
+                           1070 ;SpritePlayer.c:118: SpriteManagerRemoveSprite(spr);
+   0532 C5                 1071 	push	bc
+   0533 D1                 1072 	pop	de
+   0534 E1                 1073 	pop	hl
+   0535 E5                 1074 	push	hl
+   0536 D5                 1075 	push	de
+   0537 E5                 1076 	push	hl
+   0538 CDr00r00           1077 	call	_SpriteManagerRemoveSprite
+   053B E8 02              1078 	add	sp, #2
+   053D C1                 1079 	pop	bc
+                           1080 ;SpritePlayer.c:119: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
+   053E C5                 1081 	push	bc
+   053F 21 86 00           1082 	ld	hl,#0x0086
+   0542 E5                 1083 	push	hl
+   0543 2E 8F              1084 	ld	l, #0x8f
+   0545 E5                 1085 	push	hl
+   0546 2E A1              1086 	ld	l, #0xa1
+   0548 E5                 1087 	push	hl
+   0549 2E FE              1088 	ld	l, #0xfe
+   054B E5                 1089 	push	hl
+   054C 2E 04              1090 	ld	l, #0x04
+   054E E5                 1091 	push	hl
+   054F 21 00 0A           1092 	ld	hl,#0x0a00
+   0552 E5                 1093 	push	hl
+   0553 CDr00r00           1094 	call	_PlayFx
+   0556 E8 0C              1095 	add	sp, #12
+   0558 C1                 1096 	pop	bc
+   0559                    1097 00146$:
+                           1098 ;SpritePlayer.c:123: if (spr->type == SPRITE_DOOROPEN) {
+   0559 0A                 1099 	ld	a,(bc)
+   055A D6 05              1100 	sub	a, #0x05
+   055C 20 1D              1101 	jr	NZ,00154$
+                           1102 ;SpritePlayer.c:124: if (CheckCollision(THIS, spr)) {
+   055E E1                 1103 	pop	hl
+   055F E5                 1104 	push	hl
+   0560 E5                 1105 	push	hl
+   0561 21r00r00           1106 	ld	hl,#_THIS
+   0564 2A                 1107 	ld	a,(hl+)
+   0565 66                 1108 	ld	h,(hl)
+   0566 6F                 1109 	ld	l,a
+   0567 E5                 1110 	push	hl
+   0568 CDr00r00           1111 	call	_CheckCollision
+   056B E8 04              1112 	add	sp, #4
+   056D 7B                 1113 	ld	a,e
+   056E B7                 1114 	or	a, a
+   056F 28 0A              1115 	jr	Z,00154$
+                           1116 ;SpritePlayer.c:125: SetState(next_lvl);
+   0571 21r05r00           1117 	ld	hl,#_next_lvl
+   0574 46                 1118 	ld	b,(hl)
+   0575 C5                 1119 	push	bc
+   0576 33                 1120 	inc	sp
+   0577 CDr00r00           1121 	call	_SetState
+   057A 33                 1122 	inc	sp
+   057B                    1123 00154$:
+                           1124 ;SpritePlayer.c:76: SPRITEMANAGER_ITERATE(i, spr) {
+   057B F8 02              1125 	ldhl	sp,#2
+   057D 34                 1126 	inc	(hl)
+   057E 4E                 1127 	ld	c,(hl)
+   057F 06 00              1128 	ld	b,#0x00
+   0581 03                 1129 	inc	bc
+   0582 21r00r00           1130 	ld	hl,#_sprite_manager_updatables
+   0585 09                 1131 	add	hl,bc
+   0586 4D                 1132 	ld	c,l
+   0587 44                 1133 	ld	b,h
+   0588 0A                 1134 	ld	a,(bc)
+   0589 4F                 1135 	ld	c,a
+   058A 06 00              1136 	ld	b,#0x00
+   058C CB 21              1137 	sla	c
+   058E CB 10              1138 	rl	b
+   0590 21r00r00           1139 	ld	hl,#_sprite_manager_sprites
+   0593 09                 1140 	add	hl,bc
+   0594 4D                 1141 	ld	c,l
+   0595 44                 1142 	ld	b,h
+   0596 59                 1143 	ld	e, c
+   0597 50                 1144 	ld	d, b
+   0598 1A                 1145 	ld	a,(de)
+   0599 F8 00              1146 	ldhl	sp,#0
+   059B 22                 1147 	ld	(hl+),a
+   059C 13                 1148 	inc	de
+   059D 1A                 1149 	ld	a,(de)
+   059E 77                 1150 	ld	(hl),a
+   059F C3r54r03           1151 	jp	00153$
+   05A2                    1152 00155$:
+   05A2 E8 05              1153 	add	sp, #5
+   05A4 C9                 1154 	ret
+                           1155 ;SpritePlayer.c:131: void Destroy_SPRITE_PLAYER() {
+                           1156 ;	---------------------------------
+                           1157 ; Function Destroy_SPRITE_PLAYER
+                           1158 ; ---------------------------------
+   05A5                    1159 _Destroy_SPRITE_PLAYER::
+                           1160 ;SpritePlayer.c:132: }
+   05A5 C9                 1161 	ret
+                           1162 	.area _CODE_2
+                           1163 	.area _CABS (ABS)

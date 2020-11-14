@@ -204,12 +204,12 @@ _Update_SPRITE_PLAYER::
 	ld	b,#0xff
 	pop	af
 	inc	a
-	jr	00264$
-00263$:
+	jr	00276$
+00275$:
 	sla	b
-00264$:
+00276$:
 	dec	a
-	jr	NZ,00263$
+	jr	NZ,00275$
 	push	bc
 	inc	sp
 	xor	a, a
@@ -279,12 +279,12 @@ _Update_SPRITE_PLAYER::
 	ld	b,#0x01
 	pop	af
 	inc	a
-	jr	00267$
-00266$:
+	jr	00279$
+00278$:
 	sla	b
-00267$:
+00279$:
 	dec	a
-	jr	NZ,00266$
+	jr	NZ,00278$
 	push	bc
 	inc	sp
 	xor	a, a
@@ -354,12 +354,12 @@ _Update_SPRITE_PLAYER::
 	ld	b,#0x01
 	pop	af
 	inc	a
-	jr	00270$
-00269$:
+	jr	00282$
+00281$:
 	sla	b
-00270$:
+00282$:
 	dec	a
-	jr	NZ,00269$
+	jr	NZ,00281$
 	xor	a, a
 	push	af
 	inc	sp
@@ -434,12 +434,12 @@ _Update_SPRITE_PLAYER::
 	ld	b,#0xff
 	pop	af
 	inc	a
-	jr	00273$
-00272$:
+	jr	00285$
+00284$:
 	sla	b
-00273$:
+00285$:
 	dec	a
-	jr	NZ,00272$
+	jr	NZ,00284$
 	xor	a, a
 	push	af
 	inc	sp
@@ -498,16 +498,16 @@ _Update_SPRITE_PLAYER::
 	ld	d, a
 	ld	e, (hl)
 	bit	7, e
-	jr	Z,00277$
+	jr	Z,00289$
 	bit	7, d
-	jr	NZ,00278$
+	jr	NZ,00290$
 	cp	a, a
-	jr	00278$
-00277$:
+	jr	00290$
+00289$:
 	bit	7, d
-	jr	Z,00278$
+	jr	Z,00290$
 	scf
-00278$:
+00290$:
 	jp	NC,00112$
 ;SpritePlayer.c:35: THIS->y--;
 	ld	hl,#_THIS + 1
@@ -607,16 +607,16 @@ _Update_SPRITE_PLAYER::
 	ld	d, a
 	ld	e, (hl)
 	bit	7, e
-	jr	Z,00282$
+	jr	Z,00294$
 	bit	7, d
-	jr	NZ,00283$
+	jr	NZ,00295$
 	cp	a, a
-	jr	00283$
-00282$:
+	jr	00295$
+00294$:
 	bit	7, d
-	jr	Z,00283$
+	jr	Z,00295$
 	scf
-00283$:
+00295$:
 	jp	NC,00116$
 ;SpritePlayer.c:35: THIS->y--;
 	ld	hl,#_THIS + 1
@@ -710,26 +710,23 @@ _Update_SPRITE_PLAYER::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#1
+	ldhl	sp,#0
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
-	ld	(hl-),a
-	dec	hl
+	ld	(hl+),a
 	ld	(hl),#0x00
-00149$:
+00153$:
 	ld	de, #_sprite_manager_updatables + 0
 	ld	a,(de)
 	ld	c,a
-	ldhl	sp,#0
+	ldhl	sp,#2
 	ld	a,(hl)
 	sub	a, c
-	jp	Z,00151$
+	jp	Z,00155$
 ;SpritePlayer.c:77: if(spr->type == SPRITE_ENEMY) {
-	ldhl	sp,#(2 - 1)
-	ld	e,(hl)
-	inc	hl
-	ld	d,(hl)
+	pop	de
+	push	de
 	ld	hl,#0x0010
 	add	hl,de
 	ld	c,l
@@ -739,10 +736,10 @@ _Update_SPRITE_PLAYER::
 	jp	NZ,00122$
 ;SpritePlayer.c:78: if(CheckCollision(THIS, spr)) {
 	push	bc
-	ldhl	sp,#3
-	ld	a,(hl+)
-	ld	h,(hl)
-	ld	l,a
+	pop	de
+	pop	hl
+	push	hl
+	push	de
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -787,10 +784,10 @@ _Update_SPRITE_PLAYER::
 	jp	NZ,00126$
 ;SpritePlayer.c:85: if(CheckCollision(THIS, spr)) {
 	push	bc
-	ldhl	sp,#3
-	ld	a,(hl+)
-	ld	h,(hl)
-	ld	l,a
+	pop	de
+	pop	hl
+	push	hl
+	push	de
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -835,10 +832,10 @@ _Update_SPRITE_PLAYER::
 	jp	NZ,00130$
 ;SpritePlayer.c:91: if(CheckCollision(THIS, spr)) {
 	push	bc
-	ldhl	sp,#3
-	ld	a,(hl+)
-	ld	h,(hl)
-	ld	l,a
+	pop	de
+	pop	hl
+	push	hl
+	push	de
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -883,10 +880,10 @@ _Update_SPRITE_PLAYER::
 	jp	NZ,00134$
 ;SpritePlayer.c:97: if (CheckCollision(THIS, spr)) {
 	push	bc
-	ldhl	sp,#3
-	ld	a,(hl+)
-	ld	h,(hl)
-	ld	l,a
+	pop	de
+	pop	hl
+	push	hl
+	push	de
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -931,10 +928,10 @@ _Update_SPRITE_PLAYER::
 	jp	NZ,00138$
 ;SpritePlayer.c:103: if (CheckCollision(THIS, spr)) {
 	push	bc
-	ldhl	sp,#3
-	ld	a,(hl+)
-	ld	h,(hl)
-	ld	l,a
+	pop	de
+	pop	hl
+	push	hl
+	push	de
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -979,10 +976,10 @@ _Update_SPRITE_PLAYER::
 	jp	NZ,00142$
 ;SpritePlayer.c:109: if (CheckCollision(THIS, spr)) {
 	push	bc
-	ldhl	sp,#3
-	ld	a,(hl+)
-	ld	h,(hl)
-	ld	l,a
+	pop	de
+	pop	hl
+	push	hl
+	push	de
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -997,10 +994,10 @@ _Update_SPRITE_PLAYER::
 	jp	Z,00142$
 ;SpritePlayer.c:110: SpriteManagerRemoveSprite(spr);
 	push	bc
-	ldhl	sp,#3
-	ld	a,(hl+)
-	ld	h,(hl)
-	ld	l,a
+	pop	de
+	pop	hl
+	push	hl
+	push	de
 	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
@@ -1048,15 +1045,63 @@ _Update_SPRITE_PLAYER::
 	add	sp, #12
 	pop	bc
 00142$:
-;SpritePlayer.c:116: if (spr->type == SPRITE_DOOROPEN) {
+;SpritePlayer.c:116: if (spr->type == SPRITE_DIAMOND) {
 	ld	a,(bc)
-	sub	a, #0x05
-	jr	NZ,00150$
+	sub	a, #0x09
+	jp	NZ,00146$
 ;SpritePlayer.c:117: if (CheckCollision(THIS, spr)) {
-	ldhl	sp,#1
+	push	bc
+	pop	de
+	pop	hl
+	push	hl
+	push	de
+	push	hl
+	ld	hl,#_THIS
 	ld	a,(hl+)
 	ld	h,(hl)
 	ld	l,a
+	push	hl
+	call	_CheckCollision
+	add	sp, #4
+	pop	bc
+	ld	a,e
+	or	a, a
+	jr	Z,00146$
+;SpritePlayer.c:118: SpriteManagerRemoveSprite(spr);
+	push	bc
+	pop	de
+	pop	hl
+	push	hl
+	push	de
+	push	hl
+	call	_SpriteManagerRemoveSprite
+	add	sp, #2
+	pop	bc
+;SpritePlayer.c:119: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
+	push	bc
+	ld	hl,#0x0086
+	push	hl
+	ld	l, #0x8f
+	push	hl
+	ld	l, #0xa1
+	push	hl
+	ld	l, #0xfe
+	push	hl
+	ld	l, #0x04
+	push	hl
+	ld	hl,#0x0a00
+	push	hl
+	call	_PlayFx
+	add	sp, #12
+	pop	bc
+00146$:
+;SpritePlayer.c:123: if (spr->type == SPRITE_DOOROPEN) {
+	ld	a,(bc)
+	sub	a, #0x05
+	jr	NZ,00154$
+;SpritePlayer.c:124: if (CheckCollision(THIS, spr)) {
+	pop	hl
+	push	hl
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -1067,17 +1112,17 @@ _Update_SPRITE_PLAYER::
 	add	sp, #4
 	ld	a,e
 	or	a, a
-	jr	Z,00150$
-;SpritePlayer.c:118: SetState(next_lvl);
+	jr	Z,00154$
+;SpritePlayer.c:125: SetState(next_lvl);
 	ld	hl,#_next_lvl
 	ld	b,(hl)
 	push	bc
 	inc	sp
 	call	_SetState
 	inc	sp
-00150$:
+00154$:
 ;SpritePlayer.c:76: SPRITEMANAGER_ITERATE(i, spr) {
-	ldhl	sp,#0
+	ldhl	sp,#2
 	inc	(hl)
 	ld	c,(hl)
 	ld	b,#0x00
@@ -1098,21 +1143,21 @@ _Update_SPRITE_PLAYER::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#1
+	ldhl	sp,#0
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
 	ld	(hl),a
-	jp	00149$
-00151$:
+	jp	00153$
+00155$:
 	add	sp, #5
 	ret
-;SpritePlayer.c:124: void Destroy_SPRITE_PLAYER() {
+;SpritePlayer.c:131: void Destroy_SPRITE_PLAYER() {
 ;	---------------------------------
 ; Function Destroy_SPRITE_PLAYER
 ; ---------------------------------
 _Destroy_SPRITE_PLAYER::
-;SpritePlayer.c:125: }
+;SpritePlayer.c:132: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

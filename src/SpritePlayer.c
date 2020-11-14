@@ -113,6 +113,13 @@ void Update_SPRITE_PLAYER() {
 				PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
 			}
 		}
+		if (spr->type == SPRITE_DIAMOND) {
+			if (CheckCollision(THIS, spr)) {
+				SpriteManagerRemoveSprite(spr);
+				PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
+				
+			}
+		}
 		if (spr->type == SPRITE_DOOROPEN) {
 			if (CheckCollision(THIS, spr)) {
 				SetState(next_lvl);

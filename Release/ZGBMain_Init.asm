@@ -10,6 +10,9 @@
 ;--------------------------------------------------------
 	.globl _InitSprites
 	.globl _InitStates
+	.globl _Destroy_SPRITE_DIAMOND
+	.globl _Update_SPRITE_DIAMOND
+	.globl _Start_SPRITE_DIAMOND
 	.globl _Destroy_SPRITE_BOMB_L
 	.globl _Update_SPRITE_BOMB_L
 	.globl _Start_SPRITE_BOMB_L
@@ -77,27 +80,27 @@ _startFuncs::
 _updateFuncs::
 	.ds 12
 _spriteBanks::
-	.ds 9
+	.ds 10
 _spriteStartFuncs::
-	.ds 18
+	.ds 20
 _spriteUpdateFuncs::
-	.ds 18
+	.ds 20
 _spriteDestroyFuncs::
-	.ds 18
+	.ds 20
 _spriteDatas::
-	.ds 18
+	.ds 20
 _spriteDataBanks::
-	.ds 9
+	.ds 10
 _spriteFrameSizes::
-	.ds 9
+	.ds 10
 _spriteNumFrames::
-	.ds 9
+	.ds 10
 _spriteIdxs::
-	.ds 9
+	.ds 10
 _n_sprite_types::
 	.ds 1
 _spritePalDatas::
-	.ds 18
+	.ds 20
 ;--------------------------------------------------------
 ; absolute external ram data
 ;--------------------------------------------------------
@@ -109,15 +112,15 @@ _spritePalDatas::
 	.area _GSINIT
 	.area _GSFINAL
 	.area _GSINIT
-;ZGBMain_Init.c:3: UINT8 init_bank = 1;
+;ZGBMain_Init.c:3: UINT8 init_bank = 2;
 	ld	hl,#_init_bank
-	ld	(hl),#0x01
-;ZGBMain_Init.c:41: UINT8 next_state = STATE_MENU;
+	ld	(hl),#0x02
+;ZGBMain_Init.c:44: UINT8 next_state = STATE_MENU;
 	ld	hl,#_next_state
 	ld	(hl),#0x00
-;ZGBMain_Init.c:44: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
+;ZGBMain_Init.c:47: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
 	ld	hl,#_n_sprite_types
-	ld	(hl),#0x09
+	ld	(hl),#0x0a
 ;--------------------------------------------------------
 ; Home
 ;--------------------------------------------------------
@@ -126,13 +129,13 @@ _spritePalDatas::
 ;--------------------------------------------------------
 ; code
 ;--------------------------------------------------------
-	.area _CODE_1
-;ZGBMain_Init.c:46: void InitStates() {
+	.area _CODE_2
+;ZGBMain_Init.c:49: void InitStates() {
 ;	---------------------------------
 ; Function InitStates
 ; ---------------------------------
 _InitStates::
-;ZGBMain_Init.c:47: INIT_STATE(STATE_MENU);
+;ZGBMain_Init.c:50: INIT_STATE(STATE_MENU);
 	ld	de,#_stateBanks
 	ld	hl,#_bank_STATE_MENU
 	ld	a,(hl)
@@ -145,7 +148,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_MENU)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_MENU)
-;ZGBMain_Init.c:48: INIT_STATE(STATE_GAME);
+;ZGBMain_Init.c:51: INIT_STATE(STATE_GAME);
 	ld	de,#(_stateBanks + 0x0001)
 	ld	hl,#_bank_STATE_GAME
 	ld	a,(hl)
@@ -158,7 +161,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME)
-;ZGBMain_Init.c:49: INIT_STATE(STATE_GAME2);
+;ZGBMain_Init.c:52: INIT_STATE(STATE_GAME2);
 	ld	de,#(_stateBanks + 0x0002)
 	ld	hl,#_bank_STATE_GAME2
 	ld	a,(hl)
@@ -171,7 +174,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME2)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME2)
-;ZGBMain_Init.c:50: INIT_STATE(STATE_GAME3);
+;ZGBMain_Init.c:53: INIT_STATE(STATE_GAME3);
 	ld	de,#(_stateBanks + 0x0003)
 	ld	hl,#_bank_STATE_GAME3
 	ld	a,(hl)
@@ -185,12 +188,12 @@ _InitStates::
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME3)
 	ret
-;ZGBMain_Init.c:53: void InitSprites() {
+;ZGBMain_Init.c:56: void InitSprites() {
 ;	---------------------------------
 ; Function InitSprites
 ; ---------------------------------
 _InitSprites::
-;ZGBMain_Init.c:54: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
+;ZGBMain_Init.c:57: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0902
@@ -215,7 +218,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:55: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
+;ZGBMain_Init.c:58: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0502
@@ -240,7 +243,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:57: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:60: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602
@@ -265,7 +268,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:58: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:61: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -290,7 +293,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:59: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:62: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -315,7 +318,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:60: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:63: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602
@@ -340,7 +343,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:61: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
+;ZGBMain_Init.c:64: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0402
@@ -365,7 +368,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:62: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
+;ZGBMain_Init.c:65: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0802
@@ -390,7 +393,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:63: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
+;ZGBMain_Init.c:66: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0402
@@ -415,6 +418,31 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
+;ZGBMain_Init.c:67: INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
+	ld	hl,#0x0000
+	push	hl
+	ld	hl,#0x0502
+	push	hl
+	ld	a,#0x03
+	push	af
+	inc	sp
+	ld	hl,#_diamond
+	push	hl
+	ld	hl,#_Destroy_SPRITE_DIAMOND
+	push	hl
+	ld	hl,#_Update_SPRITE_DIAMOND
+	push	hl
+	ld	hl,#_Start_SPRITE_DIAMOND
+	push	hl
+	ld	hl,#_bank_SPRITE_DIAMOND
+	ld	a,(hl)
+	push	af
+	inc	sp
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_InitSpriteInfo
+	add	sp, #15
 	ret
-	.area _CODE_1
+	.area _CODE_2
 	.area _CABS (ABS)
