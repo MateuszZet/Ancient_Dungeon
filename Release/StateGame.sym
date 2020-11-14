@@ -8,6 +8,7 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _InitScrollColor                                               **** GX
+    _SetState                                                      **** GX
     _SpriteManagerAdd                                              **** GX
     _SpriteManagerLoad                                             **** GX
   6 _Start_STATE_GAME                                              0000 GR
@@ -18,6 +19,7 @@ Symbol Table
     _door_x                                                        **** GX
     _door_y                                                        **** GX
     _have_bomb                                                     **** GX
+    _keys                                                          **** GX
     _map                                                           **** GX
     _n_sprite_types                                                **** GX
     _next_lvl                                                      **** GX
@@ -36,6 +38,6 @@ Area Table
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size   1E   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  131   flags    0
+   6 _CODE_2                                    size  142   flags    0
    7 _CABS                                      size    0   flags    8
 
