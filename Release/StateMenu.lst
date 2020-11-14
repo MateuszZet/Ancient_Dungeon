@@ -181,74 +181,84 @@
    00A4 33                  181 	inc	sp
    00A5 CDr00r00            182 	call	_SpriteManagerAdd
    00A8 E8 05               183 	add	sp, #5
-                            184 ;StateMenu.c:36: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
-   00AA 21 1E 00            185 	ld	hl,#0x001e
+                            184 ;StateMenu.c:36: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+   00AA 21 73 00            185 	ld	hl,#0x0073
    00AD E5                  186 	push	hl
-   00AE 2E 1E               187 	ld	l, #0x1e
+   00AE 2E 32               187 	ld	l, #0x32
    00B0 E5                  188 	push	hl
-   00B1 3E 08               189 	ld	a,#0x08
+   00B1 3E 02               189 	ld	a,#0x02
    00B3 F5                  190 	push	af
    00B4 33                  191 	inc	sp
    00B5 CDr00r00            192 	call	_SpriteManagerAdd
    00B8 E8 05               193 	add	sp, #5
-                            194 ;StateMenu.c:38: InitScrollTiles(0, 59, tiles, 3);
-   00BA 21 00 00            195 	ld	hl,#0x0000
+                            194 ;StateMenu.c:37: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+   00BA 21 1E 00            195 	ld	hl,#0x001e
    00BD E5                  196 	push	hl
-   00BE 3E 03               197 	ld	a,#0x03
-   00C0 F5                  198 	push	af
-   00C1 33                  199 	inc	sp
-   00C2 21r00r00            200 	ld	hl,#_tiles
-   00C5 E5                  201 	push	hl
-   00C6 21 00 3B            202 	ld	hl,#0x3b00
-   00C9 E5                  203 	push	hl
-   00CA CDr00r00            204 	call	_ZInitScrollTilesColor
-   00CD E8 07               205 	add	sp, #7
-                            206 ;StateMenu.c:39: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
-   00CF 21 00 00            207 	ld	hl,#0x0000
-   00D2 E5                  208 	push	hl
-   00D3 3E 03               209 	ld	a,#0x03
-   00D5 F5                  210 	push	af
-   00D6 33                  211 	inc	sp
-   00D7 2E 00               212 	ld	l, #0x00
+   00BE 2E 1E               197 	ld	l, #0x1e
+   00C0 E5                  198 	push	hl
+   00C1 3E 08               199 	ld	a,#0x08
+   00C3 F5                  200 	push	af
+   00C4 33                  201 	inc	sp
+   00C5 CDr00r00            202 	call	_SpriteManagerAdd
+   00C8 E8 05               203 	add	sp, #5
+                            204 ;StateMenu.c:39: InitScrollTiles(0, 59, tiles, 3);
+   00CA 21 00 00            205 	ld	hl,#0x0000
+   00CD E5                  206 	push	hl
+   00CE 3E 03               207 	ld	a,#0x03
+   00D0 F5                  208 	push	af
+   00D1 33                  209 	inc	sp
+   00D2 21r00r00            210 	ld	hl,#_tiles
+   00D5 E5                  211 	push	hl
+   00D6 21 00 3B            212 	ld	hl,#0x3b00
    00D9 E5                  213 	push	hl
-   00DA 21r01r00            214 	ld	hl,#_collilision_tiles0
-   00DD E5                  215 	push	hl
-   00DE 21r00r00            216 	ld	hl,#_menu
-   00E1 E5                  217 	push	hl
-   00E2 21 12 00            218 	ld	hl,#0x0012
-   00E5 E5                  219 	push	hl
-   00E6 2E 14               220 	ld	l, #0x14
-   00E8 E5                  221 	push	hl
-   00E9 CDr00r00            222 	call	_InitScrollColor
-   00EC E8 0D               223 	add	sp, #13
-                            224 ;StateMenu.c:40: SHOW_BKG;
-   00EE 11 40 FF            225 	ld	de,#0xff40
-   00F1 1A                  226 	ld	a,(de)
-   00F2 4F                  227 	ld	c,a
-   00F3 06 00               228 	ld	b,#0x00
-   00F5 79                  229 	ld	a,c
-   00F6 CB C7               230 	set	0, a
-   00F8 4F                  231 	ld	c,a
-   00F9 21 40 FF            232 	ld	hl,#0xff40
-   00FC 71                  233 	ld	(hl),c
-   00FD C9                  234 	ret
-                            235 ;StateMenu.c:45: void Update_STATE_MENU() {
-                            236 ;	---------------------------------
-                            237 ; Function Update_STATE_MENU
-                            238 ; ---------------------------------
-   00FE                     239 _Update_STATE_MENU::
-                            240 ;StateMenu.c:46: if (KEY_PRESSED(J_START)) {
-   00FE 21r00r00            241 	ld	hl,#_keys
-   0101 4E                  242 	ld	c,(hl)
-   0102 06 00               243 	ld	b,#0x00
-   0104 CB 79               244 	bit	7, c
-   0106 C8                  245 	ret	Z
-                            246 ;StateMenu.c:47: SetState(STATE_GAME3);
-   0107 3E 03               247 	ld	a,#0x03
-   0109 F5                  248 	push	af
-   010A 33                  249 	inc	sp
-   010B CDr00r00            250 	call	_SetState
-   010E 33                  251 	inc	sp
-   010F C9                  252 	ret
-                            253 	.area _CODE_2
-                            254 	.area _CABS (ABS)
+   00DA CDr00r00            214 	call	_ZInitScrollTilesColor
+   00DD E8 07               215 	add	sp, #7
+                            216 ;StateMenu.c:40: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
+   00DF 21 00 00            217 	ld	hl,#0x0000
+   00E2 E5                  218 	push	hl
+   00E3 3E 03               219 	ld	a,#0x03
+   00E5 F5                  220 	push	af
+   00E6 33                  221 	inc	sp
+   00E7 2E 00               222 	ld	l, #0x00
+   00E9 E5                  223 	push	hl
+   00EA 21r01r00            224 	ld	hl,#_collilision_tiles0
+   00ED E5                  225 	push	hl
+   00EE 21r00r00            226 	ld	hl,#_menu
+   00F1 E5                  227 	push	hl
+   00F2 21 12 00            228 	ld	hl,#0x0012
+   00F5 E5                  229 	push	hl
+   00F6 2E 14               230 	ld	l, #0x14
+   00F8 E5                  231 	push	hl
+   00F9 CDr00r00            232 	call	_InitScrollColor
+   00FC E8 0D               233 	add	sp, #13
+                            234 ;StateMenu.c:41: SHOW_BKG;
+   00FE 11 40 FF            235 	ld	de,#0xff40
+   0101 1A                  236 	ld	a,(de)
+   0102 4F                  237 	ld	c,a
+   0103 06 00               238 	ld	b,#0x00
+   0105 79                  239 	ld	a,c
+   0106 CB C7               240 	set	0, a
+   0108 4F                  241 	ld	c,a
+   0109 21 40 FF            242 	ld	hl,#0xff40
+   010C 71                  243 	ld	(hl),c
+   010D C9                  244 	ret
+                            245 ;StateMenu.c:46: void Update_STATE_MENU() {
+                            246 ;	---------------------------------
+                            247 ; Function Update_STATE_MENU
+                            248 ; ---------------------------------
+   010E                     249 _Update_STATE_MENU::
+                            250 ;StateMenu.c:47: if (KEY_PRESSED(J_START)) {
+   010E 21r00r00            251 	ld	hl,#_keys
+   0111 4E                  252 	ld	c,(hl)
+   0112 06 00               253 	ld	b,#0x00
+   0114 CB 79               254 	bit	7, c
+   0116 C8                  255 	ret	Z
+                            256 ;StateMenu.c:48: SetState(STATE_GAME3);
+   0117 3E 03               257 	ld	a,#0x03
+   0119 F5                  258 	push	af
+   011A 33                  259 	inc	sp
+   011B CDr00r00            260 	call	_SetState
+   011E 33                  261 	inc	sp
+   011F C9                  262 	ret
+                            263 	.area _CODE_2
+                            264 	.area _CABS (ABS)

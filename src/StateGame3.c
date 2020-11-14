@@ -41,7 +41,7 @@ void Start_STATE_GAME3() {
 	SpriteManagerAdd(SPRITE_ENEMY, 120, 24);
 	SpriteManagerAdd(SPRITE_ENEMY, 120, 216);
 	SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
-	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+	SpriteManagerAdd(SPRITE_ENEMY3, 30, 60);
 	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);

@@ -87,6 +87,12 @@ void Update_SPRITE_PLAYER() {
 				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
 			}
 		}
+		if(spr->type == SPRITE_ENEMY3) {
+			if(CheckCollision(THIS, spr)) {
+				SetState(STATE_MENU);
+				PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+			}
+		}
 		if (spr->type == SPRITE_BOMB) {
 			if (CheckCollision(THIS, spr)) {
 				SetState(STATE_MENU);
