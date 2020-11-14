@@ -40,6 +40,8 @@
 	.globl _Destroy_SPRITE_PLAYER
 	.globl _Update_SPRITE_PLAYER
 	.globl _Start_SPRITE_PLAYER
+	.globl _Update_STATE_END
+	.globl _Start_STATE_END
 	.globl _Update_STATE_GAME3
 	.globl _Start_STATE_GAME3
 	.globl _Update_STATE_GAME2
@@ -74,11 +76,11 @@ _init_bank::
 _next_state::
 	.ds 1
 _stateBanks::
-	.ds 6
+	.ds 5
 _startFuncs::
-	.ds 12
+	.ds 10
 _updateFuncs::
-	.ds 12
+	.ds 10
 _spriteBanks::
 	.ds 10
 _spriteStartFuncs::
@@ -187,13 +189,26 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME3)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME3)
+;ZGBMain_Init.c:54: INIT_STATE(STATE_END);
+	ld	de,#(_stateBanks + 0x0004)
+	ld	hl,#_bank_STATE_END
+	ld	a,(hl)
+	ld	(de),a
+	ld	hl,#(_startFuncs + 0x0008)
+	ld	(hl),#<(_Start_STATE_END)
+	inc	hl
+	ld	(hl),#>(_Start_STATE_END)
+	ld	hl,#(_updateFuncs + 0x0008)
+	ld	(hl),#<(_Update_STATE_END)
+	inc	hl
+	ld	(hl),#>(_Update_STATE_END)
 	ret
-;ZGBMain_Init.c:56: void InitSprites() {
+;ZGBMain_Init.c:57: void InitSprites() {
 ;	---------------------------------
 ; Function InitSprites
 ; ---------------------------------
 _InitSprites::
-;ZGBMain_Init.c:57: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
+;ZGBMain_Init.c:58: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0902
@@ -218,7 +233,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:58: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
+;ZGBMain_Init.c:59: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0502
@@ -243,7 +258,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:60: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:61: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602
@@ -268,7 +283,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:61: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:62: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -293,7 +308,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:62: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:63: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -318,7 +333,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:63: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:64: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602
@@ -343,7 +358,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:64: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
+;ZGBMain_Init.c:65: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0402
@@ -368,7 +383,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:65: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
+;ZGBMain_Init.c:66: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0802
@@ -393,7 +408,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:66: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
+;ZGBMain_Init.c:67: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0402
@@ -418,7 +433,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:67: INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
+;ZGBMain_Init.c:68: INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0502

@@ -1066,7 +1066,7 @@ _Update_SPRITE_PLAYER::
 	pop	bc
 	ld	a,e
 	or	a, a
-	jr	Z,00146$
+	jp	Z,00146$
 ;SpritePlayer.c:118: SpriteManagerRemoveSprite(spr);
 	push	bc
 	pop	de
@@ -1093,6 +1093,14 @@ _Update_SPRITE_PLAYER::
 	push	hl
 	call	_PlayFx
 	add	sp, #12
+	pop	bc
+;SpritePlayer.c:120: SetState(STATE_MENU);
+	push	bc
+	xor	a, a
+	push	af
+	inc	sp
+	call	_SetState
+	inc	sp
 	pop	bc
 00146$:
 ;SpritePlayer.c:123: if (spr->type == SPRITE_DOOROPEN) {

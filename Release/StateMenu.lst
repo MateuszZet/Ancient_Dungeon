@@ -263,8 +263,8 @@
    0122 06 00               263 	ld	b,#0x00
    0124 CB 79               264 	bit	7, c
    0126 C8                  265 	ret	Z
-                            266 ;StateMenu.c:48: SetState(STATE_GAME3);
-   0127 3E 03               267 	ld	a,#0x03
+                            266 ;StateMenu.c:48: SetState(STATE_GAME);
+   0127 3E 01               267 	ld	a,#0x01
    0129 F5                  268 	push	af
    012A 33                  269 	inc	sp
    012B CDr00r00            270 	call	_SetState
