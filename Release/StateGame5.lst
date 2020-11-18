@@ -273,7 +273,7 @@
    0135 06 00               273 	ld	b,#0x00
    0137 CB 79               274 	bit	7, c
    0139 C8                  275 	ret	Z
-                            276 ;StateGame5.c:52: SetState(STATE_END);
+                            276 ;StateGame5.c:52: SetState(STATE_GAME6);
    013A 3E 06               277 	ld	a,#0x06
    013C F5                  278 	push	af
    013D 33                  279 	inc	sp

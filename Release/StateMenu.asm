@@ -263,8 +263,8 @@ _Update_STATE_MENU::
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateMenu.c:48: SetState(STATE_GAME5);
-	ld	a,#0x05
+;StateMenu.c:48: SetState(STATE_GAME6);
+	ld	a,#0x06
 	push	af
 	inc	sp
 	call	_SetState
