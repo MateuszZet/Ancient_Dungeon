@@ -8,8 +8,6 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _Update_STATE_GAME3
-	.globl _Start_STATE_GAME3
 	.globl _SpriteManagerAdd
 	.globl _SpriteManagerLoad
 	.globl _InitScrollColor
@@ -17,6 +15,8 @@
 	.globl _SetState
 	.globl _collilision_tiles3
 	.globl _bank_STATE_GAME3
+	.globl _Start_STATE_GAME3
+	.globl _Update_STATE_GAME3
 ;--------------------------------------------------------
 ; ram data
 ;--------------------------------------------------------
@@ -293,7 +293,7 @@ _Update_STATE_GAME3::
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame3.c:55: SetState(STATE_END);
+;StateGame3.c:55: SetState(STATE_GAME4);
 	ld	a,#0x04
 	push	af
 	inc	sp

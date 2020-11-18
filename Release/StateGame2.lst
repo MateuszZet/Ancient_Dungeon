@@ -8,15 +8,15 @@
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
-                             11 	.globl _Update_STATE_GAME2
-                             12 	.globl _Start_STATE_GAME2
-                             13 	.globl _SpriteManagerAdd
-                             14 	.globl _SpriteManagerLoad
-                             15 	.globl _InitScrollColor
-                             16 	.globl _ZInitScrollTilesColor
-                             17 	.globl _SetState
-                             18 	.globl _collilision_tiles2
-                             19 	.globl _bank_STATE_GAME2
+                             11 	.globl _SpriteManagerAdd
+                             12 	.globl _SpriteManagerLoad
+                             13 	.globl _InitScrollColor
+                             14 	.globl _ZInitScrollTilesColor
+                             15 	.globl _SetState
+                             16 	.globl _collilision_tiles2
+                             17 	.globl _bank_STATE_GAME2
+                             18 	.globl _Start_STATE_GAME2
+                             19 	.globl _Update_STATE_GAME2
                              20 ;--------------------------------------------------------
                              21 ; ram data
                              22 ;--------------------------------------------------------

@@ -28,7 +28,6 @@ void Start_STATE_GAME() {
 	SHOW_SPRITES;
 
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
-	
 	door_x = 240;
 	door_y = 112;
 	have_bomb = 4;

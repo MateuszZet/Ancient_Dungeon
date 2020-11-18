@@ -1,5 +1,5 @@
 #pragma bank 2
-#include "StateGame.h"
+#include "StateGame3.h"
 UINT8 bank_STATE_GAME3 = 2;
 #include <stdio.h>
 #include "..\res\src\tiles.h"
@@ -52,6 +52,6 @@ void Start_STATE_GAME3() {
 
 void Update_STATE_GAME3() {
 	if (KEY_PRESSED(J_START)) {
-		SetState(STATE_END);
+		SetState(STATE_GAME4);
 	}
 }
