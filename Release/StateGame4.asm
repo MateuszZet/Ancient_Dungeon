@@ -293,7 +293,7 @@ _Update_STATE_GAME4::
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame4.c:55: SetState(STATE_END);
+;StateGame4.c:55: SetState(STATE_GAME5);
 	ld	a,#0x05
 	push	af
 	inc	sp

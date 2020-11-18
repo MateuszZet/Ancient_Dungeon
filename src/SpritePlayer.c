@@ -108,7 +108,7 @@ void Update_SPRITE_PLAYER() {
 		if (spr->type == SPRITE_KEY) {
 			if (CheckCollision(THIS, spr)) {
 				SpriteManagerRemoveSprite(spr);
-				SpriteManagerRemove(2); //need to place door always as 2 sprite
+				SpriteManagerRemove(2); //need to place door always as 2 (second sprite)
 				SpriteManagerAdd(SPRITE_DOOROPEN, door_x, door_y);
 				PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
 			}

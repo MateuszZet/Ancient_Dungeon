@@ -45,6 +45,6 @@ void Start_STATE_MENU() {
 
 void Update_STATE_MENU() {
 	if (KEY_PRESSED(J_START)) {
-		SetState(STATE_GAME);
+		SetState(STATE_GAME5);
 	}
 }

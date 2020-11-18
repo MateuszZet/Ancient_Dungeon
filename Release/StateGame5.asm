@@ -2,7 +2,7 @@
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.6.0 #9615 (MINGW64)
 ;--------------------------------------------------------
-	.module StateMenu
+	.module StateGame5
 	.optsdcc -mgbz80
 	
 ;--------------------------------------------------------
@@ -13,17 +13,17 @@
 	.globl _InitScrollColor
 	.globl _ZInitScrollTilesColor
 	.globl _SetState
-	.globl _collilision_tiles0
-	.globl _bank_STATE_MENU
-	.globl _Start_STATE_MENU
-	.globl _Update_STATE_MENU
+	.globl _collilision_tiles5
+	.globl _bank_STATE_GAME5
+	.globl _Start_STATE_GAME5
+	.globl _Update_STATE_GAME5
 ;--------------------------------------------------------
 ; ram data
 ;--------------------------------------------------------
 	.area _DATA
-_bank_STATE_MENU::
+_bank_STATE_GAME5::
 	.ds 1
-_collilision_tiles0::
+_collilision_tiles5::
 	.ds 5
 ;--------------------------------------------------------
 ; absolute external ram data
@@ -36,19 +36,19 @@ _collilision_tiles0::
 	.area _GSINIT
 	.area _GSFINAL
 	.area _GSINIT
-;StateMenu.c:3: UINT8 bank_STATE_MENU = 2;
-	ld	hl,#_bank_STATE_MENU
+;StateGame5.c:3: UINT8 bank_STATE_GAME5 = 2;
+	ld	hl,#_bank_STATE_GAME5
 	ld	(hl),#0x02
-;StateMenu.c:14: UINT8 collilision_tiles0[] = { 1,2,3,4,0 };
-	ld	hl,#_collilision_tiles0
+;StateGame5.c:15: UINT8 collilision_tiles5[] = { 1,2,3,4,0 };
+	ld	hl,#_collilision_tiles5
 	ld	(hl),#0x01
-	ld	hl,#(_collilision_tiles0 + 0x0001)
+	ld	hl,#(_collilision_tiles5 + 0x0001)
 	ld	(hl),#0x02
-	ld	hl,#(_collilision_tiles0 + 0x0002)
+	ld	hl,#(_collilision_tiles5 + 0x0002)
 	ld	(hl),#0x03
-	ld	hl,#(_collilision_tiles0 + 0x0003)
+	ld	hl,#(_collilision_tiles5 + 0x0003)
 	ld	(hl),#0x04
-	ld	hl,#(_collilision_tiles0 + 0x0004)
+	ld	hl,#(_collilision_tiles5 + 0x0004)
 	ld	(hl),#0x00
 ;--------------------------------------------------------
 ; Home
@@ -59,26 +59,26 @@ _collilision_tiles0::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;StateMenu.c:16: void Start_STATE_MENU() {
+;StateGame5.c:17: void Start_STATE_GAME5() {
 ;	---------------------------------
-; Function Start_STATE_MENU
+; Function Start_STATE_GAME5
 ; ---------------------------------
-_Start_STATE_MENU::
-;StateMenu.c:18: next_lvl =1;
+_Start_STATE_GAME5::
+;StateGame5.c:19: next_lvl=6;
 	ld	hl,#_next_lvl
-	ld	(hl),#0x01
+	ld	(hl),#0x06
 	inc	hl
 	ld	(hl),#0x00
-;StateMenu.c:19: NR52_REG = 0x80; //Enables sound, you should always setup this first
+;StateGame5.c:20: NR52_REG = 0x80; //Enables sound, you should always setup this first
 	ld	hl,#0xff26
 	ld	(hl),#0x80
-;StateMenu.c:20: NR51_REG = 0xFF; //Enables all channels (left and right)
+;StateGame5.c:21: NR51_REG = 0xFF; //Enables all channels (left and right)
 	ld	l, #0x25
 	ld	(hl),#0xff
-;StateMenu.c:21: NR50_REG = 0x77; //Max volume
+;StateGame5.c:22: NR50_REG = 0x77; //Max volume
 	ld	l, #0x24
 	ld	(hl),#0x77
-;StateMenu.c:23: SPRITES_8x16;
+;StateGame5.c:24: SPRITES_8x16;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -88,25 +88,25 @@ _Start_STATE_MENU::
 	ld	c,a
 	ld	l, #0x40
 	ld	(hl),c
-;StateMenu.c:24: for(i = 0; i != n_sprite_types; ++ i) {
+;StateGame5.c:25: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
 00103$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
 	jr	Z,00101$
-;StateMenu.c:25: SpriteManagerLoad(i);
+;StateGame5.c:26: SpriteManagerLoad(i);
 	push	bc
 	push	bc
 	inc	sp
 	call	_SpriteManagerLoad
 	inc	sp
 	pop	bc
-;StateMenu.c:24: for(i = 0; i != n_sprite_types; ++ i) {
+;StateGame5.c:25: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
 	jr	00103$
 00101$:
-;StateMenu.c:27: SHOW_SPRITES;
+;StateGame5.c:28: SHOW_SPRITES;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -116,10 +116,10 @@ _Start_STATE_MENU::
 	ld	c,a
 	ld	hl,#0xff40
 	ld	(hl),c
-;StateMenu.c:29: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
-	ld	hl,#0x0023
+;StateGame5.c:30: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 24, 24);
+	ld	hl,#0x0018
 	push	hl
-	ld	l, #0x46
+	ld	l, #0x18
 	push	hl
 	xor	a, a
 	push	af
@@ -130,32 +130,32 @@ _Start_STATE_MENU::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateMenu.c:30: door_x = 20;
-	ld	hl,#_door_x
-	ld	(hl),#0x14
-	inc	hl
-	ld	(hl),#0x00
-;StateMenu.c:31: door_y = 120;
-	ld	hl,#_door_y
-	ld	(hl),#0x78
-	inc	hl
-	ld	(hl),#0x00
-;StateMenu.c:32: have_bomb = 6;
+;StateGame5.c:31: have_bomb = 1;
 	ld	hl,#_have_bomb
-	ld	(hl),#0x06
+	ld	(hl),#0x01
 	inc	hl
 	ld	(hl),#0x00
-;StateMenu.c:33: SpriteManagerAdd(SPRITE_KEY, 20, 20);
-	ld	hl,#0x0014
+;StateGame5.c:32: door_x = 186;
+	ld	hl,#_door_x
+	ld	(hl),#0xba
+	inc	hl
+	ld	(hl),#0x00
+;StateGame5.c:33: door_y = 176;
+	ld	hl,#_door_y
+	ld	(hl),#0xb0
+	inc	hl
+	ld	(hl),#0x00
+;StateGame5.c:34: SpriteManagerAdd(SPRITE_KEY, 416, 120);
+	ld	hl,#0x0078
 	push	hl
-	ld	l, #0x14
+	ld	hl,#0x01a0
 	push	hl
 	ld	a,#0x03
 	push	af
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:34: SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
+;StateGame5.c:35: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 	ld	hl,#_door_y
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -171,47 +171,57 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:35: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
-	ld	hl,#0x0070
+;StateGame5.c:37: SpriteManagerAdd(SPRITE_ENEMY, 96, 72);
+	ld	hl,#0x0048
 	push	hl
-	ld	l, #0x80
+	ld	l, #0x60
 	push	hl
 	ld	a,#0x01
 	push	af
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:36: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
-	ld	hl,#0x0073
+;StateGame5.c:38: SpriteManagerAdd(SPRITE_ENEMY, 272, 72);
+	ld	hl,#0x0048
 	push	hl
-	ld	l, #0x32
+	ld	hl,#0x0110
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame5.c:39: SpriteManagerAdd(SPRITE_ENEMY, 352, 65);
+	ld	hl,#0x0041
+	push	hl
+	ld	hl,#0x0160
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame5.c:40: SpriteManagerAdd(SPRITE_ENEMY, 178, 65);
+	ld	hl,#0x0041
+	push	hl
+	ld	l, #0xb2
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame5.c:41: SpriteManagerAdd(SPRITE_ENEMY2, 186, 170);
+	ld	hl,#0x00aa
+	push	hl
+	ld	l, #0xba
 	push	hl
 	ld	a,#0x02
 	push	af
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:37: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
-	ld	hl,#0x001e
-	push	hl
-	ld	l, #0x1e
-	push	hl
-	ld	a,#0x08
-	push	af
-	inc	sp
-	call	_SpriteManagerAdd
-	add	sp, #5
-;StateMenu.c:38: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
-	ld	hl,#0x0070
-	push	hl
-	ld	l, #0x80
-	push	hl
-	ld	a,#0x09
-	push	af
-	inc	sp
-	call	_SpriteManagerAdd
-	add	sp, #5
-;StateMenu.c:39: InitScrollTiles(0, 59, tiles, 3);
+;StateGame5.c:43: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -223,7 +233,7 @@ _Start_STATE_MENU::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateMenu.c:40: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
+;StateGame5.c:44: InitScroll(map5Width, map5Height, map5, collilision_tiles5, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -231,17 +241,17 @@ _Start_STATE_MENU::
 	inc	sp
 	ld	l, #0x00
 	push	hl
-	ld	hl,#_collilision_tiles0
+	ld	hl,#_collilision_tiles5
 	push	hl
-	ld	hl,#_menu
+	ld	hl,#_map5
 	push	hl
-	ld	hl,#0x0012
+	ld	hl,#0x0019
 	push	hl
-	ld	l, #0x14
+	ld	l, #0x38
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateMenu.c:41: SHOW_BKG;
+;StateGame5.c:45: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -252,19 +262,19 @@ _Start_STATE_MENU::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateMenu.c:46: void Update_STATE_MENU() {
+;StateGame5.c:50: void Update_STATE_GAME5() {
 ;	---------------------------------
-; Function Update_STATE_MENU
+; Function Update_STATE_GAME5
 ; ---------------------------------
-_Update_STATE_MENU::
-;StateMenu.c:47: if (KEY_PRESSED(J_START)) {
+_Update_STATE_GAME5::
+;StateGame5.c:51: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateMenu.c:48: SetState(STATE_GAME5);
-	ld	a,#0x05
+;StateGame5.c:52: SetState(STATE_END);
+	ld	a,#0x06
 	push	af
 	inc	sp
 	call	_SetState

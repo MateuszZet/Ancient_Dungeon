@@ -42,6 +42,8 @@
 	.globl _Start_SPRITE_PLAYER
 	.globl _Update_STATE_END
 	.globl _Start_STATE_END
+	.globl _Update_STATE_GAME5
+	.globl _Start_STATE_GAME5
 	.globl _Update_STATE_GAME4
 	.globl _Start_STATE_GAME4
 	.globl _Update_STATE_GAME3
@@ -78,11 +80,11 @@ _init_bank::
 _next_state::
 	.ds 1
 _stateBanks::
-	.ds 6
+	.ds 7
 _startFuncs::
-	.ds 12
+	.ds 14
 _updateFuncs::
-	.ds 12
+	.ds 14
 _spriteBanks::
 	.ds 10
 _spriteStartFuncs::
@@ -119,10 +121,10 @@ _spritePalDatas::
 ;ZGBMain_Init.c:3: UINT8 init_bank = 2;
 	ld	hl,#_init_bank
 	ld	(hl),#0x02
-;ZGBMain_Init.c:46: UINT8 next_state = STATE_MENU;
+;ZGBMain_Init.c:47: UINT8 next_state = STATE_MENU;
 	ld	hl,#_next_state
 	ld	(hl),#0x00
-;ZGBMain_Init.c:49: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
+;ZGBMain_Init.c:50: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
 	ld	hl,#_n_sprite_types
 	ld	(hl),#0x0a
 ;--------------------------------------------------------
@@ -134,12 +136,12 @@ _spritePalDatas::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;ZGBMain_Init.c:51: void InitStates() {
+;ZGBMain_Init.c:52: void InitStates() {
 ;	---------------------------------
 ; Function InitStates
 ; ---------------------------------
 _InitStates::
-;ZGBMain_Init.c:52: INIT_STATE(STATE_MENU);
+;ZGBMain_Init.c:53: INIT_STATE(STATE_MENU);
 	ld	de,#_stateBanks
 	ld	hl,#_bank_STATE_MENU
 	ld	a,(hl)
@@ -152,7 +154,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_MENU)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_MENU)
-;ZGBMain_Init.c:53: INIT_STATE(STATE_GAME);
+;ZGBMain_Init.c:54: INIT_STATE(STATE_GAME);
 	ld	de,#(_stateBanks + 0x0001)
 	ld	hl,#_bank_STATE_GAME
 	ld	a,(hl)
@@ -165,7 +167,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME)
-;ZGBMain_Init.c:54: INIT_STATE(STATE_GAME2);
+;ZGBMain_Init.c:55: INIT_STATE(STATE_GAME2);
 	ld	de,#(_stateBanks + 0x0002)
 	ld	hl,#_bank_STATE_GAME2
 	ld	a,(hl)
@@ -178,7 +180,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME2)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME2)
-;ZGBMain_Init.c:55: INIT_STATE(STATE_GAME3);
+;ZGBMain_Init.c:56: INIT_STATE(STATE_GAME3);
 	ld	de,#(_stateBanks + 0x0003)
 	ld	hl,#_bank_STATE_GAME3
 	ld	a,(hl)
@@ -191,7 +193,7 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME3)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME3)
-;ZGBMain_Init.c:56: INIT_STATE(STATE_GAME4);
+;ZGBMain_Init.c:57: INIT_STATE(STATE_GAME4);
 	ld	de,#(_stateBanks + 0x0004)
 	ld	hl,#_bank_STATE_GAME4
 	ld	a,(hl)
@@ -204,26 +206,39 @@ _InitStates::
 	ld	(hl),#<(_Update_STATE_GAME4)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_GAME4)
-;ZGBMain_Init.c:57: INIT_STATE(STATE_END);
+;ZGBMain_Init.c:58: INIT_STATE(STATE_GAME5);
 	ld	de,#(_stateBanks + 0x0005)
-	ld	hl,#_bank_STATE_END
+	ld	hl,#_bank_STATE_GAME5
 	ld	a,(hl)
 	ld	(de),a
 	ld	hl,#(_startFuncs + 0x000a)
+	ld	(hl),#<(_Start_STATE_GAME5)
+	inc	hl
+	ld	(hl),#>(_Start_STATE_GAME5)
+	ld	hl,#(_updateFuncs + 0x000a)
+	ld	(hl),#<(_Update_STATE_GAME5)
+	inc	hl
+	ld	(hl),#>(_Update_STATE_GAME5)
+;ZGBMain_Init.c:59: INIT_STATE(STATE_END);
+	ld	de,#(_stateBanks + 0x0006)
+	ld	hl,#_bank_STATE_END
+	ld	a,(hl)
+	ld	(de),a
+	ld	hl,#(_startFuncs + 0x000c)
 	ld	(hl),#<(_Start_STATE_END)
 	inc	hl
 	ld	(hl),#>(_Start_STATE_END)
-	ld	hl,#(_updateFuncs + 0x000a)
+	ld	hl,#(_updateFuncs + 0x000c)
 	ld	(hl),#<(_Update_STATE_END)
 	inc	hl
 	ld	(hl),#>(_Update_STATE_END)
 	ret
-;ZGBMain_Init.c:60: void InitSprites() {
+;ZGBMain_Init.c:62: void InitSprites() {
 ;	---------------------------------
 ; Function InitSprites
 ; ---------------------------------
 _InitSprites::
-;ZGBMain_Init.c:61: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
+;ZGBMain_Init.c:63: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0902
@@ -248,7 +263,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:62: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
+;ZGBMain_Init.c:64: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0502
@@ -273,7 +288,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:64: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:66: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602
@@ -298,7 +313,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:65: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:67: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -323,7 +338,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:66: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
+;ZGBMain_Init.c:68: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0102
@@ -348,7 +363,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:67: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
+;ZGBMain_Init.c:69: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0602
@@ -373,7 +388,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:68: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
+;ZGBMain_Init.c:70: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0402
@@ -398,7 +413,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:69: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
+;ZGBMain_Init.c:71: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0802
@@ -423,7 +438,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:70: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
+;ZGBMain_Init.c:72: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0402
@@ -448,7 +463,7 @@ _InitSprites::
 	inc	sp
 	call	_InitSpriteInfo
 	add	sp, #15
-;ZGBMain_Init.c:71: INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
+;ZGBMain_Init.c:73: INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
 	ld	hl,#0x0000
 	push	hl
 	ld	hl,#0x0502

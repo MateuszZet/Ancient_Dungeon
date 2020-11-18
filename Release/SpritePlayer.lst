@@ -1002,7 +1002,7 @@
    04D0 CDr00r00           1002 	call	_SpriteManagerRemoveSprite
    04D3 E8 02              1003 	add	sp, #2
    04D5 C1                 1004 	pop	bc
-                           1005 ;SpritePlayer.c:111: SpriteManagerRemove(2); //need to place door always as 2 sprite
+                           1005 ;SpritePlayer.c:111: SpriteManagerRemove(2); //need to place door always as 2 (second sprite)
    04D6 C5                 1006 	push	bc
    04D7 21 02 00           1007 	ld	hl,#0x0002
    04DA E5                 1008 	push	hl

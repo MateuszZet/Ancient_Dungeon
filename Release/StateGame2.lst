@@ -130,9 +130,9 @@
    0058 73                  130 	ld	(hl),e
    0059 23                  131 	inc	hl
    005A 72                  132 	ld	(hl),d
-                            133 ;StateGame2.c:31: have_bomb = 2;
+                            133 ;StateGame2.c:31: have_bomb = 3;
    005B 21r00r00            134 	ld	hl,#_have_bomb
-   005E 36 02               135 	ld	(hl),#0x02
+   005E 36 03               135 	ld	(hl),#0x03
    0060 23                  136 	inc	hl
    0061 36 00               137 	ld	(hl),#0x00
                             138 ;StateGame2.c:32: door_x = 16;

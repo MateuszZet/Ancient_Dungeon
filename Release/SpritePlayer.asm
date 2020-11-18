@@ -1002,7 +1002,7 @@ _Update_SPRITE_PLAYER::
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
 	pop	bc
-;SpritePlayer.c:111: SpriteManagerRemove(2); //need to place door always as 2 sprite
+;SpritePlayer.c:111: SpriteManagerRemove(2); //need to place door always as 2 (second sprite)
 	push	bc
 	ld	hl,#0x0002
 	push	hl

@@ -9,6 +9,7 @@ UINT8 init_bank = 2;
 #include "StateGame2.h"
 #include "StateGame3.h"
 #include "StateGame4.h"
+#include "StateGame5.h"
 #include "StateEnd.h"
 
 #include "SpritePlayer.h"
@@ -54,6 +55,7 @@ void InitStates() {
 	INIT_STATE(STATE_GAME2);
 	INIT_STATE(STATE_GAME3);
 	INIT_STATE(STATE_GAME4);
+	INIT_STATE(STATE_GAME5);
 	INIT_STATE(STATE_END);
 }
 
