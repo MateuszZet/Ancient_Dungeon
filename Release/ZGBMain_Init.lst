@@ -40,469 +40,484 @@
                              40 	.globl _Destroy_SPRITE_PLAYER
                              41 	.globl _Update_SPRITE_PLAYER
                              42 	.globl _Start_SPRITE_PLAYER
-                             43 	.globl _Update_STATE_END
-                             44 	.globl _Start_STATE_END
-                             45 	.globl _Update_STATE_GAME6
-                             46 	.globl _Start_STATE_GAME6
-                             47 	.globl _Update_STATE_GAME5
-                             48 	.globl _Start_STATE_GAME5
-                             49 	.globl _Update_STATE_GAME4
-                             50 	.globl _Start_STATE_GAME4
-                             51 	.globl _Update_STATE_GAME3
-                             52 	.globl _Start_STATE_GAME3
-                             53 	.globl _Update_STATE_GAME2
-                             54 	.globl _Start_STATE_GAME2
-                             55 	.globl _Update_STATE_GAME
-                             56 	.globl _Start_STATE_GAME
-                             57 	.globl _Update_STATE_MENU
-                             58 	.globl _Start_STATE_MENU
-                             59 	.globl _InitSpriteInfo
-                             60 	.globl _spritePalDatas
-                             61 	.globl _n_sprite_types
-                             62 	.globl _spriteIdxs
-                             63 	.globl _spriteNumFrames
-                             64 	.globl _spriteFrameSizes
-                             65 	.globl _spriteDataBanks
-                             66 	.globl _spriteDatas
-                             67 	.globl _spriteDestroyFuncs
-                             68 	.globl _spriteUpdateFuncs
-                             69 	.globl _spriteStartFuncs
-                             70 	.globl _spriteBanks
-                             71 	.globl _updateFuncs
-                             72 	.globl _startFuncs
-                             73 	.globl _stateBanks
-                             74 	.globl _next_state
-                             75 	.globl _init_bank
-                             76 ;--------------------------------------------------------
-                             77 ; ram data
+                             43 	.globl _Update_STATE_END2
+                             44 	.globl _Start_STATE_END2
+                             45 	.globl _Update_STATE_END
+                             46 	.globl _Start_STATE_END
+                             47 	.globl _Update_STATE_GAME6
+                             48 	.globl _Start_STATE_GAME6
+                             49 	.globl _Update_STATE_GAME5
+                             50 	.globl _Start_STATE_GAME5
+                             51 	.globl _Update_STATE_GAME4
+                             52 	.globl _Start_STATE_GAME4
+                             53 	.globl _Update_STATE_GAME3
+                             54 	.globl _Start_STATE_GAME3
+                             55 	.globl _Update_STATE_GAME2
+                             56 	.globl _Start_STATE_GAME2
+                             57 	.globl _Update_STATE_GAME
+                             58 	.globl _Start_STATE_GAME
+                             59 	.globl _Update_STATE_MENU
+                             60 	.globl _Start_STATE_MENU
+                             61 	.globl _InitSpriteInfo
+                             62 	.globl _spritePalDatas
+                             63 	.globl _n_sprite_types
+                             64 	.globl _spriteIdxs
+                             65 	.globl _spriteNumFrames
+                             66 	.globl _spriteFrameSizes
+                             67 	.globl _spriteDataBanks
+                             68 	.globl _spriteDatas
+                             69 	.globl _spriteDestroyFuncs
+                             70 	.globl _spriteUpdateFuncs
+                             71 	.globl _spriteStartFuncs
+                             72 	.globl _spriteBanks
+                             73 	.globl _updateFuncs
+                             74 	.globl _startFuncs
+                             75 	.globl _stateBanks
+                             76 	.globl _next_state
+                             77 	.globl _init_bank
                              78 ;--------------------------------------------------------
-                             79 	.area _DATA
-   0000                      80 _init_bank::
-   0000                      81 	.ds 1
-   0001                      82 _next_state::
-   0001                      83 	.ds 1
-   0002                      84 _stateBanks::
-   0002                      85 	.ds 8
-   000A                      86 _startFuncs::
-   000A                      87 	.ds 16
-   001A                      88 _updateFuncs::
-   001A                      89 	.ds 16
-   002A                      90 _spriteBanks::
-   002A                      91 	.ds 10
-   0034                      92 _spriteStartFuncs::
-   0034                      93 	.ds 20
-   0048                      94 _spriteUpdateFuncs::
-   0048                      95 	.ds 20
-   005C                      96 _spriteDestroyFuncs::
-   005C                      97 	.ds 20
-   0070                      98 _spriteDatas::
-   0070                      99 	.ds 20
-   0084                     100 _spriteDataBanks::
-   0084                     101 	.ds 10
-   008E                     102 _spriteFrameSizes::
-   008E                     103 	.ds 10
-   0098                     104 _spriteNumFrames::
-   0098                     105 	.ds 10
-   00A2                     106 _spriteIdxs::
-   00A2                     107 	.ds 10
-   00AC                     108 _n_sprite_types::
-   00AC                     109 	.ds 1
-   00AD                     110 _spritePalDatas::
-   00AD                     111 	.ds 20
-                            112 ;--------------------------------------------------------
-                            113 ; absolute external ram data
+                             79 ; ram data
+                             80 ;--------------------------------------------------------
+                             81 	.area _DATA
+   0000                      82 _init_bank::
+   0000                      83 	.ds 1
+   0001                      84 _next_state::
+   0001                      85 	.ds 1
+   0002                      86 _stateBanks::
+   0002                      87 	.ds 9
+   000B                      88 _startFuncs::
+   000B                      89 	.ds 18
+   001D                      90 _updateFuncs::
+   001D                      91 	.ds 18
+   002F                      92 _spriteBanks::
+   002F                      93 	.ds 10
+   0039                      94 _spriteStartFuncs::
+   0039                      95 	.ds 20
+   004D                      96 _spriteUpdateFuncs::
+   004D                      97 	.ds 20
+   0061                      98 _spriteDestroyFuncs::
+   0061                      99 	.ds 20
+   0075                     100 _spriteDatas::
+   0075                     101 	.ds 20
+   0089                     102 _spriteDataBanks::
+   0089                     103 	.ds 10
+   0093                     104 _spriteFrameSizes::
+   0093                     105 	.ds 10
+   009D                     106 _spriteNumFrames::
+   009D                     107 	.ds 10
+   00A7                     108 _spriteIdxs::
+   00A7                     109 	.ds 10
+   00B1                     110 _n_sprite_types::
+   00B1                     111 	.ds 1
+   00B2                     112 _spritePalDatas::
+   00B2                     113 	.ds 20
                             114 ;--------------------------------------------------------
-                            115 	.area _DABS (ABS)
+                            115 ; absolute external ram data
                             116 ;--------------------------------------------------------
-                            117 ; global & static initialisations
+                            117 	.area _DABS (ABS)
                             118 ;--------------------------------------------------------
-                            119 	.area _HOME
-                            120 	.area _GSINIT
-                            121 	.area _GSFINAL
+                            119 ; global & static initialisations
+                            120 ;--------------------------------------------------------
+                            121 	.area _HOME
                             122 	.area _GSINIT
-                            123 ;ZGBMain_Init.c:3: UINT8 init_bank = 2;
-   0000 21r00r00            124 	ld	hl,#_init_bank
-   0003 36 02               125 	ld	(hl),#0x02
-                            126 ;ZGBMain_Init.c:48: UINT8 next_state = STATE_MENU;
-   0005 21r01r00            127 	ld	hl,#_next_state
-   0008 36 00               128 	ld	(hl),#0x00
-                            129 ;ZGBMain_Init.c:51: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
-   000A 21rACr00            130 	ld	hl,#_n_sprite_types
-   000D 36 0A               131 	ld	(hl),#0x0a
-                            132 ;--------------------------------------------------------
-                            133 ; Home
+                            123 	.area _GSFINAL
+                            124 	.area _GSINIT
+                            125 ;ZGBMain_Init.c:3: UINT8 init_bank = 2;
+   0000 21r00r00            126 	ld	hl,#_init_bank
+   0003 36 02               127 	ld	(hl),#0x02
+                            128 ;ZGBMain_Init.c:49: UINT8 next_state = STATE_MENU;
+   0005 21r01r00            129 	ld	hl,#_next_state
+   0008 36 00               130 	ld	(hl),#0x00
+                            131 ;ZGBMain_Init.c:52: SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
+   000A 21rB1r00            132 	ld	hl,#_n_sprite_types
+   000D 36 0A               133 	ld	(hl),#0x0a
                             134 ;--------------------------------------------------------
-                            135 	.area _HOME
-                            136 	.area _HOME
-                            137 ;--------------------------------------------------------
-                            138 ; code
+                            135 ; Home
+                            136 ;--------------------------------------------------------
+                            137 	.area _HOME
+                            138 	.area _HOME
                             139 ;--------------------------------------------------------
-                            140 	.area _CODE_2
-                            141 ;ZGBMain_Init.c:53: void InitStates() {
-                            142 ;	---------------------------------
-                            143 ; Function InitStates
-                            144 ; ---------------------------------
-   0000                     145 _InitStates::
-                            146 ;ZGBMain_Init.c:54: INIT_STATE(STATE_MENU);
-   0000 11r02r00            147 	ld	de,#_stateBanks
-   0003 21r00r00            148 	ld	hl,#_bank_STATE_MENU
-   0006 7E                  149 	ld	a,(hl)
-   0007 12                  150 	ld	(de),a
-   0008 21r0Ar00            151 	ld	hl,#_startFuncs
-   000B 36r00               152 	ld	(hl),#<(_Start_STATE_MENU)
-   000D 23                  153 	inc	hl
-   000E 36s00               154 	ld	(hl),#>(_Start_STATE_MENU)
-   0010 21r1Ar00            155 	ld	hl,#_updateFuncs
-   0013 36r00               156 	ld	(hl),#<(_Update_STATE_MENU)
-   0015 23                  157 	inc	hl
-   0016 36s00               158 	ld	(hl),#>(_Update_STATE_MENU)
-                            159 ;ZGBMain_Init.c:55: INIT_STATE(STATE_GAME);
-   0018 11r03r00            160 	ld	de,#(_stateBanks + 0x0001)
-   001B 21r00r00            161 	ld	hl,#_bank_STATE_GAME
-   001E 7E                  162 	ld	a,(hl)
-   001F 12                  163 	ld	(de),a
-   0020 21r0Cr00            164 	ld	hl,#(_startFuncs + 0x0002)
-   0023 36r00               165 	ld	(hl),#<(_Start_STATE_GAME)
-   0025 23                  166 	inc	hl
-   0026 36s00               167 	ld	(hl),#>(_Start_STATE_GAME)
-   0028 21r1Cr00            168 	ld	hl,#(_updateFuncs + 0x0002)
-   002B 36r00               169 	ld	(hl),#<(_Update_STATE_GAME)
-   002D 23                  170 	inc	hl
-   002E 36s00               171 	ld	(hl),#>(_Update_STATE_GAME)
-                            172 ;ZGBMain_Init.c:56: INIT_STATE(STATE_GAME2);
-   0030 11r04r00            173 	ld	de,#(_stateBanks + 0x0002)
-   0033 21r00r00            174 	ld	hl,#_bank_STATE_GAME2
-   0036 7E                  175 	ld	a,(hl)
-   0037 12                  176 	ld	(de),a
-   0038 21r0Er00            177 	ld	hl,#(_startFuncs + 0x0004)
-   003B 36r00               178 	ld	(hl),#<(_Start_STATE_GAME2)
-   003D 23                  179 	inc	hl
-   003E 36s00               180 	ld	(hl),#>(_Start_STATE_GAME2)
-   0040 21r1Er00            181 	ld	hl,#(_updateFuncs + 0x0004)
-   0043 36r00               182 	ld	(hl),#<(_Update_STATE_GAME2)
-   0045 23                  183 	inc	hl
-   0046 36s00               184 	ld	(hl),#>(_Update_STATE_GAME2)
-                            185 ;ZGBMain_Init.c:57: INIT_STATE(STATE_GAME3);
-   0048 11r05r00            186 	ld	de,#(_stateBanks + 0x0003)
-   004B 21r00r00            187 	ld	hl,#_bank_STATE_GAME3
-   004E 7E                  188 	ld	a,(hl)
-   004F 12                  189 	ld	(de),a
-   0050 21r10r00            190 	ld	hl,#(_startFuncs + 0x0006)
-   0053 36r00               191 	ld	(hl),#<(_Start_STATE_GAME3)
-   0055 23                  192 	inc	hl
-   0056 36s00               193 	ld	(hl),#>(_Start_STATE_GAME3)
-   0058 21r20r00            194 	ld	hl,#(_updateFuncs + 0x0006)
-   005B 36r00               195 	ld	(hl),#<(_Update_STATE_GAME3)
-   005D 23                  196 	inc	hl
-   005E 36s00               197 	ld	(hl),#>(_Update_STATE_GAME3)
-                            198 ;ZGBMain_Init.c:58: INIT_STATE(STATE_GAME4);
-   0060 11r06r00            199 	ld	de,#(_stateBanks + 0x0004)
-   0063 21r00r00            200 	ld	hl,#_bank_STATE_GAME4
-   0066 7E                  201 	ld	a,(hl)
-   0067 12                  202 	ld	(de),a
-   0068 21r12r00            203 	ld	hl,#(_startFuncs + 0x0008)
-   006B 36r00               204 	ld	(hl),#<(_Start_STATE_GAME4)
-   006D 23                  205 	inc	hl
-   006E 36s00               206 	ld	(hl),#>(_Start_STATE_GAME4)
-   0070 21r22r00            207 	ld	hl,#(_updateFuncs + 0x0008)
-   0073 36r00               208 	ld	(hl),#<(_Update_STATE_GAME4)
-   0075 23                  209 	inc	hl
-   0076 36s00               210 	ld	(hl),#>(_Update_STATE_GAME4)
-                            211 ;ZGBMain_Init.c:59: INIT_STATE(STATE_GAME5);
-   0078 11r07r00            212 	ld	de,#(_stateBanks + 0x0005)
-   007B 21r00r00            213 	ld	hl,#_bank_STATE_GAME5
-   007E 7E                  214 	ld	a,(hl)
-   007F 12                  215 	ld	(de),a
-   0080 21r14r00            216 	ld	hl,#(_startFuncs + 0x000a)
-   0083 36r00               217 	ld	(hl),#<(_Start_STATE_GAME5)
-   0085 23                  218 	inc	hl
-   0086 36s00               219 	ld	(hl),#>(_Start_STATE_GAME5)
-   0088 21r24r00            220 	ld	hl,#(_updateFuncs + 0x000a)
-   008B 36r00               221 	ld	(hl),#<(_Update_STATE_GAME5)
-   008D 23                  222 	inc	hl
-   008E 36s00               223 	ld	(hl),#>(_Update_STATE_GAME5)
-                            224 ;ZGBMain_Init.c:60: INIT_STATE(STATE_GAME6);
-   0090 11r08r00            225 	ld	de,#(_stateBanks + 0x0006)
-   0093 21r00r00            226 	ld	hl,#_bank_STATE_GAME6
-   0096 7E                  227 	ld	a,(hl)
-   0097 12                  228 	ld	(de),a
-   0098 21r16r00            229 	ld	hl,#(_startFuncs + 0x000c)
-   009B 36r00               230 	ld	(hl),#<(_Start_STATE_GAME6)
-   009D 23                  231 	inc	hl
-   009E 36s00               232 	ld	(hl),#>(_Start_STATE_GAME6)
-   00A0 21r26r00            233 	ld	hl,#(_updateFuncs + 0x000c)
-   00A3 36r00               234 	ld	(hl),#<(_Update_STATE_GAME6)
-   00A5 23                  235 	inc	hl
-   00A6 36s00               236 	ld	(hl),#>(_Update_STATE_GAME6)
-                            237 ;ZGBMain_Init.c:61: INIT_STATE(STATE_END);
-   00A8 11r09r00            238 	ld	de,#(_stateBanks + 0x0007)
-   00AB 21r00r00            239 	ld	hl,#_bank_STATE_END
-   00AE 7E                  240 	ld	a,(hl)
-   00AF 12                  241 	ld	(de),a
-   00B0 21r18r00            242 	ld	hl,#(_startFuncs + 0x000e)
-   00B3 36r00               243 	ld	(hl),#<(_Start_STATE_END)
-   00B5 23                  244 	inc	hl
-   00B6 36s00               245 	ld	(hl),#>(_Start_STATE_END)
-   00B8 21r28r00            246 	ld	hl,#(_updateFuncs + 0x000e)
-   00BB 36r00               247 	ld	(hl),#<(_Update_STATE_END)
-   00BD 23                  248 	inc	hl
-   00BE 36s00               249 	ld	(hl),#>(_Update_STATE_END)
-   00C0 C9                  250 	ret
-                            251 ;ZGBMain_Init.c:64: void InitSprites() {
-                            252 ;	---------------------------------
-                            253 ; Function InitSprites
-                            254 ; ---------------------------------
-   00C1                     255 _InitSprites::
-                            256 ;ZGBMain_Init.c:65: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
-   00C1 21 00 00            257 	ld	hl,#0x0000
-   00C4 E5                  258 	push	hl
-   00C5 21 02 09            259 	ld	hl,#0x0902
-   00C8 E5                  260 	push	hl
-   00C9 3E 03               261 	ld	a,#0x03
-   00CB F5                  262 	push	af
-   00CC 33                  263 	inc	sp
-   00CD 21r00r00            264 	ld	hl,#_player
-   00D0 E5                  265 	push	hl
-   00D1 21r00r00            266 	ld	hl,#_Destroy_SPRITE_PLAYER
-   00D4 E5                  267 	push	hl
-   00D5 21r00r00            268 	ld	hl,#_Update_SPRITE_PLAYER
-   00D8 E5                  269 	push	hl
-   00D9 21r00r00            270 	ld	hl,#_Start_SPRITE_PLAYER
-   00DC E5                  271 	push	hl
-   00DD 21r00r00            272 	ld	hl,#_bank_SPRITE_PLAYER
-   00E0 7E                  273 	ld	a,(hl)
-   00E1 F5                  274 	push	af
-   00E2 33                  275 	inc	sp
-   00E3 AF                  276 	xor	a, a
-   00E4 F5                  277 	push	af
-   00E5 33                  278 	inc	sp
-   00E6 CDr00r00            279 	call	_InitSpriteInfo
-   00E9 E8 0F               280 	add	sp, #15
-                            281 ;ZGBMain_Init.c:66: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
-   00EB 21 00 00            282 	ld	hl,#0x0000
-   00EE E5                  283 	push	hl
-   00EF 21 02 05            284 	ld	hl,#0x0502
-   00F2 E5                  285 	push	hl
-   00F3 3E 03               286 	ld	a,#0x03
-   00F5 F5                  287 	push	af
-   00F6 33                  288 	inc	sp
-   00F7 21r00r00            289 	ld	hl,#_enemy
-   00FA E5                  290 	push	hl
-   00FB 21r00r00            291 	ld	hl,#_Destroy_SPRITE_ENEMY
-   00FE E5                  292 	push	hl
-   00FF 21r00r00            293 	ld	hl,#_Update_SPRITE_ENEMY
-   0102 E5                  294 	push	hl
-   0103 21r00r00            295 	ld	hl,#_Start_SPRITE_ENEMY
-   0106 E5                  296 	push	hl
-   0107 21r00r00            297 	ld	hl,#_bank_SPRITE_ENEMY
-   010A 7E                  298 	ld	a,(hl)
-   010B F5                  299 	push	af
-   010C 33                  300 	inc	sp
-   010D 3E 01               301 	ld	a,#0x01
-   010F F5                  302 	push	af
-   0110 33                  303 	inc	sp
-   0111 CDr00r00            304 	call	_InitSpriteInfo
-   0114 E8 0F               305 	add	sp, #15
-                            306 ;ZGBMain_Init.c:68: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
-   0116 21 00 00            307 	ld	hl,#0x0000
-   0119 E5                  308 	push	hl
-   011A 21 02 06            309 	ld	hl,#0x0602
-   011D E5                  310 	push	hl
-   011E 3E 03               311 	ld	a,#0x03
-   0120 F5                  312 	push	af
-   0121 33                  313 	inc	sp
-   0122 21r00r00            314 	ld	hl,#_key
-   0125 E5                  315 	push	hl
-   0126 21r00r00            316 	ld	hl,#_Destroy_SPRITE_KEY
-   0129 E5                  317 	push	hl
-   012A 21r00r00            318 	ld	hl,#_Update_SPRITE_KEY
-   012D E5                  319 	push	hl
-   012E 21r00r00            320 	ld	hl,#_Start_SPRITE_KEY
-   0131 E5                  321 	push	hl
-   0132 21r00r00            322 	ld	hl,#_bank_SPRITE_KEY
-   0135 7E                  323 	ld	a,(hl)
-   0136 F5                  324 	push	af
-   0137 33                  325 	inc	sp
-   0138 3E 03               326 	ld	a,#0x03
-   013A F5                  327 	push	af
-   013B 33                  328 	inc	sp
-   013C CDr00r00            329 	call	_InitSpriteInfo
-   013F E8 0F               330 	add	sp, #15
-                            331 ;ZGBMain_Init.c:69: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
-   0141 21 00 00            332 	ld	hl,#0x0000
-   0144 E5                  333 	push	hl
-   0145 21 02 01            334 	ld	hl,#0x0102
-   0148 E5                  335 	push	hl
-   0149 3E 03               336 	ld	a,#0x03
-   014B F5                  337 	push	af
-   014C 33                  338 	inc	sp
-   014D 21r00r00            339 	ld	hl,#_door
-   0150 E5                  340 	push	hl
-   0151 21r00r00            341 	ld	hl,#_Destroy_SPRITE_DOOR
-   0154 E5                  342 	push	hl
-   0155 21r00r00            343 	ld	hl,#_Update_SPRITE_DOOR
-   0158 E5                  344 	push	hl
-   0159 21r00r00            345 	ld	hl,#_Start_SPRITE_DOOR
-   015C E5                  346 	push	hl
-   015D 21r00r00            347 	ld	hl,#_bank_SPRITE_DOOR
-   0160 7E                  348 	ld	a,(hl)
-   0161 F5                  349 	push	af
-   0162 33                  350 	inc	sp
-   0163 3E 04               351 	ld	a,#0x04
-   0165 F5                  352 	push	af
-   0166 33                  353 	inc	sp
-   0167 CDr00r00            354 	call	_InitSpriteInfo
-   016A E8 0F               355 	add	sp, #15
-                            356 ;ZGBMain_Init.c:70: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
-   016C 21 00 00            357 	ld	hl,#0x0000
-   016F E5                  358 	push	hl
-   0170 21 02 01            359 	ld	hl,#0x0102
-   0173 E5                  360 	push	hl
-   0174 3E 03               361 	ld	a,#0x03
-   0176 F5                  362 	push	af
-   0177 33                  363 	inc	sp
-   0178 21r00r00            364 	ld	hl,#_dooropen
-   017B E5                  365 	push	hl
-   017C 21r00r00            366 	ld	hl,#_Destroy_SPRITE_DOOROPEN
-   017F E5                  367 	push	hl
-   0180 21r00r00            368 	ld	hl,#_Update_SPRITE_DOOROPEN
-   0183 E5                  369 	push	hl
-   0184 21r00r00            370 	ld	hl,#_Start_SPRITE_DOOROPEN
-   0187 E5                  371 	push	hl
-   0188 21r00r00            372 	ld	hl,#_bank_SPRITE_DOOROPEN
-   018B 7E                  373 	ld	a,(hl)
-   018C F5                  374 	push	af
-   018D 33                  375 	inc	sp
-   018E 3E 05               376 	ld	a,#0x05
-   0190 F5                  377 	push	af
-   0191 33                  378 	inc	sp
-   0192 CDr00r00            379 	call	_InitSpriteInfo
-   0195 E8 0F               380 	add	sp, #15
-                            381 ;ZGBMain_Init.c:71: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
-   0197 21 00 00            382 	ld	hl,#0x0000
-   019A E5                  383 	push	hl
-   019B 21 02 06            384 	ld	hl,#0x0602
-   019E E5                  385 	push	hl
-   019F 3E 03               386 	ld	a,#0x03
-   01A1 F5                  387 	push	af
-   01A2 33                  388 	inc	sp
-   01A3 21r00r00            389 	ld	hl,#_enemy2
-   01A6 E5                  390 	push	hl
-   01A7 21r00r00            391 	ld	hl,#_Destroy_SPRITE_ENEMY2
-   01AA E5                  392 	push	hl
-   01AB 21r00r00            393 	ld	hl,#_Update_SPRITE_ENEMY2
-   01AE E5                  394 	push	hl
-   01AF 21r00r00            395 	ld	hl,#_Start_SPRITE_ENEMY2
-   01B2 E5                  396 	push	hl
-   01B3 21r00r00            397 	ld	hl,#_bank_SPRITE_ENEMY2
-   01B6 7E                  398 	ld	a,(hl)
-   01B7 F5                  399 	push	af
-   01B8 33                  400 	inc	sp
-   01B9 3E 02               401 	ld	a,#0x02
-   01BB F5                  402 	push	af
-   01BC 33                  403 	inc	sp
-   01BD CDr00r00            404 	call	_InitSpriteInfo
-   01C0 E8 0F               405 	add	sp, #15
-                            406 ;ZGBMain_Init.c:72: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
-   01C2 21 00 00            407 	ld	hl,#0x0000
-   01C5 E5                  408 	push	hl
-   01C6 21 02 04            409 	ld	hl,#0x0402
-   01C9 E5                  410 	push	hl
-   01CA 3E 03               411 	ld	a,#0x03
-   01CC F5                  412 	push	af
-   01CD 33                  413 	inc	sp
-   01CE 21r00r00            414 	ld	hl,#_bomb
-   01D1 E5                  415 	push	hl
-   01D2 21r00r00            416 	ld	hl,#_Destroy_SPRITE_BOMB
-   01D5 E5                  417 	push	hl
-   01D6 21r00r00            418 	ld	hl,#_Update_SPRITE_BOMB
-   01D9 E5                  419 	push	hl
-   01DA 21r00r00            420 	ld	hl,#_Start_SPRITE_BOMB
-   01DD E5                  421 	push	hl
-   01DE 21r00r00            422 	ld	hl,#_bank_SPRITE_BOMB
-   01E1 7E                  423 	ld	a,(hl)
-   01E2 F5                  424 	push	af
-   01E3 33                  425 	inc	sp
-   01E4 3E 06               426 	ld	a,#0x06
-   01E6 F5                  427 	push	af
-   01E7 33                  428 	inc	sp
-   01E8 CDr00r00            429 	call	_InitSpriteInfo
-   01EB E8 0F               430 	add	sp, #15
-                            431 ;ZGBMain_Init.c:73: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
-   01ED 21 00 00            432 	ld	hl,#0x0000
-   01F0 E5                  433 	push	hl
-   01F1 21 02 08            434 	ld	hl,#0x0802
-   01F4 E5                  435 	push	hl
-   01F5 3E 03               436 	ld	a,#0x03
-   01F7 F5                  437 	push	af
-   01F8 33                  438 	inc	sp
-   01F9 21r00r00            439 	ld	hl,#_bomb
-   01FC E5                  440 	push	hl
-   01FD 21r00r00            441 	ld	hl,#_Destroy_SPRITE_BOMB_L
-   0200 E5                  442 	push	hl
-   0201 21r00r00            443 	ld	hl,#_Update_SPRITE_BOMB_L
-   0204 E5                  444 	push	hl
-   0205 21r00r00            445 	ld	hl,#_Start_SPRITE_BOMB_L
-   0208 E5                  446 	push	hl
-   0209 21r00r00            447 	ld	hl,#_bank_SPRITE_BOMB_L
-   020C 7E                  448 	ld	a,(hl)
-   020D F5                  449 	push	af
-   020E 33                  450 	inc	sp
-   020F 3E 07               451 	ld	a,#0x07
-   0211 F5                  452 	push	af
-   0212 33                  453 	inc	sp
-   0213 CDr00r00            454 	call	_InitSpriteInfo
-   0216 E8 0F               455 	add	sp, #15
-                            456 ;ZGBMain_Init.c:74: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
-   0218 21 00 00            457 	ld	hl,#0x0000
-   021B E5                  458 	push	hl
-   021C 21 02 04            459 	ld	hl,#0x0402
-   021F E5                  460 	push	hl
-   0220 3E 03               461 	ld	a,#0x03
-   0222 F5                  462 	push	af
-   0223 33                  463 	inc	sp
-   0224 21r00r00            464 	ld	hl,#_enemy3
-   0227 E5                  465 	push	hl
-   0228 21r00r00            466 	ld	hl,#_Destroy_SPRITE_ENEMY3
-   022B E5                  467 	push	hl
-   022C 21r00r00            468 	ld	hl,#_Update_SPRITE_ENEMY3
-   022F E5                  469 	push	hl
-   0230 21r00r00            470 	ld	hl,#_Start_SPRITE_ENEMY3
-   0233 E5                  471 	push	hl
-   0234 21r00r00            472 	ld	hl,#_bank_SPRITE_ENEMY3
-   0237 7E                  473 	ld	a,(hl)
-   0238 F5                  474 	push	af
-   0239 33                  475 	inc	sp
-   023A 3E 08               476 	ld	a,#0x08
-   023C F5                  477 	push	af
-   023D 33                  478 	inc	sp
-   023E CDr00r00            479 	call	_InitSpriteInfo
-   0241 E8 0F               480 	add	sp, #15
-                            481 ;ZGBMain_Init.c:75: INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
-   0243 21 00 00            482 	ld	hl,#0x0000
-   0246 E5                  483 	push	hl
-   0247 21 02 05            484 	ld	hl,#0x0502
-   024A E5                  485 	push	hl
-   024B 3E 03               486 	ld	a,#0x03
-   024D F5                  487 	push	af
-   024E 33                  488 	inc	sp
-   024F 21r00r00            489 	ld	hl,#_diamond
-   0252 E5                  490 	push	hl
-   0253 21r00r00            491 	ld	hl,#_Destroy_SPRITE_DIAMOND
-   0256 E5                  492 	push	hl
-   0257 21r00r00            493 	ld	hl,#_Update_SPRITE_DIAMOND
-   025A E5                  494 	push	hl
-   025B 21r00r00            495 	ld	hl,#_Start_SPRITE_DIAMOND
-   025E E5                  496 	push	hl
-   025F 21r00r00            497 	ld	hl,#_bank_SPRITE_DIAMOND
-   0262 7E                  498 	ld	a,(hl)
-   0263 F5                  499 	push	af
-   0264 33                  500 	inc	sp
-   0265 3E 09               501 	ld	a,#0x09
-   0267 F5                  502 	push	af
-   0268 33                  503 	inc	sp
-   0269 CDr00r00            504 	call	_InitSpriteInfo
-   026C E8 0F               505 	add	sp, #15
-   026E C9                  506 	ret
-                            507 	.area _CODE_2
-                            508 	.area _CABS (ABS)
+                            140 ; code
+                            141 ;--------------------------------------------------------
+                            142 	.area _CODE_2
+                            143 ;ZGBMain_Init.c:54: void InitStates() {
+                            144 ;	---------------------------------
+                            145 ; Function InitStates
+                            146 ; ---------------------------------
+   0000                     147 _InitStates::
+                            148 ;ZGBMain_Init.c:55: INIT_STATE(STATE_MENU);
+   0000 11r02r00            149 	ld	de,#_stateBanks
+   0003 21r00r00            150 	ld	hl,#_bank_STATE_MENU
+   0006 7E                  151 	ld	a,(hl)
+   0007 12                  152 	ld	(de),a
+   0008 21r0Br00            153 	ld	hl,#_startFuncs
+   000B 36r00               154 	ld	(hl),#<(_Start_STATE_MENU)
+   000D 23                  155 	inc	hl
+   000E 36s00               156 	ld	(hl),#>(_Start_STATE_MENU)
+   0010 21r1Dr00            157 	ld	hl,#_updateFuncs
+   0013 36r00               158 	ld	(hl),#<(_Update_STATE_MENU)
+   0015 23                  159 	inc	hl
+   0016 36s00               160 	ld	(hl),#>(_Update_STATE_MENU)
+                            161 ;ZGBMain_Init.c:56: INIT_STATE(STATE_GAME);
+   0018 11r03r00            162 	ld	de,#(_stateBanks + 0x0001)
+   001B 21r00r00            163 	ld	hl,#_bank_STATE_GAME
+   001E 7E                  164 	ld	a,(hl)
+   001F 12                  165 	ld	(de),a
+   0020 21r0Dr00            166 	ld	hl,#(_startFuncs + 0x0002)
+   0023 36r00               167 	ld	(hl),#<(_Start_STATE_GAME)
+   0025 23                  168 	inc	hl
+   0026 36s00               169 	ld	(hl),#>(_Start_STATE_GAME)
+   0028 21r1Fr00            170 	ld	hl,#(_updateFuncs + 0x0002)
+   002B 36r00               171 	ld	(hl),#<(_Update_STATE_GAME)
+   002D 23                  172 	inc	hl
+   002E 36s00               173 	ld	(hl),#>(_Update_STATE_GAME)
+                            174 ;ZGBMain_Init.c:57: INIT_STATE(STATE_GAME2);
+   0030 11r04r00            175 	ld	de,#(_stateBanks + 0x0002)
+   0033 21r00r00            176 	ld	hl,#_bank_STATE_GAME2
+   0036 7E                  177 	ld	a,(hl)
+   0037 12                  178 	ld	(de),a
+   0038 21r0Fr00            179 	ld	hl,#(_startFuncs + 0x0004)
+   003B 36r00               180 	ld	(hl),#<(_Start_STATE_GAME2)
+   003D 23                  181 	inc	hl
+   003E 36s00               182 	ld	(hl),#>(_Start_STATE_GAME2)
+   0040 21r21r00            183 	ld	hl,#(_updateFuncs + 0x0004)
+   0043 36r00               184 	ld	(hl),#<(_Update_STATE_GAME2)
+   0045 23                  185 	inc	hl
+   0046 36s00               186 	ld	(hl),#>(_Update_STATE_GAME2)
+                            187 ;ZGBMain_Init.c:58: INIT_STATE(STATE_GAME3);
+   0048 11r05r00            188 	ld	de,#(_stateBanks + 0x0003)
+   004B 21r00r00            189 	ld	hl,#_bank_STATE_GAME3
+   004E 7E                  190 	ld	a,(hl)
+   004F 12                  191 	ld	(de),a
+   0050 21r11r00            192 	ld	hl,#(_startFuncs + 0x0006)
+   0053 36r00               193 	ld	(hl),#<(_Start_STATE_GAME3)
+   0055 23                  194 	inc	hl
+   0056 36s00               195 	ld	(hl),#>(_Start_STATE_GAME3)
+   0058 21r23r00            196 	ld	hl,#(_updateFuncs + 0x0006)
+   005B 36r00               197 	ld	(hl),#<(_Update_STATE_GAME3)
+   005D 23                  198 	inc	hl
+   005E 36s00               199 	ld	(hl),#>(_Update_STATE_GAME3)
+                            200 ;ZGBMain_Init.c:59: INIT_STATE(STATE_GAME4);
+   0060 11r06r00            201 	ld	de,#(_stateBanks + 0x0004)
+   0063 21r00r00            202 	ld	hl,#_bank_STATE_GAME4
+   0066 7E                  203 	ld	a,(hl)
+   0067 12                  204 	ld	(de),a
+   0068 21r13r00            205 	ld	hl,#(_startFuncs + 0x0008)
+   006B 36r00               206 	ld	(hl),#<(_Start_STATE_GAME4)
+   006D 23                  207 	inc	hl
+   006E 36s00               208 	ld	(hl),#>(_Start_STATE_GAME4)
+   0070 21r25r00            209 	ld	hl,#(_updateFuncs + 0x0008)
+   0073 36r00               210 	ld	(hl),#<(_Update_STATE_GAME4)
+   0075 23                  211 	inc	hl
+   0076 36s00               212 	ld	(hl),#>(_Update_STATE_GAME4)
+                            213 ;ZGBMain_Init.c:60: INIT_STATE(STATE_GAME5);
+   0078 11r07r00            214 	ld	de,#(_stateBanks + 0x0005)
+   007B 21r00r00            215 	ld	hl,#_bank_STATE_GAME5
+   007E 7E                  216 	ld	a,(hl)
+   007F 12                  217 	ld	(de),a
+   0080 21r15r00            218 	ld	hl,#(_startFuncs + 0x000a)
+   0083 36r00               219 	ld	(hl),#<(_Start_STATE_GAME5)
+   0085 23                  220 	inc	hl
+   0086 36s00               221 	ld	(hl),#>(_Start_STATE_GAME5)
+   0088 21r27r00            222 	ld	hl,#(_updateFuncs + 0x000a)
+   008B 36r00               223 	ld	(hl),#<(_Update_STATE_GAME5)
+   008D 23                  224 	inc	hl
+   008E 36s00               225 	ld	(hl),#>(_Update_STATE_GAME5)
+                            226 ;ZGBMain_Init.c:61: INIT_STATE(STATE_GAME6);
+   0090 11r08r00            227 	ld	de,#(_stateBanks + 0x0006)
+   0093 21r00r00            228 	ld	hl,#_bank_STATE_GAME6
+   0096 7E                  229 	ld	a,(hl)
+   0097 12                  230 	ld	(de),a
+   0098 21r17r00            231 	ld	hl,#(_startFuncs + 0x000c)
+   009B 36r00               232 	ld	(hl),#<(_Start_STATE_GAME6)
+   009D 23                  233 	inc	hl
+   009E 36s00               234 	ld	(hl),#>(_Start_STATE_GAME6)
+   00A0 21r29r00            235 	ld	hl,#(_updateFuncs + 0x000c)
+   00A3 36r00               236 	ld	(hl),#<(_Update_STATE_GAME6)
+   00A5 23                  237 	inc	hl
+   00A6 36s00               238 	ld	(hl),#>(_Update_STATE_GAME6)
+                            239 ;ZGBMain_Init.c:62: INIT_STATE(STATE_END);
+   00A8 11r09r00            240 	ld	de,#(_stateBanks + 0x0007)
+   00AB 21r00r00            241 	ld	hl,#_bank_STATE_END
+   00AE 7E                  242 	ld	a,(hl)
+   00AF 12                  243 	ld	(de),a
+   00B0 21r19r00            244 	ld	hl,#(_startFuncs + 0x000e)
+   00B3 36r00               245 	ld	(hl),#<(_Start_STATE_END)
+   00B5 23                  246 	inc	hl
+   00B6 36s00               247 	ld	(hl),#>(_Start_STATE_END)
+   00B8 21r2Br00            248 	ld	hl,#(_updateFuncs + 0x000e)
+   00BB 36r00               249 	ld	(hl),#<(_Update_STATE_END)
+   00BD 23                  250 	inc	hl
+   00BE 36s00               251 	ld	(hl),#>(_Update_STATE_END)
+                            252 ;ZGBMain_Init.c:63: INIT_STATE(STATE_END2);
+   00C0 11r0Ar00            253 	ld	de,#(_stateBanks + 0x0008)
+   00C3 21r00r00            254 	ld	hl,#_bank_STATE_END2
+   00C6 7E                  255 	ld	a,(hl)
+   00C7 12                  256 	ld	(de),a
+   00C8 21r1Br00            257 	ld	hl,#(_startFuncs + 0x0010)
+   00CB 36r00               258 	ld	(hl),#<(_Start_STATE_END2)
+   00CD 23                  259 	inc	hl
+   00CE 36s00               260 	ld	(hl),#>(_Start_STATE_END2)
+   00D0 21r2Dr00            261 	ld	hl,#(_updateFuncs + 0x0010)
+   00D3 36r00               262 	ld	(hl),#<(_Update_STATE_END2)
+   00D5 23                  263 	inc	hl
+   00D6 36s00               264 	ld	(hl),#>(_Update_STATE_END2)
+   00D8 C9                  265 	ret
+                            266 ;ZGBMain_Init.c:66: void InitSprites() {
+                            267 ;	---------------------------------
+                            268 ; Function InitSprites
+                            269 ; ---------------------------------
+   00D9                     270 _InitSprites::
+                            271 ;ZGBMain_Init.c:67: INIT_SPRITE(SPRITE_PLAYER, player, 3, FRAME_16x16, 9);
+   00D9 21 00 00            272 	ld	hl,#0x0000
+   00DC E5                  273 	push	hl
+   00DD 21 02 09            274 	ld	hl,#0x0902
+   00E0 E5                  275 	push	hl
+   00E1 3E 03               276 	ld	a,#0x03
+   00E3 F5                  277 	push	af
+   00E4 33                  278 	inc	sp
+   00E5 21r00r00            279 	ld	hl,#_player
+   00E8 E5                  280 	push	hl
+   00E9 21r00r00            281 	ld	hl,#_Destroy_SPRITE_PLAYER
+   00EC E5                  282 	push	hl
+   00ED 21r00r00            283 	ld	hl,#_Update_SPRITE_PLAYER
+   00F0 E5                  284 	push	hl
+   00F1 21r00r00            285 	ld	hl,#_Start_SPRITE_PLAYER
+   00F4 E5                  286 	push	hl
+   00F5 21r00r00            287 	ld	hl,#_bank_SPRITE_PLAYER
+   00F8 7E                  288 	ld	a,(hl)
+   00F9 F5                  289 	push	af
+   00FA 33                  290 	inc	sp
+   00FB AF                  291 	xor	a, a
+   00FC F5                  292 	push	af
+   00FD 33                  293 	inc	sp
+   00FE CDr00r00            294 	call	_InitSpriteInfo
+   0101 E8 0F               295 	add	sp, #15
+                            296 ;ZGBMain_Init.c:68: INIT_SPRITE(SPRITE_ENEMY, enemy, 3, FRAME_16x16, 5);
+   0103 21 00 00            297 	ld	hl,#0x0000
+   0106 E5                  298 	push	hl
+   0107 21 02 05            299 	ld	hl,#0x0502
+   010A E5                  300 	push	hl
+   010B 3E 03               301 	ld	a,#0x03
+   010D F5                  302 	push	af
+   010E 33                  303 	inc	sp
+   010F 21r00r00            304 	ld	hl,#_enemy
+   0112 E5                  305 	push	hl
+   0113 21r00r00            306 	ld	hl,#_Destroy_SPRITE_ENEMY
+   0116 E5                  307 	push	hl
+   0117 21r00r00            308 	ld	hl,#_Update_SPRITE_ENEMY
+   011A E5                  309 	push	hl
+   011B 21r00r00            310 	ld	hl,#_Start_SPRITE_ENEMY
+   011E E5                  311 	push	hl
+   011F 21r00r00            312 	ld	hl,#_bank_SPRITE_ENEMY
+   0122 7E                  313 	ld	a,(hl)
+   0123 F5                  314 	push	af
+   0124 33                  315 	inc	sp
+   0125 3E 01               316 	ld	a,#0x01
+   0127 F5                  317 	push	af
+   0128 33                  318 	inc	sp
+   0129 CDr00r00            319 	call	_InitSpriteInfo
+   012C E8 0F               320 	add	sp, #15
+                            321 ;ZGBMain_Init.c:70: INIT_SPRITE(SPRITE_KEY, key, 3, FRAME_16x16, 6);
+   012E 21 00 00            322 	ld	hl,#0x0000
+   0131 E5                  323 	push	hl
+   0132 21 02 06            324 	ld	hl,#0x0602
+   0135 E5                  325 	push	hl
+   0136 3E 03               326 	ld	a,#0x03
+   0138 F5                  327 	push	af
+   0139 33                  328 	inc	sp
+   013A 21r00r00            329 	ld	hl,#_key
+   013D E5                  330 	push	hl
+   013E 21r00r00            331 	ld	hl,#_Destroy_SPRITE_KEY
+   0141 E5                  332 	push	hl
+   0142 21r00r00            333 	ld	hl,#_Update_SPRITE_KEY
+   0145 E5                  334 	push	hl
+   0146 21r00r00            335 	ld	hl,#_Start_SPRITE_KEY
+   0149 E5                  336 	push	hl
+   014A 21r00r00            337 	ld	hl,#_bank_SPRITE_KEY
+   014D 7E                  338 	ld	a,(hl)
+   014E F5                  339 	push	af
+   014F 33                  340 	inc	sp
+   0150 3E 03               341 	ld	a,#0x03
+   0152 F5                  342 	push	af
+   0153 33                  343 	inc	sp
+   0154 CDr00r00            344 	call	_InitSpriteInfo
+   0157 E8 0F               345 	add	sp, #15
+                            346 ;ZGBMain_Init.c:71: INIT_SPRITE(SPRITE_DOOR, door, 3, FRAME_16x16, 1);
+   0159 21 00 00            347 	ld	hl,#0x0000
+   015C E5                  348 	push	hl
+   015D 21 02 01            349 	ld	hl,#0x0102
+   0160 E5                  350 	push	hl
+   0161 3E 03               351 	ld	a,#0x03
+   0163 F5                  352 	push	af
+   0164 33                  353 	inc	sp
+   0165 21r00r00            354 	ld	hl,#_door
+   0168 E5                  355 	push	hl
+   0169 21r00r00            356 	ld	hl,#_Destroy_SPRITE_DOOR
+   016C E5                  357 	push	hl
+   016D 21r00r00            358 	ld	hl,#_Update_SPRITE_DOOR
+   0170 E5                  359 	push	hl
+   0171 21r00r00            360 	ld	hl,#_Start_SPRITE_DOOR
+   0174 E5                  361 	push	hl
+   0175 21r00r00            362 	ld	hl,#_bank_SPRITE_DOOR
+   0178 7E                  363 	ld	a,(hl)
+   0179 F5                  364 	push	af
+   017A 33                  365 	inc	sp
+   017B 3E 04               366 	ld	a,#0x04
+   017D F5                  367 	push	af
+   017E 33                  368 	inc	sp
+   017F CDr00r00            369 	call	_InitSpriteInfo
+   0182 E8 0F               370 	add	sp, #15
+                            371 ;ZGBMain_Init.c:72: INIT_SPRITE(SPRITE_DOOROPEN, dooropen, 3, FRAME_16x16, 1);
+   0184 21 00 00            372 	ld	hl,#0x0000
+   0187 E5                  373 	push	hl
+   0188 21 02 01            374 	ld	hl,#0x0102
+   018B E5                  375 	push	hl
+   018C 3E 03               376 	ld	a,#0x03
+   018E F5                  377 	push	af
+   018F 33                  378 	inc	sp
+   0190 21r00r00            379 	ld	hl,#_dooropen
+   0193 E5                  380 	push	hl
+   0194 21r00r00            381 	ld	hl,#_Destroy_SPRITE_DOOROPEN
+   0197 E5                  382 	push	hl
+   0198 21r00r00            383 	ld	hl,#_Update_SPRITE_DOOROPEN
+   019B E5                  384 	push	hl
+   019C 21r00r00            385 	ld	hl,#_Start_SPRITE_DOOROPEN
+   019F E5                  386 	push	hl
+   01A0 21r00r00            387 	ld	hl,#_bank_SPRITE_DOOROPEN
+   01A3 7E                  388 	ld	a,(hl)
+   01A4 F5                  389 	push	af
+   01A5 33                  390 	inc	sp
+   01A6 3E 05               391 	ld	a,#0x05
+   01A8 F5                  392 	push	af
+   01A9 33                  393 	inc	sp
+   01AA CDr00r00            394 	call	_InitSpriteInfo
+   01AD E8 0F               395 	add	sp, #15
+                            396 ;ZGBMain_Init.c:73: INIT_SPRITE(SPRITE_ENEMY2, enemy2, 3, FRAME_16x16, 6);
+   01AF 21 00 00            397 	ld	hl,#0x0000
+   01B2 E5                  398 	push	hl
+   01B3 21 02 06            399 	ld	hl,#0x0602
+   01B6 E5                  400 	push	hl
+   01B7 3E 03               401 	ld	a,#0x03
+   01B9 F5                  402 	push	af
+   01BA 33                  403 	inc	sp
+   01BB 21r00r00            404 	ld	hl,#_enemy2
+   01BE E5                  405 	push	hl
+   01BF 21r00r00            406 	ld	hl,#_Destroy_SPRITE_ENEMY2
+   01C2 E5                  407 	push	hl
+   01C3 21r00r00            408 	ld	hl,#_Update_SPRITE_ENEMY2
+   01C6 E5                  409 	push	hl
+   01C7 21r00r00            410 	ld	hl,#_Start_SPRITE_ENEMY2
+   01CA E5                  411 	push	hl
+   01CB 21r00r00            412 	ld	hl,#_bank_SPRITE_ENEMY2
+   01CE 7E                  413 	ld	a,(hl)
+   01CF F5                  414 	push	af
+   01D0 33                  415 	inc	sp
+   01D1 3E 02               416 	ld	a,#0x02
+   01D3 F5                  417 	push	af
+   01D4 33                  418 	inc	sp
+   01D5 CDr00r00            419 	call	_InitSpriteInfo
+   01D8 E8 0F               420 	add	sp, #15
+                            421 ;ZGBMain_Init.c:74: INIT_SPRITE(SPRITE_BOMB, bomb, 3, FRAME_16x16, 4);
+   01DA 21 00 00            422 	ld	hl,#0x0000
+   01DD E5                  423 	push	hl
+   01DE 21 02 04            424 	ld	hl,#0x0402
+   01E1 E5                  425 	push	hl
+   01E2 3E 03               426 	ld	a,#0x03
+   01E4 F5                  427 	push	af
+   01E5 33                  428 	inc	sp
+   01E6 21r00r00            429 	ld	hl,#_bomb
+   01E9 E5                  430 	push	hl
+   01EA 21r00r00            431 	ld	hl,#_Destroy_SPRITE_BOMB
+   01ED E5                  432 	push	hl
+   01EE 21r00r00            433 	ld	hl,#_Update_SPRITE_BOMB
+   01F1 E5                  434 	push	hl
+   01F2 21r00r00            435 	ld	hl,#_Start_SPRITE_BOMB
+   01F5 E5                  436 	push	hl
+   01F6 21r00r00            437 	ld	hl,#_bank_SPRITE_BOMB
+   01F9 7E                  438 	ld	a,(hl)
+   01FA F5                  439 	push	af
+   01FB 33                  440 	inc	sp
+   01FC 3E 06               441 	ld	a,#0x06
+   01FE F5                  442 	push	af
+   01FF 33                  443 	inc	sp
+   0200 CDr00r00            444 	call	_InitSpriteInfo
+   0203 E8 0F               445 	add	sp, #15
+                            446 ;ZGBMain_Init.c:75: INIT_SPRITE(SPRITE_BOMB_L, bomb, 3, FRAME_16x16, 8);
+   0205 21 00 00            447 	ld	hl,#0x0000
+   0208 E5                  448 	push	hl
+   0209 21 02 08            449 	ld	hl,#0x0802
+   020C E5                  450 	push	hl
+   020D 3E 03               451 	ld	a,#0x03
+   020F F5                  452 	push	af
+   0210 33                  453 	inc	sp
+   0211 21r00r00            454 	ld	hl,#_bomb
+   0214 E5                  455 	push	hl
+   0215 21r00r00            456 	ld	hl,#_Destroy_SPRITE_BOMB_L
+   0218 E5                  457 	push	hl
+   0219 21r00r00            458 	ld	hl,#_Update_SPRITE_BOMB_L
+   021C E5                  459 	push	hl
+   021D 21r00r00            460 	ld	hl,#_Start_SPRITE_BOMB_L
+   0220 E5                  461 	push	hl
+   0221 21r00r00            462 	ld	hl,#_bank_SPRITE_BOMB_L
+   0224 7E                  463 	ld	a,(hl)
+   0225 F5                  464 	push	af
+   0226 33                  465 	inc	sp
+   0227 3E 07               466 	ld	a,#0x07
+   0229 F5                  467 	push	af
+   022A 33                  468 	inc	sp
+   022B CDr00r00            469 	call	_InitSpriteInfo
+   022E E8 0F               470 	add	sp, #15
+                            471 ;ZGBMain_Init.c:76: INIT_SPRITE(SPRITE_ENEMY3, enemy3, 3, FRAME_16x16, 4);
+   0230 21 00 00            472 	ld	hl,#0x0000
+   0233 E5                  473 	push	hl
+   0234 21 02 04            474 	ld	hl,#0x0402
+   0237 E5                  475 	push	hl
+   0238 3E 03               476 	ld	a,#0x03
+   023A F5                  477 	push	af
+   023B 33                  478 	inc	sp
+   023C 21r00r00            479 	ld	hl,#_enemy3
+   023F E5                  480 	push	hl
+   0240 21r00r00            481 	ld	hl,#_Destroy_SPRITE_ENEMY3
+   0243 E5                  482 	push	hl
+   0244 21r00r00            483 	ld	hl,#_Update_SPRITE_ENEMY3
+   0247 E5                  484 	push	hl
+   0248 21r00r00            485 	ld	hl,#_Start_SPRITE_ENEMY3
+   024B E5                  486 	push	hl
+   024C 21r00r00            487 	ld	hl,#_bank_SPRITE_ENEMY3
+   024F 7E                  488 	ld	a,(hl)
+   0250 F5                  489 	push	af
+   0251 33                  490 	inc	sp
+   0252 3E 08               491 	ld	a,#0x08
+   0254 F5                  492 	push	af
+   0255 33                  493 	inc	sp
+   0256 CDr00r00            494 	call	_InitSpriteInfo
+   0259 E8 0F               495 	add	sp, #15
+                            496 ;ZGBMain_Init.c:77: INIT_SPRITE(SPRITE_DIAMOND, diamond, 3, FRAME_16x16, 5);
+   025B 21 00 00            497 	ld	hl,#0x0000
+   025E E5                  498 	push	hl
+   025F 21 02 05            499 	ld	hl,#0x0502
+   0262 E5                  500 	push	hl
+   0263 3E 03               501 	ld	a,#0x03
+   0265 F5                  502 	push	af
+   0266 33                  503 	inc	sp
+   0267 21r00r00            504 	ld	hl,#_diamond
+   026A E5                  505 	push	hl
+   026B 21r00r00            506 	ld	hl,#_Destroy_SPRITE_DIAMOND
+   026E E5                  507 	push	hl
+   026F 21r00r00            508 	ld	hl,#_Update_SPRITE_DIAMOND
+   0272 E5                  509 	push	hl
+   0273 21r00r00            510 	ld	hl,#_Start_SPRITE_DIAMOND
+   0276 E5                  511 	push	hl
+   0277 21r00r00            512 	ld	hl,#_bank_SPRITE_DIAMOND
+   027A 7E                  513 	ld	a,(hl)
+   027B F5                  514 	push	af
+   027C 33                  515 	inc	sp
+   027D 3E 09               516 	ld	a,#0x09
+   027F F5                  517 	push	af
+   0280 33                  518 	inc	sp
+   0281 CDr00r00            519 	call	_InitSpriteInfo
+   0284 E8 0F               520 	add	sp, #15
+   0286 C9                  521 	ret
+                            522 	.area _CODE_2
+                            523 	.area _CABS (ABS)

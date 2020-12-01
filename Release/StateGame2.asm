@@ -39,7 +39,7 @@ _collilision_tiles2::
 ;StateGame2.c:3: UINT8 bank_STATE_GAME2 = 2;
 	ld	hl,#_bank_STATE_GAME2
 	ld	(hl),#0x02
-;StateGame2.c:15: UINT8 collilision_tiles2[] = { 1,2,3,4,0 };
+;StateGame2.c:14: UINT8 collilision_tiles2[] = { 1,2,3,4,0 };
 	ld	hl,#_collilision_tiles2
 	ld	(hl),#0x01
 	ld	hl,#(_collilision_tiles2 + 0x0001)
@@ -59,26 +59,26 @@ _collilision_tiles2::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;StateGame2.c:17: void Start_STATE_GAME2() {
+;StateGame2.c:16: void Start_STATE_GAME2() {
 ;	---------------------------------
 ; Function Start_STATE_GAME2
 ; ---------------------------------
 _Start_STATE_GAME2::
-;StateGame2.c:19: next_lvl=3;
+;StateGame2.c:18: next_lvl=3;
 	ld	hl,#_next_lvl
 	ld	(hl),#0x03
 	inc	hl
 	ld	(hl),#0x00
-;StateGame2.c:20: NR52_REG = 0x80; //Enables sound, you should always setup this first
+;StateGame2.c:19: NR52_REG = 0x80; //Enables sound, you should always setup this first
 	ld	hl,#0xff26
 	ld	(hl),#0x80
-;StateGame2.c:21: NR51_REG = 0xFF; //Enables all channels (left and right)
+;StateGame2.c:20: NR51_REG = 0xFF; //Enables all channels (left and right)
 	ld	l, #0x25
 	ld	(hl),#0xff
-;StateGame2.c:22: NR50_REG = 0x77; //Max volume
+;StateGame2.c:21: NR50_REG = 0x77; //Max volume
 	ld	l, #0x24
 	ld	(hl),#0x77
-;StateGame2.c:24: SPRITES_8x16;
+;StateGame2.c:23: SPRITES_8x16;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -88,25 +88,25 @@ _Start_STATE_GAME2::
 	ld	c,a
 	ld	l, #0x40
 	ld	(hl),c
-;StateGame2.c:25: for(i = 0; i != n_sprite_types; ++ i) {
+;StateGame2.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
 00103$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
 	jr	Z,00101$
-;StateGame2.c:26: SpriteManagerLoad(i);
+;StateGame2.c:25: SpriteManagerLoad(i);
 	push	bc
 	push	bc
 	inc	sp
 	call	_SpriteManagerLoad
 	inc	sp
 	pop	bc
-;StateGame2.c:25: for(i = 0; i != n_sprite_types; ++ i) {
+;StateGame2.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
 	jr	00103$
 00101$:
-;StateGame2.c:28: SHOW_SPRITES;
+;StateGame2.c:27: SHOW_SPRITES;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -116,7 +116,7 @@ _Start_STATE_GAME2::
 	ld	c,a
 	ld	hl,#0xff40
 	ld	(hl),c
-;StateGame2.c:30: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
+;StateGame2.c:29: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	ld	hl,#0x0064
 	push	hl
 	ld	l, #0x14
@@ -130,22 +130,22 @@ _Start_STATE_GAME2::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateGame2.c:31: have_bomb = 3;
+;StateGame2.c:30: have_bomb = 3;
 	ld	hl,#_have_bomb
 	ld	(hl),#0x03
 	inc	hl
 	ld	(hl),#0x00
-;StateGame2.c:32: door_x = 16;
+;StateGame2.c:31: door_x = 16;
 	ld	hl,#_door_x
 	ld	(hl),#0x10
 	inc	hl
 	ld	(hl),#0x00
-;StateGame2.c:33: door_y = 24;
+;StateGame2.c:32: door_y = 24;
 	ld	hl,#_door_y
 	ld	(hl),#0x18
 	inc	hl
 	ld	(hl),#0x00
-;StateGame2.c:34: SpriteManagerAdd(SPRITE_KEY, 168, 88);
+;StateGame2.c:33: SpriteManagerAdd(SPRITE_KEY, 168, 88);
 	ld	hl,#0x0058
 	push	hl
 	ld	l, #0xa8
@@ -155,7 +155,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:35: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+;StateGame2.c:34: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 	ld	hl,#_door_y
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -171,7 +171,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:37: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+;StateGame2.c:36: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	ld	hl,#0x0073
 	push	hl
 	ld	l, #0x32
@@ -181,7 +181,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:38: SpriteManagerAdd(SPRITE_ENEMY2, 24, 64 );
+;StateGame2.c:37: SpriteManagerAdd(SPRITE_ENEMY2, 24, 64 );
 	ld	hl,#0x0040
 	push	hl
 	ld	l, #0x18
@@ -191,7 +191,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:40: SpriteManagerAdd(SPRITE_ENEMY, 88, 104);
+;StateGame2.c:39: SpriteManagerAdd(SPRITE_ENEMY, 88, 104);
 	ld	hl,#0x0068
 	push	hl
 	ld	l, #0x58
@@ -201,7 +201,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:41: SpriteManagerAdd(SPRITE_ENEMY, 224, 48);
+;StateGame2.c:40: SpriteManagerAdd(SPRITE_ENEMY, 224, 48);
 	ld	hl,#0x0030
 	push	hl
 	ld	l, #0xe0
@@ -211,7 +211,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:42: SpriteManagerAdd(SPRITE_ENEMY, 288, 40);
+;StateGame2.c:41: SpriteManagerAdd(SPRITE_ENEMY, 288, 40);
 	ld	hl,#0x0028
 	push	hl
 	ld	hl,#0x0120
@@ -221,7 +221,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:43: SpriteManagerAdd(SPRITE_ENEMY3, 50, 50);
+;StateGame2.c:42: SpriteManagerAdd(SPRITE_ENEMY3, 50, 50);
 	ld	hl,#0x0032
 	push	hl
 	ld	l, #0x32
@@ -231,7 +231,7 @@ _Start_STATE_GAME2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame2.c:44: InitScrollTiles(0, 59, tiles, 3);
+;StateGame2.c:43: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -243,7 +243,7 @@ _Start_STATE_GAME2::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame2.c:45: InitScroll(map2Width, map2Height, map2, collilision_tiles2, 0, 3);
+;StateGame2.c:44: InitScroll(map2Width, map2Height, map2, collilision_tiles2, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -261,7 +261,7 @@ _Start_STATE_GAME2::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame2.c:46: SHOW_BKG;
+;StateGame2.c:45: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -272,18 +272,18 @@ _Start_STATE_GAME2::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame2.c:51: void Update_STATE_GAME2() {
+;StateGame2.c:50: void Update_STATE_GAME2() {
 ;	---------------------------------
 ; Function Update_STATE_GAME2
 ; ---------------------------------
 _Update_STATE_GAME2::
-;StateGame2.c:52: if (KEY_PRESSED(J_START)) {
+;StateGame2.c:51: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame2.c:53: SetState(STATE_GAME3);
+;StateGame2.c:52: SetState(STATE_GAME3);
 	ld	a,#0x03
 	push	af
 	inc	sp

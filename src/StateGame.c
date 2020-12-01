@@ -8,7 +8,6 @@ UINT8 bank_STATE_GAME = 2;
 #include "ZGBMain.h"
 #include "Scroll.h"
 #include "SpriteManager.h"
-#include "Print.h"
 #include "global.h"
 
 extern UINT8 n_sprite_types;

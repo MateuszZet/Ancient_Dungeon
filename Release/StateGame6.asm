@@ -39,7 +39,7 @@ _collilision_tiles6::
 ;StateGame6.c:3: UINT8 bank_STATE_GAME6 = 2;
 	ld	hl,#_bank_STATE_GAME6
 	ld	(hl),#0x02
-;StateGame6.c:15: UINT8 collilision_tiles6[] = { 1,2,3,4,0 };
+;StateGame6.c:14: UINT8 collilision_tiles6[] = { 1,2,3,4,0 };
 	ld	hl,#_collilision_tiles6
 	ld	(hl),#0x01
 	ld	hl,#(_collilision_tiles6 + 0x0001)
@@ -59,26 +59,26 @@ _collilision_tiles6::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;StateGame6.c:17: void Start_STATE_GAME6() {
+;StateGame6.c:16: void Start_STATE_GAME6() {
 ;	---------------------------------
 ; Function Start_STATE_GAME6
 ; ---------------------------------
 _Start_STATE_GAME6::
-;StateGame6.c:19: next_lvl=7;
+;StateGame6.c:18: next_lvl=7;
 	ld	hl,#_next_lvl
 	ld	(hl),#0x07
 	inc	hl
 	ld	(hl),#0x00
-;StateGame6.c:20: NR52_REG = 0x80; //Enables sound, you should always setup this first
+;StateGame6.c:19: NR52_REG = 0x80; //Enables sound, you should always setup this first
 	ld	hl,#0xff26
 	ld	(hl),#0x80
-;StateGame6.c:21: NR51_REG = 0xFF; //Enables all channels (left and right)
+;StateGame6.c:20: NR51_REG = 0xFF; //Enables all channels (left and right)
 	ld	l, #0x25
 	ld	(hl),#0xff
-;StateGame6.c:22: NR50_REG = 0x77; //Max volume
+;StateGame6.c:21: NR50_REG = 0x77; //Max volume
 	ld	l, #0x24
 	ld	(hl),#0x77
-;StateGame6.c:24: SPRITES_8x16;
+;StateGame6.c:23: SPRITES_8x16;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -88,25 +88,25 @@ _Start_STATE_GAME6::
 	ld	c,a
 	ld	l, #0x40
 	ld	(hl),c
-;StateGame6.c:25: for(i = 0; i != n_sprite_types; ++ i) {
+;StateGame6.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
 00103$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
 	jr	Z,00101$
-;StateGame6.c:26: SpriteManagerLoad(i);
+;StateGame6.c:25: SpriteManagerLoad(i);
 	push	bc
 	push	bc
 	inc	sp
 	call	_SpriteManagerLoad
 	inc	sp
 	pop	bc
-;StateGame6.c:25: for(i = 0; i != n_sprite_types; ++ i) {
+;StateGame6.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
 	jr	00103$
 00101$:
-;StateGame6.c:28: SHOW_SPRITES;
+;StateGame6.c:27: SHOW_SPRITES;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -116,7 +116,7 @@ _Start_STATE_GAME6::
 	ld	c,a
 	ld	hl,#0xff40
 	ld	(hl),c
-;StateGame6.c:30: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
+;StateGame6.c:29: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	ld	hl,#0x0064
 	push	hl
 	ld	l, #0x14
@@ -130,22 +130,22 @@ _Start_STATE_GAME6::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateGame6.c:31: have_bomb = 1;
+;StateGame6.c:30: have_bomb = 1;
 	ld	hl,#_have_bomb
 	ld	(hl),#0x01
 	inc	hl
 	ld	(hl),#0x00
-;StateGame6.c:32: door_x = 88;
+;StateGame6.c:31: door_x = 88;
 	ld	hl,#_door_x
 	ld	(hl),#0x58
 	inc	hl
 	ld	(hl),#0x00
-;StateGame6.c:33: door_y = 120;
+;StateGame6.c:32: door_y = 120;
 	ld	hl,#_door_y
 	ld	(hl),#0x78
 	inc	hl
 	ld	(hl),#0x00
-;StateGame6.c:34: SpriteManagerAdd(SPRITE_KEY, 88, 16);
+;StateGame6.c:33: SpriteManagerAdd(SPRITE_KEY, 88, 16);
 	ld	hl,#0x0010
 	push	hl
 	ld	l, #0x58
@@ -155,7 +155,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:35: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+;StateGame6.c:34: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 	ld	hl,#_door_y
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -171,7 +171,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:37: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+;StateGame6.c:36: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x80
@@ -181,7 +181,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:38: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+;StateGame6.c:37: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	hl,#0x0110
@@ -191,7 +191,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:39: SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
+;StateGame6.c:38: SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
 	ld	hl,#0x00e0
 	push	hl
 	ld	l, #0x80
@@ -201,7 +201,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:40: InitScrollTiles(0, 59, tiles, 3);
+;StateGame6.c:39: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -213,7 +213,7 @@ _Start_STATE_GAME6::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame6.c:41: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
+;StateGame6.c:40: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -231,7 +231,7 @@ _Start_STATE_GAME6::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame6.c:42: SHOW_BKG;
+;StateGame6.c:41: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -242,18 +242,18 @@ _Start_STATE_GAME6::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame6.c:47: void Update_STATE_GAME6() {
+;StateGame6.c:46: void Update_STATE_GAME6() {
 ;	---------------------------------
 ; Function Update_STATE_GAME6
 ; ---------------------------------
 _Update_STATE_GAME6::
-;StateGame6.c:48: if (KEY_PRESSED(J_START)) {
+;StateGame6.c:47: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame6.c:49: SetState(STATE_END);
+;StateGame6.c:48: SetState(STATE_END);
 	ld	a,#0x07
 	push	af
 	inc	sp

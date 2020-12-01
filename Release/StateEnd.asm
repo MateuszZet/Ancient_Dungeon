@@ -12,6 +12,7 @@
 	.globl _SpriteManagerLoad
 	.globl _InitScrollColor
 	.globl _ZInitScrollTilesColor
+	.globl _SetState
 	.globl _collilision_tiles4
 	.globl _bank_STATE_END
 	.globl _Start_STATE_END
@@ -185,7 +186,18 @@ _Start_STATE_END::
 ; Function Update_STATE_END
 ; ---------------------------------
 _Update_STATE_END::
-;StateEnd.c:40: }
+;StateEnd.c:39: if (KEY_PRESSED(J_START)) {
+	ld	hl,#_keys
+	ld	c,(hl)
+	ld	b,#0x00
+	bit	7, c
+	ret	Z
+;StateEnd.c:40: SetState(STATE_END2);
+	ld	a,#0x08
+	push	af
+	inc	sp
+	call	_SetState
+	inc	sp
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

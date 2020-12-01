@@ -12,6 +12,7 @@ typedef enum {
 	STATE_GAME5,
 	STATE_GAME6,
 	STATE_END,
+	STATE_END2,
 
 	N_STATES
 } STATE;
