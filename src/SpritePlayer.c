@@ -17,6 +17,7 @@ int door_x;
 int door_y;
 int next_lvl;
 int have_bomb;
+int have_diamond;
 int direction_x;
 
 void Start_SPRITE_PLAYER() {
@@ -117,7 +118,8 @@ void Update_SPRITE_PLAYER() {
 			if (CheckCollision(THIS, spr)) {
 				SpriteManagerRemoveSprite(spr);
 				PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
-				SetState(STATE_MENU);
+				have_diamond++;
+				//SetState(STATE_MENU);
 			}
 		}
 		if (spr->type == SPRITE_DOOROPEN) {

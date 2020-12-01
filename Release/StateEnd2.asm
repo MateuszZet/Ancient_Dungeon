@@ -12,6 +12,7 @@
 	.globl _SpriteManagerLoad
 	.globl _InitScrollColor
 	.globl _ZInitScrollTilesColor
+	.globl _SetState
 	.globl _collilision_tiles4
 	.globl _bank_STATE_END2
 	.globl _Start_STATE_END2
@@ -129,27 +130,87 @@ _Start_STATE_END2::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateEnd2.c:29: SpriteManagerAdd(SPRITE_DIAMOND, 76, 72);
+;StateEnd2.c:30: SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
 	ld	hl,#0x0048
 	push	hl
-	ld	l, #0x4c
+	ld	l, #0x50
 	push	hl
 	ld	a,#0x09
 	push	af
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd2.c:30: SpriteManagerAdd(SPRITE_DIAMOND, 100, 100);
-	ld	hl,#0x0064
+;StateEnd2.c:31: SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
+	ld	hl,#0x0048
 	push	hl
-	ld	l, #0x64
+	ld	l, #0x40
 	push	hl
 	ld	a,#0x09
 	push	af
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd2.c:31: InitScrollTiles(0, 59, tiles, 3);
+;StateEnd2.c:33: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+	ld	hl,#0x0070
+	push	hl
+	ld	l, #0x80
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd2.c:34: SpriteManagerAdd(SPRITE_DIAMOND, 112, 96);
+	ld	hl,#0x0060
+	push	hl
+	ld	l, #0x70
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd2.c:35: SpriteManagerAdd(SPRITE_DIAMOND, 96, 80);
+	ld	hl,#0x0050
+	push	hl
+	ld	l, #0x60
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd2.c:37: SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
+	ld	hl,#0x0070
+	push	hl
+	ld	l, #0x10
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd2.c:38: SpriteManagerAdd(SPRITE_DIAMOND, 32, 96);
+	ld	hl,#0x0060
+	push	hl
+	ld	l, #0x20
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd2.c:39: SpriteManagerAdd(SPRITE_DIAMOND, 48, 80);
+	ld	hl,#0x0050
+	push	hl
+	ld	l, #0x30
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd2.c:41: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -161,7 +222,7 @@ _Start_STATE_END2::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateEnd2.c:32: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
+;StateEnd2.c:42: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -179,7 +240,7 @@ _Start_STATE_END2::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateEnd2.c:33: SHOW_BKG;
+;StateEnd2.c:43: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -190,12 +251,26 @@ _Start_STATE_END2::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateEnd2.c:38: void Update_STATE_END2() {
+;StateEnd2.c:48: void Update_STATE_END2() {
 ;	---------------------------------
 ; Function Update_STATE_END2
 ; ---------------------------------
 _Update_STATE_END2::
-;StateEnd2.c:40: }
+;StateEnd2.c:49: if(have_diamond==9){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x09
+	ret	NZ
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	ret	NZ
+;StateEnd2.c:50: SetState(STATE_MENU);
+	xor	a, a
+	push	af
+	inc	sp
+	call	_SetState
+	inc	sp
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

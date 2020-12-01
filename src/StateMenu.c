@@ -28,13 +28,29 @@ void Start_STATE_MENU() {
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
 	door_x = 20;
 	door_y = 120;
-	have_bomb = 6;
+	
+	if( have_diamond == 1 || have_diamond == 9){
+		have_bomb=0;
+	}
+	else{
+		have_bomb = 6;
+	}
+	
+	if( have_diamond == 0){
 	SpriteManagerAdd(SPRITE_KEY, 20, 20);
 	SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+	}
+	
+	if( have_diamond == 9){
+	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+	}
+	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
 	SHOW_BKG;
@@ -42,8 +58,12 @@ void Start_STATE_MENU() {
 	
 }
 
-void Update_STATE_MENU() {
-	if (KEY_PRESSED(J_START)) {
-		SetState(STATE_GAME6);
+void Update_STATE_MENU(){
+	if (KEY_PRESSED(J_START) && have_diamond<9) {
+		SetState(STATE_GAME);
+	}
+	if (KEY_PRESSED(J_SELECT) || have_diamond==10){
+		have_diamond = 0;
+		SetState(STATE_MENU);
 	}
 }

@@ -17,6 +17,7 @@
 	.globl _TranslateSprite
 	.globl _SetSpriteAnim
 	.globl _direction_x
+	.globl _have_diamond
 	.globl _have_bomb
 	.globl _next_lvl
 	.globl _door_y
@@ -44,6 +45,8 @@ _next_lvl::
 	.ds 2
 _have_bomb::
 	.ds 2
+_have_diamond::
+	.ds 2
 _direction_x::
 	.ds 2
 ;--------------------------------------------------------
@@ -69,12 +72,12 @@ _direction_x::
 ; code
 ;--------------------------------------------------------
 	.area _CODE_2
-;SpritePlayer.c:22: void Start_SPRITE_PLAYER() {
+;SpritePlayer.c:23: void Start_SPRITE_PLAYER() {
 ;	---------------------------------
 ; Function Start_SPRITE_PLAYER
 ; ---------------------------------
 _Start_SPRITE_PLAYER::
-;SpritePlayer.c:23: THIS->coll_x = 1;
+;SpritePlayer.c:24: THIS->coll_x = 1;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -86,7 +89,7 @@ _Start_SPRITE_PLAYER::
 	ld	b,h
 	ld	a,#0x01
 	ld	(bc),a
-;SpritePlayer.c:24: THIS->coll_y = 0;
+;SpritePlayer.c:25: THIS->coll_y = 0;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -98,7 +101,7 @@ _Start_SPRITE_PLAYER::
 	ld	b,h
 	xor	a, a
 	ld	(bc),a
-;SpritePlayer.c:25: THIS->coll_w = 13;
+;SpritePlayer.c:26: THIS->coll_w = 13;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -110,7 +113,7 @@ _Start_SPRITE_PLAYER::
 	ld	b,h
 	ld	a,#0x0d
 	ld	(bc),a
-;SpritePlayer.c:26: THIS->coll_h = 16;
+;SpritePlayer.c:27: THIS->coll_h = 16;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -142,19 +145,19 @@ _anim_up:
 	.db #0x02	; 2
 	.db #0x07	; 7
 	.db #0x08	; 8
-;SpritePlayer.c:29: void Update_SPRITE_PLAYER() {
+;SpritePlayer.c:30: void Update_SPRITE_PLAYER() {
 ;	---------------------------------
 ; Function Update_SPRITE_PLAYER
 ; ---------------------------------
 _Update_SPRITE_PLAYER::
 	add	sp, #-5
-;SpritePlayer.c:34: if(KEY_PRESSED(J_UP)){
+;SpritePlayer.c:35: if(KEY_PRESSED(J_UP)){
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	2, c
 	jp	Z,00102$
-;SpritePlayer.c:35: THIS->y--;
+;SpritePlayer.c:36: THIS->y--;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -184,7 +187,7 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-;SpritePlayer.c:36: SetSpriteAnim(THIS, anim_up, 10);
+;SpritePlayer.c:37: SetSpriteAnim(THIS, anim_up, 10);
 	ld	a,#0x0a
 	push	af
 	inc	sp
@@ -197,7 +200,7 @@ _Update_SPRITE_PLAYER::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpritePlayer.c:37: TranslateSprite(THIS, 0, -1 << delta_time);
+;SpritePlayer.c:38: TranslateSprite(THIS, 0, -1 << delta_time);
 	ld	hl,#_delta_time
 	ld	a,(hl)
 	push	af
@@ -223,13 +226,13 @@ _Update_SPRITE_PLAYER::
 	call	_TranslateSprite
 	add	sp, #4
 00102$:
-;SpritePlayer.c:39: if(KEY_PRESSED(J_DOWN)){
+;SpritePlayer.c:40: if(KEY_PRESSED(J_DOWN)){
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	3, c
 	jp	Z,00104$
-;SpritePlayer.c:40: THIS->y++;
+;SpritePlayer.c:41: THIS->y++;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -259,7 +262,7 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-;SpritePlayer.c:41: SetSpriteAnim(THIS, anim_down, 10);
+;SpritePlayer.c:42: SetSpriteAnim(THIS, anim_down, 10);
 	ld	a,#0x0a
 	push	af
 	inc	sp
@@ -272,7 +275,7 @@ _Update_SPRITE_PLAYER::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpritePlayer.c:42: TranslateSprite(THIS, 0, 1 << delta_time);
+;SpritePlayer.c:43: TranslateSprite(THIS, 0, 1 << delta_time);
 	ld	hl,#_delta_time
 	ld	a,(hl)
 	push	af
@@ -298,13 +301,13 @@ _Update_SPRITE_PLAYER::
 	call	_TranslateSprite
 	add	sp, #4
 00104$:
-;SpritePlayer.c:44: if(KEY_PRESSED(J_RIGHT)){
+;SpritePlayer.c:45: if(KEY_PRESSED(J_RIGHT)){
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	0, c
 	jp	Z,00106$
-;SpritePlayer.c:45: THIS->x++;
+;SpritePlayer.c:46: THIS->x++;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -334,7 +337,7 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-;SpritePlayer.c:46: SetSpriteAnim(THIS, anim_right, 10);
+;SpritePlayer.c:47: SetSpriteAnim(THIS, anim_right, 10);
 	ld	a,#0x0a
 	push	af
 	inc	sp
@@ -347,7 +350,7 @@ _Update_SPRITE_PLAYER::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpritePlayer.c:47: TranslateSprite(THIS, 1 << delta_time, 0);
+;SpritePlayer.c:48: TranslateSprite(THIS, 1 << delta_time, 0);
 	ld	hl,#_delta_time
 	ld	a,(hl)
 	push	af
@@ -372,19 +375,19 @@ _Update_SPRITE_PLAYER::
 	push	hl
 	call	_TranslateSprite
 	add	sp, #4
-;SpritePlayer.c:48: direction_x = 1;
+;SpritePlayer.c:49: direction_x = 1;
 	ld	hl,#_direction_x
 	ld	(hl),#0x01
 	inc	hl
 	ld	(hl),#0x00
 00106$:
-;SpritePlayer.c:51: if(KEY_PRESSED(J_LEFT)){
+;SpritePlayer.c:52: if(KEY_PRESSED(J_LEFT)){
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	1, c
 	jp	Z,00108$
-;SpritePlayer.c:52: THIS->x--;
+;SpritePlayer.c:53: THIS->x--;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
@@ -414,7 +417,7 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-;SpritePlayer.c:53: SetSpriteAnim(THIS, anim_left, 10);
+;SpritePlayer.c:54: SetSpriteAnim(THIS, anim_left, 10);
 	ld	a,#0x0a
 	push	af
 	inc	sp
@@ -427,7 +430,7 @@ _Update_SPRITE_PLAYER::
 	push	hl
 	call	_SetSpriteAnim
 	add	sp, #5
-;SpritePlayer.c:54: TranslateSprite(THIS, -1 << delta_time, 0);
+;SpritePlayer.c:55: TranslateSprite(THIS, -1 << delta_time, 0);
 	ld	hl,#_delta_time
 	ld	a,(hl)
 	push	af
@@ -452,18 +455,18 @@ _Update_SPRITE_PLAYER::
 	push	hl
 	call	_TranslateSprite
 	add	sp, #4
-;SpritePlayer.c:55: direction_x = 0;
+;SpritePlayer.c:56: direction_x = 0;
 	ld	hl,#_direction_x
 	ld	(hl),#0x00
 	inc	hl
 	ld	(hl),#0x00
 00108$:
-;SpritePlayer.c:58: if(keys == 0){
+;SpritePlayer.c:59: if(keys == 0){
 	ld	hl,#_keys
 	ld	a,(hl)
 	or	a, a
 	jr	NZ,00110$
-;SpritePlayer.c:59: SetSpriteAnim(THIS, anim_idle, 20);
+;SpritePlayer.c:60: SetSpriteAnim(THIS, anim_idle, 20);
 	ld	a,#0x14
 	push	af
 	inc	sp
@@ -477,7 +480,7 @@ _Update_SPRITE_PLAYER::
 	call	_SetSpriteAnim
 	add	sp, #5
 00110$:
-;SpritePlayer.c:61: if (KEY_TICKED(J_A) && have_bomb>0 ) {
+;SpritePlayer.c:62: if (KEY_TICKED(J_A) && have_bomb>0 ) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
@@ -509,13 +512,13 @@ _Update_SPRITE_PLAYER::
 	scf
 00290$:
 	jp	NC,00112$
-;SpritePlayer.c:35: THIS->y--;
+;SpritePlayer.c:36: THIS->y--;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
-;SpritePlayer.c:62: SpriteManagerAdd(SPRITE_BOMB, THIS->x + 15, THIS->y);
+;SpritePlayer.c:63: SpriteManagerAdd(SPRITE_BOMB, THIS->x + 15, THIS->y);
 	ld	hl,#0x0009
 	add	hl,bc
 	ld	a,l
@@ -559,7 +562,7 @@ _Update_SPRITE_PLAYER::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;SpritePlayer.c:63: have_bomb--;
+;SpritePlayer.c:64: have_bomb--;
 	ld	hl,#_have_bomb + 1
 	dec	hl
 	ld	e,(hl)
@@ -570,7 +573,7 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;SpritePlayer.c:64: PlayFx(CHANNEL_1, 10, 0x38, 0x70, 0xe0, 0x0a, 0xc6);
+;SpritePlayer.c:65: PlayFx(CHANNEL_1, 10, 0x38, 0x70, 0xe0, 0x0a, 0xc6);
 	ld	hl,#0x00c6
 	push	hl
 	ld	l, #0x0a
@@ -586,7 +589,7 @@ _Update_SPRITE_PLAYER::
 	call	_PlayFx
 	add	sp, #12
 00112$:
-;SpritePlayer.c:67: if (KEY_TICKED(J_B) && have_bomb>0) {
+;SpritePlayer.c:68: if (KEY_TICKED(J_B) && have_bomb>0) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
@@ -618,13 +621,13 @@ _Update_SPRITE_PLAYER::
 	scf
 00295$:
 	jp	NC,00116$
-;SpritePlayer.c:35: THIS->y--;
+;SpritePlayer.c:36: THIS->y--;
 	ld	hl,#_THIS + 1
 	dec	hl
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
-;SpritePlayer.c:68: SpriteManagerAdd(SPRITE_BOMB_L, THIS->x - 20, THIS->y);
+;SpritePlayer.c:69: SpriteManagerAdd(SPRITE_BOMB_L, THIS->x - 20, THIS->y);
 	ld	hl,#0x0009
 	add	hl,bc
 	ld	a,l
@@ -670,7 +673,7 @@ _Update_SPRITE_PLAYER::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;SpritePlayer.c:69: have_bomb--;
+;SpritePlayer.c:70: have_bomb--;
 	ld	hl,#_have_bomb + 1
 	dec	hl
 	ld	e,(hl)
@@ -681,7 +684,7 @@ _Update_SPRITE_PLAYER::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;SpritePlayer.c:70: PlayFx(CHANNEL_1, 10, 0x38, 0x70, 0xe0, 0x0a, 0xc6);
+;SpritePlayer.c:71: PlayFx(CHANNEL_1, 10, 0x38, 0x70, 0xe0, 0x0a, 0xc6);
 	ld	hl,#0x00c6
 	push	hl
 	ld	l, #0x0a
@@ -697,7 +700,7 @@ _Update_SPRITE_PLAYER::
 	call	_PlayFx
 	add	sp, #12
 00116$:
-;SpritePlayer.c:76: SPRITEMANAGER_ITERATE(i, spr) {
+;SpritePlayer.c:77: SPRITEMANAGER_ITERATE(i, spr) {
 	ld	a, (#(_sprite_manager_updatables + 0x0001) + 0)
 	ld	c,a
 	ld	b,#0x00
@@ -710,23 +713,26 @@ _Update_SPRITE_PLAYER::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#0
+	ldhl	sp,#1
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
-	ld	(hl+),a
+	ld	(hl-),a
+	dec	hl
 	ld	(hl),#0x00
 00153$:
 	ld	de, #_sprite_manager_updatables + 0
 	ld	a,(de)
 	ld	c,a
-	ldhl	sp,#2
+	ldhl	sp,#0
 	ld	a,(hl)
 	sub	a, c
 	jp	Z,00155$
-;SpritePlayer.c:77: if(spr->type == SPRITE_ENEMY) {
-	pop	de
-	push	de
+;SpritePlayer.c:78: if(spr->type == SPRITE_ENEMY) {
+	ldhl	sp,#(2 - 1)
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
 	ld	hl,#0x0010
 	add	hl,de
 	ld	c,l
@@ -734,12 +740,12 @@ _Update_SPRITE_PLAYER::
 	ld	a,(bc)
 	dec	a
 	jp	NZ,00122$
-;SpritePlayer.c:78: if(CheckCollision(THIS, spr)) {
+;SpritePlayer.c:79: if(CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -752,7 +758,7 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jr	Z,00122$
-;SpritePlayer.c:79: SetState(STATE_MENU);
+;SpritePlayer.c:80: SetState(STATE_MENU);
 	push	bc
 	xor	a, a
 	push	af
@@ -760,7 +766,7 @@ _Update_SPRITE_PLAYER::
 	call	_SetState
 	inc	sp
 	pop	bc
-;SpritePlayer.c:80: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+;SpritePlayer.c:81: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
 	push	bc
 	ld	hl,#0x0086
 	push	hl
@@ -778,16 +784,16 @@ _Update_SPRITE_PLAYER::
 	add	sp, #12
 	pop	bc
 00122$:
-;SpritePlayer.c:84: if(spr->type == SPRITE_ENEMY2) {
+;SpritePlayer.c:85: if(spr->type == SPRITE_ENEMY2) {
 	ld	a,(bc)
 	sub	a, #0x02
 	jp	NZ,00126$
-;SpritePlayer.c:85: if(CheckCollision(THIS, spr)) {
+;SpritePlayer.c:86: if(CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -800,7 +806,7 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jr	Z,00126$
-;SpritePlayer.c:86: SetState(STATE_MENU);
+;SpritePlayer.c:87: SetState(STATE_MENU);
 	push	bc
 	xor	a, a
 	push	af
@@ -808,7 +814,7 @@ _Update_SPRITE_PLAYER::
 	call	_SetState
 	inc	sp
 	pop	bc
-;SpritePlayer.c:87: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+;SpritePlayer.c:88: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
 	push	bc
 	ld	hl,#0x0086
 	push	hl
@@ -826,16 +832,16 @@ _Update_SPRITE_PLAYER::
 	add	sp, #12
 	pop	bc
 00126$:
-;SpritePlayer.c:90: if(spr->type == SPRITE_ENEMY3) {
+;SpritePlayer.c:91: if(spr->type == SPRITE_ENEMY3) {
 	ld	a,(bc)
 	sub	a, #0x08
 	jp	NZ,00130$
-;SpritePlayer.c:91: if(CheckCollision(THIS, spr)) {
+;SpritePlayer.c:92: if(CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -848,7 +854,7 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jr	Z,00130$
-;SpritePlayer.c:92: SetState(STATE_MENU);
+;SpritePlayer.c:93: SetState(STATE_MENU);
 	push	bc
 	xor	a, a
 	push	af
@@ -856,7 +862,7 @@ _Update_SPRITE_PLAYER::
 	call	_SetState
 	inc	sp
 	pop	bc
-;SpritePlayer.c:93: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+;SpritePlayer.c:94: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
 	push	bc
 	ld	hl,#0x0086
 	push	hl
@@ -874,16 +880,16 @@ _Update_SPRITE_PLAYER::
 	add	sp, #12
 	pop	bc
 00130$:
-;SpritePlayer.c:96: if (spr->type == SPRITE_BOMB) {
+;SpritePlayer.c:97: if (spr->type == SPRITE_BOMB) {
 	ld	a,(bc)
 	sub	a, #0x06
 	jp	NZ,00134$
-;SpritePlayer.c:97: if (CheckCollision(THIS, spr)) {
+;SpritePlayer.c:98: if (CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -896,7 +902,7 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jr	Z,00134$
-;SpritePlayer.c:98: SetState(STATE_MENU);
+;SpritePlayer.c:99: SetState(STATE_MENU);
 	push	bc
 	xor	a, a
 	push	af
@@ -904,7 +910,7 @@ _Update_SPRITE_PLAYER::
 	call	_SetState
 	inc	sp
 	pop	bc
-;SpritePlayer.c:99: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+;SpritePlayer.c:100: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
 	push	bc
 	ld	hl,#0x0086
 	push	hl
@@ -922,16 +928,16 @@ _Update_SPRITE_PLAYER::
 	add	sp, #12
 	pop	bc
 00134$:
-;SpritePlayer.c:102: if (spr->type == SPRITE_BOMB_L) {
+;SpritePlayer.c:103: if (spr->type == SPRITE_BOMB_L) {
 	ld	a,(bc)
 	sub	a, #0x07
 	jp	NZ,00138$
-;SpritePlayer.c:103: if (CheckCollision(THIS, spr)) {
+;SpritePlayer.c:104: if (CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -944,7 +950,7 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jr	Z,00138$
-;SpritePlayer.c:104: SetState(STATE_MENU);
+;SpritePlayer.c:105: SetState(STATE_MENU);
 	push	bc
 	xor	a, a
 	push	af
@@ -952,7 +958,7 @@ _Update_SPRITE_PLAYER::
 	call	_SetState
 	inc	sp
 	pop	bc
-;SpritePlayer.c:105: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
+;SpritePlayer.c:106: PlayFx(CHANNEL_1, 10, 0x4f, 0xc7, 0xf3, 0x73, 0x86);
 	push	bc
 	ld	hl,#0x0086
 	push	hl
@@ -970,16 +976,16 @@ _Update_SPRITE_PLAYER::
 	add	sp, #12
 	pop	bc
 00138$:
-;SpritePlayer.c:108: if (spr->type == SPRITE_KEY) {
+;SpritePlayer.c:109: if (spr->type == SPRITE_KEY) {
 	ld	a,(bc)
 	sub	a, #0x03
 	jp	NZ,00142$
-;SpritePlayer.c:109: if (CheckCollision(THIS, spr)) {
+;SpritePlayer.c:110: if (CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -992,24 +998,24 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jp	Z,00142$
-;SpritePlayer.c:110: SpriteManagerRemoveSprite(spr);
+;SpritePlayer.c:111: SpriteManagerRemoveSprite(spr);
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
 	pop	bc
-;SpritePlayer.c:111: SpriteManagerRemove(2); //need to place door always as 2 (second sprite)
+;SpritePlayer.c:112: SpriteManagerRemove(2); //need to place door always as 2 (second sprite)
 	push	bc
 	ld	hl,#0x0002
 	push	hl
 	call	_SpriteManagerRemove
 	add	sp, #2
 	pop	bc
-;SpritePlayer.c:112: SpriteManagerAdd(SPRITE_DOOROPEN, door_x, door_y);
+;SpritePlayer.c:113: SpriteManagerAdd(SPRITE_DOOROPEN, door_x, door_y);
 	push	bc
 	ld	hl,#_door_y
 	ld	a,(hl+)
@@ -1027,7 +1033,7 @@ _Update_SPRITE_PLAYER::
 	call	_SpriteManagerAdd
 	add	sp, #5
 	pop	bc
-;SpritePlayer.c:113: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
+;SpritePlayer.c:114: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
 	push	bc
 	ld	hl,#0x0086
 	push	hl
@@ -1045,16 +1051,16 @@ _Update_SPRITE_PLAYER::
 	add	sp, #12
 	pop	bc
 00142$:
-;SpritePlayer.c:116: if (spr->type == SPRITE_DIAMOND) {
+;SpritePlayer.c:117: if (spr->type == SPRITE_DIAMOND) {
 	ld	a,(bc)
 	sub	a, #0x09
 	jp	NZ,00146$
-;SpritePlayer.c:117: if (CheckCollision(THIS, spr)) {
+;SpritePlayer.c:118: if (CheckCollision(THIS, spr)) {
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -1067,17 +1073,17 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jp	Z,00146$
-;SpritePlayer.c:118: SpriteManagerRemoveSprite(spr);
+;SpritePlayer.c:119: SpriteManagerRemoveSprite(spr);
 	push	bc
-	pop	de
-	pop	hl
-	push	hl
-	push	de
+	ldhl	sp,#3
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	call	_SpriteManagerRemoveSprite
 	add	sp, #2
 	pop	bc
-;SpritePlayer.c:119: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
+;SpritePlayer.c:120: PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
 	push	bc
 	ld	hl,#0x0086
 	push	hl
@@ -1094,22 +1100,23 @@ _Update_SPRITE_PLAYER::
 	call	_PlayFx
 	add	sp, #12
 	pop	bc
-;SpritePlayer.c:120: SetState(STATE_MENU);
-	push	bc
-	xor	a, a
-	push	af
-	inc	sp
-	call	_SetState
-	inc	sp
-	pop	bc
+;SpritePlayer.c:121: have_diamond++;
+	ld	hl,#_have_diamond
+	inc	(hl)
+	jr	NZ,00313$
+	inc	hl
+	inc	(hl)
+00313$:
 00146$:
-;SpritePlayer.c:123: if (spr->type == SPRITE_DOOROPEN) {
+;SpritePlayer.c:125: if (spr->type == SPRITE_DOOROPEN) {
 	ld	a,(bc)
 	sub	a, #0x05
 	jr	NZ,00154$
-;SpritePlayer.c:124: if (CheckCollision(THIS, spr)) {
-	pop	hl
-	push	hl
+;SpritePlayer.c:126: if (CheckCollision(THIS, spr)) {
+	ldhl	sp,#1
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
 	push	hl
 	ld	hl,#_THIS
 	ld	a,(hl+)
@@ -1121,7 +1128,7 @@ _Update_SPRITE_PLAYER::
 	ld	a,e
 	or	a, a
 	jr	Z,00154$
-;SpritePlayer.c:125: SetState(next_lvl);
+;SpritePlayer.c:127: SetState(next_lvl);
 	ld	hl,#_next_lvl
 	ld	b,(hl)
 	push	bc
@@ -1129,8 +1136,8 @@ _Update_SPRITE_PLAYER::
 	call	_SetState
 	inc	sp
 00154$:
-;SpritePlayer.c:76: SPRITEMANAGER_ITERATE(i, spr) {
-	ldhl	sp,#2
+;SpritePlayer.c:77: SPRITEMANAGER_ITERATE(i, spr) {
+	ldhl	sp,#0
 	inc	(hl)
 	ld	c,(hl)
 	ld	b,#0x00
@@ -1151,7 +1158,7 @@ _Update_SPRITE_PLAYER::
 	ld	e, c
 	ld	d, b
 	ld	a,(de)
-	ldhl	sp,#0
+	ldhl	sp,#1
 	ld	(hl+),a
 	inc	de
 	ld	a,(de)
@@ -1160,12 +1167,12 @@ _Update_SPRITE_PLAYER::
 00155$:
 	add	sp, #5
 	ret
-;SpritePlayer.c:131: void Destroy_SPRITE_PLAYER() {
+;SpritePlayer.c:133: void Destroy_SPRITE_PLAYER() {
 ;	---------------------------------
 ; Function Destroy_SPRITE_PLAYER
 ; ---------------------------------
 _Destroy_SPRITE_PLAYER::
-;SpritePlayer.c:132: }
+;SpritePlayer.c:134: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

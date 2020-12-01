@@ -90,7 +90,7 @@ _Start_STATE_MENU::
 	ld	(hl),c
 ;StateMenu.c:23: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
-00103$:
+00111$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
@@ -104,7 +104,7 @@ _Start_STATE_MENU::
 	pop	bc
 ;StateMenu.c:23: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
-	jr	00103$
+	jr	00111$
 00101$:
 ;StateMenu.c:26: SHOW_SPRITES;
 	ld	de,#0xff40
@@ -140,12 +140,44 @@ _Start_STATE_MENU::
 	ld	(hl),#0x78
 	inc	hl
 	ld	(hl),#0x00
-;StateMenu.c:31: have_bomb = 6;
+;StateMenu.c:32: if( have_diamond == 1 || have_diamond == 9){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	dec	a
+	jr	NZ,00137$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jr	Z,00102$
+00137$:
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x09
+	jr	NZ,00103$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jr	NZ,00103$
+00102$:
+;StateMenu.c:33: have_bomb=0;
+	ld	hl,#_have_bomb
+	ld	(hl),#0x00
+	inc	hl
+	ld	(hl),#0x00
+	jr	00104$
+00103$:
+;StateMenu.c:36: have_bomb = 6;
 	ld	hl,#_have_bomb
 	ld	(hl),#0x06
 	inc	hl
 	ld	(hl),#0x00
-;StateMenu.c:32: SpriteManagerAdd(SPRITE_KEY, 20, 20);
+00104$:
+;StateMenu.c:39: if( have_diamond == 0){
+	ld	hl,#_have_diamond + 1
+	ld	a,(hl-)
+	or	a,(hl)
+	jp	NZ,00107$
+;StateMenu.c:40: SpriteManagerAdd(SPRITE_KEY, 20, 20);
 	ld	hl,#0x0014
 	push	hl
 	ld	l, #0x14
@@ -155,7 +187,7 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:33: SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
+;StateMenu.c:41: SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
 	ld	hl,#_door_y
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -171,7 +203,7 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:34: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+;StateMenu.c:42: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x80
@@ -181,7 +213,7 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:35: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+;StateMenu.c:43: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	ld	hl,#0x0073
 	push	hl
 	ld	l, #0x32
@@ -191,7 +223,7 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:36: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+;StateMenu.c:44: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	ld	hl,#0x001e
 	push	hl
 	ld	l, #0x1e
@@ -201,7 +233,47 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:37: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+00107$:
+;StateMenu.c:47: if( have_diamond == 9){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x09
+	jp	NZ,00109$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jp	NZ,00109$
+;StateMenu.c:48: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	ld	hl,#0x0070
+	push	hl
+	ld	l, #0x80
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateMenu.c:49: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+	ld	hl,#0x0073
+	push	hl
+	ld	l, #0x32
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateMenu.c:50: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+	ld	hl,#0x001e
+	push	hl
+	ld	l, #0x1e
+	push	hl
+	ld	a,#0x08
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateMenu.c:51: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x80
@@ -211,7 +283,8 @@ _Start_STATE_MENU::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateMenu.c:38: InitScrollTiles(0, 59, tiles, 3);
+00109$:
+;StateMenu.c:54: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -223,7 +296,7 @@ _Start_STATE_MENU::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateMenu.c:39: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
+;StateMenu.c:55: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -241,7 +314,7 @@ _Start_STATE_MENU::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateMenu.c:40: SHOW_BKG;
+;StateMenu.c:56: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -252,19 +325,67 @@ _Start_STATE_MENU::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateMenu.c:45: void Update_STATE_MENU() {
+;StateMenu.c:61: void Update_STATE_MENU(){
 ;	---------------------------------
 ; Function Update_STATE_MENU
 ; ---------------------------------
 _Update_STATE_MENU::
-;StateMenu.c:46: if (KEY_PRESSED(J_START)) {
+;StateMenu.c:62: if (KEY_PRESSED(J_START) && have_diamond<9) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
-	ret	Z
-;StateMenu.c:47: SetState(STATE_GAME6);
-	ld	a,#0x06
+	jr	Z,00102$
+	ld	hl,#_have_diamond
+	ld	a, (hl)
+	sub	a, #0x09
+	inc	hl
+	ld	a, (hl)
+	sbc	a, #0x00
+	ld	d, (hl)
+	ld	a,#0x00
+	ld	e, a
+	bit	7, e
+	jr	Z,00122$
+	bit	7, d
+	jr	NZ,00123$
+	cp	a, a
+	jr	00123$
+00122$:
+	bit	7, d
+	jr	Z,00123$
+	scf
+00123$:
+	jr	NC,00102$
+;StateMenu.c:63: SetState(STATE_GAME);
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SetState
+	inc	sp
+00102$:
+;StateMenu.c:65: if (KEY_PRESSED(J_SELECT) || have_diamond==10){
+	ld	hl,#_keys
+	ld	c,(hl)
+	ld	b,#0x00
+	bit	6, c
+	jr	NZ,00104$
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x0a
+	ret	NZ
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	ret	NZ
+00104$:
+;StateMenu.c:66: have_diamond = 0;
+	ld	hl,#_have_diamond
+	ld	(hl),#0x00
+	inc	hl
+	ld	(hl),#0x00
+;StateMenu.c:67: SetState(STATE_MENU);
+	xor	a, a
 	push	af
 	inc	sp
 	call	_SetState

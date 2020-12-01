@@ -130,10 +130,10 @@
    0058 73                  130 	ld	(hl),e
    0059 23                  131 	inc	hl
    005A 72                  132 	ld	(hl),d
-                            133 ;StateEnd.c:30: SpriteManagerAdd(SPRITE_DIAMOND, 76, 72);
+                            133 ;StateEnd.c:30: SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
    005B 21 48 00            134 	ld	hl,#0x0048
    005E E5                  135 	push	hl
-   005F 2E 4C               136 	ld	l, #0x4c
+   005F 2E 48               136 	ld	l, #0x48
    0061 E5                  137 	push	hl
    0062 3E 09               138 	ld	a,#0x09
    0064 F5                  139 	push	af
@@ -186,18 +186,34 @@
                             186 ; Function Update_STATE_END
                             187 ; ---------------------------------
    00AF                     188 _Update_STATE_END::
-                            189 ;StateEnd.c:39: if (KEY_PRESSED(J_START)) {
-   00AF 21r00r00            190 	ld	hl,#_keys
-   00B2 4E                  191 	ld	c,(hl)
-   00B3 06 00               192 	ld	b,#0x00
-   00B5 CB 79               193 	bit	7, c
-   00B7 C8                  194 	ret	Z
-                            195 ;StateEnd.c:40: SetState(STATE_END2);
-   00B8 3E 08               196 	ld	a,#0x08
-   00BA F5                  197 	push	af
-   00BB 33                  198 	inc	sp
-   00BC CDr00r00            199 	call	_SetState
-   00BF 33                  200 	inc	sp
-   00C0 C9                  201 	ret
-                            202 	.area _CODE_2
-                            203 	.area _CABS (ABS)
+                            189 ;StateEnd.c:40: if(have_diamond==1){
+   00AF 21r00r00            190 	ld	hl,#_have_diamond
+   00B2 7E                  191 	ld	a,(hl)
+   00B3 3D                  192 	dec	a
+   00B4 20 0C               193 	jr	NZ,00102$
+   00B6 23                  194 	inc	hl
+   00B7 7E                  195 	ld	a,(hl)
+   00B8 B7                  196 	or	a, a
+   00B9 20 07               197 	jr	NZ,00102$
+                            198 ;StateEnd.c:41: SetState(STATE_MENU);
+   00BB AF                  199 	xor	a, a
+   00BC F5                  200 	push	af
+   00BD 33                  201 	inc	sp
+   00BE CDr00r00            202 	call	_SetState
+   00C1 33                  203 	inc	sp
+   00C2                     204 00102$:
+                            205 ;StateEnd.c:43: if (KEY_PRESSED(J_START)) {
+   00C2 21r00r00            206 	ld	hl,#_keys
+   00C5 4E                  207 	ld	c,(hl)
+   00C6 06 00               208 	ld	b,#0x00
+   00C8 CB 79               209 	bit	7, c
+   00CA C8                  210 	ret	Z
+                            211 ;StateEnd.c:44: SetState(STATE_END2);
+   00CB 3E 08               212 	ld	a,#0x08
+   00CD F5                  213 	push	af
+   00CE 33                  214 	inc	sp
+   00CF CDr00r00            215 	call	_SetState
+   00D2 33                  216 	inc	sp
+   00D3 C9                  217 	ret
+                            218 	.area _CODE_2
+                            219 	.area _CABS (ABS)

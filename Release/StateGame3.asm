@@ -90,7 +90,7 @@ _Start_STATE_GAME3::
 	ld	(hl),c
 ;StateGame3.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
-00103$:
+00106$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
@@ -104,7 +104,7 @@ _Start_STATE_GAME3::
 	pop	bc
 ;StateGame3.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
-	jr	00103$
+	jr	00106$
 00101$:
 ;StateGame3.c:27: SHOW_SPRITES;
 	ld	de,#0xff40
@@ -130,22 +130,39 @@ _Start_STATE_GAME3::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateGame3.c:30: have_bomb = 2;
+;StateGame3.c:31: if( have_diamond == 1){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	dec	a
+	jr	NZ,00103$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jr	NZ,00103$
+;StateGame3.c:32: have_bomb=0;
+	ld	hl,#_have_bomb
+	ld	(hl),#0x00
+	inc	hl
+	ld	(hl),#0x00
+	jr	00104$
+00103$:
+;StateGame3.c:35: have_bomb = 2;
 	ld	hl,#_have_bomb
 	ld	(hl),#0x02
 	inc	hl
 	ld	(hl),#0x00
-;StateGame3.c:31: door_x = 104;
+00104$:
+;StateGame3.c:38: door_x = 104;
 	ld	hl,#_door_x
 	ld	(hl),#0x68
 	inc	hl
 	ld	(hl),#0x00
-;StateGame3.c:32: door_y = 344;
+;StateGame3.c:39: door_y = 344;
 	ld	hl,#_door_y
 	ld	(hl),#0x58
 	inc	hl
 	ld	(hl),#0x01
-;StateGame3.c:33: SpriteManagerAdd(SPRITE_KEY, 120, 408);
+;StateGame3.c:40: SpriteManagerAdd(SPRITE_KEY, 120, 408);
 	ld	hl,#0x0198
 	push	hl
 	ld	hl,#0x0078
@@ -155,7 +172,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:34: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+;StateGame3.c:41: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 	ld	hl,#_door_y
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -171,7 +188,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:36: SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
+;StateGame3.c:43: SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
 	ld	hl,#0x0138
 	push	hl
 	ld	hl,#0x0010
@@ -181,7 +198,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:37: SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
+;StateGame3.c:44: SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
 	ld	hl,#0x0058
 	push	hl
 	ld	l, #0x10
@@ -191,7 +208,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:38: SpriteManagerAdd(SPRITE_ENEMY2, 32, 408 );
+;StateGame3.c:45: SpriteManagerAdd(SPRITE_ENEMY2, 32, 408 );
 	ld	hl,#0x0198
 	push	hl
 	ld	hl,#0x0020
@@ -201,7 +218,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:40: SpriteManagerAdd(SPRITE_ENEMY, 120, 24);
+;StateGame3.c:47: SpriteManagerAdd(SPRITE_ENEMY, 120, 24);
 	ld	hl,#0x0018
 	push	hl
 	ld	l, #0x78
@@ -211,7 +228,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:41: SpriteManagerAdd(SPRITE_ENEMY, 120, 216);
+;StateGame3.c:48: SpriteManagerAdd(SPRITE_ENEMY, 120, 216);
 	ld	hl,#0x00d8
 	push	hl
 	ld	l, #0x78
@@ -221,7 +238,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:42: SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
+;StateGame3.c:49: SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
 	ld	hl,#0x0190
 	push	hl
 	ld	hl,#0x0020
@@ -231,7 +248,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:43: SpriteManagerAdd(SPRITE_ENEMY3, 30, 60);
+;StateGame3.c:50: SpriteManagerAdd(SPRITE_ENEMY3, 30, 60);
 	ld	hl,#0x003c
 	push	hl
 	ld	l, #0x1e
@@ -241,7 +258,7 @@ _Start_STATE_GAME3::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame3.c:45: InitScrollTiles(0, 59, tiles, 3);
+;StateGame3.c:52: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -253,7 +270,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame3.c:46: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
+;StateGame3.c:53: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -271,7 +288,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame3.c:47: SHOW_BKG;
+;StateGame3.c:54: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -282,18 +299,18 @@ _Start_STATE_GAME3::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame3.c:52: void Update_STATE_GAME3() {
+;StateGame3.c:59: void Update_STATE_GAME3() {
 ;	---------------------------------
 ; Function Update_STATE_GAME3
 ; ---------------------------------
 _Update_STATE_GAME3::
-;StateGame3.c:53: if (KEY_PRESSED(J_START)) {
+;StateGame3.c:60: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame3.c:54: SetState(STATE_GAME4);
+;StateGame3.c:61: SetState(STATE_GAME4);
 	ld	a,#0x04
 	push	af
 	inc	sp

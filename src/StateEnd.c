@@ -27,7 +27,7 @@ void Start_STATE_END() {
 	SHOW_SPRITES;
 	
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
-	SpriteManagerAdd(SPRITE_DIAMOND, 76, 72);
+	SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
 	SHOW_BKG;
@@ -36,6 +36,10 @@ void Start_STATE_END() {
 }
 
 void Update_STATE_END() {
+	
+	if(have_diamond==1){
+		SetState(STATE_MENU);
+	}
 	if (KEY_PRESSED(J_START)) {
 		SetState(STATE_END2);
 	}

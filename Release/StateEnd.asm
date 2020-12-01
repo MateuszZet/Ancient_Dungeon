@@ -130,10 +130,10 @@ _Start_STATE_END::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateEnd.c:30: SpriteManagerAdd(SPRITE_DIAMOND, 76, 72);
+;StateEnd.c:30: SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
 	ld	hl,#0x0048
 	push	hl
-	ld	l, #0x4c
+	ld	l, #0x48
 	push	hl
 	ld	a,#0x09
 	push	af
@@ -186,13 +186,29 @@ _Start_STATE_END::
 ; Function Update_STATE_END
 ; ---------------------------------
 _Update_STATE_END::
-;StateEnd.c:39: if (KEY_PRESSED(J_START)) {
+;StateEnd.c:40: if(have_diamond==1){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	dec	a
+	jr	NZ,00102$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jr	NZ,00102$
+;StateEnd.c:41: SetState(STATE_MENU);
+	xor	a, a
+	push	af
+	inc	sp
+	call	_SetState
+	inc	sp
+00102$:
+;StateEnd.c:43: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateEnd.c:40: SetState(STATE_END2);
+;StateEnd.c:44: SetState(STATE_END2);
 	ld	a,#0x08
 	push	af
 	inc	sp

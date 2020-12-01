@@ -15,7 +15,14 @@ UINT8 collilision_tiles6[] = { 1,2,3,4,0 };
 
 void Start_STATE_GAME6() {
 	UINT8 i;
-	next_lvl=7;
+	if(have_diamond==1){
+		next_lvl=8;
+	}
+	else{
+		next_lvl=7;
+	}
+		
+	
 	NR52_REG = 0x80; //Enables sound, you should always setup this first
 	NR51_REG = 0xFF; //Enables all channels (left and right)
 	NR50_REG = 0x77; //Max volume
@@ -27,7 +34,14 @@ void Start_STATE_GAME6() {
 	SHOW_SPRITES;
 
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
-	have_bomb = 1;
+	
+	if( have_diamond == 1){
+		have_bomb=0;
+	}
+	else{
+		have_bomb = 1;
+	}
+	
 	door_x = 88;
 	door_y = 120;
 	SpriteManagerAdd(SPRITE_KEY, 88, 16);
@@ -45,6 +59,11 @@ void Start_STATE_GAME6() {
 
 void Update_STATE_GAME6() {
 	if (KEY_PRESSED(J_START)) {
+		if(have_diamond == 0){
 		SetState(STATE_END);
+		}
+		else{
+			SetState(STATE_END2);
+		}
 	}
 }
