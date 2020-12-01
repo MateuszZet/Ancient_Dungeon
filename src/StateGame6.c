@@ -15,7 +15,8 @@ UINT8 collilision_tiles6[] = { 1,2,3,4,0 };
 
 void Start_STATE_GAME6() {
 	UINT8 i;
-	if(have_diamond==1){
+	
+	if(have_diamond>=1){
 		next_lvl=8;
 	}
 	else{
@@ -35,7 +36,7 @@ void Start_STATE_GAME6() {
 
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	
-	if( have_diamond == 1){
+	if( have_diamond == 5){
 		have_bomb=0;
 	}
 	else{
@@ -59,7 +60,7 @@ void Start_STATE_GAME6() {
 
 void Update_STATE_GAME6() {
 	if (KEY_PRESSED(J_START)) {
-		if(have_diamond == 0){
+		if(have_diamond == 0 || have_diamond == 5){
 		SetState(STATE_END);
 		}
 		else{

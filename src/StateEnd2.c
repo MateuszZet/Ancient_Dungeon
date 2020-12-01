@@ -27,16 +27,12 @@ void Start_STATE_END2() {
 	
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
 	
+	if(have_diamond==1){
 	SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
 	SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
-	
 	SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
-	SpriteManagerAdd(SPRITE_DIAMOND, 112, 96);
-	SpriteManagerAdd(SPRITE_DIAMOND, 96, 80);
-	
 	SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
-	SpriteManagerAdd(SPRITE_DIAMOND, 32, 96);
-	SpriteManagerAdd(SPRITE_DIAMOND, 48, 80);
+	}
 	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
@@ -46,7 +42,7 @@ void Start_STATE_END2() {
 }
 
 void Update_STATE_END2() {
-	if(have_diamond==9){
+	if(have_diamond==5){
 		SetState(STATE_MENU);
 	}
 }

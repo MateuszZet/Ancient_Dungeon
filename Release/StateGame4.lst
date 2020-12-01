@@ -130,192 +130,192 @@
    0058 73                  130 	ld	(hl),e
    0059 23                  131 	inc	hl
    005A 72                  132 	ld	(hl),d
-                            133 ;StateGame4.c:31: if( have_diamond == 1){
+                            133 ;StateGame4.c:31: if( have_diamond == 5 ){
    005B 21r00r00            134 	ld	hl,#_have_diamond
    005E 7E                  135 	ld	a,(hl)
-   005F 3D                  136 	dec	a
-   0060 20 0F               137 	jr	NZ,00103$
-   0062 23                  138 	inc	hl
-   0063 7E                  139 	ld	a,(hl)
-   0064 B7                  140 	or	a, a
-   0065 20 0A               141 	jr	NZ,00103$
+   005F D6 05               136 	sub	a, #0x05
+   0061 20 0F               137 	jr	NZ,00103$
+   0063 23                  138 	inc	hl
+   0064 7E                  139 	ld	a,(hl)
+   0065 B7                  140 	or	a, a
+   0066 20 0A               141 	jr	NZ,00103$
                             142 ;StateGame4.c:32: have_bomb=0;
-   0067 21r00r00            143 	ld	hl,#_have_bomb
-   006A 36 00               144 	ld	(hl),#0x00
-   006C 23                  145 	inc	hl
-   006D 36 00               146 	ld	(hl),#0x00
-   006F 18 08               147 	jr	00104$
-   0071                     148 00103$:
+   0068 21r00r00            143 	ld	hl,#_have_bomb
+   006B 36 00               144 	ld	(hl),#0x00
+   006D 23                  145 	inc	hl
+   006E 36 00               146 	ld	(hl),#0x00
+   0070 18 08               147 	jr	00104$
+   0072                     148 00103$:
                             149 ;StateGame4.c:35: have_bomb = 2;
-   0071 21r00r00            150 	ld	hl,#_have_bomb
-   0074 36 02               151 	ld	(hl),#0x02
-   0076 23                  152 	inc	hl
-   0077 36 00               153 	ld	(hl),#0x00
-   0079                     154 00104$:
+   0072 21r00r00            150 	ld	hl,#_have_bomb
+   0075 36 02               151 	ld	(hl),#0x02
+   0077 23                  152 	inc	hl
+   0078 36 00               153 	ld	(hl),#0x00
+   007A                     154 00104$:
                             155 ;StateGame4.c:38: door_x = 343;
-   0079 21r00r00            156 	ld	hl,#_door_x
-   007C 36 57               157 	ld	(hl),#0x57
-   007E 23                  158 	inc	hl
-   007F 36 01               159 	ld	(hl),#0x01
+   007A 21r00r00            156 	ld	hl,#_door_x
+   007D 36 57               157 	ld	(hl),#0x57
+   007F 23                  158 	inc	hl
+   0080 36 01               159 	ld	(hl),#0x01
                             160 ;StateGame4.c:39: door_y = 343;
-   0081 21r00r00            161 	ld	hl,#_door_y
-   0084 36 57               162 	ld	(hl),#0x57
-   0086 23                  163 	inc	hl
-   0087 36 01               164 	ld	(hl),#0x01
+   0082 21r00r00            161 	ld	hl,#_door_y
+   0085 36 57               162 	ld	(hl),#0x57
+   0087 23                  163 	inc	hl
+   0088 36 01               164 	ld	(hl),#0x01
                             165 ;StateGame4.c:40: SpriteManagerAdd(SPRITE_KEY, 38, 38);
-   0089 21 26 00            166 	ld	hl,#0x0026
-   008C E5                  167 	push	hl
-   008D 2E 26               168 	ld	l, #0x26
-   008F E5                  169 	push	hl
-   0090 3E 03               170 	ld	a,#0x03
-   0092 F5                  171 	push	af
-   0093 33                  172 	inc	sp
-   0094 CDr00r00            173 	call	_SpriteManagerAdd
-   0097 E8 05               174 	add	sp, #5
+   008A 21 26 00            166 	ld	hl,#0x0026
+   008D E5                  167 	push	hl
+   008E 2E 26               168 	ld	l, #0x26
+   0090 E5                  169 	push	hl
+   0091 3E 03               170 	ld	a,#0x03
+   0093 F5                  171 	push	af
+   0094 33                  172 	inc	sp
+   0095 CDr00r00            173 	call	_SpriteManagerAdd
+   0098 E8 05               174 	add	sp, #5
                             175 ;StateGame4.c:41: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
-   0099 21r00r00            176 	ld	hl,#_door_y
-   009C 2A                  177 	ld	a,(hl+)
-   009D 66                  178 	ld	h,(hl)
-   009E 6F                  179 	ld	l,a
-   009F E5                  180 	push	hl
-   00A0 21r00r00            181 	ld	hl,#_door_x
-   00A3 2A                  182 	ld	a,(hl+)
-   00A4 66                  183 	ld	h,(hl)
-   00A5 6F                  184 	ld	l,a
-   00A6 E5                  185 	push	hl
-   00A7 3E 04               186 	ld	a,#0x04
-   00A9 F5                  187 	push	af
-   00AA 33                  188 	inc	sp
-   00AB CDr00r00            189 	call	_SpriteManagerAdd
-   00AE E8 05               190 	add	sp, #5
+   009A 21r00r00            176 	ld	hl,#_door_y
+   009D 2A                  177 	ld	a,(hl+)
+   009E 66                  178 	ld	h,(hl)
+   009F 6F                  179 	ld	l,a
+   00A0 E5                  180 	push	hl
+   00A1 21r00r00            181 	ld	hl,#_door_x
+   00A4 2A                  182 	ld	a,(hl+)
+   00A5 66                  183 	ld	h,(hl)
+   00A6 6F                  184 	ld	l,a
+   00A7 E5                  185 	push	hl
+   00A8 3E 04               186 	ld	a,#0x04
+   00AA F5                  187 	push	af
+   00AB 33                  188 	inc	sp
+   00AC CDr00r00            189 	call	_SpriteManagerAdd
+   00AF E8 05               190 	add	sp, #5
                             191 ;StateGame4.c:44: SpriteManagerAdd(SPRITE_ENEMY3, 352, 190);
-   00B0 21 BE 00            192 	ld	hl,#0x00be
-   00B3 E5                  193 	push	hl
-   00B4 21 60 01            194 	ld	hl,#0x0160
-   00B7 E5                  195 	push	hl
-   00B8 3E 08               196 	ld	a,#0x08
-   00BA F5                  197 	push	af
-   00BB 33                  198 	inc	sp
-   00BC CDr00r00            199 	call	_SpriteManagerAdd
-   00BF E8 05               200 	add	sp, #5
+   00B1 21 BE 00            192 	ld	hl,#0x00be
+   00B4 E5                  193 	push	hl
+   00B5 21 60 01            194 	ld	hl,#0x0160
+   00B8 E5                  195 	push	hl
+   00B9 3E 08               196 	ld	a,#0x08
+   00BB F5                  197 	push	af
+   00BC 33                  198 	inc	sp
+   00BD CDr00r00            199 	call	_SpriteManagerAdd
+   00C0 E8 05               200 	add	sp, #5
                             201 ;StateGame4.c:45: SpriteManagerAdd(SPRITE_ENEMY3, 88, 144);
-   00C1 21 90 00            202 	ld	hl,#0x0090
-   00C4 E5                  203 	push	hl
-   00C5 2E 58               204 	ld	l, #0x58
-   00C7 E5                  205 	push	hl
-   00C8 3E 08               206 	ld	a,#0x08
-   00CA F5                  207 	push	af
-   00CB 33                  208 	inc	sp
-   00CC CDr00r00            209 	call	_SpriteManagerAdd
-   00CF E8 05               210 	add	sp, #5
+   00C2 21 90 00            202 	ld	hl,#0x0090
+   00C5 E5                  203 	push	hl
+   00C6 2E 58               204 	ld	l, #0x58
+   00C8 E5                  205 	push	hl
+   00C9 3E 08               206 	ld	a,#0x08
+   00CB F5                  207 	push	af
+   00CC 33                  208 	inc	sp
+   00CD CDr00r00            209 	call	_SpriteManagerAdd
+   00D0 E8 05               210 	add	sp, #5
                             211 ;StateGame4.c:46: SpriteManagerAdd(SPRITE_ENEMY2, 272, 112);
-   00D1 21 70 00            212 	ld	hl,#0x0070
-   00D4 E5                  213 	push	hl
-   00D5 21 10 01            214 	ld	hl,#0x0110
-   00D8 E5                  215 	push	hl
-   00D9 3E 02               216 	ld	a,#0x02
-   00DB F5                  217 	push	af
-   00DC 33                  218 	inc	sp
-   00DD CDr00r00            219 	call	_SpriteManagerAdd
-   00E0 E8 05               220 	add	sp, #5
+   00D2 21 70 00            212 	ld	hl,#0x0070
+   00D5 E5                  213 	push	hl
+   00D6 21 10 01            214 	ld	hl,#0x0110
+   00D9 E5                  215 	push	hl
+   00DA 3E 02               216 	ld	a,#0x02
+   00DC F5                  217 	push	af
+   00DD 33                  218 	inc	sp
+   00DE CDr00r00            219 	call	_SpriteManagerAdd
+   00E1 E8 05               220 	add	sp, #5
                             221 ;StateGame4.c:47: SpriteManagerAdd(SPRITE_ENEMY, 94, 280);
-   00E2 21 18 01            222 	ld	hl,#0x0118
-   00E5 E5                  223 	push	hl
-   00E6 21 5E 00            224 	ld	hl,#0x005e
-   00E9 E5                  225 	push	hl
-   00EA 3E 01               226 	ld	a,#0x01
-   00EC F5                  227 	push	af
-   00ED 33                  228 	inc	sp
-   00EE CDr00r00            229 	call	_SpriteManagerAdd
-   00F1 E8 05               230 	add	sp, #5
+   00E3 21 18 01            222 	ld	hl,#0x0118
+   00E6 E5                  223 	push	hl
+   00E7 21 5E 00            224 	ld	hl,#0x005e
+   00EA E5                  225 	push	hl
+   00EB 3E 01               226 	ld	a,#0x01
+   00ED F5                  227 	push	af
+   00EE 33                  228 	inc	sp
+   00EF CDr00r00            229 	call	_SpriteManagerAdd
+   00F2 E8 05               230 	add	sp, #5
                             231 ;StateGame4.c:48: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
-   00F3 21 70 00            232 	ld	hl,#0x0070
-   00F6 E5                  233 	push	hl
-   00F7 21 10 01            234 	ld	hl,#0x0110
-   00FA E5                  235 	push	hl
-   00FB 3E 01               236 	ld	a,#0x01
-   00FD F5                  237 	push	af
-   00FE 33                  238 	inc	sp
-   00FF CDr00r00            239 	call	_SpriteManagerAdd
-   0102 E8 05               240 	add	sp, #5
+   00F4 21 70 00            232 	ld	hl,#0x0070
+   00F7 E5                  233 	push	hl
+   00F8 21 10 01            234 	ld	hl,#0x0110
+   00FB E5                  235 	push	hl
+   00FC 3E 01               236 	ld	a,#0x01
+   00FE F5                  237 	push	af
+   00FF 33                  238 	inc	sp
+   0100 CDr00r00            239 	call	_SpriteManagerAdd
+   0103 E8 05               240 	add	sp, #5
                             241 ;StateGame4.c:49: SpriteManagerAdd(SPRITE_ENEMY2, 94, 280);
-   0104 21 18 01            242 	ld	hl,#0x0118
-   0107 E5                  243 	push	hl
-   0108 21 5E 00            244 	ld	hl,#0x005e
-   010B E5                  245 	push	hl
-   010C 3E 02               246 	ld	a,#0x02
-   010E F5                  247 	push	af
-   010F 33                  248 	inc	sp
-   0110 CDr00r00            249 	call	_SpriteManagerAdd
-   0113 E8 05               250 	add	sp, #5
+   0105 21 18 01            242 	ld	hl,#0x0118
+   0108 E5                  243 	push	hl
+   0109 21 5E 00            244 	ld	hl,#0x005e
+   010C E5                  245 	push	hl
+   010D 3E 02               246 	ld	a,#0x02
+   010F F5                  247 	push	af
+   0110 33                  248 	inc	sp
+   0111 CDr00r00            249 	call	_SpriteManagerAdd
+   0114 E8 05               250 	add	sp, #5
                             251 ;StateGame4.c:50: SpriteManagerAdd(SPRITE_ENEMY2, 312, 344);
-   0115 21 58 01            252 	ld	hl,#0x0158
-   0118 E5                  253 	push	hl
-   0119 2E 38               254 	ld	l, #0x38
-   011B E5                  255 	push	hl
-   011C 3E 02               256 	ld	a,#0x02
-   011E F5                  257 	push	af
-   011F 33                  258 	inc	sp
-   0120 CDr00r00            259 	call	_SpriteManagerAdd
-   0123 E8 05               260 	add	sp, #5
+   0116 21 58 01            252 	ld	hl,#0x0158
+   0119 E5                  253 	push	hl
+   011A 2E 38               254 	ld	l, #0x38
+   011C E5                  255 	push	hl
+   011D 3E 02               256 	ld	a,#0x02
+   011F F5                  257 	push	af
+   0120 33                  258 	inc	sp
+   0121 CDr00r00            259 	call	_SpriteManagerAdd
+   0124 E8 05               260 	add	sp, #5
                             261 ;StateGame4.c:52: InitScrollTiles(0, 59, tiles, 3);
-   0125 21 00 00            262 	ld	hl,#0x0000
-   0128 E5                  263 	push	hl
-   0129 3E 03               264 	ld	a,#0x03
-   012B F5                  265 	push	af
-   012C 33                  266 	inc	sp
-   012D 21r00r00            267 	ld	hl,#_tiles
-   0130 E5                  268 	push	hl
-   0131 21 00 3B            269 	ld	hl,#0x3b00
-   0134 E5                  270 	push	hl
-   0135 CDr00r00            271 	call	_ZInitScrollTilesColor
-   0138 E8 07               272 	add	sp, #7
+   0126 21 00 00            262 	ld	hl,#0x0000
+   0129 E5                  263 	push	hl
+   012A 3E 03               264 	ld	a,#0x03
+   012C F5                  265 	push	af
+   012D 33                  266 	inc	sp
+   012E 21r00r00            267 	ld	hl,#_tiles
+   0131 E5                  268 	push	hl
+   0132 21 00 3B            269 	ld	hl,#0x3b00
+   0135 E5                  270 	push	hl
+   0136 CDr00r00            271 	call	_ZInitScrollTilesColor
+   0139 E8 07               272 	add	sp, #7
                             273 ;StateGame4.c:53: InitScroll(map4Width, map4Height, map4, collilision_tiles4, 0, 3);
-   013A 21 00 00            274 	ld	hl,#0x0000
-   013D E5                  275 	push	hl
-   013E 3E 03               276 	ld	a,#0x03
-   0140 F5                  277 	push	af
-   0141 33                  278 	inc	sp
-   0142 2E 00               279 	ld	l, #0x00
-   0144 E5                  280 	push	hl
-   0145 21r01r00            281 	ld	hl,#_collilision_tiles4
-   0148 E5                  282 	push	hl
-   0149 21r00r00            283 	ld	hl,#_map4
-   014C E5                  284 	push	hl
-   014D 21 32 00            285 	ld	hl,#0x0032
-   0150 E5                  286 	push	hl
-   0151 2E 32               287 	ld	l, #0x32
-   0153 E5                  288 	push	hl
-   0154 CDr00r00            289 	call	_InitScrollColor
-   0157 E8 0D               290 	add	sp, #13
+   013B 21 00 00            274 	ld	hl,#0x0000
+   013E E5                  275 	push	hl
+   013F 3E 03               276 	ld	a,#0x03
+   0141 F5                  277 	push	af
+   0142 33                  278 	inc	sp
+   0143 2E 00               279 	ld	l, #0x00
+   0145 E5                  280 	push	hl
+   0146 21r01r00            281 	ld	hl,#_collilision_tiles4
+   0149 E5                  282 	push	hl
+   014A 21r00r00            283 	ld	hl,#_map4
+   014D E5                  284 	push	hl
+   014E 21 32 00            285 	ld	hl,#0x0032
+   0151 E5                  286 	push	hl
+   0152 2E 32               287 	ld	l, #0x32
+   0154 E5                  288 	push	hl
+   0155 CDr00r00            289 	call	_InitScrollColor
+   0158 E8 0D               290 	add	sp, #13
                             291 ;StateGame4.c:54: SHOW_BKG;
-   0159 11 40 FF            292 	ld	de,#0xff40
-   015C 1A                  293 	ld	a,(de)
-   015D 4F                  294 	ld	c,a
-   015E 06 00               295 	ld	b,#0x00
-   0160 79                  296 	ld	a,c
-   0161 CB C7               297 	set	0, a
-   0163 4F                  298 	ld	c,a
-   0164 21 40 FF            299 	ld	hl,#0xff40
-   0167 71                  300 	ld	(hl),c
-   0168 C9                  301 	ret
+   015A 11 40 FF            292 	ld	de,#0xff40
+   015D 1A                  293 	ld	a,(de)
+   015E 4F                  294 	ld	c,a
+   015F 06 00               295 	ld	b,#0x00
+   0161 79                  296 	ld	a,c
+   0162 CB C7               297 	set	0, a
+   0164 4F                  298 	ld	c,a
+   0165 21 40 FF            299 	ld	hl,#0xff40
+   0168 71                  300 	ld	(hl),c
+   0169 C9                  301 	ret
                             302 ;StateGame4.c:59: void Update_STATE_GAME4() {
                             303 ;	---------------------------------
                             304 ; Function Update_STATE_GAME4
                             305 ; ---------------------------------
-   0169                     306 _Update_STATE_GAME4::
+   016A                     306 _Update_STATE_GAME4::
                             307 ;StateGame4.c:60: if (KEY_PRESSED(J_START)) {
-   0169 21r00r00            308 	ld	hl,#_keys
-   016C 4E                  309 	ld	c,(hl)
-   016D 06 00               310 	ld	b,#0x00
-   016F CB 79               311 	bit	7, c
-   0171 C8                  312 	ret	Z
+   016A 21r00r00            308 	ld	hl,#_keys
+   016D 4E                  309 	ld	c,(hl)
+   016E 06 00               310 	ld	b,#0x00
+   0170 CB 79               311 	bit	7, c
+   0172 C8                  312 	ret	Z
                             313 ;StateGame4.c:61: SetState(STATE_GAME5);
-   0172 3E 05               314 	ld	a,#0x05
-   0174 F5                  315 	push	af
-   0175 33                  316 	inc	sp
-   0176 CDr00r00            317 	call	_SetState
-   0179 33                  318 	inc	sp
-   017A C9                  319 	ret
+   0173 3E 05               314 	ld	a,#0x05
+   0175 F5                  315 	push	af
+   0176 33                  316 	inc	sp
+   0177 CDr00r00            317 	call	_SetState
+   017A 33                  318 	inc	sp
+   017B C9                  319 	ret
                             320 	.area _CODE_2
                             321 	.area _CABS (ABS)

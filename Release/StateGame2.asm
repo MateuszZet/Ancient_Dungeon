@@ -130,10 +130,10 @@ _Start_STATE_GAME2::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateGame2.c:31: if( have_diamond == 1){
+;StateGame2.c:31: if( have_diamond == 5 ){
 	ld	hl,#_have_diamond
 	ld	a,(hl)
-	dec	a
+	sub	a, #0x05
 	jr	NZ,00103$
 	inc	hl
 	ld	a,(hl)

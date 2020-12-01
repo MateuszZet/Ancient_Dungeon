@@ -90,7 +90,7 @@
    0022 71                   90 	ld	(hl),c
                              91 ;StateEnd.c:24: for(i = 0; i != n_sprite_types; ++ i) {
    0023 06 00                92 	ld	b,#0x00
-   0025                      93 00103$:
+   0025                      93 00107$:
    0025 21r00r00             94 	ld	hl,#_n_sprite_types
    0028 7E                   95 	ld	a,(hl)
    0029 90                   96 	sub	a, b
@@ -104,7 +104,7 @@
    0033 C1                  104 	pop	bc
                             105 ;StateEnd.c:24: for(i = 0; i != n_sprite_types; ++ i) {
    0034 04                  106 	inc	b
-   0035 18 EE               107 	jr	00103$
+   0035 18 EE               107 	jr	00107$
    0037                     108 00101$:
                             109 ;StateEnd.c:27: SHOW_SPRITES;
    0037 11 40 FF            110 	ld	de,#0xff40
@@ -130,90 +130,183 @@
    0058 73                  130 	ld	(hl),e
    0059 23                  131 	inc	hl
    005A 72                  132 	ld	(hl),d
-                            133 ;StateEnd.c:30: SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
-   005B 21 48 00            134 	ld	hl,#0x0048
-   005E E5                  135 	push	hl
-   005F 2E 48               136 	ld	l, #0x48
-   0061 E5                  137 	push	hl
-   0062 3E 09               138 	ld	a,#0x09
-   0064 F5                  139 	push	af
-   0065 33                  140 	inc	sp
-   0066 CDr00r00            141 	call	_SpriteManagerAdd
-   0069 E8 05               142 	add	sp, #5
-                            143 ;StateEnd.c:31: InitScrollTiles(0, 59, tiles, 3);
-   006B 21 00 00            144 	ld	hl,#0x0000
-   006E E5                  145 	push	hl
-   006F 3E 03               146 	ld	a,#0x03
-   0071 F5                  147 	push	af
-   0072 33                  148 	inc	sp
-   0073 21r00r00            149 	ld	hl,#_tiles
-   0076 E5                  150 	push	hl
-   0077 21 00 3B            151 	ld	hl,#0x3b00
-   007A E5                  152 	push	hl
-   007B CDr00r00            153 	call	_ZInitScrollTilesColor
-   007E E8 07               154 	add	sp, #7
-                            155 ;StateEnd.c:32: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
-   0080 21 00 00            156 	ld	hl,#0x0000
-   0083 E5                  157 	push	hl
-   0084 3E 03               158 	ld	a,#0x03
-   0086 F5                  159 	push	af
-   0087 33                  160 	inc	sp
-   0088 2E 00               161 	ld	l, #0x00
-   008A E5                  162 	push	hl
-   008B 21r01r00            163 	ld	hl,#_collilision_tiles4
-   008E E5                  164 	push	hl
-   008F 21r00r00            165 	ld	hl,#_end
-   0092 E5                  166 	push	hl
-   0093 21 12 00            167 	ld	hl,#0x0012
-   0096 E5                  168 	push	hl
-   0097 2E 14               169 	ld	l, #0x14
-   0099 E5                  170 	push	hl
-   009A CDr00r00            171 	call	_InitScrollColor
-   009D E8 0D               172 	add	sp, #13
-                            173 ;StateEnd.c:33: SHOW_BKG;
-   009F 11 40 FF            174 	ld	de,#0xff40
-   00A2 1A                  175 	ld	a,(de)
-   00A3 4F                  176 	ld	c,a
-   00A4 06 00               177 	ld	b,#0x00
-   00A6 79                  178 	ld	a,c
-   00A7 CB C7               179 	set	0, a
-   00A9 4F                  180 	ld	c,a
-   00AA 21 40 FF            181 	ld	hl,#0xff40
-   00AD 71                  182 	ld	(hl),c
-   00AE C9                  183 	ret
-                            184 ;StateEnd.c:38: void Update_STATE_END() {
-                            185 ;	---------------------------------
-                            186 ; Function Update_STATE_END
-                            187 ; ---------------------------------
-   00AF                     188 _Update_STATE_END::
-                            189 ;StateEnd.c:40: if(have_diamond==1){
-   00AF 21r00r00            190 	ld	hl,#_have_diamond
-   00B2 7E                  191 	ld	a,(hl)
-   00B3 3D                  192 	dec	a
-   00B4 20 0C               193 	jr	NZ,00102$
-   00B6 23                  194 	inc	hl
-   00B7 7E                  195 	ld	a,(hl)
-   00B8 B7                  196 	or	a, a
-   00B9 20 07               197 	jr	NZ,00102$
-                            198 ;StateEnd.c:41: SetState(STATE_MENU);
-   00BB AF                  199 	xor	a, a
-   00BC F5                  200 	push	af
-   00BD 33                  201 	inc	sp
-   00BE CDr00r00            202 	call	_SetState
-   00C1 33                  203 	inc	sp
-   00C2                     204 00102$:
-                            205 ;StateEnd.c:43: if (KEY_PRESSED(J_START)) {
-   00C2 21r00r00            206 	ld	hl,#_keys
-   00C5 4E                  207 	ld	c,(hl)
-   00C6 06 00               208 	ld	b,#0x00
-   00C8 CB 79               209 	bit	7, c
-   00CA C8                  210 	ret	Z
-                            211 ;StateEnd.c:44: SetState(STATE_END2);
-   00CB 3E 08               212 	ld	a,#0x08
-   00CD F5                  213 	push	af
-   00CE 33                  214 	inc	sp
-   00CF CDr00r00            215 	call	_SetState
-   00D2 33                  216 	inc	sp
-   00D3 C9                  217 	ret
-                            218 	.area _CODE_2
-                            219 	.area _CABS (ABS)
+                            133 ;StateEnd.c:31: if(have_diamond==0){
+   005B 21r01r00            134 	ld	hl,#_have_diamond + 1
+   005E 3A                  135 	ld	a,(hl-)
+   005F B6                  136 	or	a,(hl)
+   0060 20 10               137 	jr	NZ,00103$
+                            138 ;StateEnd.c:32: SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
+   0062 21 48 00            139 	ld	hl,#0x0048
+   0065 E5                  140 	push	hl
+   0066 2E 48               141 	ld	l, #0x48
+   0068 E5                  142 	push	hl
+   0069 3E 09               143 	ld	a,#0x09
+   006B F5                  144 	push	af
+   006C 33                  145 	inc	sp
+   006D CDr00r00            146 	call	_SpriteManagerAdd
+   0070 E8 05               147 	add	sp, #5
+   0072                     148 00103$:
+                            149 ;StateEnd.c:35: if(have_diamond==5){
+   0072 21r00r00            150 	ld	hl,#_have_diamond
+   0075 7E                  151 	ld	a,(hl)
+   0076 D6 05               152 	sub	a, #0x05
+   0078 C2r01r01            153 	jp	NZ,00105$
+   007B 23                  154 	inc	hl
+   007C 7E                  155 	ld	a,(hl)
+   007D B7                  156 	or	a, a
+   007E C2r01r01            157 	jp	NZ,00105$
+                            158 ;StateEnd.c:36: SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
+   0081 21 48 00            159 	ld	hl,#0x0048
+   0084 E5                  160 	push	hl
+   0085 2E 50               161 	ld	l, #0x50
+   0087 E5                  162 	push	hl
+   0088 3E 09               163 	ld	a,#0x09
+   008A F5                  164 	push	af
+   008B 33                  165 	inc	sp
+   008C CDr00r00            166 	call	_SpriteManagerAdd
+   008F E8 05               167 	add	sp, #5
+                            168 ;StateEnd.c:37: SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
+   0091 21 48 00            169 	ld	hl,#0x0048
+   0094 E5                  170 	push	hl
+   0095 2E 40               171 	ld	l, #0x40
+   0097 E5                  172 	push	hl
+   0098 3E 09               173 	ld	a,#0x09
+   009A F5                  174 	push	af
+   009B 33                  175 	inc	sp
+   009C CDr00r00            176 	call	_SpriteManagerAdd
+   009F E8 05               177 	add	sp, #5
+                            178 ;StateEnd.c:39: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+   00A1 21 70 00            179 	ld	hl,#0x0070
+   00A4 E5                  180 	push	hl
+   00A5 2E 80               181 	ld	l, #0x80
+   00A7 E5                  182 	push	hl
+   00A8 3E 09               183 	ld	a,#0x09
+   00AA F5                  184 	push	af
+   00AB 33                  185 	inc	sp
+   00AC CDr00r00            186 	call	_SpriteManagerAdd
+   00AF E8 05               187 	add	sp, #5
+                            188 ;StateEnd.c:40: SpriteManagerAdd(SPRITE_DIAMOND, 112, 96);
+   00B1 21 60 00            189 	ld	hl,#0x0060
+   00B4 E5                  190 	push	hl
+   00B5 2E 70               191 	ld	l, #0x70
+   00B7 E5                  192 	push	hl
+   00B8 3E 09               193 	ld	a,#0x09
+   00BA F5                  194 	push	af
+   00BB 33                  195 	inc	sp
+   00BC CDr00r00            196 	call	_SpriteManagerAdd
+   00BF E8 05               197 	add	sp, #5
+                            198 ;StateEnd.c:41: SpriteManagerAdd(SPRITE_DIAMOND, 96, 80);
+   00C1 21 50 00            199 	ld	hl,#0x0050
+   00C4 E5                  200 	push	hl
+   00C5 2E 60               201 	ld	l, #0x60
+   00C7 E5                  202 	push	hl
+   00C8 3E 09               203 	ld	a,#0x09
+   00CA F5                  204 	push	af
+   00CB 33                  205 	inc	sp
+   00CC CDr00r00            206 	call	_SpriteManagerAdd
+   00CF E8 05               207 	add	sp, #5
+                            208 ;StateEnd.c:43: SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
+   00D1 21 70 00            209 	ld	hl,#0x0070
+   00D4 E5                  210 	push	hl
+   00D5 2E 10               211 	ld	l, #0x10
+   00D7 E5                  212 	push	hl
+   00D8 3E 09               213 	ld	a,#0x09
+   00DA F5                  214 	push	af
+   00DB 33                  215 	inc	sp
+   00DC CDr00r00            216 	call	_SpriteManagerAdd
+   00DF E8 05               217 	add	sp, #5
+                            218 ;StateEnd.c:44: SpriteManagerAdd(SPRITE_DIAMOND, 32, 96);
+   00E1 21 60 00            219 	ld	hl,#0x0060
+   00E4 E5                  220 	push	hl
+   00E5 2E 20               221 	ld	l, #0x20
+   00E7 E5                  222 	push	hl
+   00E8 3E 09               223 	ld	a,#0x09
+   00EA F5                  224 	push	af
+   00EB 33                  225 	inc	sp
+   00EC CDr00r00            226 	call	_SpriteManagerAdd
+   00EF E8 05               227 	add	sp, #5
+                            228 ;StateEnd.c:45: SpriteManagerAdd(SPRITE_DIAMOND, 48, 80);
+   00F1 21 50 00            229 	ld	hl,#0x0050
+   00F4 E5                  230 	push	hl
+   00F5 2E 30               231 	ld	l, #0x30
+   00F7 E5                  232 	push	hl
+   00F8 3E 09               233 	ld	a,#0x09
+   00FA F5                  234 	push	af
+   00FB 33                  235 	inc	sp
+   00FC CDr00r00            236 	call	_SpriteManagerAdd
+   00FF E8 05               237 	add	sp, #5
+   0101                     238 00105$:
+                            239 ;StateEnd.c:48: InitScrollTiles(0, 59, tiles, 3);
+   0101 21 00 00            240 	ld	hl,#0x0000
+   0104 E5                  241 	push	hl
+   0105 3E 03               242 	ld	a,#0x03
+   0107 F5                  243 	push	af
+   0108 33                  244 	inc	sp
+   0109 21r00r00            245 	ld	hl,#_tiles
+   010C E5                  246 	push	hl
+   010D 21 00 3B            247 	ld	hl,#0x3b00
+   0110 E5                  248 	push	hl
+   0111 CDr00r00            249 	call	_ZInitScrollTilesColor
+   0114 E8 07               250 	add	sp, #7
+                            251 ;StateEnd.c:49: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
+   0116 21 00 00            252 	ld	hl,#0x0000
+   0119 E5                  253 	push	hl
+   011A 3E 03               254 	ld	a,#0x03
+   011C F5                  255 	push	af
+   011D 33                  256 	inc	sp
+   011E 2E 00               257 	ld	l, #0x00
+   0120 E5                  258 	push	hl
+   0121 21r01r00            259 	ld	hl,#_collilision_tiles4
+   0124 E5                  260 	push	hl
+   0125 21r00r00            261 	ld	hl,#_end
+   0128 E5                  262 	push	hl
+   0129 21 12 00            263 	ld	hl,#0x0012
+   012C E5                  264 	push	hl
+   012D 2E 14               265 	ld	l, #0x14
+   012F E5                  266 	push	hl
+   0130 CDr00r00            267 	call	_InitScrollColor
+   0133 E8 0D               268 	add	sp, #13
+                            269 ;StateEnd.c:50: SHOW_BKG;
+   0135 11 40 FF            270 	ld	de,#0xff40
+   0138 1A                  271 	ld	a,(de)
+   0139 4F                  272 	ld	c,a
+   013A 06 00               273 	ld	b,#0x00
+   013C 79                  274 	ld	a,c
+   013D CB C7               275 	set	0, a
+   013F 4F                  276 	ld	c,a
+   0140 21 40 FF            277 	ld	hl,#0xff40
+   0143 71                  278 	ld	(hl),c
+   0144 C9                  279 	ret
+                            280 ;StateEnd.c:55: void Update_STATE_END() {
+                            281 ;	---------------------------------
+                            282 ; Function Update_STATE_END
+                            283 ; ---------------------------------
+   0145                     284 _Update_STATE_END::
+                            285 ;StateEnd.c:57: if(have_diamond==1 || have_diamond==13){
+   0145 21r00r00            286 	ld	hl,#_have_diamond
+   0148 7E                  287 	ld	a,(hl)
+   0149 3D                  288 	dec	a
+   014A 20 05               289 	jr	NZ,00110$
+   014C 23                  290 	inc	hl
+   014D 7E                  291 	ld	a,(hl)
+   014E B7                  292 	or	a, a
+   014F 28 0B               293 	jr	Z,00101$
+   0151                     294 00110$:
+   0151 21r00r00            295 	ld	hl,#_have_diamond
+   0154 7E                  296 	ld	a,(hl)
+   0155 D6 0D               297 	sub	a, #0x0d
+   0157 C0                  298 	ret	NZ
+   0158 23                  299 	inc	hl
+   0159 7E                  300 	ld	a,(hl)
+   015A B7                  301 	or	a, a
+   015B C0                  302 	ret	NZ
+   015C                     303 00101$:
+                            304 ;StateEnd.c:58: SetState(STATE_MENU);
+   015C AF                  305 	xor	a, a
+   015D F5                  306 	push	af
+   015E 33                  307 	inc	sp
+   015F CDr00r00            308 	call	_SetState
+   0162 33                  309 	inc	sp
+   0163 C9                  310 	ret
+                            311 	.area _CODE_2
+                            312 	.area _CABS (ABS)

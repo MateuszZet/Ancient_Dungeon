@@ -29,7 +29,7 @@ void Start_STATE_MENU() {
 	door_x = 20;
 	door_y = 120;
 	
-	if( have_diamond == 1 || have_diamond == 9){
+	if( have_diamond == 5 || have_diamond == 13){
 		have_bomb=0;
 	}
 	else{
@@ -44,7 +44,18 @@ void Start_STATE_MENU() {
 	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	}
 	
-	if( have_diamond == 9){
+	if( have_diamond == 1){
+	SpriteManagerAdd(SPRITE_KEY, 20, 20);
+	SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
+	}
+	
+	if ( have_diamond == 5 ){
+	SpriteManagerAdd(SPRITE_KEY, 20, 20);
+	SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
+	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	}
+	
+	if( have_diamond == 13){
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
@@ -59,10 +70,10 @@ void Start_STATE_MENU() {
 }
 
 void Update_STATE_MENU(){
-	if (KEY_PRESSED(J_START) && have_diamond<9) {
+	if (KEY_PRESSED(J_START) && have_diamond<13) {
 		SetState(STATE_GAME);
 	}
-	if (KEY_PRESSED(J_SELECT) || have_diamond==10){
+	if (KEY_PRESSED(J_SELECT) || have_diamond==14){
 		have_diamond = 0;
 		SetState(STATE_MENU);
 	}
