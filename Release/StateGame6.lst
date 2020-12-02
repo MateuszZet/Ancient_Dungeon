@@ -300,33 +300,42 @@
    0154 06 00               300 	ld	b,#0x00
    0156 CB 79               301 	bit	7, c
    0158 C8                  302 	ret	Z
-                            303 ;StateGame6.c:63: if(have_diamond == 0 || have_diamond == 5){
+                            303 ;StateGame6.c:63: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
    0159 21r01r00            304 	ld	hl,#_have_diamond + 1
    015C 3A                  305 	ld	a,(hl-)
    015D B6                  306 	or	a,(hl)
-   015E 28 0A               307 	jr	Z,00101$
+   015E 28 17               307 	jr	Z,00101$
    0160 7E                  308 	ld	a,(hl)
-   0161 D6 05               309 	sub	a, #0x05
-   0163 20 0E               310 	jr	NZ,00102$
+   0161 D6 03               309 	sub	a, #0x03
+   0163 20 05               310 	jr	NZ,00123$
    0165 23                  311 	inc	hl
    0166 7E                  312 	ld	a,(hl)
    0167 B7                  313 	or	a, a
-   0168 20 09               314 	jr	NZ,00102$
-   016A                     315 00101$:
-                            316 ;StateGame6.c:64: SetState(STATE_END);
-   016A 3E 07               317 	ld	a,#0x07
-   016C F5                  318 	push	af
-   016D 33                  319 	inc	sp
-   016E CDr00r00            320 	call	_SetState
-   0171 33                  321 	inc	sp
-   0172 C9                  322 	ret
-   0173                     323 00102$:
-                            324 ;StateGame6.c:67: SetState(STATE_END2);
-   0173 3E 08               325 	ld	a,#0x08
-   0175 F5                  326 	push	af
-   0176 33                  327 	inc	sp
-   0177 CDr00r00            328 	call	_SetState
-   017A 33                  329 	inc	sp
-   017B C9                  330 	ret
-                            331 	.area _CODE_2
-                            332 	.area _CABS (ABS)
+   0168 28 0D               314 	jr	Z,00101$
+   016A                     315 00123$:
+   016A 21r00r00            316 	ld	hl,#_have_diamond
+   016D 7E                  317 	ld	a,(hl)
+   016E D6 0A               318 	sub	a, #0x0a
+   0170 20 0E               319 	jr	NZ,00102$
+   0172 23                  320 	inc	hl
+   0173 7E                  321 	ld	a,(hl)
+   0174 B7                  322 	or	a, a
+   0175 20 09               323 	jr	NZ,00102$
+   0177                     324 00101$:
+                            325 ;StateGame6.c:64: SetState(STATE_END);
+   0177 3E 07               326 	ld	a,#0x07
+   0179 F5                  327 	push	af
+   017A 33                  328 	inc	sp
+   017B CDr00r00            329 	call	_SetState
+   017E 33                  330 	inc	sp
+   017F C9                  331 	ret
+   0180                     332 00102$:
+                            333 ;StateGame6.c:67: SetState(STATE_END2);
+   0180 3E 08               334 	ld	a,#0x08
+   0182 F5                  335 	push	af
+   0183 33                  336 	inc	sp
+   0184 CDr00r00            337 	call	_SetState
+   0187 33                  338 	inc	sp
+   0188 C9                  339 	ret
+                            340 	.area _CODE_2
+                            341 	.area _CABS (ABS)

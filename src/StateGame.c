@@ -33,7 +33,7 @@ void Start_STATE_GAME() {
 		have_bomb = 4;
 	}
 	
-	if( have_diamond == 0 || have_diamond == 5 ){
+	if( have_diamond == 0 || have_diamond == 3 ){
 	
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	door_x = 240;

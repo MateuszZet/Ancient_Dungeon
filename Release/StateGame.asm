@@ -120,19 +120,11 @@ _Start_STATE_GAME::
 	ld	hl,#_have_diamond
 	ld	a,(hl)
 	sub	a, #0x05
-	jr	NZ,00132$
+	jr	NZ,00103$
 	inc	hl
 	ld	a,(hl)
 	or	a, a
-	jr	NZ,00132$
-	ld	a,#0x01
-	jr	00133$
-00132$:
-	xor	a,a
-00133$:
-	ld	c,a
-	or	a, a
-	jr	Z,00103$
+	jr	NZ,00103$
 ;StateGame.c:30: have_bomb=0;
 	ld	hl,#_have_bomb
 	ld	(hl),#0x00
@@ -146,14 +138,18 @@ _Start_STATE_GAME::
 	inc	hl
 	ld	(hl),#0x00
 00104$:
-;StateGame.c:36: if( have_diamond == 0 || have_diamond == 5 ){
+;StateGame.c:36: if( have_diamond == 0 || have_diamond == 3 ){
 	ld	hl,#_have_diamond + 1
 	ld	a,(hl-)
 	or	a,(hl)
 	jr	Z,00105$
-	ld	a,c
+	ld	a,(hl)
+	sub	a, #0x03
+	jp	NZ,00106$
+	inc	hl
+	ld	a,(hl)
 	or	a, a
-	jp	Z,00106$
+	jp	NZ,00106$
 00105$:
 ;StateGame.c:38: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	ld	hl,#0x0064

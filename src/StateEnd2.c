@@ -30,6 +30,12 @@ void Start_STATE_END2() {
 	if(have_diamond==1){
 	SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
 	SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
+	//SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+	//SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
+	}
+	if(have_diamond==6){
+	SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
+	SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
 	SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
 	SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
 	}
@@ -42,7 +48,7 @@ void Start_STATE_END2() {
 }
 
 void Update_STATE_END2() {
-	if(have_diamond==5){
+	if(have_diamond==3 || have_diamond==10){
 		SetState(STATE_MENU);
 	}
 }

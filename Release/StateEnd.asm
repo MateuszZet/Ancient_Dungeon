@@ -90,7 +90,7 @@ _Start_STATE_END::
 	ld	(hl),c
 ;StateEnd.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
-00107$:
+00109$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
@@ -104,7 +104,7 @@ _Start_STATE_END::
 	pop	bc
 ;StateEnd.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
-	jr	00107$
+	jr	00109$
 00101$:
 ;StateEnd.c:27: SHOW_SPRITES;
 	ld	de,#0xff40
@@ -146,36 +146,26 @@ _Start_STATE_END::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00103$:
-;StateEnd.c:35: if(have_diamond==5){
+;StateEnd.c:35: if(have_diamond==3){
 	ld	hl,#_have_diamond
 	ld	a,(hl)
-	sub	a, #0x05
+	sub	a, #0x03
 	jp	NZ,00105$
 	inc	hl
 	ld	a,(hl)
 	or	a, a
-	jp	NZ,00105$
-;StateEnd.c:36: SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
+	jr	NZ,00105$
+;StateEnd.c:38: SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
 	ld	hl,#0x0048
 	push	hl
-	ld	l, #0x50
+	ld	l, #0x48
 	push	hl
 	ld	a,#0x09
 	push	af
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd.c:37: SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
-	ld	hl,#0x0048
-	push	hl
-	ld	l, #0x40
-	push	hl
-	ld	a,#0x09
-	push	af
-	inc	sp
-	call	_SpriteManagerAdd
-	add	sp, #5
-;StateEnd.c:39: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+;StateEnd.c:40: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x80
@@ -185,27 +175,7 @@ _Start_STATE_END::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd.c:40: SpriteManagerAdd(SPRITE_DIAMOND, 112, 96);
-	ld	hl,#0x0060
-	push	hl
-	ld	l, #0x70
-	push	hl
-	ld	a,#0x09
-	push	af
-	inc	sp
-	call	_SpriteManagerAdd
-	add	sp, #5
-;StateEnd.c:41: SpriteManagerAdd(SPRITE_DIAMOND, 96, 80);
-	ld	hl,#0x0050
-	push	hl
-	ld	l, #0x60
-	push	hl
-	ld	a,#0x09
-	push	af
-	inc	sp
-	call	_SpriteManagerAdd
-	add	sp, #5
-;StateEnd.c:43: SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
+;StateEnd.c:44: SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x10
@@ -215,28 +185,68 @@ _Start_STATE_END::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd.c:44: SpriteManagerAdd(SPRITE_DIAMOND, 32, 96);
-	ld	hl,#0x0060
-	push	hl
-	ld	l, #0x20
-	push	hl
-	ld	a,#0x09
-	push	af
-	inc	sp
-	call	_SpriteManagerAdd
-	add	sp, #5
-;StateEnd.c:45: SpriteManagerAdd(SPRITE_DIAMOND, 48, 80);
-	ld	hl,#0x0050
-	push	hl
-	ld	l, #0x30
-	push	hl
-	ld	a,#0x09
-	push	af
-	inc	sp
-	call	_SpriteManagerAdd
-	add	sp, #5
 00105$:
-;StateEnd.c:48: InitScrollTiles(0, 59, tiles, 3);
+;StateEnd.c:49: if(have_diamond==10){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x0a
+	jp	NZ,00107$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jp	NZ,00107$
+;StateEnd.c:52: SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
+	ld	hl,#0x0048
+	push	hl
+	ld	l, #0x48
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd.c:54: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+	ld	hl,#0x0070
+	push	hl
+	ld	l, #0x80
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd.c:55: SpriteManagerAdd(SPRITE_DIAMOND, 104, 88);
+	ld	hl,#0x0058
+	push	hl
+	ld	l, #0x68
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd.c:58: SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
+	ld	hl,#0x0070
+	push	hl
+	ld	l, #0x10
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateEnd.c:59: SpriteManagerAdd(SPRITE_DIAMOND, 40, 88);
+	ld	hl,#0x0058
+	push	hl
+	ld	l, #0x28
+	push	hl
+	ld	a,#0x09
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+00107$:
+;StateEnd.c:63: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -248,7 +258,7 @@ _Start_STATE_END::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateEnd.c:49: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
+;StateEnd.c:64: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -266,7 +276,7 @@ _Start_STATE_END::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateEnd.c:50: SHOW_BKG;
+;StateEnd.c:65: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -277,31 +287,41 @@ _Start_STATE_END::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateEnd.c:55: void Update_STATE_END() {
+;StateEnd.c:70: void Update_STATE_END() {
 ;	---------------------------------
 ; Function Update_STATE_END
 ; ---------------------------------
 _Update_STATE_END::
-;StateEnd.c:57: if(have_diamond==1 || have_diamond==13){
+;StateEnd.c:72: if(have_diamond==1 || have_diamond==6 || have_diamond==15
 	ld	hl,#_have_diamond
 	ld	a,(hl)
 	dec	a
-	jr	NZ,00110$
+	jr	NZ,00115$
 	inc	hl
 	ld	a,(hl)
 	or	a, a
 	jr	Z,00101$
-00110$:
+00115$:
 	ld	hl,#_have_diamond
 	ld	a,(hl)
-	sub	a, #0x0d
+	sub	a, #0x06
+	jr	NZ,00116$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jr	Z,00101$
+00116$:
+;StateEnd.c:73: ){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x0f
 	ret	NZ
 	inc	hl
 	ld	a,(hl)
 	or	a, a
 	ret	NZ
 00101$:
-;StateEnd.c:58: SetState(STATE_MENU);
+;StateEnd.c:74: SetState(STATE_MENU);
 	xor	a, a
 	push	af
 	inc	sp

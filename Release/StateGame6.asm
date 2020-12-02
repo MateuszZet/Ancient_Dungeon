@@ -300,13 +300,22 @@ _Update_STATE_GAME6::
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame6.c:63: if(have_diamond == 0 || have_diamond == 5){
+;StateGame6.c:63: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
 	ld	hl,#_have_diamond + 1
 	ld	a,(hl-)
 	or	a,(hl)
 	jr	Z,00101$
 	ld	a,(hl)
-	sub	a, #0x05
+	sub	a, #0x03
+	jr	NZ,00123$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jr	Z,00101$
+00123$:
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x0a
 	jr	NZ,00102$
 	inc	hl
 	ld	a,(hl)
