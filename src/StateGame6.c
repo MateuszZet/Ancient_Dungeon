@@ -60,6 +60,10 @@ void Start_STATE_GAME6() {
 		
 	}
 	
+	if( have_diamond == 10 ){
+		
+	}
+	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
 	SHOW_BKG;
