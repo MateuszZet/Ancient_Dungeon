@@ -16,11 +16,11 @@ UINT8 collilision_tiles6[] = { 1,2,3,4,0 };
 void Start_STATE_GAME6() {
 	UINT8 i;
 	
-	if(have_diamond>=1){
-		next_lvl=8;
+	if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
+		next_lvl=7;
 	}
 	else{
-		next_lvl=7;
+		next_lvl=8;
 	}
 		
 	
@@ -36,12 +36,7 @@ void Start_STATE_GAME6() {
 
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	
-	if( have_diamond == 5){
-		have_bomb=0;
-	}
-	else{
-		have_bomb = 1;
-	}
+	have_bomb=2;
 	
 	door_x = 88;
 	door_y = 120;

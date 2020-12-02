@@ -26,6 +26,8 @@ void Start_STATE_END() {
 	}
 	SHOW_SPRITES;
 	
+	have_bomb=0;
+	
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
 	
 	if(have_diamond==0){
@@ -33,31 +35,18 @@ void Start_STATE_END() {
 	}
 	
 	if(have_diamond==3){
-	//SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
 	SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
-	
 	SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 112, 96);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 96, 80);
-	
 	SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 32, 96);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 48, 80);
+	
 	}
 	
 	if(have_diamond==10){
-	//SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
 	SpriteManagerAdd(SPRITE_DIAMOND, 72, 72);
-	
 	SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
 	SpriteManagerAdd(SPRITE_DIAMOND, 104, 88);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 96, 80);
-	
 	SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
 	SpriteManagerAdd(SPRITE_DIAMOND, 40, 88);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 48, 80);
 	}
 	
 	InitScrollTiles(0, 59, tiles, 3);

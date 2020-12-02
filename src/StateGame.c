@@ -26,12 +26,7 @@ void Start_STATE_GAME() {
 	}
 	SHOW_SPRITES;
 	
-	if( have_diamond == 5){
-		have_bomb=0;
-	}
-	else{
-		have_bomb = 4;
-	}
+	have_bomb=2;
 	
 	if( have_diamond == 0 || have_diamond == 3 ){
 	

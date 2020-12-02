@@ -119,7 +119,6 @@ void Update_SPRITE_PLAYER() {
 				SpriteManagerRemoveSprite(spr);
 				PlayFx(CHANNEL_1, 10, 0x4U, 0xFEU, 0xA1U, 0x8FU, 0x86U);
 				have_diamond++;
-				//SetState(STATE_MENU);
 			}
 		}
 		if (spr->type == SPRITE_DOOROPEN) {

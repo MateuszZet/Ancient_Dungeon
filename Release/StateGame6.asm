@@ -64,38 +64,38 @@ _collilision_tiles6::
 ; Function Start_STATE_GAME6
 ; ---------------------------------
 _Start_STATE_GAME6::
-;StateGame6.c:19: if(have_diamond>=1){
-	ld	hl,#_have_diamond
-	ld	a, (hl)
-	sub	a, #0x01
+;StateGame6.c:19: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
+	ld	hl,#_have_diamond + 1
+	ld	a,(hl-)
+	or	a,(hl)
+	jr	Z,00101$
+	ld	a,(hl)
+	sub	a, #0x03
+	jr	NZ,00129$
 	inc	hl
-	ld	a, (hl)
-	sbc	a, #0x00
-	ld	d, (hl)
-	ld	a,#0x00
-	ld	e, a
-	bit	7, e
-	jr	Z,00130$
-	bit	7, d
-	jr	NZ,00131$
-	cp	a, a
-	jr	00131$
-00130$:
-	bit	7, d
-	jr	Z,00131$
-	scf
-00131$:
-	jr	C,00102$
-;StateGame6.c:20: next_lvl=8;
+	ld	a,(hl)
+	or	a, a
+	jr	Z,00101$
+00129$:
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x0a
+	jr	NZ,00102$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jr	NZ,00102$
+00101$:
+;StateGame6.c:20: next_lvl=7;
 	ld	hl,#_next_lvl
-	ld	(hl),#0x08
+	ld	(hl),#0x07
 	inc	hl
 	ld	(hl),#0x00
 	jr	00103$
 00102$:
-;StateGame6.c:23: next_lvl=7;
+;StateGame6.c:23: next_lvl=8;
 	ld	hl,#_next_lvl
-	ld	(hl),#0x07
+	ld	(hl),#0x08
 	inc	hl
 	ld	(hl),#0x00
 00103$:
@@ -120,11 +120,11 @@ _Start_STATE_GAME6::
 	ld	(hl),c
 ;StateGame6.c:32: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
-00109$:
+00108$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
-	jr	Z,00104$
+	jr	Z,00106$
 ;StateGame6.c:33: SpriteManagerLoad(i);
 	push	bc
 	push	bc
@@ -134,8 +134,8 @@ _Start_STATE_GAME6::
 	pop	bc
 ;StateGame6.c:32: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
-	jr	00109$
-00104$:
+	jr	00108$
+00106$:
 ;StateGame6.c:35: SHOW_SPRITES;
 	ld	de,#0xff40
 	ld	a,(de)
@@ -160,39 +160,22 @@ _Start_STATE_GAME6::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateGame6.c:39: if( have_diamond == 5){
-	ld	hl,#_have_diamond
-	ld	a,(hl)
-	sub	a, #0x05
-	jr	NZ,00106$
-	inc	hl
-	ld	a,(hl)
-	or	a, a
-	jr	NZ,00106$
-;StateGame6.c:40: have_bomb=0;
+;StateGame6.c:39: have_bomb=2;
 	ld	hl,#_have_bomb
-	ld	(hl),#0x00
+	ld	(hl),#0x02
 	inc	hl
 	ld	(hl),#0x00
-	jr	00107$
-00106$:
-;StateGame6.c:43: have_bomb = 1;
-	ld	hl,#_have_bomb
-	ld	(hl),#0x01
-	inc	hl
-	ld	(hl),#0x00
-00107$:
-;StateGame6.c:46: door_x = 88;
+;StateGame6.c:41: door_x = 88;
 	ld	hl,#_door_x
 	ld	(hl),#0x58
 	inc	hl
 	ld	(hl),#0x00
-;StateGame6.c:47: door_y = 120;
+;StateGame6.c:42: door_y = 120;
 	ld	hl,#_door_y
 	ld	(hl),#0x78
 	inc	hl
 	ld	(hl),#0x00
-;StateGame6.c:48: SpriteManagerAdd(SPRITE_KEY, 88, 16);
+;StateGame6.c:43: SpriteManagerAdd(SPRITE_KEY, 88, 16);
 	ld	hl,#0x0010
 	push	hl
 	ld	l, #0x58
@@ -202,7 +185,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:49: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+;StateGame6.c:44: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 	ld	hl,#_door_y
 	ld	a,(hl+)
 	ld	h,(hl)
@@ -218,7 +201,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:51: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+;StateGame6.c:46: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x80
@@ -228,7 +211,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:52: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+;StateGame6.c:47: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	hl,#0x0110
@@ -238,7 +221,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:53: SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
+;StateGame6.c:48: SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
 	ld	hl,#0x00e0
 	push	hl
 	ld	l, #0x80
@@ -248,7 +231,7 @@ _Start_STATE_GAME6::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame6.c:54: InitScrollTiles(0, 59, tiles, 3);
+;StateGame6.c:49: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -260,7 +243,7 @@ _Start_STATE_GAME6::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame6.c:55: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
+;StateGame6.c:50: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -278,7 +261,7 @@ _Start_STATE_GAME6::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame6.c:56: SHOW_BKG;
+;StateGame6.c:51: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -289,18 +272,18 @@ _Start_STATE_GAME6::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame6.c:61: void Update_STATE_GAME6() {
+;StateGame6.c:56: void Update_STATE_GAME6() {
 ;	---------------------------------
 ; Function Update_STATE_GAME6
 ; ---------------------------------
 _Update_STATE_GAME6::
-;StateGame6.c:62: if (KEY_PRESSED(J_START)) {
+;StateGame6.c:57: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame6.c:63: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
+;StateGame6.c:58: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
 	ld	hl,#_have_diamond + 1
 	ld	a,(hl-)
 	or	a,(hl)
@@ -322,7 +305,7 @@ _Update_STATE_GAME6::
 	or	a, a
 	jr	NZ,00102$
 00101$:
-;StateGame6.c:64: SetState(STATE_END);
+;StateGame6.c:59: SetState(STATE_END);
 	ld	a,#0x07
 	push	af
 	inc	sp
@@ -330,7 +313,7 @@ _Update_STATE_GAME6::
 	inc	sp
 	ret
 00102$:
-;StateGame6.c:67: SetState(STATE_END2);
+;StateGame6.c:62: SetState(STATE_END2);
 	ld	a,#0x08
 	push	af
 	inc	sp

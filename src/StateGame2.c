@@ -28,12 +28,7 @@ void Start_STATE_GAME2() {
 
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	
-	if( have_diamond == 5 ){
-		have_bomb=0;
-	}
-	else{
-		have_bomb = 3;
-	}
+	have_bomb=2;
 	
 	door_x = 16;
 	door_y = 24;

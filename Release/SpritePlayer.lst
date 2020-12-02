@@ -1108,11 +1108,11 @@
    056E 34                 1108 	inc	(hl)
    056F                    1109 00313$:
    056F                    1110 00146$:
-                           1111 ;SpritePlayer.c:125: if (spr->type == SPRITE_DOOROPEN) {
+                           1111 ;SpritePlayer.c:124: if (spr->type == SPRITE_DOOROPEN) {
    056F 0A                 1112 	ld	a,(bc)
    0570 D6 05              1113 	sub	a, #0x05
    0572 20 20              1114 	jr	NZ,00154$
-                           1115 ;SpritePlayer.c:126: if (CheckCollision(THIS, spr)) {
+                           1115 ;SpritePlayer.c:125: if (CheckCollision(THIS, spr)) {
    0574 F8 01              1116 	ldhl	sp,#1
    0576 2A                 1117 	ld	a,(hl+)
    0577 66                 1118 	ld	h,(hl)
@@ -1128,7 +1128,7 @@
    0586 7B                 1128 	ld	a,e
    0587 B7                 1129 	or	a, a
    0588 28 0A              1130 	jr	Z,00154$
-                           1131 ;SpritePlayer.c:127: SetState(next_lvl);
+                           1131 ;SpritePlayer.c:126: SetState(next_lvl);
    058A 21r05r00           1132 	ld	hl,#_next_lvl
    058D 46                 1133 	ld	b,(hl)
    058E C5                 1134 	push	bc
@@ -1167,12 +1167,12 @@
    05BB                    1167 00155$:
    05BB E8 05              1168 	add	sp, #5
    05BD C9                 1169 	ret
-                           1170 ;SpritePlayer.c:133: void Destroy_SPRITE_PLAYER() {
+                           1170 ;SpritePlayer.c:132: void Destroy_SPRITE_PLAYER() {
                            1171 ;	---------------------------------
                            1172 ; Function Destroy_SPRITE_PLAYER
                            1173 ; ---------------------------------
    05BE                    1174 _Destroy_SPRITE_PLAYER::
-                           1175 ;SpritePlayer.c:134: }
+                           1175 ;SpritePlayer.c:133: }
    05BE C9                 1176 	ret
                            1177 	.area _CODE_2
                            1178 	.area _CABS (ABS)

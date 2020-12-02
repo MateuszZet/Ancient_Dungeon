@@ -29,12 +29,8 @@ void Start_STATE_MENU() {
 	door_x = 20;
 	door_y = 120;
 	
-	if( have_diamond == 5 || have_diamond == 13){
-		have_bomb=0;
-	}
-	else{
-		have_bomb = 6;
-	}
+	have_bomb=2;
+	
 	
 	if( have_diamond == 0){
 	SpriteManagerAdd(SPRITE_KEY, 20, 20);

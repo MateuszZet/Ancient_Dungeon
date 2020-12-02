@@ -116,7 +116,12 @@ _Start_STATE_END2::
 	ld	c,a
 	ld	hl,#0xff40
 	ld	(hl),c
-;StateEnd2.c:28: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
+;StateEnd2.c:28: have_bomb=0;
+	ld	hl,#_have_bomb
+	ld	(hl),#0x00
+	inc	hl
+	ld	(hl),#0x00
+;StateEnd2.c:30: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
 	ld	hl,#0x0023
 	push	hl
 	ld	l, #0x46
@@ -130,7 +135,7 @@ _Start_STATE_END2::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateEnd2.c:30: if(have_diamond==1){
+;StateEnd2.c:32: if(have_diamond==1){
 	ld	hl,#_have_diamond
 	ld	a,(hl)
 	dec	a
@@ -139,7 +144,7 @@ _Start_STATE_END2::
 	ld	a,(hl)
 	or	a, a
 	jr	NZ,00103$
-;StateEnd2.c:31: SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
+;StateEnd2.c:33: SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
 	ld	hl,#0x0048
 	push	hl
 	ld	l, #0x50
@@ -149,7 +154,7 @@ _Start_STATE_END2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd2.c:32: SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
+;StateEnd2.c:34: SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
 	ld	hl,#0x0048
 	push	hl
 	ld	l, #0x40
@@ -160,7 +165,7 @@ _Start_STATE_END2::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00103$:
-;StateEnd2.c:36: if(have_diamond==6){
+;StateEnd2.c:37: if(have_diamond==6){
 	ld	hl,#_have_diamond
 	ld	a,(hl)
 	sub	a, #0x06
@@ -169,7 +174,7 @@ _Start_STATE_END2::
 	ld	a,(hl)
 	or	a, a
 	jp	NZ,00105$
-;StateEnd2.c:37: SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
+;StateEnd2.c:38: SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
 	ld	hl,#0x0048
 	push	hl
 	ld	l, #0x50
@@ -179,7 +184,7 @@ _Start_STATE_END2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd2.c:38: SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
+;StateEnd2.c:39: SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
 	ld	hl,#0x0048
 	push	hl
 	ld	l, #0x40
@@ -189,7 +194,7 @@ _Start_STATE_END2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd2.c:39: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
+;StateEnd2.c:40: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x80
@@ -199,7 +204,7 @@ _Start_STATE_END2::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateEnd2.c:40: SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
+;StateEnd2.c:41: SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	l, #0x10
@@ -210,7 +215,7 @@ _Start_STATE_END2::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00105$:
-;StateEnd2.c:43: InitScrollTiles(0, 59, tiles, 3);
+;StateEnd2.c:44: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -222,7 +227,7 @@ _Start_STATE_END2::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateEnd2.c:44: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
+;StateEnd2.c:45: InitScroll(endWidth,endHeight,end, collilision_tiles4, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -240,7 +245,7 @@ _Start_STATE_END2::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateEnd2.c:45: SHOW_BKG;
+;StateEnd2.c:46: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -251,12 +256,12 @@ _Start_STATE_END2::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateEnd2.c:50: void Update_STATE_END2() {
+;StateEnd2.c:51: void Update_STATE_END2() {
 ;	---------------------------------
 ; Function Update_STATE_END2
 ; ---------------------------------
 _Update_STATE_END2::
-;StateEnd2.c:51: if(have_diamond==3 || have_diamond==10){
+;StateEnd2.c:52: if(have_diamond==3 || have_diamond==10){
 	ld	hl,#_have_diamond
 	ld	a,(hl)
 	sub	a, #0x03
@@ -275,7 +280,7 @@ _Update_STATE_END2::
 	or	a, a
 	ret	NZ
 00101$:
-;StateEnd2.c:52: SetState(STATE_MENU);
+;StateEnd2.c:53: SetState(STATE_MENU);
 	xor	a, a
 	push	af
 	inc	sp

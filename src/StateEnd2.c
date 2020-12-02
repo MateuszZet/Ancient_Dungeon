@@ -25,14 +25,15 @@ void Start_STATE_END2() {
 	}
 	SHOW_SPRITES;
 	
+	have_bomb=0;
+	
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 70, 35);
 	
 	if(have_diamond==1){
 	SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
 	SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
-	//SpriteManagerAdd(SPRITE_DIAMOND, 16, 112);
 	}
+	
 	if(have_diamond==6){
 	SpriteManagerAdd(SPRITE_DIAMOND, 80, 72);
 	SpriteManagerAdd(SPRITE_DIAMOND, 64, 72);
