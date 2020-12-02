@@ -82,7 +82,7 @@ void Start_STATE_MENU() {
 
 void Update_STATE_MENU(){
 	if (KEY_PRESSED(J_START) && have_diamond<15) {
-		SetState(STATE_GAME);
+		SetState(STATE_GAME5);
 	}
 	if (KEY_PRESSED(J_SELECT) || have_diamond==16){
 		have_diamond = 0;

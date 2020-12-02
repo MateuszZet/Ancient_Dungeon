@@ -534,8 +534,8 @@
    02C1 37                  534 	scf
    02C2                     535 00123$:
    02C2 30 08               536 	jr	NC,00102$
-                            537 ;StateMenu.c:85: SetState(STATE_GAME);
-   02C4 3E 01               538 	ld	a,#0x01
+                            537 ;StateMenu.c:85: SetState(STATE_GAME5);
+   02C4 3E 05               538 	ld	a,#0x05
    02C6 F5                  539 	push	af
    02C7 33                  540 	inc	sp
    02C8 CDr00r00            541 	call	_SetState

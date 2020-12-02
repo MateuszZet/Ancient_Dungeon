@@ -534,8 +534,8 @@ _Update_STATE_MENU::
 	scf
 00123$:
 	jr	NC,00102$
-;StateMenu.c:85: SetState(STATE_GAME);
-	ld	a,#0x01
+;StateMenu.c:85: SetState(STATE_GAME5);
+	ld	a,#0x05
 	push	af
 	inc	sp
 	call	_SetState
