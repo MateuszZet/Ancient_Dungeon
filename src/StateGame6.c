@@ -44,24 +44,58 @@ void Start_STATE_GAME6() {
 	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
 	
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
-	SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 270, 112);
 	SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
 	}
 	
 	if( have_diamond == 1 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 16);
+	door_x = 88;
+	door_y = 16;
+	SpriteManagerAdd(SPRITE_KEY, 88, 120);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
+	SpriteManagerAdd(SPRITE_ENEMY2, 128, 69);
+	SpriteManagerAdd(SPRITE_ENEMY, 64, 120);
+	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
 	}
 	
 	if( have_diamond == 3 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 120);
+	door_x = 88;
+	door_y = 16;
+	SpriteManagerAdd(SPRITE_KEY, 88, 120);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
+	SpriteManagerAdd(SPRITE_ENEMY2, 128, 78);
+	SpriteManagerAdd(SPRITE_ENEMY, 270, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 70, 120);	
 	}
 	
 	if( have_diamond == 6 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 72, 16);
+	door_x = 88;
+	door_y = 120;
+	SpriteManagerAdd(SPRITE_KEY, 20, 44);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
+	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 20, 100);
+	SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);	
+	SpriteManagerAdd(SPRITE_ENEMY2, 128, 69);
 	}
 	
 	if( have_diamond == 10 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 120);
+	door_x = 88;
+	door_y = 120;
+	SpriteManagerAdd(SPRITE_KEY, 20, 16);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	SpriteManagerAdd(SPRITE_ENEMY, 72, 16);
+	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 270, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 70, 120);	
 	}
 	
 	InitScrollTiles(0, 59, tiles, 3);

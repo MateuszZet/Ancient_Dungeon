@@ -121,14 +121,10 @@ _Start_STATE_GAME5::
 	ld	(hl),#0x02
 	inc	hl
 	ld	(hl),#0x00
-;StateGame5.c:31: if( have_diamond == 30 ){
-	ld	hl,#_have_diamond
-	ld	a,(hl)
-	sub	a, #0x1e
-	jp	NZ,00103$
-	inc	hl
-	ld	a,(hl)
-	or	a, a
+;StateGame5.c:31: if( have_diamond == 0 ){
+	ld	hl,#_have_diamond + 1
+	ld	a,(hl-)
+	or	a,(hl)
 	jp	NZ,00103$
 ;StateGame5.c:32: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 24, 24);
 	ld	hl,#0x0018
@@ -451,10 +447,10 @@ _Start_STATE_GAME5::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00107$:
-;StateGame5.c:73: if( have_diamond == 10 ){
+;StateGame5.c:73: if( have_diamond == 6 ){
 	ld	hl,#_have_diamond
 	ld	a,(hl)
-	sub	a, #0x0a
+	sub	a, #0x06
 	jp	NZ,00109$
 	inc	hl
 	ld	a,(hl)
@@ -581,10 +577,14 @@ _Start_STATE_GAME5::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00109$:
-;StateGame5.c:89: if( have_diamond == 0 ){
-	ld	hl,#_have_diamond + 1
-	ld	a,(hl-)
-	or	a,(hl)
+;StateGame5.c:89: if( have_diamond == 10 ){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x0a
+	jp	NZ,00111$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
 	jp	NZ,00111$
 ;StateGame5.c:90: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 186, 176);
 	ld	hl,#0x00b0

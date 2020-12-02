@@ -71,12 +71,12 @@
    0005 28 17                71 	jr	Z,00101$
    0007 7E                   72 	ld	a,(hl)
    0008 D6 03                73 	sub	a, #0x03
-   000A 20 05                74 	jr	NZ,00135$
+   000A 20 05                74 	jr	NZ,00159$
    000C 23                   75 	inc	hl
    000D 7E                   76 	ld	a,(hl)
    000E B7                   77 	or	a, a
    000F 28 0D                78 	jr	Z,00101$
-   0011                      79 00135$:
+   0011                      79 00159$:
    0011 21r00r00             80 	ld	hl,#_have_diamond
    0014 7E                   81 	ld	a,(hl)
    0015 D6 0A                82 	sub	a, #0x0a
@@ -120,7 +120,7 @@
    004A 71                  120 	ld	(hl),c
                             121 ;StateGame6.c:32: for(i = 0; i != n_sprite_types; ++ i) {
    004B 06 00               122 	ld	b,#0x00
-   004D                     123 00110$:
+   004D                     123 00118$:
    004D 21r00r00            124 	ld	hl,#_n_sprite_types
    0050 7E                  125 	ld	a,(hl)
    0051 90                  126 	sub	a, b
@@ -134,7 +134,7 @@
    005B C1                  134 	pop	bc
                             135 ;StateGame6.c:32: for(i = 0; i != n_sprite_types; ++ i) {
    005C 04                  136 	inc	b
-   005D 18 EE               137 	jr	00110$
+   005D 18 EE               137 	jr	00118$
    005F                     138 00106$:
                             139 ;StateGame6.c:35: SHOW_SPRITES;
    005F 11 40 FF            140 	ld	de,#0xff40
@@ -216,10 +216,10 @@
    00D4 33                  216 	inc	sp
    00D5 CDr00r00            217 	call	_SpriteManagerAdd
    00D8 E8 05               218 	add	sp, #5
-                            219 ;StateGame6.c:47: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+                            219 ;StateGame6.c:47: SpriteManagerAdd(SPRITE_ENEMY, 270, 112);
    00DA 21 70 00            220 	ld	hl,#0x0070
    00DD E5                  221 	push	hl
-   00DE 21 10 01            222 	ld	hl,#0x0110
+   00DE 21 0E 01            222 	ld	hl,#0x010e
    00E1 E5                  223 	push	hl
    00E2 3E 01               224 	ld	a,#0x01
    00E4 F5                  225 	push	af
@@ -237,94 +237,484 @@
    00F6 CDr00r00            237 	call	_SpriteManagerAdd
    00F9 E8 05               238 	add	sp, #5
    00FB                     239 00108$:
-                            240 ;StateGame6.c:67: InitScrollTiles(0, 59, tiles, 3);
-   00FB 21 00 00            241 	ld	hl,#0x0000
-   00FE E5                  242 	push	hl
-   00FF 3E 03               243 	ld	a,#0x03
-   0101 F5                  244 	push	af
-   0102 33                  245 	inc	sp
-   0103 21r00r00            246 	ld	hl,#_tiles
-   0106 E5                  247 	push	hl
-   0107 21 00 3B            248 	ld	hl,#0x3b00
-   010A E5                  249 	push	hl
-   010B CDr00r00            250 	call	_ZInitScrollTilesColor
-   010E E8 07               251 	add	sp, #7
-                            252 ;StateGame6.c:68: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
-   0110 21 00 00            253 	ld	hl,#0x0000
-   0113 E5                  254 	push	hl
-   0114 3E 03               255 	ld	a,#0x03
-   0116 F5                  256 	push	af
-   0117 33                  257 	inc	sp
-   0118 2E 00               258 	ld	l, #0x00
-   011A E5                  259 	push	hl
-   011B 21r01r00            260 	ld	hl,#_collilision_tiles6
-   011E E5                  261 	push	hl
-   011F 21r00r00            262 	ld	hl,#_map6
-   0122 E5                  263 	push	hl
-   0123 21 24 00            264 	ld	hl,#0x0024
-   0126 E5                  265 	push	hl
-   0127 2E 28               266 	ld	l, #0x28
-   0129 E5                  267 	push	hl
-   012A CDr00r00            268 	call	_InitScrollColor
-   012D E8 0D               269 	add	sp, #13
-                            270 ;StateGame6.c:69: SHOW_BKG;
-   012F 11 40 FF            271 	ld	de,#0xff40
-   0132 1A                  272 	ld	a,(de)
-   0133 4F                  273 	ld	c,a
-   0134 06 00               274 	ld	b,#0x00
-   0136 79                  275 	ld	a,c
-   0137 CB C7               276 	set	0, a
-   0139 4F                  277 	ld	c,a
-   013A 21 40 FF            278 	ld	hl,#0xff40
-   013D 71                  279 	ld	(hl),c
-   013E C9                  280 	ret
-                            281 ;StateGame6.c:74: void Update_STATE_GAME6() {
-                            282 ;	---------------------------------
-                            283 ; Function Update_STATE_GAME6
-                            284 ; ---------------------------------
-   013F                     285 _Update_STATE_GAME6::
-                            286 ;StateGame6.c:75: if (KEY_PRESSED(J_START)) {
-   013F 21r00r00            287 	ld	hl,#_keys
-   0142 4E                  288 	ld	c,(hl)
-   0143 06 00               289 	ld	b,#0x00
-   0145 CB 79               290 	bit	7, c
-   0147 C8                  291 	ret	Z
-                            292 ;StateGame6.c:76: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
-   0148 21r01r00            293 	ld	hl,#_have_diamond + 1
-   014B 3A                  294 	ld	a,(hl-)
-   014C B6                  295 	or	a,(hl)
-   014D 28 17               296 	jr	Z,00101$
-   014F 7E                  297 	ld	a,(hl)
-   0150 D6 03               298 	sub	a, #0x03
-   0152 20 05               299 	jr	NZ,00123$
-   0154 23                  300 	inc	hl
-   0155 7E                  301 	ld	a,(hl)
-   0156 B7                  302 	or	a, a
-   0157 28 0D               303 	jr	Z,00101$
-   0159                     304 00123$:
-   0159 21r00r00            305 	ld	hl,#_have_diamond
-   015C 7E                  306 	ld	a,(hl)
-   015D D6 0A               307 	sub	a, #0x0a
-   015F 20 0E               308 	jr	NZ,00102$
-   0161 23                  309 	inc	hl
-   0162 7E                  310 	ld	a,(hl)
-   0163 B7                  311 	or	a, a
-   0164 20 09               312 	jr	NZ,00102$
-   0166                     313 00101$:
-                            314 ;StateGame6.c:77: SetState(STATE_END);
-   0166 3E 07               315 	ld	a,#0x07
-   0168 F5                  316 	push	af
-   0169 33                  317 	inc	sp
-   016A CDr00r00            318 	call	_SetState
-   016D 33                  319 	inc	sp
-   016E C9                  320 	ret
-   016F                     321 00102$:
-                            322 ;StateGame6.c:80: SetState(STATE_END2);
-   016F 3E 08               323 	ld	a,#0x08
-   0171 F5                  324 	push	af
-   0172 33                  325 	inc	sp
-   0173 CDr00r00            326 	call	_SetState
-   0176 33                  327 	inc	sp
-   0177 C9                  328 	ret
-                            329 	.area _CODE_2
-                            330 	.area _CABS (ABS)
+                            240 ;StateGame6.c:51: if( have_diamond == 1 ){
+   00FB 21r00r00            241 	ld	hl,#_have_diamond
+   00FE 7E                  242 	ld	a,(hl)
+   00FF 3D                  243 	dec	a
+   0100 C2r95r01            244 	jp	NZ,00110$
+   0103 23                  245 	inc	hl
+   0104 7E                  246 	ld	a,(hl)
+   0105 B7                  247 	or	a, a
+   0106 C2r95r01            248 	jp	NZ,00110$
+                            249 ;StateGame6.c:52: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 16);
+   0109 21 10 00            250 	ld	hl,#0x0010
+   010C E5                  251 	push	hl
+   010D 2E 14               252 	ld	l, #0x14
+   010F E5                  253 	push	hl
+   0110 AF                  254 	xor	a, a
+   0111 F5                  255 	push	af
+   0112 33                  256 	inc	sp
+   0113 CDr00r00            257 	call	_SpriteManagerAdd
+   0116 E8 05               258 	add	sp, #5
+   0118 21r00r00            259 	ld	hl,#_scroll_target
+   011B 73                  260 	ld	(hl),e
+   011C 23                  261 	inc	hl
+   011D 72                  262 	ld	(hl),d
+                            263 ;StateGame6.c:53: door_x = 88;
+   011E 21r00r00            264 	ld	hl,#_door_x
+   0121 36 58               265 	ld	(hl),#0x58
+   0123 23                  266 	inc	hl
+   0124 36 00               267 	ld	(hl),#0x00
+                            268 ;StateGame6.c:54: door_y = 16;
+   0126 21r00r00            269 	ld	hl,#_door_y
+   0129 36 10               270 	ld	(hl),#0x10
+   012B 23                  271 	inc	hl
+   012C 36 00               272 	ld	(hl),#0x00
+                            273 ;StateGame6.c:55: SpriteManagerAdd(SPRITE_KEY, 88, 120);
+   012E 21 78 00            274 	ld	hl,#0x0078
+   0131 E5                  275 	push	hl
+   0132 2E 58               276 	ld	l, #0x58
+   0134 E5                  277 	push	hl
+   0135 3E 03               278 	ld	a,#0x03
+   0137 F5                  279 	push	af
+   0138 33                  280 	inc	sp
+   0139 CDr00r00            281 	call	_SpriteManagerAdd
+   013C E8 05               282 	add	sp, #5
+                            283 ;StateGame6.c:56: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+   013E 21r00r00            284 	ld	hl,#_door_y
+   0141 2A                  285 	ld	a,(hl+)
+   0142 66                  286 	ld	h,(hl)
+   0143 6F                  287 	ld	l,a
+   0144 E5                  288 	push	hl
+   0145 21r00r00            289 	ld	hl,#_door_x
+   0148 2A                  290 	ld	a,(hl+)
+   0149 66                  291 	ld	h,(hl)
+   014A 6F                  292 	ld	l,a
+   014B E5                  293 	push	hl
+   014C 3E 04               294 	ld	a,#0x04
+   014E F5                  295 	push	af
+   014F 33                  296 	inc	sp
+   0150 CDr00r00            297 	call	_SpriteManagerAdd
+   0153 E8 05               298 	add	sp, #5
+                            299 ;StateGame6.c:58: SpriteManagerAdd(SPRITE_ENEMY2, 128, 69);
+   0155 21 45 00            300 	ld	hl,#0x0045
+   0158 E5                  301 	push	hl
+   0159 2E 80               302 	ld	l, #0x80
+   015B E5                  303 	push	hl
+   015C 3E 02               304 	ld	a,#0x02
+   015E F5                  305 	push	af
+   015F 33                  306 	inc	sp
+   0160 CDr00r00            307 	call	_SpriteManagerAdd
+   0163 E8 05               308 	add	sp, #5
+                            309 ;StateGame6.c:59: SpriteManagerAdd(SPRITE_ENEMY, 64, 120);
+   0165 21 78 00            310 	ld	hl,#0x0078
+   0168 E5                  311 	push	hl
+   0169 2E 40               312 	ld	l, #0x40
+   016B E5                  313 	push	hl
+   016C 3E 01               314 	ld	a,#0x01
+   016E F5                  315 	push	af
+   016F 33                  316 	inc	sp
+   0170 CDr00r00            317 	call	_SpriteManagerAdd
+   0173 E8 05               318 	add	sp, #5
+                            319 ;StateGame6.c:60: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+   0175 21 70 00            320 	ld	hl,#0x0070
+   0178 E5                  321 	push	hl
+   0179 2E 80               322 	ld	l, #0x80
+   017B E5                  323 	push	hl
+   017C 3E 01               324 	ld	a,#0x01
+   017E F5                  325 	push	af
+   017F 33                  326 	inc	sp
+   0180 CDr00r00            327 	call	_SpriteManagerAdd
+   0183 E8 05               328 	add	sp, #5
+                            329 ;StateGame6.c:61: SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
+   0185 21 E0 00            330 	ld	hl,#0x00e0
+   0188 E5                  331 	push	hl
+   0189 2E 80               332 	ld	l, #0x80
+   018B E5                  333 	push	hl
+   018C 3E 02               334 	ld	a,#0x02
+   018E F5                  335 	push	af
+   018F 33                  336 	inc	sp
+   0190 CDr00r00            337 	call	_SpriteManagerAdd
+   0193 E8 05               338 	add	sp, #5
+   0195                     339 00110$:
+                            340 ;StateGame6.c:64: if( have_diamond == 3 ){
+   0195 21r00r00            341 	ld	hl,#_have_diamond
+   0198 7E                  342 	ld	a,(hl)
+   0199 D6 03               343 	sub	a, #0x03
+   019B C2r21r02            344 	jp	NZ,00112$
+   019E 23                  345 	inc	hl
+   019F 7E                  346 	ld	a,(hl)
+   01A0 B7                  347 	or	a, a
+   01A1 C2r21r02            348 	jp	NZ,00112$
+                            349 ;StateGame6.c:65: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 120);
+   01A4 21 78 00            350 	ld	hl,#0x0078
+   01A7 E5                  351 	push	hl
+   01A8 2E 14               352 	ld	l, #0x14
+   01AA E5                  353 	push	hl
+   01AB AF                  354 	xor	a, a
+   01AC F5                  355 	push	af
+   01AD 33                  356 	inc	sp
+   01AE CDr00r00            357 	call	_SpriteManagerAdd
+   01B1 E8 05               358 	add	sp, #5
+   01B3 21r00r00            359 	ld	hl,#_scroll_target
+   01B6 73                  360 	ld	(hl),e
+   01B7 23                  361 	inc	hl
+   01B8 72                  362 	ld	(hl),d
+                            363 ;StateGame6.c:66: door_x = 88;
+   01B9 21r00r00            364 	ld	hl,#_door_x
+   01BC 36 58               365 	ld	(hl),#0x58
+   01BE 23                  366 	inc	hl
+   01BF 36 00               367 	ld	(hl),#0x00
+                            368 ;StateGame6.c:67: door_y = 16;
+   01C1 21r00r00            369 	ld	hl,#_door_y
+   01C4 36 10               370 	ld	(hl),#0x10
+   01C6 23                  371 	inc	hl
+   01C7 36 00               372 	ld	(hl),#0x00
+                            373 ;StateGame6.c:68: SpriteManagerAdd(SPRITE_KEY, 88, 120);
+   01C9 21 78 00            374 	ld	hl,#0x0078
+   01CC E5                  375 	push	hl
+   01CD 2E 58               376 	ld	l, #0x58
+   01CF E5                  377 	push	hl
+   01D0 3E 03               378 	ld	a,#0x03
+   01D2 F5                  379 	push	af
+   01D3 33                  380 	inc	sp
+   01D4 CDr00r00            381 	call	_SpriteManagerAdd
+   01D7 E8 05               382 	add	sp, #5
+                            383 ;StateGame6.c:69: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+   01D9 21r00r00            384 	ld	hl,#_door_y
+   01DC 2A                  385 	ld	a,(hl+)
+   01DD 66                  386 	ld	h,(hl)
+   01DE 6F                  387 	ld	l,a
+   01DF E5                  388 	push	hl
+   01E0 21r00r00            389 	ld	hl,#_door_x
+   01E3 2A                  390 	ld	a,(hl+)
+   01E4 66                  391 	ld	h,(hl)
+   01E5 6F                  392 	ld	l,a
+   01E6 E5                  393 	push	hl
+   01E7 3E 04               394 	ld	a,#0x04
+   01E9 F5                  395 	push	af
+   01EA 33                  396 	inc	sp
+   01EB CDr00r00            397 	call	_SpriteManagerAdd
+   01EE E8 05               398 	add	sp, #5
+                            399 ;StateGame6.c:71: SpriteManagerAdd(SPRITE_ENEMY2, 128, 78);
+   01F0 21 4E 00            400 	ld	hl,#0x004e
+   01F3 E5                  401 	push	hl
+   01F4 2E 80               402 	ld	l, #0x80
+   01F6 E5                  403 	push	hl
+   01F7 3E 02               404 	ld	a,#0x02
+   01F9 F5                  405 	push	af
+   01FA 33                  406 	inc	sp
+   01FB CDr00r00            407 	call	_SpriteManagerAdd
+   01FE E8 05               408 	add	sp, #5
+                            409 ;StateGame6.c:72: SpriteManagerAdd(SPRITE_ENEMY, 270, 112);
+   0200 21 70 00            410 	ld	hl,#0x0070
+   0203 E5                  411 	push	hl
+   0204 21 0E 01            412 	ld	hl,#0x010e
+   0207 E5                  413 	push	hl
+   0208 3E 01               414 	ld	a,#0x01
+   020A F5                  415 	push	af
+   020B 33                  416 	inc	sp
+   020C CDr00r00            417 	call	_SpriteManagerAdd
+   020F E8 05               418 	add	sp, #5
+                            419 ;StateGame6.c:73: SpriteManagerAdd(SPRITE_ENEMY, 70, 120);	
+   0211 21 78 00            420 	ld	hl,#0x0078
+   0214 E5                  421 	push	hl
+   0215 2E 46               422 	ld	l, #0x46
+   0217 E5                  423 	push	hl
+   0218 3E 01               424 	ld	a,#0x01
+   021A F5                  425 	push	af
+   021B 33                  426 	inc	sp
+   021C CDr00r00            427 	call	_SpriteManagerAdd
+   021F E8 05               428 	add	sp, #5
+   0221                     429 00112$:
+                            430 ;StateGame6.c:76: if( have_diamond == 6 ){
+   0221 21r00r00            431 	ld	hl,#_have_diamond
+   0224 7E                  432 	ld	a,(hl)
+   0225 D6 06               433 	sub	a, #0x06
+   0227 C2rBCr02            434 	jp	NZ,00114$
+   022A 23                  435 	inc	hl
+   022B 7E                  436 	ld	a,(hl)
+   022C B7                  437 	or	a, a
+   022D C2rBCr02            438 	jp	NZ,00114$
+                            439 ;StateGame6.c:77: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 72, 16);
+   0230 21 10 00            440 	ld	hl,#0x0010
+   0233 E5                  441 	push	hl
+   0234 2E 48               442 	ld	l, #0x48
+   0236 E5                  443 	push	hl
+   0237 AF                  444 	xor	a, a
+   0238 F5                  445 	push	af
+   0239 33                  446 	inc	sp
+   023A CDr00r00            447 	call	_SpriteManagerAdd
+   023D E8 05               448 	add	sp, #5
+   023F 21r00r00            449 	ld	hl,#_scroll_target
+   0242 73                  450 	ld	(hl),e
+   0243 23                  451 	inc	hl
+   0244 72                  452 	ld	(hl),d
+                            453 ;StateGame6.c:78: door_x = 88;
+   0245 21r00r00            454 	ld	hl,#_door_x
+   0248 36 58               455 	ld	(hl),#0x58
+   024A 23                  456 	inc	hl
+   024B 36 00               457 	ld	(hl),#0x00
+                            458 ;StateGame6.c:79: door_y = 120;
+   024D 21r00r00            459 	ld	hl,#_door_y
+   0250 36 78               460 	ld	(hl),#0x78
+   0252 23                  461 	inc	hl
+   0253 36 00               462 	ld	(hl),#0x00
+                            463 ;StateGame6.c:80: SpriteManagerAdd(SPRITE_KEY, 20, 44);
+   0255 21 2C 00            464 	ld	hl,#0x002c
+   0258 E5                  465 	push	hl
+   0259 2E 14               466 	ld	l, #0x14
+   025B E5                  467 	push	hl
+   025C 3E 03               468 	ld	a,#0x03
+   025E F5                  469 	push	af
+   025F 33                  470 	inc	sp
+   0260 CDr00r00            471 	call	_SpriteManagerAdd
+   0263 E8 05               472 	add	sp, #5
+                            473 ;StateGame6.c:81: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+   0265 21r00r00            474 	ld	hl,#_door_y
+   0268 2A                  475 	ld	a,(hl+)
+   0269 66                  476 	ld	h,(hl)
+   026A 6F                  477 	ld	l,a
+   026B E5                  478 	push	hl
+   026C 21r00r00            479 	ld	hl,#_door_x
+   026F 2A                  480 	ld	a,(hl+)
+   0270 66                  481 	ld	h,(hl)
+   0271 6F                  482 	ld	l,a
+   0272 E5                  483 	push	hl
+   0273 3E 04               484 	ld	a,#0x04
+   0275 F5                  485 	push	af
+   0276 33                  486 	inc	sp
+   0277 CDr00r00            487 	call	_SpriteManagerAdd
+   027A E8 05               488 	add	sp, #5
+                            489 ;StateGame6.c:83: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+   027C 21 70 00            490 	ld	hl,#0x0070
+   027F E5                  491 	push	hl
+   0280 2E 80               492 	ld	l, #0x80
+   0282 E5                  493 	push	hl
+   0283 3E 01               494 	ld	a,#0x01
+   0285 F5                  495 	push	af
+   0286 33                  496 	inc	sp
+   0287 CDr00r00            497 	call	_SpriteManagerAdd
+   028A E8 05               498 	add	sp, #5
+                            499 ;StateGame6.c:84: SpriteManagerAdd(SPRITE_ENEMY, 20, 100);
+   028C 21 64 00            500 	ld	hl,#0x0064
+   028F E5                  501 	push	hl
+   0290 2E 14               502 	ld	l, #0x14
+   0292 E5                  503 	push	hl
+   0293 3E 01               504 	ld	a,#0x01
+   0295 F5                  505 	push	af
+   0296 33                  506 	inc	sp
+   0297 CDr00r00            507 	call	_SpriteManagerAdd
+   029A E8 05               508 	add	sp, #5
+                            509 ;StateGame6.c:85: SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);	
+   029C 21 E0 00            510 	ld	hl,#0x00e0
+   029F E5                  511 	push	hl
+   02A0 2E 80               512 	ld	l, #0x80
+   02A2 E5                  513 	push	hl
+   02A3 3E 02               514 	ld	a,#0x02
+   02A5 F5                  515 	push	af
+   02A6 33                  516 	inc	sp
+   02A7 CDr00r00            517 	call	_SpriteManagerAdd
+   02AA E8 05               518 	add	sp, #5
+                            519 ;StateGame6.c:86: SpriteManagerAdd(SPRITE_ENEMY2, 128, 69);
+   02AC 21 45 00            520 	ld	hl,#0x0045
+   02AF E5                  521 	push	hl
+   02B0 2E 80               522 	ld	l, #0x80
+   02B2 E5                  523 	push	hl
+   02B3 3E 02               524 	ld	a,#0x02
+   02B5 F5                  525 	push	af
+   02B6 33                  526 	inc	sp
+   02B7 CDr00r00            527 	call	_SpriteManagerAdd
+   02BA E8 05               528 	add	sp, #5
+   02BC                     529 00114$:
+                            530 ;StateGame6.c:89: if( have_diamond == 10 ){
+   02BC 21r00r00            531 	ld	hl,#_have_diamond
+   02BF 7E                  532 	ld	a,(hl)
+   02C0 D6 0A               533 	sub	a, #0x0a
+   02C2 C2r58r03            534 	jp	NZ,00116$
+   02C5 23                  535 	inc	hl
+   02C6 7E                  536 	ld	a,(hl)
+   02C7 B7                  537 	or	a, a
+   02C8 C2r58r03            538 	jp	NZ,00116$
+                            539 ;StateGame6.c:90: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 120);
+   02CB 21 78 00            540 	ld	hl,#0x0078
+   02CE E5                  541 	push	hl
+   02CF 2E 14               542 	ld	l, #0x14
+   02D1 E5                  543 	push	hl
+   02D2 AF                  544 	xor	a, a
+   02D3 F5                  545 	push	af
+   02D4 33                  546 	inc	sp
+   02D5 CDr00r00            547 	call	_SpriteManagerAdd
+   02D8 E8 05               548 	add	sp, #5
+   02DA 21r00r00            549 	ld	hl,#_scroll_target
+   02DD 73                  550 	ld	(hl),e
+   02DE 23                  551 	inc	hl
+   02DF 72                  552 	ld	(hl),d
+                            553 ;StateGame6.c:91: door_x = 88;
+   02E0 21r00r00            554 	ld	hl,#_door_x
+   02E3 36 58               555 	ld	(hl),#0x58
+   02E5 23                  556 	inc	hl
+   02E6 36 00               557 	ld	(hl),#0x00
+                            558 ;StateGame6.c:92: door_y = 120;
+   02E8 21r00r00            559 	ld	hl,#_door_y
+   02EB 36 78               560 	ld	(hl),#0x78
+   02ED 23                  561 	inc	hl
+   02EE 36 00               562 	ld	(hl),#0x00
+                            563 ;StateGame6.c:93: SpriteManagerAdd(SPRITE_KEY, 20, 16);
+   02F0 21 10 00            564 	ld	hl,#0x0010
+   02F3 E5                  565 	push	hl
+   02F4 2E 14               566 	ld	l, #0x14
+   02F6 E5                  567 	push	hl
+   02F7 3E 03               568 	ld	a,#0x03
+   02F9 F5                  569 	push	af
+   02FA 33                  570 	inc	sp
+   02FB CDr00r00            571 	call	_SpriteManagerAdd
+   02FE E8 05               572 	add	sp, #5
+                            573 ;StateGame6.c:94: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+   0300 21r00r00            574 	ld	hl,#_door_y
+   0303 2A                  575 	ld	a,(hl+)
+   0304 66                  576 	ld	h,(hl)
+   0305 6F                  577 	ld	l,a
+   0306 E5                  578 	push	hl
+   0307 21r00r00            579 	ld	hl,#_door_x
+   030A 2A                  580 	ld	a,(hl+)
+   030B 66                  581 	ld	h,(hl)
+   030C 6F                  582 	ld	l,a
+   030D E5                  583 	push	hl
+   030E 3E 04               584 	ld	a,#0x04
+   0310 F5                  585 	push	af
+   0311 33                  586 	inc	sp
+   0312 CDr00r00            587 	call	_SpriteManagerAdd
+   0315 E8 05               588 	add	sp, #5
+                            589 ;StateGame6.c:95: SpriteManagerAdd(SPRITE_ENEMY, 72, 16);
+   0317 21 10 00            590 	ld	hl,#0x0010
+   031A E5                  591 	push	hl
+   031B 2E 48               592 	ld	l, #0x48
+   031D E5                  593 	push	hl
+   031E 3E 01               594 	ld	a,#0x01
+   0320 F5                  595 	push	af
+   0321 33                  596 	inc	sp
+   0322 CDr00r00            597 	call	_SpriteManagerAdd
+   0325 E8 05               598 	add	sp, #5
+                            599 ;StateGame6.c:96: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+   0327 21 70 00            600 	ld	hl,#0x0070
+   032A E5                  601 	push	hl
+   032B 2E 80               602 	ld	l, #0x80
+   032D E5                  603 	push	hl
+   032E 3E 01               604 	ld	a,#0x01
+   0330 F5                  605 	push	af
+   0331 33                  606 	inc	sp
+   0332 CDr00r00            607 	call	_SpriteManagerAdd
+   0335 E8 05               608 	add	sp, #5
+                            609 ;StateGame6.c:97: SpriteManagerAdd(SPRITE_ENEMY, 270, 112);
+   0337 21 70 00            610 	ld	hl,#0x0070
+   033A E5                  611 	push	hl
+   033B 21 0E 01            612 	ld	hl,#0x010e
+   033E E5                  613 	push	hl
+   033F 3E 01               614 	ld	a,#0x01
+   0341 F5                  615 	push	af
+   0342 33                  616 	inc	sp
+   0343 CDr00r00            617 	call	_SpriteManagerAdd
+   0346 E8 05               618 	add	sp, #5
+                            619 ;StateGame6.c:98: SpriteManagerAdd(SPRITE_ENEMY, 70, 120);	
+   0348 21 78 00            620 	ld	hl,#0x0078
+   034B E5                  621 	push	hl
+   034C 2E 46               622 	ld	l, #0x46
+   034E E5                  623 	push	hl
+   034F 3E 01               624 	ld	a,#0x01
+   0351 F5                  625 	push	af
+   0352 33                  626 	inc	sp
+   0353 CDr00r00            627 	call	_SpriteManagerAdd
+   0356 E8 05               628 	add	sp, #5
+   0358                     629 00116$:
+                            630 ;StateGame6.c:101: InitScrollTiles(0, 59, tiles, 3);
+   0358 21 00 00            631 	ld	hl,#0x0000
+   035B E5                  632 	push	hl
+   035C 3E 03               633 	ld	a,#0x03
+   035E F5                  634 	push	af
+   035F 33                  635 	inc	sp
+   0360 21r00r00            636 	ld	hl,#_tiles
+   0363 E5                  637 	push	hl
+   0364 21 00 3B            638 	ld	hl,#0x3b00
+   0367 E5                  639 	push	hl
+   0368 CDr00r00            640 	call	_ZInitScrollTilesColor
+   036B E8 07               641 	add	sp, #7
+                            642 ;StateGame6.c:102: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
+   036D 21 00 00            643 	ld	hl,#0x0000
+   0370 E5                  644 	push	hl
+   0371 3E 03               645 	ld	a,#0x03
+   0373 F5                  646 	push	af
+   0374 33                  647 	inc	sp
+   0375 2E 00               648 	ld	l, #0x00
+   0377 E5                  649 	push	hl
+   0378 21r01r00            650 	ld	hl,#_collilision_tiles6
+   037B E5                  651 	push	hl
+   037C 21r00r00            652 	ld	hl,#_map6
+   037F E5                  653 	push	hl
+   0380 21 24 00            654 	ld	hl,#0x0024
+   0383 E5                  655 	push	hl
+   0384 2E 28               656 	ld	l, #0x28
+   0386 E5                  657 	push	hl
+   0387 CDr00r00            658 	call	_InitScrollColor
+   038A E8 0D               659 	add	sp, #13
+                            660 ;StateGame6.c:103: SHOW_BKG;
+   038C 11 40 FF            661 	ld	de,#0xff40
+   038F 1A                  662 	ld	a,(de)
+   0390 4F                  663 	ld	c,a
+   0391 06 00               664 	ld	b,#0x00
+   0393 79                  665 	ld	a,c
+   0394 CB C7               666 	set	0, a
+   0396 4F                  667 	ld	c,a
+   0397 21 40 FF            668 	ld	hl,#0xff40
+   039A 71                  669 	ld	(hl),c
+   039B C9                  670 	ret
+                            671 ;StateGame6.c:108: void Update_STATE_GAME6() {
+                            672 ;	---------------------------------
+                            673 ; Function Update_STATE_GAME6
+                            674 ; ---------------------------------
+   039C                     675 _Update_STATE_GAME6::
+                            676 ;StateGame6.c:109: if (KEY_PRESSED(J_START)) {
+   039C 21r00r00            677 	ld	hl,#_keys
+   039F 4E                  678 	ld	c,(hl)
+   03A0 06 00               679 	ld	b,#0x00
+   03A2 CB 79               680 	bit	7, c
+   03A4 C8                  681 	ret	Z
+                            682 ;StateGame6.c:110: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
+   03A5 21r01r00            683 	ld	hl,#_have_diamond + 1
+   03A8 3A                  684 	ld	a,(hl-)
+   03A9 B6                  685 	or	a,(hl)
+   03AA 28 17               686 	jr	Z,00101$
+   03AC 7E                  687 	ld	a,(hl)
+   03AD D6 03               688 	sub	a, #0x03
+   03AF 20 05               689 	jr	NZ,00123$
+   03B1 23                  690 	inc	hl
+   03B2 7E                  691 	ld	a,(hl)
+   03B3 B7                  692 	or	a, a
+   03B4 28 0D               693 	jr	Z,00101$
+   03B6                     694 00123$:
+   03B6 21r00r00            695 	ld	hl,#_have_diamond
+   03B9 7E                  696 	ld	a,(hl)
+   03BA D6 0A               697 	sub	a, #0x0a
+   03BC 20 0E               698 	jr	NZ,00102$
+   03BE 23                  699 	inc	hl
+   03BF 7E                  700 	ld	a,(hl)
+   03C0 B7                  701 	or	a, a
+   03C1 20 09               702 	jr	NZ,00102$
+   03C3                     703 00101$:
+                            704 ;StateGame6.c:111: SetState(STATE_END);
+   03C3 3E 07               705 	ld	a,#0x07
+   03C5 F5                  706 	push	af
+   03C6 33                  707 	inc	sp
+   03C7 CDr00r00            708 	call	_SetState
+   03CA 33                  709 	inc	sp
+   03CB C9                  710 	ret
+   03CC                     711 00102$:
+                            712 ;StateGame6.c:114: SetState(STATE_END2);
+   03CC 3E 08               713 	ld	a,#0x08
+   03CE F5                  714 	push	af
+   03CF 33                  715 	inc	sp
+   03D0 CDr00r00            716 	call	_SetState
+   03D3 33                  717 	inc	sp
+   03D4 C9                  718 	ret
+                            719 	.area _CODE_2
+                            720 	.area _CABS (ABS)
