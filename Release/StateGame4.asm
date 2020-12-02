@@ -90,7 +90,7 @@ _Start_STATE_GAME4::
 	ld	(hl),c
 ;StateGame4.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
-00103$:
+00105$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
@@ -104,7 +104,7 @@ _Start_STATE_GAME4::
 	pop	bc
 ;StateGame4.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
-	jr	00103$
+	jr	00105$
 00101$:
 ;StateGame4.c:27: SHOW_SPRITES;
 	ld	de,#0xff40
@@ -116,7 +116,17 @@ _Start_STATE_GAME4::
 	ld	c,a
 	ld	hl,#0xff40
 	ld	(hl),c
-;StateGame4.c:29: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 200, 200);
+;StateGame4.c:29: have_bomb=2;
+	ld	hl,#_have_bomb
+	ld	(hl),#0x02
+	inc	hl
+	ld	(hl),#0x00
+;StateGame4.c:31: if( have_diamond == 0 ){
+	ld	hl,#_have_diamond + 1
+	ld	a,(hl-)
+	or	a,(hl)
+	jp	NZ,00103$
+;StateGame4.c:32: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 200, 200);
 	ld	hl,#0x00c8
 	push	hl
 	ld	l, #0xc8
@@ -130,11 +140,6 @@ _Start_STATE_GAME4::
 	ld	(hl),e
 	inc	hl
 	ld	(hl),d
-;StateGame4.c:31: have_bomb=2;
-	ld	hl,#_have_bomb
-	ld	(hl),#0x02
-	inc	hl
-	ld	(hl),#0x00
 ;StateGame4.c:33: door_x = 343;
 	ld	hl,#_door_x
 	ld	(hl),#0x57
@@ -171,7 +176,7 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:39: SpriteManagerAdd(SPRITE_ENEMY3, 352, 190);
+;StateGame4.c:38: SpriteManagerAdd(SPRITE_ENEMY3, 352, 190);
 	ld	hl,#0x00be
 	push	hl
 	ld	hl,#0x0160
@@ -181,7 +186,7 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:40: SpriteManagerAdd(SPRITE_ENEMY3, 88, 144);
+;StateGame4.c:39: SpriteManagerAdd(SPRITE_ENEMY3, 88, 144);
 	ld	hl,#0x0090
 	push	hl
 	ld	l, #0x58
@@ -191,7 +196,7 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:41: SpriteManagerAdd(SPRITE_ENEMY2, 272, 112);
+;StateGame4.c:40: SpriteManagerAdd(SPRITE_ENEMY2, 272, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	hl,#0x0110
@@ -201,7 +206,7 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:42: SpriteManagerAdd(SPRITE_ENEMY, 94, 280);
+;StateGame4.c:41: SpriteManagerAdd(SPRITE_ENEMY, 94, 280);
 	ld	hl,#0x0118
 	push	hl
 	ld	hl,#0x005e
@@ -211,7 +216,7 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:43: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+;StateGame4.c:42: SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
 	ld	hl,#0x0070
 	push	hl
 	ld	hl,#0x0110
@@ -221,7 +226,7 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:44: SpriteManagerAdd(SPRITE_ENEMY2, 94, 280);
+;StateGame4.c:43: SpriteManagerAdd(SPRITE_ENEMY2, 94, 280);
 	ld	hl,#0x0118
 	push	hl
 	ld	hl,#0x005e
@@ -231,7 +236,7 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:45: SpriteManagerAdd(SPRITE_ENEMY2, 312, 344);
+;StateGame4.c:44: SpriteManagerAdd(SPRITE_ENEMY2, 312, 344);
 	ld	hl,#0x0158
 	push	hl
 	ld	l, #0x38
@@ -241,7 +246,8 @@ _Start_STATE_GAME4::
 	inc	sp
 	call	_SpriteManagerAdd
 	add	sp, #5
-;StateGame4.c:47: InitScrollTiles(0, 59, tiles, 3);
+00103$:
+;StateGame4.c:59: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -253,7 +259,7 @@ _Start_STATE_GAME4::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame4.c:48: InitScroll(map4Width, map4Height, map4, collilision_tiles4, 0, 3);
+;StateGame4.c:60: InitScroll(map4Width, map4Height, map4, collilision_tiles4, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -271,7 +277,7 @@ _Start_STATE_GAME4::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame4.c:49: SHOW_BKG;
+;StateGame4.c:61: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -282,18 +288,18 @@ _Start_STATE_GAME4::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame4.c:54: void Update_STATE_GAME4() {
+;StateGame4.c:66: void Update_STATE_GAME4() {
 ;	---------------------------------
 ; Function Update_STATE_GAME4
 ; ---------------------------------
 _Update_STATE_GAME4::
-;StateGame4.c:55: if (KEY_PRESSED(J_START)) {
+;StateGame4.c:67: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame4.c:56: SetState(STATE_GAME5);
+;StateGame4.c:68: SetState(STATE_GAME5);
 	ld	a,#0x05
 	push	af
 	inc	sp

@@ -28,7 +28,7 @@ void Start_STATE_GAME() {
 	
 	have_bomb=2;
 	
-	if( have_diamond == 0 || have_diamond == 3 ){
+	if( have_diamond == 0 ){
 	
 	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	door_x = 240;
@@ -43,13 +43,17 @@ void Start_STATE_GAME() {
 	SpriteManagerAdd(SPRITE_ENEMY, 288, 96);
 	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);	
 	}
-	else{
-	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
-	door_x = 240;
-	door_y = 112;
 	
-	SpriteManagerAdd(SPRITE_KEY, 288, 112);
-	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	if( have_diamond == 1 ){
+		
+	}
+	
+	if( have_diamond == 3 ){
+		
+	}
+	
+	if( have_diamond == 6 ){
+		
 	}
 	
 	InitScrollTiles(0, 59, tiles, 3);

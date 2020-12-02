@@ -33,11 +33,11 @@ void Start_STATE_GAME6() {
 		SpriteManagerLoad(i);
 	}
 	SHOW_SPRITES;
-
-	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	
 	have_bomb=2;
 	
+	if( have_diamond == 0 ){
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 20, 100);
 	door_x = 88;
 	door_y = 120;
 	SpriteManagerAdd(SPRITE_KEY, 88, 16);
@@ -46,6 +46,20 @@ void Start_STATE_GAME6() {
 	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
 	SpriteManagerAdd(SPRITE_ENEMY2, 128, 224);
+	}
+	
+	if( have_diamond == 1 ){
+		
+	}
+	
+	if( have_diamond == 3 ){
+		
+	}
+	
+	if( have_diamond == 6 ){
+		
+	}
+	
 	InitScrollTiles(0, 59, tiles, 3);
 	InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
 	SHOW_BKG;
