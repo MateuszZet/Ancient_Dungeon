@@ -54,15 +54,12 @@ void Start_STATE_MENU() {
 	if( have_diamond == 6){
 	SpriteManagerAdd(SPRITE_KEY, 20, 20);
 	SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);
-	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
 	SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	}
 	
 	if( have_diamond == 10){
 	SpriteManagerAdd(SPRITE_KEY, 20, 20);
 	SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);	
-	SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
-	SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
 	SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
 	}
 	
