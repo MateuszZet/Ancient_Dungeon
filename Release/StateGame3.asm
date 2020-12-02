@@ -90,7 +90,7 @@ _Start_STATE_GAME3::
 	ld	(hl),c
 ;StateGame3.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	ld	b,#0x00
-00105$:
+00113$:
 	ld	hl,#_n_sprite_types
 	ld	a,(hl)
 	sub	a, b
@@ -104,7 +104,7 @@ _Start_STATE_GAME3::
 	pop	bc
 ;StateGame3.c:24: for(i = 0; i != n_sprite_types; ++ i) {
 	inc	b
-	jr	00105$
+	jr	00113$
 00101$:
 ;StateGame3.c:27: SHOW_SPRITES;
 	ld	de,#0xff40
@@ -121,7 +121,7 @@ _Start_STATE_GAME3::
 	ld	(hl),#0x02
 	inc	hl
 	ld	(hl),#0x00
-;StateGame3.c:31: if( have_diamond==0 ){
+;StateGame3.c:31: if( have_diamond== 0 ){
 	ld	hl,#_have_diamond + 1
 	ld	a,(hl-)
 	or	a,(hl)
@@ -247,7 +247,437 @@ _Start_STATE_GAME3::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00103$:
-;StateGame3.c:64: InitScrollTiles(0, 59, tiles, 3);
+;StateGame3.c:48: if( have_diamond == 1 ){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	dec	a
+	jp	NZ,00105$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jp	NZ,00105$
+;StateGame3.c:49: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 24, 24);
+	ld	hl,#0x0018
+	push	hl
+	ld	l, #0x18
+	push	hl
+	xor	a, a
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+	ld	hl,#_scroll_target
+	ld	(hl),e
+	inc	hl
+	ld	(hl),d
+;StateGame3.c:50: door_x = 120;
+	ld	hl,#_door_x
+	ld	(hl),#0x78
+	inc	hl
+	ld	(hl),#0x00
+;StateGame3.c:51: door_y = 408;
+	ld	hl,#_door_y
+	ld	(hl),#0x98
+	inc	hl
+	ld	(hl),#0x01
+;StateGame3.c:52: SpriteManagerAdd(SPRITE_KEY, 30, 208);
+	ld	hl,#0x00d0
+	push	hl
+	ld	l, #0x1e
+	push	hl
+	ld	a,#0x03
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:53: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	ld	hl,#_door_y
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	hl,#_door_x
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	a,#0x04
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:55: SpriteManagerAdd(SPRITE_ENEMY, 90, 24);
+	ld	hl,#0x0018
+	push	hl
+	ld	l, #0x5a
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:56: SpriteManagerAdd(SPRITE_ENEMY2, 32, 408 );
+	ld	hl,#0x0198
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:57: SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
+	ld	hl,#0x0190
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:58: SpriteManagerAdd(SPRITE_ENEMY, 120, 216);
+	ld	hl,#0x00d8
+	push	hl
+	ld	l, #0x78
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+00105$:
+;StateGame3.c:61: if( have_diamond == 3 ){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x03
+	jp	NZ,00107$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jp	NZ,00107$
+;StateGame3.c:62: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 120, 408);
+	ld	hl,#0x0198
+	push	hl
+	ld	hl,#0x0078
+	push	hl
+	xor	a, a
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+	ld	hl,#_scroll_target
+	ld	(hl),e
+	inc	hl
+	ld	(hl),d
+;StateGame3.c:63: door_x = 30;
+	ld	hl,#_door_x
+	ld	(hl),#0x1e
+	inc	hl
+	ld	(hl),#0x00
+;StateGame3.c:64: door_y = 208;
+	ld	hl,#_door_y
+	ld	(hl),#0xd0
+	inc	hl
+	ld	(hl),#0x00
+;StateGame3.c:65: SpriteManagerAdd(SPRITE_KEY, 32, 250);
+	ld	hl,#0x00fa
+	push	hl
+	ld	l, #0x20
+	push	hl
+	ld	a,#0x03
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:66: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	ld	hl,#_door_y
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	hl,#_door_x
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	a,#0x04
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:68: SpriteManagerAdd(SPRITE_ENEMY, 24, 24);
+	ld	hl,#0x0018
+	push	hl
+	ld	l, #0x18
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:69: SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
+	ld	hl,#0x0138
+	push	hl
+	ld	hl,#0x0010
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:70: SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
+	ld	hl,#0x0058
+	push	hl
+	ld	l, #0x10
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:71: SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
+	ld	hl,#0x0190
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+00107$:
+;StateGame3.c:74: if( have_diamond == 6 ){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x06
+	jp	NZ,00109$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jp	NZ,00109$
+;StateGame3.c:75: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 120, 216);
+	ld	hl,#0x00d8
+	push	hl
+	ld	l, #0x78
+	push	hl
+	xor	a, a
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+	ld	hl,#_scroll_target
+	ld	(hl),e
+	inc	hl
+	ld	(hl),d
+;StateGame3.c:76: door_x = 30;
+	ld	hl,#_door_x
+	ld	(hl),#0x1e
+	inc	hl
+	ld	(hl),#0x00
+;StateGame3.c:77: door_y = 208;
+	ld	hl,#_door_y
+	ld	(hl),#0xd0
+	inc	hl
+	ld	(hl),#0x00
+;StateGame3.c:78: SpriteManagerAdd(SPRITE_KEY, 120, 408);
+	ld	hl,#0x0198
+	push	hl
+	ld	hl,#0x0078
+	push	hl
+	ld	a,#0x03
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:79: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	ld	hl,#_door_y
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	hl,#_door_x
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	a,#0x04
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:81: SpriteManagerAdd(SPRITE_ENEMY2, 32, 408 );
+	ld	hl,#0x0198
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:82: SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
+	ld	hl,#0x0138
+	push	hl
+	ld	hl,#0x0010
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:83: SpriteManagerAdd(SPRITE_ENEMY3, 30, 60);
+	ld	hl,#0x003c
+	push	hl
+	ld	l, #0x1e
+	push	hl
+	ld	a,#0x08
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:84: SpriteManagerAdd(SPRITE_ENEMY, 32, 400);
+	ld	hl,#0x0190
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:85: SpriteManagerAdd(SPRITE_ENEMY3, 120, 24);
+	ld	hl,#0x0018
+	push	hl
+	ld	l, #0x78
+	push	hl
+	ld	a,#0x08
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:86: SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
+	ld	hl,#0x0058
+	push	hl
+	ld	l, #0x10
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+00109$:
+;StateGame3.c:89: if( have_diamond == 10 ){
+	ld	hl,#_have_diamond
+	ld	a,(hl)
+	sub	a, #0x0a
+	jp	NZ,00111$
+	inc	hl
+	ld	a,(hl)
+	or	a, a
+	jp	NZ,00111$
+;StateGame3.c:90: scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 30, 208);
+	ld	hl,#0x00d0
+	push	hl
+	ld	l, #0x1e
+	push	hl
+	xor	a, a
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+	ld	hl,#_scroll_target
+	ld	(hl),e
+	inc	hl
+	ld	(hl),d
+;StateGame3.c:91: door_x = 120;
+	ld	hl,#_door_x
+	ld	(hl),#0x78
+	inc	hl
+	ld	(hl),#0x00
+;StateGame3.c:92: door_y = 24;
+	ld	hl,#_door_y
+	ld	(hl),#0x18
+	inc	hl
+	ld	(hl),#0x00
+;StateGame3.c:93: SpriteManagerAdd(SPRITE_KEY, 120, 408);
+	ld	hl,#0x0198
+	push	hl
+	ld	hl,#0x0078
+	push	hl
+	ld	a,#0x03
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:94: SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	ld	hl,#_door_y
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	hl,#_door_x
+	ld	a,(hl+)
+	ld	h,(hl)
+	ld	l,a
+	push	hl
+	ld	a,#0x04
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:96: SpriteManagerAdd(SPRITE_ENEMY, 120, 24);
+	ld	hl,#0x0018
+	push	hl
+	ld	l, #0x78
+	push	hl
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:97: SpriteManagerAdd(SPRITE_ENEMY2, 32, 380 );
+	ld	hl,#0x017c
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:98: SpriteManagerAdd(SPRITE_ENEMY2, 16, 88 );
+	ld	hl,#0x0058
+	push	hl
+	ld	l, #0x10
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:99: SpriteManagerAdd(SPRITE_ENEMY2, 16, 312 );
+	ld	hl,#0x0138
+	push	hl
+	ld	hl,#0x0010
+	push	hl
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+;StateGame3.c:100: SpriteManagerAdd(SPRITE_ENEMY3, 32, 400);
+	ld	hl,#0x0190
+	push	hl
+	ld	hl,#0x0020
+	push	hl
+	ld	a,#0x08
+	push	af
+	inc	sp
+	call	_SpriteManagerAdd
+	add	sp, #5
+00111$:
+;StateGame3.c:103: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -259,7 +689,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame3.c:65: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
+;StateGame3.c:104: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -277,7 +707,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame3.c:66: SHOW_BKG;
+;StateGame3.c:105: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -288,18 +718,18 @@ _Start_STATE_GAME3::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame3.c:71: void Update_STATE_GAME3() {
+;StateGame3.c:110: void Update_STATE_GAME3() {
 ;	---------------------------------
 ; Function Update_STATE_GAME3
 ; ---------------------------------
 _Update_STATE_GAME3::
-;StateGame3.c:72: if (KEY_PRESSED(J_START)) {
+;StateGame3.c:111: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame3.c:73: SetState(STATE_GAME4);
+;StateGame3.c:112: SetState(STATE_GAME4);
 	ld	a,#0x04
 	push	af
 	inc	sp
