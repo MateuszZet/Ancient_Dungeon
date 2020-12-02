@@ -247,7 +247,7 @@ _Start_STATE_GAME3::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00103$:
-;StateGame3.c:60: InitScrollTiles(0, 59, tiles, 3);
+;StateGame3.c:64: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -259,7 +259,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame3.c:61: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
+;StateGame3.c:65: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -277,7 +277,7 @@ _Start_STATE_GAME3::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame3.c:62: SHOW_BKG;
+;StateGame3.c:66: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -288,18 +288,18 @@ _Start_STATE_GAME3::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame3.c:67: void Update_STATE_GAME3() {
+;StateGame3.c:71: void Update_STATE_GAME3() {
 ;	---------------------------------
 ; Function Update_STATE_GAME3
 ; ---------------------------------
 _Update_STATE_GAME3::
-;StateGame3.c:68: if (KEY_PRESSED(J_START)) {
+;StateGame3.c:72: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame3.c:69: SetState(STATE_GAME4);
+;StateGame3.c:73: SetState(STATE_GAME4);
 	ld	a,#0x04
 	push	af
 	inc	sp

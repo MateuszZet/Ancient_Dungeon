@@ -237,7 +237,7 @@
    00F6 CDr00r00            237 	call	_SpriteManagerAdd
    00F9 E8 05               238 	add	sp, #5
    00FB                     239 00108$:
-                            240 ;StateGame6.c:63: InitScrollTiles(0, 59, tiles, 3);
+                            240 ;StateGame6.c:67: InitScrollTiles(0, 59, tiles, 3);
    00FB 21 00 00            241 	ld	hl,#0x0000
    00FE E5                  242 	push	hl
    00FF 3E 03               243 	ld	a,#0x03
@@ -249,7 +249,7 @@
    010A E5                  249 	push	hl
    010B CDr00r00            250 	call	_ZInitScrollTilesColor
    010E E8 07               251 	add	sp, #7
-                            252 ;StateGame6.c:64: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
+                            252 ;StateGame6.c:68: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
    0110 21 00 00            253 	ld	hl,#0x0000
    0113 E5                  254 	push	hl
    0114 3E 03               255 	ld	a,#0x03
@@ -267,7 +267,7 @@
    0129 E5                  267 	push	hl
    012A CDr00r00            268 	call	_InitScrollColor
    012D E8 0D               269 	add	sp, #13
-                            270 ;StateGame6.c:65: SHOW_BKG;
+                            270 ;StateGame6.c:69: SHOW_BKG;
    012F 11 40 FF            271 	ld	de,#0xff40
    0132 1A                  272 	ld	a,(de)
    0133 4F                  273 	ld	c,a
@@ -278,18 +278,18 @@
    013A 21 40 FF            278 	ld	hl,#0xff40
    013D 71                  279 	ld	(hl),c
    013E C9                  280 	ret
-                            281 ;StateGame6.c:70: void Update_STATE_GAME6() {
+                            281 ;StateGame6.c:74: void Update_STATE_GAME6() {
                             282 ;	---------------------------------
                             283 ; Function Update_STATE_GAME6
                             284 ; ---------------------------------
    013F                     285 _Update_STATE_GAME6::
-                            286 ;StateGame6.c:71: if (KEY_PRESSED(J_START)) {
+                            286 ;StateGame6.c:75: if (KEY_PRESSED(J_START)) {
    013F 21r00r00            287 	ld	hl,#_keys
    0142 4E                  288 	ld	c,(hl)
    0143 06 00               289 	ld	b,#0x00
    0145 CB 79               290 	bit	7, c
    0147 C8                  291 	ret	Z
-                            292 ;StateGame6.c:72: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
+                            292 ;StateGame6.c:76: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
    0148 21r01r00            293 	ld	hl,#_have_diamond + 1
    014B 3A                  294 	ld	a,(hl-)
    014C B6                  295 	or	a,(hl)
@@ -311,7 +311,7 @@
    0163 B7                  311 	or	a, a
    0164 20 09               312 	jr	NZ,00102$
    0166                     313 00101$:
-                            314 ;StateGame6.c:73: SetState(STATE_END);
+                            314 ;StateGame6.c:77: SetState(STATE_END);
    0166 3E 07               315 	ld	a,#0x07
    0168 F5                  316 	push	af
    0169 33                  317 	inc	sp
@@ -319,7 +319,7 @@
    016D 33                  319 	inc	sp
    016E C9                  320 	ret
    016F                     321 00102$:
-                            322 ;StateGame6.c:76: SetState(STATE_END2);
+                            322 ;StateGame6.c:80: SetState(STATE_END2);
    016F 3E 08               323 	ld	a,#0x08
    0171 F5                  324 	push	af
    0172 33                  325 	inc	sp

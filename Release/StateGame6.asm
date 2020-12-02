@@ -237,7 +237,7 @@ _Start_STATE_GAME6::
 	call	_SpriteManagerAdd
 	add	sp, #5
 00108$:
-;StateGame6.c:63: InitScrollTiles(0, 59, tiles, 3);
+;StateGame6.c:67: InitScrollTiles(0, 59, tiles, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -249,7 +249,7 @@ _Start_STATE_GAME6::
 	push	hl
 	call	_ZInitScrollTilesColor
 	add	sp, #7
-;StateGame6.c:64: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
+;StateGame6.c:68: InitScroll(map6Width, map6Height, map6, collilision_tiles6, 0, 3);
 	ld	hl,#0x0000
 	push	hl
 	ld	a,#0x03
@@ -267,7 +267,7 @@ _Start_STATE_GAME6::
 	push	hl
 	call	_InitScrollColor
 	add	sp, #13
-;StateGame6.c:65: SHOW_BKG;
+;StateGame6.c:69: SHOW_BKG;
 	ld	de,#0xff40
 	ld	a,(de)
 	ld	c,a
@@ -278,18 +278,18 @@ _Start_STATE_GAME6::
 	ld	hl,#0xff40
 	ld	(hl),c
 	ret
-;StateGame6.c:70: void Update_STATE_GAME6() {
+;StateGame6.c:74: void Update_STATE_GAME6() {
 ;	---------------------------------
 ; Function Update_STATE_GAME6
 ; ---------------------------------
 _Update_STATE_GAME6::
-;StateGame6.c:71: if (KEY_PRESSED(J_START)) {
+;StateGame6.c:75: if (KEY_PRESSED(J_START)) {
 	ld	hl,#_keys
 	ld	c,(hl)
 	ld	b,#0x00
 	bit	7, c
 	ret	Z
-;StateGame6.c:72: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
+;StateGame6.c:76: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
 	ld	hl,#_have_diamond + 1
 	ld	a,(hl-)
 	or	a,(hl)
@@ -311,7 +311,7 @@ _Update_STATE_GAME6::
 	or	a, a
 	jr	NZ,00102$
 00101$:
-;StateGame6.c:73: SetState(STATE_END);
+;StateGame6.c:77: SetState(STATE_END);
 	ld	a,#0x07
 	push	af
 	inc	sp
@@ -319,7 +319,7 @@ _Update_STATE_GAME6::
 	inc	sp
 	ret
 00102$:
-;StateGame6.c:76: SetState(STATE_END2);
+;StateGame6.c:80: SetState(STATE_END2);
 	ld	a,#0x08
 	push	af
 	inc	sp

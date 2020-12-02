@@ -247,7 +247,7 @@
    0111 CDr00r00            247 	call	_SpriteManagerAdd
    0114 E8 05               248 	add	sp, #5
    0116                     249 00103$:
-                            250 ;StateGame3.c:60: InitScrollTiles(0, 59, tiles, 3);
+                            250 ;StateGame3.c:64: InitScrollTiles(0, 59, tiles, 3);
    0116 21 00 00            251 	ld	hl,#0x0000
    0119 E5                  252 	push	hl
    011A 3E 03               253 	ld	a,#0x03
@@ -259,7 +259,7 @@
    0125 E5                  259 	push	hl
    0126 CDr00r00            260 	call	_ZInitScrollTilesColor
    0129 E8 07               261 	add	sp, #7
-                            262 ;StateGame3.c:61: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
+                            262 ;StateGame3.c:65: InitScroll(map3Width, map3Height, map3, collilision_tiles3, 0, 3);
    012B 21 00 00            263 	ld	hl,#0x0000
    012E E5                  264 	push	hl
    012F 3E 03               265 	ld	a,#0x03
@@ -277,7 +277,7 @@
    0144 E5                  277 	push	hl
    0145 CDr00r00            278 	call	_InitScrollColor
    0148 E8 0D               279 	add	sp, #13
-                            280 ;StateGame3.c:62: SHOW_BKG;
+                            280 ;StateGame3.c:66: SHOW_BKG;
    014A 11 40 FF            281 	ld	de,#0xff40
    014D 1A                  282 	ld	a,(de)
    014E 4F                  283 	ld	c,a
@@ -288,18 +288,18 @@
    0155 21 40 FF            288 	ld	hl,#0xff40
    0158 71                  289 	ld	(hl),c
    0159 C9                  290 	ret
-                            291 ;StateGame3.c:67: void Update_STATE_GAME3() {
+                            291 ;StateGame3.c:71: void Update_STATE_GAME3() {
                             292 ;	---------------------------------
                             293 ; Function Update_STATE_GAME3
                             294 ; ---------------------------------
    015A                     295 _Update_STATE_GAME3::
-                            296 ;StateGame3.c:68: if (KEY_PRESSED(J_START)) {
+                            296 ;StateGame3.c:72: if (KEY_PRESSED(J_START)) {
    015A 21r00r00            297 	ld	hl,#_keys
    015D 4E                  298 	ld	c,(hl)
    015E 06 00               299 	ld	b,#0x00
    0160 CB 79               300 	bit	7, c
    0162 C8                  301 	ret	Z
-                            302 ;StateGame3.c:69: SetState(STATE_GAME4);
+                            302 ;StateGame3.c:73: SetState(STATE_GAME4);
    0163 3E 04               303 	ld	a,#0x04
    0165 F5                  304 	push	af
    0166 33                  305 	inc	sp
