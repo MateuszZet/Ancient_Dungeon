@@ -45,19 +45,66 @@ void Start_STATE_GAME4() {
 	}
 	
 	if( have_diamond == 1 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 38, 38);
+	door_x = 192;
+	door_y = 192;
+	SpriteManagerAdd(SPRITE_KEY, 343, 343);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
+	SpriteManagerAdd(SPRITE_ENEMY2, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 94, 280);
+	SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 192, 192);
+	SpriteManagerAdd(SPRITE_ENEMY2, 192, 192);
+	SpriteManagerAdd(SPRITE_ENEMY2, 94, 280);	
 	}
 	
 	if( have_diamond == 3 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 38, 38);
+	door_x = 192;
+	door_y = 192;
+	SpriteManagerAdd(SPRITE_KEY, 343, 343);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
+	SpriteManagerAdd(SPRITE_ENEMY2, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY3, 94, 280);
+	SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY3, 192, 192);
+	SpriteManagerAdd(SPRITE_ENEMY2, 192, 192);
+	SpriteManagerAdd(SPRITE_ENEMY2, 94, 280);	
+	SpriteManagerAdd(SPRITE_ENEMY3, 352, 190);
 	}
 	
 	if( have_diamond == 6 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 343, 343);
+	door_x = 38;
+	door_y = 38;
+	SpriteManagerAdd(SPRITE_KEY, 192, 192);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
+	SpriteManagerAdd(SPRITE_ENEMY2, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 94, 280);
+	SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 192, 192);
+	SpriteManagerAdd(SPRITE_ENEMY2, 192, 192);
+	SpriteManagerAdd(SPRITE_ENEMY2, 94, 280);	
+	SpriteManagerAdd(SPRITE_ENEMY3, 352, 190);
 	}
 	
 	if( have_diamond == 10 ){
-		
+	scroll_target = SpriteManagerAdd(SPRITE_PLAYER, 200, 200);
+	door_x = 38;
+	door_y = 38;
+	SpriteManagerAdd(SPRITE_KEY, 343, 343);
+	SpriteManagerAdd(SPRITE_DOOR, door_x, door_y);
+	
+	SpriteManagerAdd(SPRITE_ENEMY, 320, 190);
+	SpriteManagerAdd(SPRITE_ENEMY3, 88, 144);
+	SpriteManagerAdd(SPRITE_ENEMY2, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY, 94, 280);
+	SpriteManagerAdd(SPRITE_ENEMY, 272, 112);
+	SpriteManagerAdd(SPRITE_ENEMY2, 94, 280);
+	SpriteManagerAdd(SPRITE_ENEMY2, 312, 344);	
 	}
 	
 	InitScrollTiles(0, 59, tiles, 3);
