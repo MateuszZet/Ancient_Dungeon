@@ -12,7 +12,6 @@
 	.globl _SpriteManagerLoad
 	.globl _InitScrollColor
 	.globl _ZInitScrollTilesColor
-	.globl _SetState
 	.globl _collilision_tiles6
 	.globl _bank_STATE_GAME6
 	.globl _Start_STATE_GAME6
@@ -673,48 +672,7 @@ _Start_STATE_GAME6::
 ; Function Update_STATE_GAME6
 ; ---------------------------------
 _Update_STATE_GAME6::
-;StateGame6.c:109: if (KEY_PRESSED(J_START)) {
-	ld	hl,#_keys
-	ld	c,(hl)
-	ld	b,#0x00
-	bit	7, c
-	ret	Z
-;StateGame6.c:110: if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
-	ld	hl,#_have_diamond + 1
-	ld	a,(hl-)
-	or	a,(hl)
-	jr	Z,00101$
-	ld	a,(hl)
-	sub	a, #0x03
-	jr	NZ,00123$
-	inc	hl
-	ld	a,(hl)
-	or	a, a
-	jr	Z,00101$
-00123$:
-	ld	hl,#_have_diamond
-	ld	a,(hl)
-	sub	a, #0x0a
-	jr	NZ,00102$
-	inc	hl
-	ld	a,(hl)
-	or	a, a
-	jr	NZ,00102$
-00101$:
-;StateGame6.c:111: SetState(STATE_END);
-	ld	a,#0x07
-	push	af
-	inc	sp
-	call	_SetState
-	inc	sp
-	ret
-00102$:
-;StateGame6.c:114: SetState(STATE_END2);
-	ld	a,#0x08
-	push	af
-	inc	sp
-	call	_SetState
-	inc	sp
+;StateGame6.c:110: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

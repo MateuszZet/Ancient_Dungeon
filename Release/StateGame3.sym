@@ -8,7 +8,6 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _InitScrollColor                                               **** GX
-    _SetState                                                      **** GX
     _SpriteManagerAdd                                              **** GX
     _SpriteManagerLoad                                             **** GX
   6 _Start_STATE_GAME3                                             0000 GR
@@ -20,13 +19,11 @@ Symbol Table
     _door_y                                                        **** GX
     _have_bomb                                                     **** GX
     _have_diamond                                                  **** GX
-    _keys                                                          **** GX
     _map3                                                          **** GX
     _n_sprite_types                                                **** GX
     _next_lvl                                                      **** GX
     _scroll_target                                                 **** GX
     _tiles                                                         **** GX
-
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
@@ -39,6 +36,6 @@ Area Table
    3 _HOME                                      size    0   flags    0
    4 _GSINIT                                    size   1E   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  414   flags    0
+   6 _CODE_2                                    size  403   flags    0
    7 _CABS                                      size    0   flags    8
 

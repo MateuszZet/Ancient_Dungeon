@@ -293,11 +293,11 @@
    014B 21r00r00            293 	ld	hl,#_have_diamond
    014E 7E                  294 	ld	a,(hl)
    014F D6 06               295 	sub	a, #0x06
-   0151 C2rA1r01            296 	jp	NZ,00109$
+   0151 C2r91r01            296 	jp	NZ,00109$
    0154 23                  297 	inc	hl
    0155 7E                  298 	ld	a,(hl)
    0156 B7                  299 	or	a, a
-   0157 C2rA1r01            300 	jp	NZ,00109$
+   0157 C2r91r01            300 	jp	NZ,00109$
                             301 ;StateMenu.c:55: SpriteManagerAdd(SPRITE_KEY, 20, 20);
    015A 21 14 00            302 	ld	hl,#0x0014
    015D E5                  303 	push	hl
@@ -324,249 +324,219 @@
    017B 33                  324 	inc	sp
    017C CDr00r00            325 	call	_SpriteManagerAdd
    017F E8 05               326 	add	sp, #5
-                            327 ;StateMenu.c:57: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
-   0181 21 70 00            328 	ld	hl,#0x0070
+                            327 ;StateMenu.c:57: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+   0181 21 73 00            328 	ld	hl,#0x0073
    0184 E5                  329 	push	hl
-   0185 2E 80               330 	ld	l, #0x80
+   0185 2E 32               330 	ld	l, #0x32
    0187 E5                  331 	push	hl
-   0188 3E 01               332 	ld	a,#0x01
+   0188 3E 02               332 	ld	a,#0x02
    018A F5                  333 	push	af
    018B 33                  334 	inc	sp
    018C CDr00r00            335 	call	_SpriteManagerAdd
    018F E8 05               336 	add	sp, #5
-                            337 ;StateMenu.c:58: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
-   0191 21 73 00            338 	ld	hl,#0x0073
-   0194 E5                  339 	push	hl
-   0195 2E 32               340 	ld	l, #0x32
-   0197 E5                  341 	push	hl
-   0198 3E 02               342 	ld	a,#0x02
-   019A F5                  343 	push	af
-   019B 33                  344 	inc	sp
-   019C CDr00r00            345 	call	_SpriteManagerAdd
-   019F E8 05               346 	add	sp, #5
-   01A1                     347 00109$:
-                            348 ;StateMenu.c:61: if( have_diamond == 10){
-   01A1 21r00r00            349 	ld	hl,#_have_diamond
-   01A4 7E                  350 	ld	a,(hl)
-   01A5 D6 0A               351 	sub	a, #0x0a
-   01A7 C2r07r02            352 	jp	NZ,00111$
-   01AA 23                  353 	inc	hl
-   01AB 7E                  354 	ld	a,(hl)
-   01AC B7                  355 	or	a, a
-   01AD C2r07r02            356 	jp	NZ,00111$
-                            357 ;StateMenu.c:62: SpriteManagerAdd(SPRITE_KEY, 20, 20);
-   01B0 21 14 00            358 	ld	hl,#0x0014
-   01B3 E5                  359 	push	hl
-   01B4 2E 14               360 	ld	l, #0x14
-   01B6 E5                  361 	push	hl
-   01B7 3E 03               362 	ld	a,#0x03
-   01B9 F5                  363 	push	af
-   01BA 33                  364 	inc	sp
-   01BB CDr00r00            365 	call	_SpriteManagerAdd
-   01BE E8 05               366 	add	sp, #5
-                            367 ;StateMenu.c:63: SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);	
-   01C0 21r00r00            368 	ld	hl,#_door_y
-   01C3 2A                  369 	ld	a,(hl+)
-   01C4 66                  370 	ld	h,(hl)
-   01C5 6F                  371 	ld	l,a
-   01C6 E5                  372 	push	hl
-   01C7 21r00r00            373 	ld	hl,#_door_x
-   01CA 2A                  374 	ld	a,(hl+)
-   01CB 66                  375 	ld	h,(hl)
-   01CC 6F                  376 	ld	l,a
+   0191                     337 00109$:
+                            338 ;StateMenu.c:60: if( have_diamond == 10){
+   0191 21r00r00            339 	ld	hl,#_have_diamond
+   0194 7E                  340 	ld	a,(hl)
+   0195 D6 0A               341 	sub	a, #0x0a
+   0197 C2rD7r01            342 	jp	NZ,00111$
+   019A 23                  343 	inc	hl
+   019B 7E                  344 	ld	a,(hl)
+   019C B7                  345 	or	a, a
+   019D C2rD7r01            346 	jp	NZ,00111$
+                            347 ;StateMenu.c:61: SpriteManagerAdd(SPRITE_KEY, 20, 20);
+   01A0 21 14 00            348 	ld	hl,#0x0014
+   01A3 E5                  349 	push	hl
+   01A4 2E 14               350 	ld	l, #0x14
+   01A6 E5                  351 	push	hl
+   01A7 3E 03               352 	ld	a,#0x03
+   01A9 F5                  353 	push	af
+   01AA 33                  354 	inc	sp
+   01AB CDr00r00            355 	call	_SpriteManagerAdd
+   01AE E8 05               356 	add	sp, #5
+                            357 ;StateMenu.c:62: SpriteManagerAdd(SPRITE_DOOR,door_x, door_y);	
+   01B0 21r00r00            358 	ld	hl,#_door_y
+   01B3 2A                  359 	ld	a,(hl+)
+   01B4 66                  360 	ld	h,(hl)
+   01B5 6F                  361 	ld	l,a
+   01B6 E5                  362 	push	hl
+   01B7 21r00r00            363 	ld	hl,#_door_x
+   01BA 2A                  364 	ld	a,(hl+)
+   01BB 66                  365 	ld	h,(hl)
+   01BC 6F                  366 	ld	l,a
+   01BD E5                  367 	push	hl
+   01BE 3E 04               368 	ld	a,#0x04
+   01C0 F5                  369 	push	af
+   01C1 33                  370 	inc	sp
+   01C2 CDr00r00            371 	call	_SpriteManagerAdd
+   01C5 E8 05               372 	add	sp, #5
+                            373 ;StateMenu.c:63: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+   01C7 21 1E 00            374 	ld	hl,#0x001e
+   01CA E5                  375 	push	hl
+   01CB 2E 1E               376 	ld	l, #0x1e
    01CD E5                  377 	push	hl
-   01CE 3E 04               378 	ld	a,#0x04
+   01CE 3E 08               378 	ld	a,#0x08
    01D0 F5                  379 	push	af
    01D1 33                  380 	inc	sp
    01D2 CDr00r00            381 	call	_SpriteManagerAdd
    01D5 E8 05               382 	add	sp, #5
-                            383 ;StateMenu.c:64: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
-   01D7 21 70 00            384 	ld	hl,#0x0070
-   01DA E5                  385 	push	hl
-   01DB 2E 80               386 	ld	l, #0x80
-   01DD E5                  387 	push	hl
-   01DE 3E 01               388 	ld	a,#0x01
-   01E0 F5                  389 	push	af
-   01E1 33                  390 	inc	sp
-   01E2 CDr00r00            391 	call	_SpriteManagerAdd
-   01E5 E8 05               392 	add	sp, #5
-                            393 ;StateMenu.c:65: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
-   01E7 21 73 00            394 	ld	hl,#0x0073
-   01EA E5                  395 	push	hl
-   01EB 2E 32               396 	ld	l, #0x32
-   01ED E5                  397 	push	hl
-   01EE 3E 02               398 	ld	a,#0x02
-   01F0 F5                  399 	push	af
-   01F1 33                  400 	inc	sp
-   01F2 CDr00r00            401 	call	_SpriteManagerAdd
-   01F5 E8 05               402 	add	sp, #5
-                            403 ;StateMenu.c:66: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
-   01F7 21 1E 00            404 	ld	hl,#0x001e
-   01FA E5                  405 	push	hl
-   01FB 2E 1E               406 	ld	l, #0x1e
-   01FD E5                  407 	push	hl
-   01FE 3E 08               408 	ld	a,#0x08
-   0200 F5                  409 	push	af
-   0201 33                  410 	inc	sp
-   0202 CDr00r00            411 	call	_SpriteManagerAdd
-   0205 E8 05               412 	add	sp, #5
-   0207                     413 00111$:
-                            414 ;StateMenu.c:69: if( have_diamond == 15){
-   0207 21r00r00            415 	ld	hl,#_have_diamond
-   020A 7E                  416 	ld	a,(hl)
-   020B D6 0F               417 	sub	a, #0x0f
-   020D C2r56r02            418 	jp	NZ,00113$
-   0210 23                  419 	inc	hl
-   0211 7E                  420 	ld	a,(hl)
-   0212 B7                  421 	or	a, a
-   0213 C2r56r02            422 	jp	NZ,00113$
-                            423 ;StateMenu.c:70: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+   01D7                     383 00111$:
+                            384 ;StateMenu.c:66: if( have_diamond == 15){
+   01D7 21r00r00            385 	ld	hl,#_have_diamond
+   01DA 7E                  386 	ld	a,(hl)
+   01DB D6 0F               387 	sub	a, #0x0f
+   01DD C2r26r02            388 	jp	NZ,00113$
+   01E0 23                  389 	inc	hl
+   01E1 7E                  390 	ld	a,(hl)
+   01E2 B7                  391 	or	a, a
+   01E3 C2r26r02            392 	jp	NZ,00113$
+                            393 ;StateMenu.c:67: SpriteManagerAdd(SPRITE_ENEMY, 128, 112);
+   01E6 21 70 00            394 	ld	hl,#0x0070
+   01E9 E5                  395 	push	hl
+   01EA 2E 80               396 	ld	l, #0x80
+   01EC E5                  397 	push	hl
+   01ED 3E 01               398 	ld	a,#0x01
+   01EF F5                  399 	push	af
+   01F0 33                  400 	inc	sp
+   01F1 CDr00r00            401 	call	_SpriteManagerAdd
+   01F4 E8 05               402 	add	sp, #5
+                            403 ;StateMenu.c:68: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
+   01F6 21 73 00            404 	ld	hl,#0x0073
+   01F9 E5                  405 	push	hl
+   01FA 2E 32               406 	ld	l, #0x32
+   01FC E5                  407 	push	hl
+   01FD 3E 02               408 	ld	a,#0x02
+   01FF F5                  409 	push	af
+   0200 33                  410 	inc	sp
+   0201 CDr00r00            411 	call	_SpriteManagerAdd
+   0204 E8 05               412 	add	sp, #5
+                            413 ;StateMenu.c:69: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
+   0206 21 1E 00            414 	ld	hl,#0x001e
+   0209 E5                  415 	push	hl
+   020A 2E 1E               416 	ld	l, #0x1e
+   020C E5                  417 	push	hl
+   020D 3E 08               418 	ld	a,#0x08
+   020F F5                  419 	push	af
+   0210 33                  420 	inc	sp
+   0211 CDr00r00            421 	call	_SpriteManagerAdd
+   0214 E8 05               422 	add	sp, #5
+                            423 ;StateMenu.c:70: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
    0216 21 70 00            424 	ld	hl,#0x0070
    0219 E5                  425 	push	hl
    021A 2E 80               426 	ld	l, #0x80
    021C E5                  427 	push	hl
-   021D 3E 01               428 	ld	a,#0x01
+   021D 3E 09               428 	ld	a,#0x09
    021F F5                  429 	push	af
    0220 33                  430 	inc	sp
    0221 CDr00r00            431 	call	_SpriteManagerAdd
    0224 E8 05               432 	add	sp, #5
-                            433 ;StateMenu.c:71: SpriteManagerAdd(SPRITE_ENEMY2, 50, 115 );
-   0226 21 73 00            434 	ld	hl,#0x0073
-   0229 E5                  435 	push	hl
-   022A 2E 32               436 	ld	l, #0x32
-   022C E5                  437 	push	hl
-   022D 3E 02               438 	ld	a,#0x02
-   022F F5                  439 	push	af
-   0230 33                  440 	inc	sp
-   0231 CDr00r00            441 	call	_SpriteManagerAdd
-   0234 E8 05               442 	add	sp, #5
-                            443 ;StateMenu.c:72: SpriteManagerAdd(SPRITE_ENEMY3, 30, 30);
-   0236 21 1E 00            444 	ld	hl,#0x001e
-   0239 E5                  445 	push	hl
-   023A 2E 1E               446 	ld	l, #0x1e
-   023C E5                  447 	push	hl
-   023D 3E 08               448 	ld	a,#0x08
-   023F F5                  449 	push	af
-   0240 33                  450 	inc	sp
-   0241 CDr00r00            451 	call	_SpriteManagerAdd
-   0244 E8 05               452 	add	sp, #5
-                            453 ;StateMenu.c:73: SpriteManagerAdd(SPRITE_DIAMOND, 128, 112);
-   0246 21 70 00            454 	ld	hl,#0x0070
+   0226                     433 00113$:
+                            434 ;StateMenu.c:73: InitScrollTiles(0, 59, tiles, 3);
+   0226 21 00 00            435 	ld	hl,#0x0000
+   0229 E5                  436 	push	hl
+   022A 3E 03               437 	ld	a,#0x03
+   022C F5                  438 	push	af
+   022D 33                  439 	inc	sp
+   022E 21r00r00            440 	ld	hl,#_tiles
+   0231 E5                  441 	push	hl
+   0232 21 00 3B            442 	ld	hl,#0x3b00
+   0235 E5                  443 	push	hl
+   0236 CDr00r00            444 	call	_ZInitScrollTilesColor
+   0239 E8 07               445 	add	sp, #7
+                            446 ;StateMenu.c:74: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
+   023B 21 00 00            447 	ld	hl,#0x0000
+   023E E5                  448 	push	hl
+   023F 3E 03               449 	ld	a,#0x03
+   0241 F5                  450 	push	af
+   0242 33                  451 	inc	sp
+   0243 2E 00               452 	ld	l, #0x00
+   0245 E5                  453 	push	hl
+   0246 21r01r00            454 	ld	hl,#_collilision_tiles0
    0249 E5                  455 	push	hl
-   024A 2E 80               456 	ld	l, #0x80
-   024C E5                  457 	push	hl
-   024D 3E 09               458 	ld	a,#0x09
-   024F F5                  459 	push	af
-   0250 33                  460 	inc	sp
-   0251 CDr00r00            461 	call	_SpriteManagerAdd
-   0254 E8 05               462 	add	sp, #5
-   0256                     463 00113$:
-                            464 ;StateMenu.c:76: InitScrollTiles(0, 59, tiles, 3);
-   0256 21 00 00            465 	ld	hl,#0x0000
-   0259 E5                  466 	push	hl
-   025A 3E 03               467 	ld	a,#0x03
-   025C F5                  468 	push	af
-   025D 33                  469 	inc	sp
-   025E 21r00r00            470 	ld	hl,#_tiles
-   0261 E5                  471 	push	hl
-   0262 21 00 3B            472 	ld	hl,#0x3b00
-   0265 E5                  473 	push	hl
-   0266 CDr00r00            474 	call	_ZInitScrollTilesColor
-   0269 E8 07               475 	add	sp, #7
-                            476 ;StateMenu.c:77: InitScroll(menuWidth,menuHeight,menu, collilision_tiles0, 0, 3);
-   026B 21 00 00            477 	ld	hl,#0x0000
-   026E E5                  478 	push	hl
-   026F 3E 03               479 	ld	a,#0x03
-   0271 F5                  480 	push	af
-   0272 33                  481 	inc	sp
-   0273 2E 00               482 	ld	l, #0x00
-   0275 E5                  483 	push	hl
-   0276 21r01r00            484 	ld	hl,#_collilision_tiles0
-   0279 E5                  485 	push	hl
-   027A 21r00r00            486 	ld	hl,#_menu
-   027D E5                  487 	push	hl
-   027E 21 12 00            488 	ld	hl,#0x0012
-   0281 E5                  489 	push	hl
-   0282 2E 14               490 	ld	l, #0x14
-   0284 E5                  491 	push	hl
-   0285 CDr00r00            492 	call	_InitScrollColor
-   0288 E8 0D               493 	add	sp, #13
-                            494 ;StateMenu.c:78: SHOW_BKG;
-   028A 11 40 FF            495 	ld	de,#0xff40
-   028D 1A                  496 	ld	a,(de)
-   028E 4F                  497 	ld	c,a
-   028F 06 00               498 	ld	b,#0x00
-   0291 79                  499 	ld	a,c
-   0292 CB C7               500 	set	0, a
-   0294 4F                  501 	ld	c,a
-   0295 21 40 FF            502 	ld	hl,#0xff40
-   0298 71                  503 	ld	(hl),c
-   0299 C9                  504 	ret
-                            505 ;StateMenu.c:83: void Update_STATE_MENU(){
-                            506 ;	---------------------------------
-                            507 ; Function Update_STATE_MENU
-                            508 ; ---------------------------------
-   029A                     509 _Update_STATE_MENU::
-                            510 ;StateMenu.c:84: if (KEY_PRESSED(J_START) && have_diamond<15) {
-   029A 21r00r00            511 	ld	hl,#_keys
-   029D 4E                  512 	ld	c,(hl)
-   029E 06 00               513 	ld	b,#0x00
-   02A0 CB 79               514 	bit	7, c
-   02A2 28 28               515 	jr	Z,00102$
-   02A4 21r00r00            516 	ld	hl,#_have_diamond
-   02A7 7E                  517 	ld	a, (hl)
-   02A8 D6 0F               518 	sub	a, #0x0f
-   02AA 23                  519 	inc	hl
-   02AB 7E                  520 	ld	a, (hl)
-   02AC DE 00               521 	sbc	a, #0x00
-   02AE 56                  522 	ld	d, (hl)
-   02AF 3E 00               523 	ld	a,#0x00
-   02B1 5F                  524 	ld	e, a
-   02B2 CB 7B               525 	bit	7, e
-   02B4 28 07               526 	jr	Z,00122$
-   02B6 CB 7A               527 	bit	7, d
-   02B8 20 08               528 	jr	NZ,00123$
-   02BA BF                  529 	cp	a, a
-   02BB 18 05               530 	jr	00123$
-   02BD                     531 00122$:
-   02BD CB 7A               532 	bit	7, d
-   02BF 28 01               533 	jr	Z,00123$
-   02C1 37                  534 	scf
-   02C2                     535 00123$:
-   02C2 30 08               536 	jr	NC,00102$
-                            537 ;StateMenu.c:85: SetState(STATE_GAME);
-   02C4 3E 01               538 	ld	a,#0x01
-   02C6 F5                  539 	push	af
-   02C7 33                  540 	inc	sp
-   02C8 CDr00r00            541 	call	_SetState
-   02CB 33                  542 	inc	sp
-   02CC                     543 00102$:
-                            544 ;StateMenu.c:87: if (KEY_PRESSED(J_SELECT) || have_diamond==16){
-   02CC 21r00r00            545 	ld	hl,#_keys
-   02CF 4E                  546 	ld	c,(hl)
-   02D0 06 00               547 	ld	b,#0x00
-   02D2 CB 71               548 	bit	6, c
-   02D4 20 0B               549 	jr	NZ,00104$
-   02D6 21r00r00            550 	ld	hl,#_have_diamond
-   02D9 7E                  551 	ld	a,(hl)
-   02DA D6 10               552 	sub	a, #0x10
-   02DC C0                  553 	ret	NZ
-   02DD 23                  554 	inc	hl
-   02DE 7E                  555 	ld	a,(hl)
-   02DF B7                  556 	or	a, a
-   02E0 C0                  557 	ret	NZ
-   02E1                     558 00104$:
-                            559 ;StateMenu.c:88: have_diamond = 0;
-   02E1 21r00r00            560 	ld	hl,#_have_diamond
-   02E4 36 00               561 	ld	(hl),#0x00
-   02E6 23                  562 	inc	hl
-   02E7 36 00               563 	ld	(hl),#0x00
-                            564 ;StateMenu.c:89: SetState(STATE_MENU);
-   02E9 AF                  565 	xor	a, a
-   02EA F5                  566 	push	af
-   02EB 33                  567 	inc	sp
-   02EC CDr00r00            568 	call	_SetState
-   02EF 33                  569 	inc	sp
-   02F0 C9                  570 	ret
-                            571 	.area _CODE_2
-                            572 	.area _CABS (ABS)
+   024A 21r00r00            456 	ld	hl,#_menu
+   024D E5                  457 	push	hl
+   024E 21 12 00            458 	ld	hl,#0x0012
+   0251 E5                  459 	push	hl
+   0252 2E 14               460 	ld	l, #0x14
+   0254 E5                  461 	push	hl
+   0255 CDr00r00            462 	call	_InitScrollColor
+   0258 E8 0D               463 	add	sp, #13
+                            464 ;StateMenu.c:75: SHOW_BKG;
+   025A 11 40 FF            465 	ld	de,#0xff40
+   025D 1A                  466 	ld	a,(de)
+   025E 4F                  467 	ld	c,a
+   025F 06 00               468 	ld	b,#0x00
+   0261 79                  469 	ld	a,c
+   0262 CB C7               470 	set	0, a
+   0264 4F                  471 	ld	c,a
+   0265 21 40 FF            472 	ld	hl,#0xff40
+   0268 71                  473 	ld	(hl),c
+   0269 C9                  474 	ret
+                            475 ;StateMenu.c:80: void Update_STATE_MENU(){
+                            476 ;	---------------------------------
+                            477 ; Function Update_STATE_MENU
+                            478 ; ---------------------------------
+   026A                     479 _Update_STATE_MENU::
+                            480 ;StateMenu.c:81: if (KEY_PRESSED(J_START) && have_diamond<15) {
+   026A 21r00r00            481 	ld	hl,#_keys
+   026D 4E                  482 	ld	c,(hl)
+   026E 06 00               483 	ld	b,#0x00
+   0270 CB 79               484 	bit	7, c
+   0272 28 28               485 	jr	Z,00102$
+   0274 21r00r00            486 	ld	hl,#_have_diamond
+   0277 7E                  487 	ld	a, (hl)
+   0278 D6 0F               488 	sub	a, #0x0f
+   027A 23                  489 	inc	hl
+   027B 7E                  490 	ld	a, (hl)
+   027C DE 00               491 	sbc	a, #0x00
+   027E 56                  492 	ld	d, (hl)
+   027F 3E 00               493 	ld	a,#0x00
+   0281 5F                  494 	ld	e, a
+   0282 CB 7B               495 	bit	7, e
+   0284 28 07               496 	jr	Z,00122$
+   0286 CB 7A               497 	bit	7, d
+   0288 20 08               498 	jr	NZ,00123$
+   028A BF                  499 	cp	a, a
+   028B 18 05               500 	jr	00123$
+   028D                     501 00122$:
+   028D CB 7A               502 	bit	7, d
+   028F 28 01               503 	jr	Z,00123$
+   0291 37                  504 	scf
+   0292                     505 00123$:
+   0292 30 08               506 	jr	NC,00102$
+                            507 ;StateMenu.c:82: SetState(STATE_GAME);
+   0294 3E 01               508 	ld	a,#0x01
+   0296 F5                  509 	push	af
+   0297 33                  510 	inc	sp
+   0298 CDr00r00            511 	call	_SetState
+   029B 33                  512 	inc	sp
+   029C                     513 00102$:
+                            514 ;StateMenu.c:84: if (KEY_PRESSED(J_SELECT) || have_diamond==16){
+   029C 21r00r00            515 	ld	hl,#_keys
+   029F 4E                  516 	ld	c,(hl)
+   02A0 06 00               517 	ld	b,#0x00
+   02A2 CB 71               518 	bit	6, c
+   02A4 20 0B               519 	jr	NZ,00104$
+   02A6 21r00r00            520 	ld	hl,#_have_diamond
+   02A9 7E                  521 	ld	a,(hl)
+   02AA D6 10               522 	sub	a, #0x10
+   02AC C0                  523 	ret	NZ
+   02AD 23                  524 	inc	hl
+   02AE 7E                  525 	ld	a,(hl)
+   02AF B7                  526 	or	a, a
+   02B0 C0                  527 	ret	NZ
+   02B1                     528 00104$:
+                            529 ;StateMenu.c:85: have_diamond = 0;
+   02B1 21r00r00            530 	ld	hl,#_have_diamond
+   02B4 36 00               531 	ld	(hl),#0x00
+   02B6 23                  532 	inc	hl
+   02B7 36 00               533 	ld	(hl),#0x00
+                            534 ;StateMenu.c:86: SetState(STATE_MENU);
+   02B9 AF                  535 	xor	a, a
+   02BA F5                  536 	push	af
+   02BB 33                  537 	inc	sp
+   02BC CDr00r00            538 	call	_SetState
+   02BF 33                  539 	inc	sp
+   02C0 C9                  540 	ret
+                            541 	.area _CODE_2
+                            542 	.area _CABS (ABS)

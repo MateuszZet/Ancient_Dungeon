@@ -108,7 +108,5 @@ void Start_STATE_GAME3() {
 }
 
 void Update_STATE_GAME3() {
-	if (KEY_PRESSED(J_START)) {
-		SetState(STATE_GAME4);
-	}
+	
 }

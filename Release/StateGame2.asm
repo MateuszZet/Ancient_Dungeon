@@ -12,7 +12,6 @@
 	.globl _SpriteManagerLoad
 	.globl _InitScrollColor
 	.globl _ZInitScrollTilesColor
-	.globl _SetState
 	.globl _collilision_tiles2
 	.globl _bank_STATE_GAME2
 	.globl _Start_STATE_GAME2
@@ -693,18 +692,7 @@ _Start_STATE_GAME2::
 ; Function Update_STATE_GAME2
 ; ---------------------------------
 _Update_STATE_GAME2::
-;StateGame2.c:112: if (KEY_PRESSED(J_START)) {
-	ld	hl,#_keys
-	ld	c,(hl)
-	ld	b,#0x00
-	bit	7, c
-	ret	Z
-;StateGame2.c:113: SetState(STATE_GAME3);
-	ld	a,#0x03
-	push	af
-	inc	sp
-	call	_SetState
-	inc	sp
+;StateGame2.c:113: }
 	ret
 	.area _CODE_2
 	.area _CABS (ABS)

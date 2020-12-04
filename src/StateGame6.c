@@ -106,12 +106,5 @@ void Start_STATE_GAME6() {
 }
 
 void Update_STATE_GAME6() {
-	if (KEY_PRESSED(J_START)) {
-		if(have_diamond == 0 || have_diamond == 3 || have_diamond == 10){
-		SetState(STATE_END);
-		}
-		else{
-			SetState(STATE_END2);
-		}
-	}
+	
 }

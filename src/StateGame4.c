@@ -115,7 +115,5 @@ void Start_STATE_GAME4() {
 }
 
 void Update_STATE_GAME4() {
-	if (KEY_PRESSED(J_START)) {
-		SetState(STATE_GAME5);
-	}
+	
 }
