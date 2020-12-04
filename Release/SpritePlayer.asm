@@ -518,7 +518,7 @@ _Update_SPRITE_PLAYER::
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
-;SpritePlayer.c:63: SpriteManagerAdd(SPRITE_BOMB, THIS->x + 15, THIS->y);
+;SpritePlayer.c:63: SpriteManagerAdd(SPRITE_BOMB, THIS->x + 20, THIS->y);
 	ld	hl,#0x0009
 	add	hl,bc
 	ld	a,l
@@ -547,7 +547,7 @@ _Update_SPRITE_PLAYER::
 	inc	de
 	ld	a,(de)
 	ld	b,a
-	ld	hl,#0x000f
+	ld	hl,#0x0014
 	add	hl,bc
 	ld	c,l
 	ld	b,h

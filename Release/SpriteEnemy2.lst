@@ -13,394 +13,345 @@
                              13 	.globl _CheckCollision
                              14 	.globl _TranslateSprite
                              15 	.globl _SetSpriteAnim
-                             16 	.globl _dir_pointer2
-                             17 	.globl _dir2
-                             18 	.globl _bank_SPRITE_ENEMY2
-                             19 	.globl _anime_right
-                             20 	.globl _anime_left
-                             21 	.globl _Start_SPRITE_ENEMY2
-                             22 	.globl _Update_SPRITE_ENEMY2
-                             23 	.globl _Destroy_SPRITE_ENEMY2
+                             16 	.globl _bank_SPRITE_ENEMY2
+                             17 	.globl _anime_right
+                             18 	.globl _anime_left
+                             19 	.globl _Start_SPRITE_ENEMY2
+                             20 	.globl _Update_SPRITE_ENEMY2
+                             21 	.globl _Destroy_SPRITE_ENEMY2
+                             22 ;--------------------------------------------------------
+                             23 ; ram data
                              24 ;--------------------------------------------------------
-                             25 ; ram data
-                             26 ;--------------------------------------------------------
-                             27 	.area _DATA
-   0000                      28 _bank_SPRITE_ENEMY2::
-   0000                      29 	.ds 1
-   0001                      30 _dir2::
-   0001                      31 	.ds 2
-   0003                      32 _dir_pointer2::
-   0003                      33 	.ds 2
+                             25 	.area _DATA
+   0000                      26 _bank_SPRITE_ENEMY2::
+   0000                      27 	.ds 1
+                             28 ;--------------------------------------------------------
+                             29 ; absolute external ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _DABS (ABS)
+                             32 ;--------------------------------------------------------
+                             33 ; global & static initialisations
                              34 ;--------------------------------------------------------
-                             35 ; absolute external ram data
-                             36 ;--------------------------------------------------------
-                             37 	.area _DABS (ABS)
-                             38 ;--------------------------------------------------------
-                             39 ; global & static initialisations
-                             40 ;--------------------------------------------------------
-                             41 	.area _HOME
-                             42 	.area _GSINIT
-                             43 	.area _GSFINAL
-                             44 	.area _GSINIT
-                             45 ;SpriteEnemy2.c:3: UINT8 bank_SPRITE_ENEMY2 = 2;
-   0000 21r00r00             46 	ld	hl,#_bank_SPRITE_ENEMY2
-   0003 36 02                47 	ld	(hl),#0x02
-                             48 ;SpriteEnemy2.c:12: int dir2=0;
-   0005 21r01r00             49 	ld	hl,#_dir2
-   0008 36 00                50 	ld	(hl),#0x00
-   000A 23                   51 	inc	hl
-   000B 36 00                52 	ld	(hl),#0x00
-                             53 ;SpriteEnemy2.c:13: int *dir_pointer2 = NULL;
-   000D 21r03r00             54 	ld	hl,#_dir_pointer2
-   0010 36 00                55 	ld	(hl),#0x00
-   0012 23                   56 	inc	hl
-   0013 36 00                57 	ld	(hl),#0x00
-                             58 ;--------------------------------------------------------
-                             59 ; Home
-                             60 ;--------------------------------------------------------
-                             61 	.area _HOME
-                             62 	.area _HOME
-                             63 ;--------------------------------------------------------
-                             64 ; code
-                             65 ;--------------------------------------------------------
-                             66 	.area _CODE_2
-                             67 ;SpriteEnemy2.c:22: void Start_SPRITE_ENEMY2() {
-                             68 ;	---------------------------------
-                             69 ; Function Start_SPRITE_ENEMY2
-                             70 ; ---------------------------------
-   0000                      71 _Start_SPRITE_ENEMY2::
-   0000 E8 FC                72 	add	sp, #-4
-                             73 ;SpriteEnemy2.c:23: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
-   0002 21r01r00             74 	ld	hl,#_THIS + 1
-   0005 2B                   75 	dec	hl
-   0006 4E                   76 	ld	c,(hl)
-   0007 23                   77 	inc	hl
-   0008 46                   78 	ld	b,(hl)
-   0009 21 18 00             79 	ld	hl,#0x0018
-   000C 09                   80 	add	hl,bc
-   000D 7D                   81 	ld	a,l
-   000E 54                   82 	ld	d,h
-   000F F8 02                83 	ldhl	sp,#2
-   0011 22                   84 	ld	(hl+),a
-   0012 72                   85 	ld	(hl),d
-   0013 2B                   86 	dec	hl
-   0014 2A                   87 	ld	a,(hl+)
-   0015 5E                   88 	ld	e, (hl)
-   0016 F8 00                89 	ldhl	sp,#0
-   0018 22                   90 	ld	(hl+),a
-   0019 73                   91 	ld	(hl),e
-                             92 ;SpriteEnemy2.c:24: THIS->lim_x=9999;
-   001A 21 12 00             93 	ld	hl,#0x0012
-   001D 09                   94 	add	hl,bc
-   001E 4D                   95 	ld	c,l
-   001F 44                   96 	ld	b,h
-   0020 3E 0F                97 	ld	a,#0x0f
-   0022 02                   98 	ld	(bc),a
-   0023 03                   99 	inc	bc
-   0024 3E 27               100 	ld	a,#0x27
-   0026 02                  101 	ld	(bc),a
-                            102 ;SpriteEnemy2.c:25: THIS->lim_y=9999;
-   0027 21r01r00            103 	ld	hl,#_THIS + 1
-   002A 2B                  104 	dec	hl
-   002B 4E                  105 	ld	c,(hl)
-   002C 23                  106 	inc	hl
-   002D 46                  107 	ld	b,(hl)
-   002E 21 14 00            108 	ld	hl,#0x0014
-   0031 09                  109 	add	hl,bc
-   0032 4D                  110 	ld	c,l
-   0033 44                  111 	ld	b,h
-   0034 3E 0F               112 	ld	a,#0x0f
-   0036 02                  113 	ld	(bc),a
-   0037 03                  114 	inc	bc
-   0038 3E 27               115 	ld	a,#0x27
-   003A 02                  116 	ld	(bc),a
-                            117 ;SpriteEnemy2.c:26: data->vx = 1;
-   003B E1                  118 	pop	hl
-   003C E5                  119 	push	hl
-   003D 36 01               120 	ld	(hl),#0x01
-                            121 ;SpriteEnemy2.c:28: SetSpriteAnim(THIS, anime_right, 15);
-   003F 3E 0F               122 	ld	a,#0x0f
-   0041 F5                  123 	push	af
-   0042 33                  124 	inc	sp
-   0043 21r5Ar00            125 	ld	hl,#_anime_right
-   0046 E5                  126 	push	hl
-   0047 21r00r00            127 	ld	hl,#_THIS
-   004A 2A                  128 	ld	a,(hl+)
-   004B 66                  129 	ld	h,(hl)
-   004C 6F                  130 	ld	l,a
-   004D E5                  131 	push	hl
-   004E CDr00r00            132 	call	_SetSpriteAnim
-   0051 E8 05               133 	add	sp, #5
-   0053 E8 04               134 	add	sp, #4
-   0055 C9                  135 	ret
-   0056                     136 _anime_left:
-   0056 03                  137 	.db #0x03	; 3
-   0057 00                  138 	.db #0x00	; 0
-   0058 01                  139 	.db #0x01	; 1
-   0059 02                  140 	.db #0x02	; 2
-   005A                     141 _anime_right:
-   005A 03                  142 	.db #0x03	; 3
-   005B 03                  143 	.db #0x03	; 3
-   005C 04                  144 	.db #0x04	; 4
-   005D 05                  145 	.db #0x05	; 5
-                            146 ;SpriteEnemy2.c:32: void Update_SPRITE_ENEMY2() {
-                            147 ;	---------------------------------
-                            148 ; Function Update_SPRITE_ENEMY2
-                            149 ; ---------------------------------
-   005E                     150 _Update_SPRITE_ENEMY2::
-   005E E8 FC               151 	add	sp, #-4
-                            152 ;SpriteEnemy2.c:35: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
-   0060 21r01r00            153 	ld	hl,#_THIS + 1
-   0063 2B                  154 	dec	hl
-   0064 4E                  155 	ld	c,(hl)
-   0065 23                  156 	inc	hl
-   0066 46                  157 	ld	b,(hl)
-   0067 21 18 00            158 	ld	hl,#0x0018
-   006A 09                  159 	add	hl,bc
-   006B 4D                  160 	ld	c,l
-   006C 44                  161 	ld	b,h
-                            162 ;SpriteEnemy2.c:36: dir_pointer2 = &dir2;
-   006D 21r03r00            163 	ld	hl,#_dir_pointer2
-   0070 36r01               164 	ld	(hl),#<(_dir2)
-   0072 23                  165 	inc	hl
-   0073 36s00               166 	ld	(hl),#>(_dir2)
-                            167 ;SpriteEnemy2.c:38: if(TranslateSprite(THIS, data->vx << delta_time,0)) {
-   0075 0A                  168 	ld	a,(bc)
-   0076 57                  169 	ld	d,a
-   0077 21r00r00            170 	ld	hl,#_delta_time
-   007A 7E                  171 	ld	a,(hl)
-   007B 3C                  172 	inc	a
-   007C 18 02               173 	jr	00143$
-   007E                     174 00142$:
-   007E CB 22               175 	sla	d
-   0080                     176 00143$:
-   0080 3D                  177 	dec	a
-   0081 20 FB               178 	jr	NZ,00142$
-   0083 C5                  179 	push	bc
-   0084 AF                  180 	xor	a, a
-   0085 F5                  181 	push	af
-   0086 33                  182 	inc	sp
-   0087 D5                  183 	push	de
-   0088 33                  184 	inc	sp
-   0089 21r00r00            185 	ld	hl,#_THIS
-   008C 2A                  186 	ld	a,(hl+)
-   008D 66                  187 	ld	h,(hl)
-   008E 6F                  188 	ld	l,a
-   008F E5                  189 	push	hl
-   0090 CDr00r00            190 	call	_TranslateSprite
-   0093 E8 04               191 	add	sp, #4
-   0095 C1                  192 	pop	bc
-   0096 7B                  193 	ld	a,e
-   0097 B7                  194 	or	a, a
-   0098 CAr07r01            195 	jp	Z,00105$
-                            196 ;SpriteEnemy2.c:40: data->vx = -data->vx;
-   009B 0A                  197 	ld	a,(bc)
-   009C F8 03               198 	ldhl	sp,#3
-   009E 77                  199 	ld	(hl),a
-   009F AF                  200 	xor	a, a
-   00A0 96                  201 	sub	a, (hl)
-   00A1 77                  202 	ld	(hl),a
-   00A2 7E                  203 	ld	a,(hl)
-   00A3 02                  204 	ld	(bc),a
-                            205 ;SpriteEnemy2.c:42: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
-   00A4 21 C0 00            206 	ld	hl,#0x00c0
-   00A7 E5                  207 	push	hl
-   00A8 2E 30               208 	ld	l, #0x30
-   00AA E5                  209 	push	hl
-   00AB 2E 41               210 	ld	l, #0x41
-   00AD E5                  211 	push	hl
-   00AE 2E 0C               212 	ld	l, #0x0c
-   00B0 E5                  213 	push	hl
-   00B1 21 03 04            214 	ld	hl,#0x0403
-   00B4 E5                  215 	push	hl
-   00B5 CDr00r00            216 	call	_PlayFx
-   00B8 E8 0A               217 	add	sp, #10
-                            218 ;SpriteEnemy2.c:43: if (dir2 == 0 ) {
-   00BA 21r02r00            219 	ld	hl,#_dir2 + 1
-   00BD 3A                  220 	ld	a,(hl-)
-   00BE B6                  221 	or	a,(hl)
-   00BF 20 24               222 	jr	NZ,00102$
-                            223 ;SpriteEnemy2.c:44: SetSpriteAnim(THIS, anime_left, 15);
-   00C1 3E 0F               224 	ld	a,#0x0f
-   00C3 F5                  225 	push	af
-   00C4 33                  226 	inc	sp
-   00C5 21r56r00            227 	ld	hl,#_anime_left
-   00C8 E5                  228 	push	hl
-   00C9 21r00r00            229 	ld	hl,#_THIS
-   00CC 2A                  230 	ld	a,(hl+)
-   00CD 66                  231 	ld	h,(hl)
-   00CE 6F                  232 	ld	l,a
-   00CF E5                  233 	push	hl
-   00D0 CDr00r00            234 	call	_SetSpriteAnim
-   00D3 E8 05               235 	add	sp, #5
-                            236 ;SpriteEnemy2.c:45: *dir_pointer2 = 1;
-   00D5 21r04r00            237 	ld	hl,#_dir_pointer2 + 1
-   00D8 2B                  238 	dec	hl
-   00D9 4E                  239 	ld	c,(hl)
-   00DA 23                  240 	inc	hl
-   00DB 46                  241 	ld	b,(hl)
-   00DC 3E 01               242 	ld	a,#0x01
-   00DE 02                  243 	ld	(bc),a
-   00DF 03                  244 	inc	bc
-   00E0 3E 00               245 	ld	a,#0x00
-   00E2 02                  246 	ld	(bc),a
-   00E3 18 22               247 	jr	00105$
-   00E5                     248 00102$:
-                            249 ;SpriteEnemy2.c:48: SetSpriteAnim(THIS, anime_right, 15);
-   00E5 3E 0F               250 	ld	a,#0x0f
-   00E7 F5                  251 	push	af
-   00E8 33                  252 	inc	sp
-   00E9 21r5Ar00            253 	ld	hl,#_anime_right
-   00EC E5                  254 	push	hl
-   00ED 21r00r00            255 	ld	hl,#_THIS
-   00F0 2A                  256 	ld	a,(hl+)
-   00F1 66                  257 	ld	h,(hl)
-   00F2 6F                  258 	ld	l,a
-   00F3 E5                  259 	push	hl
-   00F4 CDr00r00            260 	call	_SetSpriteAnim
-   00F7 E8 05               261 	add	sp, #5
-                            262 ;SpriteEnemy2.c:49: *dir_pointer2 = 0;
-   00F9 21r04r00            263 	ld	hl,#_dir_pointer2 + 1
-   00FC 2B                  264 	dec	hl
-   00FD 4E                  265 	ld	c,(hl)
-   00FE 23                  266 	inc	hl
-   00FF 46                  267 	ld	b,(hl)
-   0100 3E 00               268 	ld	a,#0x00
-   0102 02                  269 	ld	(bc),a
-   0103 03                  270 	inc	bc
-   0104 3E 00               271 	ld	a,#0x00
-   0106 02                  272 	ld	(bc),a
-   0107                     273 00105$:
-                            274 ;SpriteEnemy2.c:55: SPRITEMANAGER_ITERATE(i, spr) {
-   0107 FAr01r00            275 	ld	a, (#(_sprite_manager_updatables + 0x0001) + 0)
-   010A 4F                  276 	ld	c,a
-   010B 06 00               277 	ld	b,#0x00
-   010D CB 21               278 	sla	c
-   010F CB 10               279 	rl	b
-   0111 21r00r00            280 	ld	hl,#_sprite_manager_sprites
-   0114 09                  281 	add	hl,bc
-   0115 4D                  282 	ld	c,l
-   0116 44                  283 	ld	b,h
-   0117 59                  284 	ld	e, c
-   0118 50                  285 	ld	d, b
-   0119 1A                  286 	ld	a,(de)
-   011A F8 01               287 	ldhl	sp,#1
-   011C 22                  288 	ld	(hl+),a
-   011D 13                  289 	inc	de
-   011E 1A                  290 	ld	a,(de)
-   011F 32                  291 	ld	(hl-),a
-   0120 2B                  292 	dec	hl
-   0121 36 00               293 	ld	(hl),#0x00
-   0123                     294 00113$:
-   0123 11r00r00            295 	ld	de, #_sprite_manager_updatables + 0
-   0126 1A                  296 	ld	a,(de)
-   0127 4F                  297 	ld	c,a
-   0128 F8 00               298 	ldhl	sp,#0
-   012A 7E                  299 	ld	a,(hl)
-   012B 91                  300 	sub	a, c
-   012C CArB3r01            301 	jp	Z,00115$
-                            302 ;SpriteEnemy2.c:56: if (spr->type == SPRITE_BOMB || spr->type == SPRITE_BOMB_L) {
-   012F F8 01               303 	ldhl	sp,#(2 - 1)
-   0131 5E                  304 	ld	e,(hl)
-   0132 23                  305 	inc	hl
-   0133 56                  306 	ld	d,(hl)
-   0134 21 10 00            307 	ld	hl,#0x0010
-   0137 19                  308 	add	hl,de
-   0138 4D                  309 	ld	c,l
-   0139 44                  310 	ld	b,h
-   013A 0A                  311 	ld	a,(bc)
-   013B 4F                  312 	ld	c,a
-   013C D6 06               313 	sub	a, #0x06
-   013E 28 06               314 	jr	Z,00108$
-   0140 79                  315 	ld	a,c
-   0141 D6 07               316 	sub	a, #0x07
-   0143 C2r8Cr01            317 	jp	NZ,00114$
-   0146                     318 00108$:
-                            319 ;SpriteEnemy2.c:57: if (CheckCollision(THIS, spr)) {
-   0146 F8 01               320 	ldhl	sp,#1
-   0148 2A                  321 	ld	a,(hl+)
-   0149 66                  322 	ld	h,(hl)
-   014A 6F                  323 	ld	l,a
-   014B E5                  324 	push	hl
-   014C 21r00r00            325 	ld	hl,#_THIS
-   014F 2A                  326 	ld	a,(hl+)
-   0150 66                  327 	ld	h,(hl)
-   0151 6F                  328 	ld	l,a
-   0152 E5                  329 	push	hl
-   0153 CDr00r00            330 	call	_CheckCollision
-   0156 E8 04               331 	add	sp, #4
-   0158 7B                  332 	ld	a,e
-   0159 B7                  333 	or	a, a
-   015A 28 30               334 	jr	Z,00114$
-                            335 ;SpriteEnemy2.c:58: SpriteManagerRemoveSprite(THIS);
-   015C 21r00r00            336 	ld	hl,#_THIS
-   015F 2A                  337 	ld	a,(hl+)
-   0160 66                  338 	ld	h,(hl)
-   0161 6F                  339 	ld	l,a
-   0162 E5                  340 	push	hl
-   0163 CDr00r00            341 	call	_SpriteManagerRemoveSprite
-   0166 E8 02               342 	add	sp, #2
-                            343 ;SpriteEnemy2.c:59: PlayFx(CHANNEL_1, 10, 0x1e, 0x10, 0xf3, 0x00, 0x87);
-   0168 21 87 00            344 	ld	hl,#0x0087
-   016B E5                  345 	push	hl
-   016C 2E 00               346 	ld	l, #0x00
-   016E E5                  347 	push	hl
-   016F 2E F3               348 	ld	l, #0xf3
-   0171 E5                  349 	push	hl
-   0172 2E 10               350 	ld	l, #0x10
-   0174 E5                  351 	push	hl
-   0175 2E 1E               352 	ld	l, #0x1e
-   0177 E5                  353 	push	hl
-   0178 21 00 0A            354 	ld	hl,#0x0a00
-   017B E5                  355 	push	hl
-   017C CDr00r00            356 	call	_PlayFx
-   017F E8 0C               357 	add	sp, #12
-                            358 ;SpriteEnemy2.c:60: SpriteManagerRemoveSprite(spr);
-   0181 F8 01               359 	ldhl	sp,#1
-   0183 2A                  360 	ld	a,(hl+)
-   0184 66                  361 	ld	h,(hl)
-   0185 6F                  362 	ld	l,a
-   0186 E5                  363 	push	hl
-   0187 CDr00r00            364 	call	_SpriteManagerRemoveSprite
-   018A E8 02               365 	add	sp, #2
-   018C                     366 00114$:
-                            367 ;SpriteEnemy2.c:55: SPRITEMANAGER_ITERATE(i, spr) {
-   018C F8 00               368 	ldhl	sp,#0
-   018E 34                  369 	inc	(hl)
-   018F 4E                  370 	ld	c,(hl)
-   0190 06 00               371 	ld	b,#0x00
-   0192 03                  372 	inc	bc
-   0193 21r00r00            373 	ld	hl,#_sprite_manager_updatables
-   0196 09                  374 	add	hl,bc
-   0197 4D                  375 	ld	c,l
-   0198 44                  376 	ld	b,h
-   0199 0A                  377 	ld	a,(bc)
-   019A 4F                  378 	ld	c,a
-   019B 06 00               379 	ld	b,#0x00
-   019D CB 21               380 	sla	c
-   019F CB 10               381 	rl	b
-   01A1 21r00r00            382 	ld	hl,#_sprite_manager_sprites
-   01A4 09                  383 	add	hl,bc
-   01A5 4D                  384 	ld	c,l
-   01A6 44                  385 	ld	b,h
-   01A7 59                  386 	ld	e, c
-   01A8 50                  387 	ld	d, b
-   01A9 1A                  388 	ld	a,(de)
-   01AA F8 01               389 	ldhl	sp,#1
-   01AC 22                  390 	ld	(hl+),a
-   01AD 13                  391 	inc	de
-   01AE 1A                  392 	ld	a,(de)
-   01AF 77                  393 	ld	(hl),a
-   01B0 C3r23r01            394 	jp	00113$
-   01B3                     395 00115$:
-   01B3 E8 04               396 	add	sp, #4
-   01B5 C9                  397 	ret
-                            398 ;SpriteEnemy2.c:68: void Destroy_SPRITE_ENEMY2() {
-                            399 ;	---------------------------------
-                            400 ; Function Destroy_SPRITE_ENEMY2
-                            401 ; ---------------------------------
-   01B6                     402 _Destroy_SPRITE_ENEMY2::
-                            403 ;SpriteEnemy2.c:69: }
-   01B6 C9                  404 	ret
-                            405 	.area _CODE_2
-                            406 	.area _CABS (ABS)
+                             35 	.area _HOME
+                             36 	.area _GSINIT
+                             37 	.area _GSFINAL
+                             38 	.area _GSINIT
+                             39 ;SpriteEnemy2.c:3: UINT8 bank_SPRITE_ENEMY2 = 2;
+   0000 21r00r00             40 	ld	hl,#_bank_SPRITE_ENEMY2
+   0003 36 02                41 	ld	(hl),#0x02
+                             42 ;--------------------------------------------------------
+                             43 ; Home
+                             44 ;--------------------------------------------------------
+                             45 	.area _HOME
+                             46 	.area _HOME
+                             47 ;--------------------------------------------------------
+                             48 ; code
+                             49 ;--------------------------------------------------------
+                             50 	.area _CODE_2
+                             51 ;SpriteEnemy2.c:16: void Start_SPRITE_ENEMY2() {
+                             52 ;	---------------------------------
+                             53 ; Function Start_SPRITE_ENEMY2
+                             54 ; ---------------------------------
+   0000                      55 _Start_SPRITE_ENEMY2::
+   0000 E8 FC                56 	add	sp, #-4
+                             57 ;SpriteEnemy2.c:17: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+   0002 21r01r00             58 	ld	hl,#_THIS + 1
+   0005 2B                   59 	dec	hl
+   0006 4E                   60 	ld	c,(hl)
+   0007 23                   61 	inc	hl
+   0008 46                   62 	ld	b,(hl)
+   0009 21 18 00             63 	ld	hl,#0x0018
+   000C 09                   64 	add	hl,bc
+   000D 7D                   65 	ld	a,l
+   000E 54                   66 	ld	d,h
+   000F F8 02                67 	ldhl	sp,#2
+   0011 22                   68 	ld	(hl+),a
+   0012 72                   69 	ld	(hl),d
+   0013 2B                   70 	dec	hl
+   0014 2A                   71 	ld	a,(hl+)
+   0015 5E                   72 	ld	e, (hl)
+   0016 F8 00                73 	ldhl	sp,#0
+   0018 22                   74 	ld	(hl+),a
+   0019 73                   75 	ld	(hl),e
+                             76 ;SpriteEnemy2.c:18: THIS->lim_x=9999;
+   001A 21 12 00             77 	ld	hl,#0x0012
+   001D 09                   78 	add	hl,bc
+   001E 4D                   79 	ld	c,l
+   001F 44                   80 	ld	b,h
+   0020 3E 0F                81 	ld	a,#0x0f
+   0022 02                   82 	ld	(bc),a
+   0023 03                   83 	inc	bc
+   0024 3E 27                84 	ld	a,#0x27
+   0026 02                   85 	ld	(bc),a
+                             86 ;SpriteEnemy2.c:19: THIS->lim_y=9999;
+   0027 21r01r00             87 	ld	hl,#_THIS + 1
+   002A 2B                   88 	dec	hl
+   002B 4E                   89 	ld	c,(hl)
+   002C 23                   90 	inc	hl
+   002D 46                   91 	ld	b,(hl)
+   002E 21 14 00             92 	ld	hl,#0x0014
+   0031 09                   93 	add	hl,bc
+   0032 4D                   94 	ld	c,l
+   0033 44                   95 	ld	b,h
+   0034 3E 0F                96 	ld	a,#0x0f
+   0036 02                   97 	ld	(bc),a
+   0037 03                   98 	inc	bc
+   0038 3E 27                99 	ld	a,#0x27
+   003A 02                  100 	ld	(bc),a
+                            101 ;SpriteEnemy2.c:20: data->vx = 1;
+   003B E1                  102 	pop	hl
+   003C E5                  103 	push	hl
+   003D 36 01               104 	ld	(hl),#0x01
+                            105 ;SpriteEnemy2.c:22: SetSpriteAnim(THIS, anime_right, 15);
+   003F 3E 0F               106 	ld	a,#0x0f
+   0041 F5                  107 	push	af
+   0042 33                  108 	inc	sp
+   0043 21r5Ar00            109 	ld	hl,#_anime_right
+   0046 E5                  110 	push	hl
+   0047 21r00r00            111 	ld	hl,#_THIS
+   004A 2A                  112 	ld	a,(hl+)
+   004B 66                  113 	ld	h,(hl)
+   004C 6F                  114 	ld	l,a
+   004D E5                  115 	push	hl
+   004E CDr00r00            116 	call	_SetSpriteAnim
+   0051 E8 05               117 	add	sp, #5
+   0053 E8 04               118 	add	sp, #4
+   0055 C9                  119 	ret
+   0056                     120 _anime_left:
+   0056 03                  121 	.db #0x03	; 3
+   0057 00                  122 	.db #0x00	; 0
+   0058 01                  123 	.db #0x01	; 1
+   0059 02                  124 	.db #0x02	; 2
+   005A                     125 _anime_right:
+   005A 03                  126 	.db #0x03	; 3
+   005B 03                  127 	.db #0x03	; 3
+   005C 04                  128 	.db #0x04	; 4
+   005D 05                  129 	.db #0x05	; 5
+                            130 ;SpriteEnemy2.c:26: void Update_SPRITE_ENEMY2() {
+                            131 ;	---------------------------------
+                            132 ; Function Update_SPRITE_ENEMY2
+                            133 ; ---------------------------------
+   005E                     134 _Update_SPRITE_ENEMY2::
+   005E E8 FC               135 	add	sp, #-4
+                            136 ;SpriteEnemy2.c:29: struct EnemyInfo* data = (struct EnemyInfo*)THIS->custom_data;
+   0060 21r01r00            137 	ld	hl,#_THIS + 1
+   0063 2B                  138 	dec	hl
+   0064 4E                  139 	ld	c,(hl)
+   0065 23                  140 	inc	hl
+   0066 46                  141 	ld	b,(hl)
+   0067 21 18 00            142 	ld	hl,#0x0018
+   006A 09                  143 	add	hl,bc
+   006B 4D                  144 	ld	c,l
+   006C 44                  145 	ld	b,h
+                            146 ;SpriteEnemy2.c:31: if(TranslateSprite(THIS, data->vx << delta_time,0)) {
+   006D 0A                  147 	ld	a,(bc)
+   006E 57                  148 	ld	d,a
+   006F 21r00r00            149 	ld	hl,#_delta_time
+   0072 7E                  150 	ld	a,(hl)
+   0073 3C                  151 	inc	a
+   0074 18 02               152 	jr	00143$
+   0076                     153 00142$:
+   0076 CB 22               154 	sla	d
+   0078                     155 00143$:
+   0078 3D                  156 	dec	a
+   0079 20 FB               157 	jr	NZ,00142$
+   007B C5                  158 	push	bc
+   007C AF                  159 	xor	a, a
+   007D F5                  160 	push	af
+   007E 33                  161 	inc	sp
+   007F D5                  162 	push	de
+   0080 33                  163 	inc	sp
+   0081 21r00r00            164 	ld	hl,#_THIS
+   0084 2A                  165 	ld	a,(hl+)
+   0085 66                  166 	ld	h,(hl)
+   0086 6F                  167 	ld	l,a
+   0087 E5                  168 	push	hl
+   0088 CDr00r00            169 	call	_TranslateSprite
+   008B E8 04               170 	add	sp, #4
+   008D C1                  171 	pop	bc
+   008E 7B                  172 	ld	a,e
+   008F B7                  173 	or	a, a
+   0090 CArE2r00            174 	jp	Z,00105$
+                            175 ;SpriteEnemy2.c:33: data->vx = -data->vx;
+   0093 0A                  176 	ld	a,(bc)
+   0094 F8 03               177 	ldhl	sp,#3
+   0096 77                  178 	ld	(hl),a
+   0097 AF                  179 	xor	a, a
+   0098 96                  180 	sub	a, (hl)
+   0099 77                  181 	ld	(hl),a
+   009A 7E                  182 	ld	a,(hl)
+   009B 02                  183 	ld	(bc),a
+                            184 ;SpriteEnemy2.c:35: PlayFx(CHANNEL_4, 4, 0x0c, 0x41, 0x30, 0xc0);
+   009C C5                  185 	push	bc
+   009D 21 C0 00            186 	ld	hl,#0x00c0
+   00A0 E5                  187 	push	hl
+   00A1 2E 30               188 	ld	l, #0x30
+   00A3 E5                  189 	push	hl
+   00A4 2E 41               190 	ld	l, #0x41
+   00A6 E5                  191 	push	hl
+   00A7 2E 0C               192 	ld	l, #0x0c
+   00A9 E5                  193 	push	hl
+   00AA 21 03 04            194 	ld	hl,#0x0403
+   00AD E5                  195 	push	hl
+   00AE CDr00r00            196 	call	_PlayFx
+   00B1 E8 0A               197 	add	sp, #10
+   00B3 C1                  198 	pop	bc
+                            199 ;SpriteEnemy2.c:36: if (data->vx == -1 ) {
+   00B4 0A                  200 	ld	a,(bc)
+   00B5 3C                  201 	inc	a
+   00B6 20 16               202 	jr	NZ,00102$
+                            203 ;SpriteEnemy2.c:37: SetSpriteAnim(THIS, anime_left, 15);
+   00B8 3E 0F               204 	ld	a,#0x0f
+   00BA F5                  205 	push	af
+   00BB 33                  206 	inc	sp
+   00BC 21r56r00            207 	ld	hl,#_anime_left
+   00BF E5                  208 	push	hl
+   00C0 21r00r00            209 	ld	hl,#_THIS
+   00C3 2A                  210 	ld	a,(hl+)
+   00C4 66                  211 	ld	h,(hl)
+   00C5 6F                  212 	ld	l,a
+   00C6 E5                  213 	push	hl
+   00C7 CDr00r00            214 	call	_SetSpriteAnim
+   00CA E8 05               215 	add	sp, #5
+   00CC 18 14               216 	jr	00105$
+   00CE                     217 00102$:
+                            218 ;SpriteEnemy2.c:40: SetSpriteAnim(THIS, anime_right, 15);
+   00CE 3E 0F               219 	ld	a,#0x0f
+   00D0 F5                  220 	push	af
+   00D1 33                  221 	inc	sp
+   00D2 21r5Ar00            222 	ld	hl,#_anime_right
+   00D5 E5                  223 	push	hl
+   00D6 21r00r00            224 	ld	hl,#_THIS
+   00D9 2A                  225 	ld	a,(hl+)
+   00DA 66                  226 	ld	h,(hl)
+   00DB 6F                  227 	ld	l,a
+   00DC E5                  228 	push	hl
+   00DD CDr00r00            229 	call	_SetSpriteAnim
+   00E0 E8 05               230 	add	sp, #5
+   00E2                     231 00105$:
+                            232 ;SpriteEnemy2.c:46: SPRITEMANAGER_ITERATE(i, spr) {
+   00E2 FAr01r00            233 	ld	a, (#(_sprite_manager_updatables + 0x0001) + 0)
+   00E5 4F                  234 	ld	c,a
+   00E6 06 00               235 	ld	b,#0x00
+   00E8 CB 21               236 	sla	c
+   00EA CB 10               237 	rl	b
+   00EC 21r00r00            238 	ld	hl,#_sprite_manager_sprites
+   00EF 09                  239 	add	hl,bc
+   00F0 4D                  240 	ld	c,l
+   00F1 44                  241 	ld	b,h
+   00F2 59                  242 	ld	e, c
+   00F3 50                  243 	ld	d, b
+   00F4 1A                  244 	ld	a,(de)
+   00F5 F8 00               245 	ldhl	sp,#0
+   00F7 22                  246 	ld	(hl+),a
+   00F8 13                  247 	inc	de
+   00F9 1A                  248 	ld	a,(de)
+   00FA 22                  249 	ld	(hl+),a
+   00FB 36 00               250 	ld	(hl),#0x00
+   00FD                     251 00113$:
+   00FD 11r00r00            252 	ld	de, #_sprite_manager_updatables + 0
+   0100 1A                  253 	ld	a,(de)
+   0101 4F                  254 	ld	c,a
+   0102 F8 02               255 	ldhl	sp,#2
+   0104 7E                  256 	ld	a,(hl)
+   0105 91                  257 	sub	a, c
+   0106 CAr84r01            258 	jp	Z,00115$
+                            259 ;SpriteEnemy2.c:47: if (spr->type == SPRITE_BOMB || spr->type == SPRITE_BOMB_L) {
+   0109 D1                  260 	pop	de
+   010A D5                  261 	push	de
+   010B 21 10 00            262 	ld	hl,#0x0010
+   010E 19                  263 	add	hl,de
+   010F 4D                  264 	ld	c,l
+   0110 44                  265 	ld	b,h
+   0111 0A                  266 	ld	a,(bc)
+   0112 4F                  267 	ld	c,a
+   0113 D6 06               268 	sub	a, #0x06
+   0115 28 06               269 	jr	Z,00108$
+   0117 79                  270 	ld	a,c
+   0118 D6 07               271 	sub	a, #0x07
+   011A C2r5Dr01            272 	jp	NZ,00114$
+   011D                     273 00108$:
+                            274 ;SpriteEnemy2.c:48: if (CheckCollision(THIS, spr)) {
+   011D E1                  275 	pop	hl
+   011E E5                  276 	push	hl
+   011F E5                  277 	push	hl
+   0120 21r00r00            278 	ld	hl,#_THIS
+   0123 2A                  279 	ld	a,(hl+)
+   0124 66                  280 	ld	h,(hl)
+   0125 6F                  281 	ld	l,a
+   0126 E5                  282 	push	hl
+   0127 CDr00r00            283 	call	_CheckCollision
+   012A E8 04               284 	add	sp, #4
+   012C 7B                  285 	ld	a,e
+   012D B7                  286 	or	a, a
+   012E 28 2D               287 	jr	Z,00114$
+                            288 ;SpriteEnemy2.c:49: SpriteManagerRemoveSprite(THIS);
+   0130 21r00r00            289 	ld	hl,#_THIS
+   0133 2A                  290 	ld	a,(hl+)
+   0134 66                  291 	ld	h,(hl)
+   0135 6F                  292 	ld	l,a
+   0136 E5                  293 	push	hl
+   0137 CDr00r00            294 	call	_SpriteManagerRemoveSprite
+   013A E8 02               295 	add	sp, #2
+                            296 ;SpriteEnemy2.c:50: PlayFx(CHANNEL_1, 10, 0x1e, 0x10, 0xf3, 0x00, 0x87);
+   013C 21 87 00            297 	ld	hl,#0x0087
+   013F E5                  298 	push	hl
+   0140 2E 00               299 	ld	l, #0x00
+   0142 E5                  300 	push	hl
+   0143 2E F3               301 	ld	l, #0xf3
+   0145 E5                  302 	push	hl
+   0146 2E 10               303 	ld	l, #0x10
+   0148 E5                  304 	push	hl
+   0149 2E 1E               305 	ld	l, #0x1e
+   014B E5                  306 	push	hl
+   014C 21 00 0A            307 	ld	hl,#0x0a00
+   014F E5                  308 	push	hl
+   0150 CDr00r00            309 	call	_PlayFx
+   0153 E8 0C               310 	add	sp, #12
+                            311 ;SpriteEnemy2.c:51: SpriteManagerRemoveSprite(spr);
+   0155 E1                  312 	pop	hl
+   0156 E5                  313 	push	hl
+   0157 E5                  314 	push	hl
+   0158 CDr00r00            315 	call	_SpriteManagerRemoveSprite
+   015B E8 02               316 	add	sp, #2
+   015D                     317 00114$:
+                            318 ;SpriteEnemy2.c:46: SPRITEMANAGER_ITERATE(i, spr) {
+   015D F8 02               319 	ldhl	sp,#2
+   015F 34                  320 	inc	(hl)
+   0160 4E                  321 	ld	c,(hl)
+   0161 06 00               322 	ld	b,#0x00
+   0163 03                  323 	inc	bc
+   0164 21r00r00            324 	ld	hl,#_sprite_manager_updatables
+   0167 09                  325 	add	hl,bc
+   0168 4D                  326 	ld	c,l
+   0169 44                  327 	ld	b,h
+   016A 0A                  328 	ld	a,(bc)
+   016B 4F                  329 	ld	c,a
+   016C 06 00               330 	ld	b,#0x00
+   016E CB 21               331 	sla	c
+   0170 CB 10               332 	rl	b
+   0172 21r00r00            333 	ld	hl,#_sprite_manager_sprites
+   0175 09                  334 	add	hl,bc
+   0176 4D                  335 	ld	c,l
+   0177 44                  336 	ld	b,h
+   0178 59                  337 	ld	e, c
+   0179 50                  338 	ld	d, b
+   017A 1A                  339 	ld	a,(de)
+   017B F8 00               340 	ldhl	sp,#0
+   017D 22                  341 	ld	(hl+),a
+   017E 13                  342 	inc	de
+   017F 1A                  343 	ld	a,(de)
+   0180 77                  344 	ld	(hl),a
+   0181 C3rFDr00            345 	jp	00113$
+   0184                     346 00115$:
+   0184 E8 04               347 	add	sp, #4
+   0186 C9                  348 	ret
+                            349 ;SpriteEnemy2.c:59: void Destroy_SPRITE_ENEMY2() {
+                            350 ;	---------------------------------
+                            351 ; Function Destroy_SPRITE_ENEMY2
+                            352 ; ---------------------------------
+   0187                     353 _Destroy_SPRITE_ENEMY2::
+                            354 ;SpriteEnemy2.c:60: }
+   0187 C9                  355 	ret
+                            356 	.area _CODE_2
+                            357 	.area _CABS (ABS)

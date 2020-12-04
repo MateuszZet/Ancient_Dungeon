@@ -60,7 +60,7 @@ void Update_SPRITE_PLAYER() {
 		SetSpriteAnim(THIS, anim_idle, 20);
 	}
 	if (KEY_TICKED(J_A) && have_bomb>0 ) {
-			SpriteManagerAdd(SPRITE_BOMB, THIS->x + 15, THIS->y);
+			SpriteManagerAdd(SPRITE_BOMB, THIS->x + 20, THIS->y);
 			have_bomb--;
 			PlayFx(CHANNEL_1, 10, 0x38, 0x70, 0xe0, 0x0a, 0xc6);
 		

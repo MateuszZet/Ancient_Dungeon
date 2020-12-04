@@ -8,7 +8,7 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _CheckCollision                                                **** GX
-  6 _Destroy_SPRITE_ENEMY                                          01B7 GR
+  6 _Destroy_SPRITE_ENEMY                                          019C GR
     _PlayFx                                                        **** GX
     _SetSpriteAnim                                                 **** GX
     _SpriteManagerRemoveSprite                                     **** GX
@@ -20,10 +20,9 @@ Symbol Table
   6 _anim_walk2                                                    0056 GR
   1 _bank_SPRITE_ENEMY                                             0000 GR
     _delta_time                                                    **** GX
-  1 _dir                                                           0001 GR
-  1 _dir_pointer                                                   0003 GR
     _sprite_manager_sprites                                        **** GX
     _sprite_manager_updatables                                     **** GX
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [16-Bits]
@@ -31,11 +30,11 @@ Hexadecimal [16-Bits]
 Area Table
 
    0 _CODE                                      size    0   flags    0
-   1 _DATA                                      size    5   flags    0
+   1 _DATA                                      size    1   flags    0
    2 _DABS                                      size    0   flags    8
    3 _HOME                                      size    0   flags    0
-   4 _GSINIT                                    size   15   flags    0
+   4 _GSINIT                                    size    5   flags    0
    5 _GSFINAL                                   size    0   flags    0
-   6 _CODE_2                                    size  1B8   flags    0
+   6 _CODE_2                                    size  19D   flags    0
    7 _CABS                                      size    0   flags    8
 

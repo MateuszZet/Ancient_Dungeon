@@ -518,7 +518,7 @@
    023E 4E                  518 	ld	c,(hl)
    023F 23                  519 	inc	hl
    0240 46                  520 	ld	b,(hl)
-                            521 ;SpritePlayer.c:63: SpriteManagerAdd(SPRITE_BOMB, THIS->x + 15, THIS->y);
+                            521 ;SpritePlayer.c:63: SpriteManagerAdd(SPRITE_BOMB, THIS->x + 20, THIS->y);
    0241 21 09 00            522 	ld	hl,#0x0009
    0244 09                  523 	add	hl,bc
    0245 7D                  524 	ld	a,l
@@ -547,7 +547,7 @@
    025F 13                  547 	inc	de
    0260 1A                  548 	ld	a,(de)
    0261 47                  549 	ld	b,a
-   0262 21 0F 00            550 	ld	hl,#0x000f
+   0262 21 14 00            550 	ld	hl,#0x0014
    0265 09                  551 	add	hl,bc
    0266 4D                  552 	ld	c,l
    0267 44                  553 	ld	b,h
